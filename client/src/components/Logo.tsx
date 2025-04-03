@@ -12,11 +12,11 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
   if (size === "header") {
     // Header logo with exact dimension of 81x81px
     return (
-      <div className="flex items-center">
+      <div className="flex items-center group cursor-pointer">
         <img 
           src={logoImage} 
           alt="Upcrafty Logo" 
-          className="h-[81px] w-auto"
+          className="h-[81px] w-auto transition-all duration-300 group-hover:[filter:invert(43%)_sepia(91%)_saturate(2170%)_hue-rotate(360deg)_brightness(104%)_contrast(110%)]"
         />
         {includeDropdown && (
           <svg
@@ -25,7 +25,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
             viewBox="0 0 12 7"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="ml-2"
+            className="ml-2 transition-all duration-300"
           >
             <path
               d="M1 1L6 6L11 1"
@@ -33,6 +33,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="group-hover:stroke-[#FF6600]"
             />
           </svg>
         )}

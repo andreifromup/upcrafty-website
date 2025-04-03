@@ -10,10 +10,10 @@ const Navbar: React.FC = () => {
         <Logo size="header" includeDropdown={true} />
       </div>
       
-      {/* Contact Button - Pixel perfect specs */}
+      {/* Contact Button - Pixel perfect specs with hover effect */}
       <Button 
-        className="bg-[#FF6600] hover:bg-[#FF6600]/90 text-white rounded-full uppercase font-normal
-        tracking-[2px] text-[14px] leading-[20px] h-[34px] w-[107px] px-[13px] py-[7px]"
+        className="bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] rounded-full uppercase font-normal
+        tracking-[2px] text-[14px] leading-[20px] h-[34px] w-[107px] px-[13px] py-[7px] transition-colors duration-300"
         onClick={() => console.log("Contact button clicked")}
       >
         Contact
