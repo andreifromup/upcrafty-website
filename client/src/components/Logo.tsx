@@ -13,11 +13,21 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
     // Header logo with exact dimension of 81x81px
     return (
       <div className="flex items-center group cursor-pointer">
-        <img 
-          src={logoImage} 
-          alt="Upcrafty Logo" 
-          className="h-[81px] w-auto transition-all duration-300 group-hover:[filter:invert(43%)_sepia(91%)_saturate(2170%)_hue-rotate(360deg)_brightness(104%)_contrast(110%)]"
-        />
+        {/* Logo image that changes to orange on hover */}
+        <div className="relative h-[81px] w-[81px] flex items-center justify-center">
+          {/* White logo (visible by default) */}
+          <img 
+            src={logoImage} 
+            alt="Upcrafty Logo" 
+            className="h-[81px] w-auto absolute transition-opacity duration-300 group-hover:opacity-0"
+          />
+          {/* Orange logo (hidden by default, visible on hover) */}
+          <img 
+            src={logoImage} 
+            alt="Upcrafty Logo" 
+            className="h-[81px] w-auto absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
+          />
+        </div>
         {includeDropdown && (
           <svg
             width="12"
@@ -25,7 +35,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
             viewBox="0 0 12 7"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="ml-2 transition-all duration-300"
+            className="ml-2 transition-colors duration-300"
           >
             <path
               d="M1 1L6 6L11 1"
@@ -33,7 +43,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="group-hover:stroke-[#FF6600]"
+              className="transition-colors duration-300 group-hover:stroke-[#FF6600]"
             />
           </svg>
         )}

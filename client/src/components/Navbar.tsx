@@ -13,7 +13,8 @@ const Navbar: React.FC = () => {
       {/* Contact Button - Pixel perfect specs with hover effect */}
       <Button 
         className="bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] rounded-full uppercase font-normal
-        tracking-[2px] text-[14px] leading-[20px] h-[34px] w-[107px] px-[13px] py-[7px] transition-colors duration-300"
+        tracking-[2px] text-[14px] leading-[20px] h-[34px] w-[107px] p-0 transition-colors duration-300"
+        style={{ width: "107px", height: "34px" }}
         onClick={() => console.log("Contact button clicked")}
       >
         Contact
