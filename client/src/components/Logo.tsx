@@ -30,7 +30,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
           />
         </div>
         {includeDropdown && (
-          <div className="relative ml-2 w-[12px] h-[9px]">
+          <div className="relative ml-1 w-[12px] h-[9px]">
             {/* White polygon (default) */}
             <img 
               src={polygonImage} 
