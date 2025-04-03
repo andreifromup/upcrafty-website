@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="w-full px-[54px] py-[54px]">
+    <div className="w-full px-[54px] pb-[40px] pt-0">
       {isMobile ? (
         // Mobile Layout - Stacked
         <div className="flex flex-col items-center space-y-4">
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
         <div className="flex justify-between items-center w-full">
           {/* Copyright Text - Left with exact specifications from design */}
           <div 
-            className="text-white text-[15px] leading-[20px] font-normal"
+            className="text-white text-[15px] leading-[20px] font-normal whitespace-nowrap"
             style={{
               width: "294px",
               height: "20px",

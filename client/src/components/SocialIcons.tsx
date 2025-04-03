@@ -5,7 +5,7 @@ import tiktokIcon from "@assets/Tiktok.png";
 import youtubeIcon from "@assets/Youtube.png";
 
 const SocialIcons: React.FC = () => {
-  const iconStyle = "transition-opacity hover:opacity-70";
+  const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
   
   return (
     <div className="flex items-center space-x-6">

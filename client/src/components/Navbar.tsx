@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="px-[54px] py-[54px] flex justify-between items-center w-full">
+    <div className="px-[54px] pt-[40px] pb-0 flex justify-between items-center w-full">
       {/* Logo with dropdown arrow - 81x81px container */}
       <div className="flex items-center">
         <Logo size="header" includeDropdown={true} />
