@@ -1,6 +1,7 @@
 import React from "react";
 import logoImage from "@assets/sigla.png";
 import bottomLogoImage from "@assets/sigla bottom.png";
+import polygonImage from "@assets/Polygon 2.png";
 
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
@@ -29,23 +30,24 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
           />
         </div>
         {includeDropdown && (
-          <svg
-            width="12"
-            height="7"
-            viewBox="0 0 12 7"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="ml-2 transition-colors duration-300"
-          >
-            <path
-              d="M1 1L6 6L11 1"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-colors duration-300 group-hover:stroke-[#FF6600]"
+          <div className="relative ml-2 w-[12px] h-[9px]">
+            {/* White polygon (default) */}
+            <img 
+              src={polygonImage} 
+              alt="Dropdown" 
+              width={12}
+              height={9}
+              className="absolute transition-opacity duration-300 group-hover:opacity-0"
             />
-          </svg>
+            {/* Orange polygon (on hover) */}
+            <img 
+              src={polygonImage} 
+              alt="Dropdown" 
+              width={12}
+              height={9}
+              className="absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
+            />
+          </div>
         )}
       </div>
     );
