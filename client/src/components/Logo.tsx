@@ -1,48 +1,69 @@
 import React from "react";
+import logoImage from "@assets/sigla.png";
+import bottomLogoImage from "@assets/sigla bottom.png";
 
 interface LogoProps {
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "header" | "footer";
+  includeDropdown?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = "medium" }) => {
+const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false }) => {
+  // Use the specific dimensions from the design specs
+  if (size === "header") {
+    // Header logo with exact dimension of 81x81px
+    return (
+      <div className="flex items-center">
+        <img 
+          src={logoImage} 
+          alt="Upcrafty Logo" 
+          className="h-[81px] w-auto"
+        />
+        {includeDropdown && (
+          <svg
+            width="12"
+            height="7"
+            viewBox="0 0 12 7"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="ml-2"
+          >
+            <path
+              d="M1 1L6 6L11 1"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+      </div>
+    );
+  }
+  
+  if (size === "footer") {
+    // Bottom center logo with exact dimension of 38x38px
+    return (
+      <img 
+        src={bottomLogoImage}
+        alt="Upcrafty Logo" 
+        className="h-[38px] w-[38px]"
+      />
+    );
+  }
+  
+  // For backwards compatibility with other parts of the app
   const sizes = {
-    small: "h-6 w-6",
-    medium: "h-8 w-8 md:h-10 md:w-10",
-    large: "h-12 w-12",
+    small: "h-6 w-auto",
+    medium: "h-8 w-auto md:h-10",
+    large: "h-12 w-auto",
   };
-
+  
   return (
-    <svg 
-      width="48" 
-      height="48" 
-      viewBox="0 0 48 48" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg" 
+    <img 
+      src={logoImage} 
+      alt="Upcrafty Logo" 
       className={sizes[size]}
-    >
-      {/* Based on the provided assets, creating a simplified animal face logo */}
-      <g>
-        {/* Face shape */}
-        <circle cx="24" cy="24" r="13" fill="white" />
-        
-        {/* Ears */}
-        <circle cx="13" cy="13" r="5" fill="white" />
-        <circle cx="35" cy="13" r="5" fill="white" />
-        
-        {/* Eyes */}
-        <circle cx="18" cy="20" r="2.5" fill="black" />
-        <circle cx="30" cy="20" r="2.5" fill="black" />
-        
-        {/* Nose */}
-        <circle cx="24" cy="26" r="3" fill="black" />
-        
-        {/* Mouth */}
-        <path d="M19 30C20.5 32 26.5 32 29 30" stroke="black" strokeWidth="1.5" strokeLinecap="round" />
-        
-        {/* Dot details */}
-        <circle cx="41" cy="10" r="1" fill="white" />
-      </g>
-    </svg>
+    />
   );
 };
 

@@ -15,19 +15,17 @@ const Home: React.FC = () => {
   }, []);
   
   return (
-    <div className="bg-black text-white font-sans antialiased">
+    <div className="bg-black text-white font-['Inter'] font-normal antialiased">
       {/* Video Background */}
       <VideoBackground />
       
-      {/* Main container - Using position relative for absolute positioning context */}
-      <div className="relative w-full h-screen flex flex-col justify-between z-10">
+      {/* Main container - Fixed dimensions with symmetric spacing */}
+      <div className="fixed top-0 left-0 right-0 bottom-0 flex flex-col justify-between z-10 overflow-hidden">
         {/* Top Navigation */}
         <Navbar />
         
-        {/* Bottom Footer - Full width and positioned at bottom */}
-        <div className="w-full">
-          <Footer />
-        </div>
+        {/* Bottom Footer - Positioned with exact symmetrical spacing */}
+        <Footer />
       </div>
     </div>
   );

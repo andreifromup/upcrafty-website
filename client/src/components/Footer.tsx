@@ -7,48 +7,47 @@ const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="w-full px-5 py-6">
+    <div className="w-full px-[54px] py-[54px]">
       {isMobile ? (
         // Mobile Layout - Stacked
         <div className="flex flex-col items-center space-y-4">
           {/* Logo on top */}
           <div className="flex justify-center">
-            <Logo size="small" />
+            <Logo size="footer" />
           </div>
           
           {/* Social Icons below logo */}
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
             <SocialIcons />
           </div>
           
           {/* Copyright text at bottom */}
-          <div className="text-center text-xs">
+          <div className="text-center text-[12px] leading-[20px] mt-6 font-normal text-white">
             <p>© 2025 Upcrafty Co. All Rights Reserved.</p>
           </div>
         </div>
       ) : (
         // Desktop Layout - Three columns with precise positioning
-        <div className="flex justify-between items-center relative">
+        <div className="flex justify-between items-center w-full">
           {/* Copyright Text - Left with exact specifications from design */}
           <div 
-            className="text-white text-sm absolute"
+            className="text-white text-[15px] leading-[20px] font-normal"
             style={{
               width: "294px",
               height: "20px",
-              left: "54px",
-              bottom: "0", // We'll use bottom instead of top since we're in a footer context
+              paddingLeft: "0", // Align with the left edge of the top logo
             }}
           >
             <p>© 2025 Upcrafty Co. All Rights Reserved.</p>
           </div>
           
-          {/* Center Logo */}
-          <div className="flex justify-center w-full">
-            <Logo size="small" />
+          {/* Center Logo - Exactly 38x38px and perfectly centered */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <Logo size="footer" />
           </div>
           
-          {/* Social Media Icons - Right */}
-          <div className="flex justify-end">
+          {/* Social Media Icons - Right, group size 136x16.35px */}
+          <div className="flex justify-end" style={{ width: "136px", height: "16.35px" }}>
             <SocialIcons />
           </div>
         </div>

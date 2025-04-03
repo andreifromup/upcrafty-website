@@ -4,19 +4,16 @@ import { Button } from "@/components/ui/button";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="px-5 py-6 flex justify-between items-center">
-      {/* Logo with company name */}
+    <div className="px-[54px] py-[54px] flex justify-between items-center w-full">
+      {/* Logo with dropdown arrow - 81x81px container */}
       <div className="flex items-center">
-        <Logo />
-        <span className="ml-2 text-xs uppercase tracking-wider hidden md:inline-block">Upcrafty</span>
-        <svg className="ml-1 w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+        <Logo size="header" includeDropdown={true} />
       </div>
       
-      {/* Contact Button */}
+      {/* Contact Button - Pixel perfect specs */}
       <Button 
-        className="bg-[#FF6600] hover:bg-[#FF6600]/90 text-white rounded-full uppercase text-xs md:text-sm font-normal tracking-wider px-5"
+        className="bg-[#FF6600] hover:bg-[#FF6600]/90 text-white rounded-full uppercase font-normal
+        tracking-[2px] text-[14px] leading-[20px] h-[34px] w-[107px] px-[13px] py-[7px]"
         onClick={() => console.log("Contact button clicked")}
       >
         Contact
