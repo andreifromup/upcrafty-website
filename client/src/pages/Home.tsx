@@ -19,13 +19,15 @@ const Home: React.FC = () => {
       {/* Video Background */}
       <VideoBackground />
       
-      {/* Main container */}
+      {/* Main container - Using position relative for absolute positioning context */}
       <div className="relative w-full h-screen flex flex-col justify-between z-10">
         {/* Top Navigation */}
         <Navbar />
         
-        {/* Bottom Footer */}
-        <Footer />
+        {/* Bottom Footer - Full width and positioned at bottom */}
+        <div className="w-full">
+          <Footer />
+        </div>
       </div>
     </div>
   );

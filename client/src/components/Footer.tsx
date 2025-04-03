@@ -27,15 +27,23 @@ const Footer: React.FC = () => {
           </div>
         </div>
       ) : (
-        // Desktop Layout - Three columns
-        <div className="flex justify-between items-center">
-          {/* Copyright Text - Left */}
-          <div className="text-sm">
+        // Desktop Layout - Three columns with precise positioning
+        <div className="flex justify-between items-center relative">
+          {/* Copyright Text - Left with exact specifications from design */}
+          <div 
+            className="text-white text-sm absolute"
+            style={{
+              width: "294px",
+              height: "20px",
+              left: "54px",
+              bottom: "0", // We'll use bottom instead of top since we're in a footer context
+            }}
+          >
             <p>© 2025 Upcrafty Co. All Rights Reserved.</p>
           </div>
           
           {/* Center Logo */}
-          <div className="flex justify-center">
+          <div className="flex justify-center w-full">
             <Logo size="small" />
           </div>
           
