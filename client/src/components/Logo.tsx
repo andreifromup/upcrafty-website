@@ -13,41 +13,37 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false }) => {
   // Use the specific dimensions from the design specs
   if (size === "header") {
-    // Header logo with exact dimension of 81x81px
+    // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div className="flex items-center group cursor-pointer">
         {/* Logo image that changes to orange on hover */}
-        <div className="relative h-[81px] w-[81px] flex items-center justify-center">
+        <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
           {/* White logo (visible by default) */}
           <img 
             src={logoImage} 
             alt="Upcrafty Logo" 
-            className="h-[81px] w-auto absolute transition-opacity duration-300 group-hover:opacity-0"
+            className="h-full w-auto absolute transition-opacity duration-300 group-hover:opacity-0"
           />
           {/* Orange logo (hidden by default, visible on hover) */}
           <img 
             src={logoImage} 
             alt="Upcrafty Logo" 
-            className="h-[81px] w-auto absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
+            className="h-full w-auto absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
           />
         </div>
         {includeDropdown && (
-          <div className="relative -ml-1 w-[12px] h-[9px] flex items-center">
+          <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
             {/* White polygon (default) */}
             <img 
               src={polygonImage} 
               alt="Dropdown" 
-              width={12}
-              height={9}
-              className="absolute transition-opacity duration-300 group-hover:opacity-0"
+              className="absolute w-full h-full transition-opacity duration-300 group-hover:opacity-0"
             />
             {/* Orange polygon (on hover) */}
             <img 
               src={polygonImage} 
               alt="Dropdown" 
-              width={12}
-              height={9}
-              className="absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
+              className="absolute w-full h-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
             />
           </div>
         )}
@@ -56,12 +52,12 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
   }
   
   if (size === "footer") {
-    // Bottom center logo with exact dimension of 38x38px
+    // Bottom center logo with exact dimension of 38x38px (desktop), smaller for mobile
     return (
       <img 
         src={bottomLogoImage}
         alt="Upcrafty Logo" 
-        className="h-[38px] w-[38px]"
+        className="h-[30px] w-[30px] md:h-[38px] md:w-[38px]"
       />
     );
   }

@@ -13,19 +13,40 @@
     @apply bg-black text-white overflow-hidden;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: 16px;
   }
   
-  @media (max-width: 768px) {
+  @media (min-width: 768px) {
     body {
-      font-size: 12px;
+      font-size: 15px;
       line-height: 20px;
     }
+  }
+  
+  /* For proper content scaling */
+  p, span, div, a {
+    @apply text-[12px] leading-[16px] md:text-[15px] md:leading-[20px];
   }
 }
 
 /* Ensure proper overflow handling */
 html, body, #root {
   @apply h-full w-full overflow-hidden;
+}
+
+/* Custom classes for responsive text */
+.text-mobile {
+  @apply text-[12px] leading-[16px];
+}
+
+.text-desktop {
+  @apply text-[15px] leading-[20px];
+}
+
+/* Responsive spacing adjustments */
+@media (max-width: 768px) {
+  .contact-button {
+    @apply text-[12px] tracking-[1.5px] leading-[16px] h-[28px] w-[90px];
+  }
 }

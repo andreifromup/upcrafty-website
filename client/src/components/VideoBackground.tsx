@@ -109,18 +109,16 @@ const VideoBackground: React.FC = () => {
 
   // Choose the appropriate video source based on device and connection
   const getVideoSource = () => {
-    // For testing - force high-quality desktop video regardless of device or connection
-    console.log("Loading high-quality desktop video for testing");
-    return desktopHighQuality;
-    
-    // Original logic (commented out for testing)
-    /*
+    // Restore original logic that properly respects mobile vs desktop
     if (isMobileDevice) {
-      return isSlowConnection ? mobileLowQuality : mobileHighQuality;
+      const source = isSlowConnection ? mobileLowQuality : mobileHighQuality;
+      console.log("Loading mobile video:", source);
+      return source;
     } else {
-      return isSlowConnection ? desktopLowQuality : desktopHighQuality;
+      const source = isSlowConnection ? desktopLowQuality : desktopHighQuality;
+      console.log("Loading desktop video:", source);
+      return source;
     }
-    */
   };
 
   // Handle video loading
@@ -150,7 +148,9 @@ const VideoBackground: React.FC = () => {
         loop={true}
         playsInline={true}
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
+        className={`absolute inset-0 object-cover ${
+          isMobileDevice ? 'h-[50vh] md:h-full' : 'h-full'
+        } w-full`}
         src={getVideoSource()}
         onLoadedData={handleVideoLoaded}
         onError={() => setVideoError("Failed to load video")}
@@ -158,6 +158,22 @@ const VideoBackground: React.FC = () => {
         <source src={getVideoSource()} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      
+      {/* Diagonal divider and black background for mobile view */}
+      {isMobileDevice && (
+        <>
+          {/* Black background below the diagonal */}
+          <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-black md:hidden"></div>
+          
+          {/* Diagonal divider */}
+          <div className="absolute top-[calc(50vh-25px)] left-0 w-full h-[50px] md:hidden" 
+               style={{
+                 background: 'linear-gradient(135deg, transparent 0%, transparent 49%, black 50%, black 100%)',
+                 zIndex: 1
+               }}>
+          </div>
+        </>
+      )}
     </div>
   );
 };
