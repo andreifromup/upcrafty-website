@@ -1,8 +1,10 @@
 import React from "react";
-import xIcon from "@assets/X.png";
-import instaIcon from "@assets/Insta.png";
-import tiktokIcon from "@assets/Tiktok.png";
-import youtubeIcon from "@assets/Youtube.png";
+
+// Use string URLs instead of direct imports
+const xIcon = "/X.png";
+const instaIcon = "/Insta.png";
+const tiktokIcon = "/Tiktok.png";
+const youtubeIcon = "/Youtube.png";
 
 const SocialIcons: React.FC = () => {
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";

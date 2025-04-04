@@ -1,51 +1,96 @@
-import React, { useEffect, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState, useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
-// Using mixkit's sample video as a placeholder
-// In a production environment, you would host your own video or use one from a CDN
-const VIDEO_URL = "https://assets.mixkit.co/videos/preview/mixkit-countryside-meadow-4075-large.mp4";
+// We'll use URL strings instead of direct imports since the videos might not be in the assets folder yet
+const desktopHighQuality = '/background-desktop_1.mp4';
+const desktopLowQuality = '/background-desktop-low.mp4';
+const mobileHighQuality = '/background-mobile.mp4';
+const mobileLowQuality = '/background-mobile-low.mp4';
+
+// Type for Network Information API
+interface NetworkInformation extends EventTarget {
+  effectiveType: string;
+  downlink: number;
+  addEventListener: (type: string, listener: EventListener) => void;
+  removeEventListener: (type: string, listener: EventListener) => void;
+}
+
+interface NavigatorWithConnection extends Navigator {
+  connection: NetworkInformation;
+}
 
 const VideoBackground: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isMobile = useIsMobile();
+  const isMobileDevice = useIsMobile();
+  const [isSlowConnection, setIsSlowConnection] = useState<boolean>(false);
+  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    // Ensure video auto-plays
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.error("Video autoplay failed:", error);
-      });
+    // Check connection speed if the Network Information API is available
+    if ('connection' in navigator) {
+      const nav = navigator as NavigatorWithConnection;
+      
+      if (nav.connection) {
+        // Check if connection is slow
+        const slowConnectionTypes = ['slow-2g', '2g', '3g'];
+        const isSlow = 
+          slowConnectionTypes.includes(nav.connection.effectiveType) || 
+          nav.connection.downlink < 1.5;
+        
+        setIsSlowConnection(isSlow);
+        
+        // Listen for connection changes
+        const updateConnectionStatus = () => {
+          const isSlowUpdated = 
+            slowConnectionTypes.includes(nav.connection.effectiveType) || 
+            nav.connection.downlink < 1.5;
+          
+          setIsSlowConnection(isSlowUpdated);
+        };
+        
+        nav.connection.addEventListener('change', updateConnectionStatus);
+        
+        return () => {
+          nav.connection.removeEventListener('change', updateConnectionStatus);
+        };
+      }
     }
+    
+    // Fallback for browsers that don't support the Network Information API
+    setIsSlowConnection(false);
   }, []);
 
+  // Choose the appropriate video source based on device and connection
+  const getVideoSource = () => {
+    if (isMobileDevice) {
+      return isSlowConnection ? mobileLowQuality : mobileHighQuality;
+    } else {
+      return isSlowConnection ? desktopLowQuality : desktopHighQuality;
+    }
+  };
+
+  // Handle video loading
+  const handleVideoLoaded = () => {
+    setVideoLoaded(true);
+  };
+
   return (
-    <div className="video-container absolute inset-0 w-full h-full overflow-hidden">
-      {/* Video overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50 z-0"></div>
-      
-      {/* Video element */}
-      <video 
+    <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
+      {!videoLoaded && (
+        <div className="absolute inset-0 bg-black"></div>
+      )}
+      <video
         ref={videoRef}
-        className={`absolute top-0 left-0 w-full object-cover z-[-1] ${isMobile ? 'h-[50vh]' : 'h-full'}`}
-        autoPlay 
-        loop 
-        muted 
+        autoPlay
+        muted
+        loop
         playsInline
+        className="w-full h-full object-cover"
+        src={getVideoSource()}
+        onLoadedData={handleVideoLoaded}
       >
-        <source src={VIDEO_URL} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      
-      {/* Mobile specific elements */}
-      {isMobile && (
-        <>
-          {/* Diagonal divider */}
-          <div className="absolute top-[45vh] left-0 w-full h-[10vh] bg-black transform -skew-y-6 z-10"></div>
-          
-          {/* Black background for bottom half */}
-          <div className="absolute top-[50vh] left-0 w-full h-[50vh] bg-black z-5"></div>
-        </>
-      )}
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import React from "react";
-import logoImage from "@assets/sigla.png";
-import bottomLogoImage from "@assets/sigla bottom.png";
-import polygonImage from "@assets/Polygon 2.png";
+
+// Use string URLs instead of direct imports
+const logoImage = "/sigla.png";
+const bottomLogoImage = "/sigla bottom.png";
+const polygonImage = "/Polygon 2.png";
 
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
