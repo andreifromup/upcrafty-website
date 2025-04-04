@@ -11,7 +11,7 @@ const SocialIcons: React.FC = () => {
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
   
-  // Smaller sizes for mobile
+  // Exact sizes to match reference image
   const iconSizes = {
     x: isMobileDevice ? "w-[14px] h-[14.3px]" : "w-[16px] h-[16.35px]",
     instagram: isMobileDevice ? "w-[14px] h-[14px]" : "w-[16px] h-[16.05px]",
@@ -20,7 +20,7 @@ const SocialIcons: React.FC = () => {
   };
   
   return (
-    <div className="flex items-center space-x-4 md:space-x-6">
+    <div className="flex items-center justify-center space-x-6">
       {/* X (Twitter) */}
       <a 
         href="#" 

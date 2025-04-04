@@ -52,13 +52,15 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
   }
   
   if (size === "footer") {
-    // Bottom center logo with exact dimension of 38x38px (desktop), smaller for mobile
+    // Bottom center logo with exact dimensions to match reference
     return (
-      <img 
-        src={bottomLogoImage}
-        alt="Upcrafty Logo" 
-        className="h-[30px] w-[30px] md:h-[38px] md:w-[38px]"
-      />
+      <div className="rounded-full bg-white flex items-center justify-center h-[40px] w-[40px] md:h-[38px] md:w-[38px]">
+        <img 
+          src={bottomLogoImage}
+          alt="Upcrafty Logo" 
+          className="h-[24px] w-[24px] md:h-[22px] md:w-[22px]"
+        />
+      </div>
     );
   }
   

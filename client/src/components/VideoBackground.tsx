@@ -140,7 +140,7 @@ const VideoBackground: React.FC = () => {
         </div>
       )}
       
-      {/* Video element */}
+      {/* Video element - edge-to-edge for mobile */}
       <video
         ref={videoRef}
         autoPlay={true}
@@ -149,7 +149,7 @@ const VideoBackground: React.FC = () => {
         playsInline={true}
         preload="auto"
         className={`absolute inset-0 object-cover ${
-          isMobileDevice ? 'h-[50vh] md:h-full' : 'h-full'
+          isMobileDevice ? 'h-[65vh] md:h-full' : 'h-full'
         } w-full`}
         src={getVideoSource()}
         onLoadedData={handleVideoLoaded}
@@ -162,15 +162,14 @@ const VideoBackground: React.FC = () => {
       {/* Diagonal divider and black background for mobile view */}
       {isMobileDevice && (
         <>
-          {/* Black background below the diagonal */}
-          <div className="absolute bottom-0 left-0 w-full h-[55vh] bg-black md:hidden"></div>
+          {/* Black background below the diagonal - exact height from reference */}
+          <div className="absolute bottom-0 left-0 w-full h-[40vh] bg-black md:hidden"></div>
           
-          {/* Diagonal divider - more pronounced angle matching Figma */}
-          <div className="absolute top-[42vh] left-0 w-full h-[20vh] md:hidden" 
+          {/* Diagonal divider - exact angle matching mobile.png reference */}
+          <div className="absolute top-[60vh] left-0 w-full h-[10vh] md:hidden" 
                style={{
-                 background: 'linear-gradient(165deg, transparent 0%, transparent 49%, black 50%, black 100%)',
-                 zIndex: 1,
-                 clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+                 background: 'linear-gradient(170deg, transparent 0%, transparent 49%, black 50%, black 100%)',
+                 zIndex: 1
                }}>
           </div>
         </>
