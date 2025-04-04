@@ -163,13 +163,14 @@ const VideoBackground: React.FC = () => {
       {isMobileDevice && (
         <>
           {/* Black background below the diagonal */}
-          <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-black md:hidden"></div>
+          <div className="absolute bottom-0 left-0 w-full h-[55vh] bg-black md:hidden"></div>
           
-          {/* Diagonal divider */}
-          <div className="absolute top-[calc(50vh-25px)] left-0 w-full h-[50px] md:hidden" 
+          {/* Diagonal divider - more pronounced angle matching Figma */}
+          <div className="absolute top-[42vh] left-0 w-full h-[20vh] md:hidden" 
                style={{
-                 background: 'linear-gradient(135deg, transparent 0%, transparent 49%, black 50%, black 100%)',
-                 zIndex: 1
+                 background: 'linear-gradient(165deg, transparent 0%, transparent 49%, black 50%, black 100%)',
+                 zIndex: 1,
+                 clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
                }}>
           </div>
         </>

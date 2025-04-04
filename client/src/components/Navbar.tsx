@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   const isMobileDevice = useIsMobile();
   
   return (
-    <div className="px-[20px] sm:px-[35px] md:px-[54px] pt-[20px] md:pt-[40px] pb-0 flex justify-between items-center w-full">
+    <div className="px-[20px] sm:px-[35px] md:px-[54px] pt-[15px] sm:pt-[18px] md:pt-[40px] pb-0 flex justify-between items-center w-full">
       {/* Logo with dropdown arrow - responsive sizing */}
       <div className="flex items-center">
         <Logo size="header" includeDropdown={true} />

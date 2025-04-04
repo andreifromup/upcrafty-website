@@ -13,20 +13,16 @@
     @apply bg-black text-white overflow-hidden;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
+    /* Exact 12px for mobile and 15px for desktop */
+    font-size: 12px !important;
+    line-height: 16px !important;
   }
   
   @media (min-width: 768px) {
     body {
-      font-size: 15px;
-      line-height: 20px;
+      font-size: 15px !important;
+      line-height: 20px !important;
     }
-  }
-  
-  /* For proper content scaling */
-  p, span, div, a {
-    @apply text-[12px] leading-[16px] md:text-[15px] md:leading-[20px];
   }
 }
 

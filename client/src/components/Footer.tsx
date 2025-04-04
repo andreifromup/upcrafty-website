@@ -7,22 +7,22 @@ const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="w-full px-[20px] sm:px-[35px] md:px-[54px] pb-[20px] md:pb-[40px] pt-0">
+    <div className="w-full px-[20px] sm:px-[35px] md:px-[54px] pb-[15px] sm:pb-[18px] md:pb-[40px] pt-0">
       {/* Mobile Layout for small screens */}
-      <div className="flex flex-col items-center space-y-4 md:hidden">
+      <div className="flex flex-col items-center space-y-3 md:hidden">
         {/* Logo on top */}
         <div className="flex justify-center">
           <Logo size="footer" />
         </div>
         
         {/* Social Icons below logo */}
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-3">
           <SocialIcons />
         </div>
         
         {/* Copyright text at bottom */}
-        <div className="text-center text-[12px] leading-[16px] mt-4 font-normal text-white">
-          <p>© 2025 Upcrafty Co. All Rights Reserved.</p>
+        <div className="text-center mt-3 font-normal text-white">
+          <p className="text-[12px] leading-[16px]">© 2025 Upcrafty Co. All Rights Reserved.</p>
         </div>
       </div>
       
