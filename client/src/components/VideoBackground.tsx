@@ -35,6 +35,20 @@ const VideoBackground: React.FC = () => {
           // Try to play the video
           await videoRef.current?.play();
           console.log("Video playing successfully");
+          
+          // Log the current source for debugging
+          const currentSrc = videoRef.current?.currentSrc || 'unknown';
+          console.log("Current video source:", currentSrc);
+          
+          // Log video dimensions and quality
+          if (videoRef.current) {
+            console.log("Video dimensions:", {
+              videoWidth: videoRef.current.videoWidth,
+              videoHeight: videoRef.current.videoHeight,
+              displayWidth: videoRef.current.clientWidth,
+              displayHeight: videoRef.current.clientHeight
+            });
+          }
         } catch (error) {
           console.error("Error playing video:", error);
           setVideoError(error instanceof Error ? error.message : String(error));
@@ -46,9 +60,13 @@ const VideoBackground: React.FC = () => {
       
       // Play video when it's loaded
       videoRef.current.addEventListener('loadeddata', playVideo);
+      videoRef.current.addEventListener('loadedmetadata', () => {
+        console.log("Video metadata loaded");
+      });
       
       return () => {
         videoRef.current?.removeEventListener('loadeddata', playVideo);
+        videoRef.current?.removeEventListener('loadedmetadata', () => {});
       };
     }
   }, []);
@@ -91,11 +109,18 @@ const VideoBackground: React.FC = () => {
 
   // Choose the appropriate video source based on device and connection
   const getVideoSource = () => {
+    // For testing - force high-quality desktop video regardless of device or connection
+    console.log("Loading high-quality desktop video for testing");
+    return desktopHighQuality;
+    
+    // Original logic (commented out for testing)
+    /*
     if (isMobileDevice) {
       return isSlowConnection ? mobileLowQuality : mobileHighQuality;
     } else {
       return isSlowConnection ? desktopLowQuality : desktopHighQuality;
     }
+    */
   };
 
   // Handle video loading
