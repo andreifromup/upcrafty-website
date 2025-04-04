@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// We'll use URL strings instead of direct imports since the videos might not be in the assets folder yet
-const desktopHighQuality = '/background-desktop_1.mp4';
-const desktopLowQuality = '/background-desktop-low.mp4';
-const mobileHighQuality = '/background-mobile.mp4';
-const mobileLowQuality = '/background-mobile-low.mp4';
+// Using direct URLs to our public folder with a cache-busting timestamp
+const timestamp = Date.now();
+const desktopHighQuality = `/background-desktop_1.mp4?v=${timestamp}`;
+const desktopLowQuality = `/background-desktop-low.mp4?v=${timestamp}`;
+const mobileHighQuality = `/background-mobile.mp4?v=${timestamp}`;
+const mobileLowQuality = `/background-mobile-low.mp4?v=${timestamp}`;
 
 // Type for Network Information API
 interface NetworkInformation extends EventTarget {
@@ -24,7 +25,35 @@ const VideoBackground: React.FC = () => {
   const isMobileDevice = useIsMobile();
   const [isSlowConnection, setIsSlowConnection] = useState<boolean>(false);
   const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
+  const [videoError, setVideoError] = useState<string | null>(null);
 
+  // Force play the video when it's loaded
+  useEffect(() => {
+    if (videoRef.current) {
+      const playVideo = async () => {
+        try {
+          // Try to play the video
+          await videoRef.current?.play();
+          console.log("Video playing successfully");
+        } catch (error) {
+          console.error("Error playing video:", error);
+          setVideoError(error instanceof Error ? error.message : String(error));
+        }
+      };
+
+      // Play video when component mounts
+      playVideo();
+      
+      // Play video when it's loaded
+      videoRef.current.addEventListener('loadeddata', playVideo);
+      
+      return () => {
+        videoRef.current?.removeEventListener('loadeddata', playVideo);
+      };
+    }
+  }, []);
+
+  // Check connection speed
   useEffect(() => {
     // Check connection speed if the Network Information API is available
     if ('connection' in navigator) {
@@ -76,19 +105,32 @@ const VideoBackground: React.FC = () => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
+      {/* Show black background while video is loading */}
       {!videoLoaded && (
         <div className="absolute inset-0 bg-black"></div>
       )}
+      
+      {/* Show error message if there's an error */}
+      {videoError && (
+        <div className="absolute top-0 left-0 p-2 bg-red-500 text-white text-xs z-50 opacity-70">
+          Error: {videoError}
+        </div>
+      )}
+      
+      {/* Video element */}
       <video
         ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="w-full h-full object-cover"
+        autoPlay={true}
+        muted={true}
+        loop={true}
+        playsInline={true}
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover"
         src={getVideoSource()}
         onLoadedData={handleVideoLoaded}
+        onError={() => setVideoError("Failed to load video")}
       >
+        <source src={getVideoSource()} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
