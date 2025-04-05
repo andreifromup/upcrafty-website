@@ -10,13 +10,13 @@ const Footer: React.FC = () => {
     <div className="w-full px-0 md:px-[54px] pb-5 md:pb-[40px] pt-0">
       {/* Mobile Layout for small screens - matching exact reference */}
       <div className="flex flex-col items-center md:hidden">
-        {/* Logo on top - perfectly centered */}
-        <div className="flex justify-center mb-5">
+        {/* Logo on top - perfectly centered, same size as social icons */}
+        <div className="flex justify-center mb-4">
           <Logo size="footer" />
         </div>
         
         {/* Social Icons below logo - exact spacing from reference */}
-        <div className="flex justify-center mb-5">
+        <div className="flex justify-center mb-4">
           <SocialIcons />
         </div>
         
