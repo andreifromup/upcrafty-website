@@ -27,6 +27,19 @@ const VideoBackground: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<string | null>(null);
 
+  // Handle video loading based on screen size
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  // Update window width on resize for responsive video selection
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   // Force play the video when it's loaded
   useEffect(() => {
     if (videoRef.current) {
@@ -69,7 +82,7 @@ const VideoBackground: React.FC = () => {
         videoRef.current?.removeEventListener('loadedmetadata', () => {});
       };
     }
-  }, []);
+  }, [windowWidth]); // Re-run when window width changes
 
   // Check connection speed
   useEffect(() => {
@@ -107,10 +120,12 @@ const VideoBackground: React.FC = () => {
     setIsSlowConnection(false);
   }, []);
 
-  // Choose the appropriate video source based on device and connection
+  // Choose the appropriate video source based on device width and connection
   const getVideoSource = () => {
-    // Restore original logic that properly respects mobile vs desktop
-    if (isMobileDevice) {
+    // Use window.innerWidth for more reliable device detection
+    const isMobileWidth = window.innerWidth <= 768;
+    
+    if (isMobileWidth) {
       const source = isSlowConnection ? mobileLowQuality : mobileHighQuality;
       console.log("Loading mobile video:", source);
       return source;
@@ -142,7 +157,7 @@ const VideoBackground: React.FC = () => {
       
       {/* Main container - for mobile, use clip-path for diagonal cut */}
       <div className="absolute inset-0">
-        {/* Video element - edge-to-edge for mobile with precise clip-path */}
+        {/* Video element - edge-to-edge for mobile with precise clip-path at bottom edge */}
         <video
           ref={videoRef}
           autoPlay={true}
@@ -154,9 +169,10 @@ const VideoBackground: React.FC = () => {
             isMobileDevice ? 'md:h-full' : 'h-full'
           }`}
           style={isMobileDevice ? {
-            clipPath: 'polygon(0 0, 100% 0, 100% 55%, 0% 70%)'
+            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0% 92%)' // Subtle diagonal near bottom edge
           } : {}}
           src={getVideoSource()}
+          key={getVideoSource()} // Force recreation when source changes
           onLoadedData={handleVideoLoaded}
           onError={() => setVideoError("Failed to load video")}
         >
@@ -164,12 +180,12 @@ const VideoBackground: React.FC = () => {
           Your browser does not support the video tag.
         </video>
         
-        {/* Black background for mobile view - exact diagonal cut matching reference */}
+        {/* Black background for mobile view - subtle diagonal cut at bottom matching reference */}
         {isMobileDevice && (
           <div 
             className="absolute inset-0 bg-black md:hidden" 
             style={{
-              clipPath: 'polygon(0 69%, 100% 54%, 100% 100%, 0 100%)'
+              clipPath: 'polygon(0 91%, 100% 84%, 100% 100%, 0 100%)' // Subtle diagonal at bottom edge
             }}
           ></div>
         )}
