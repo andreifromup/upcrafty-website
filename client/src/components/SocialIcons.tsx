@@ -7,6 +7,14 @@ const instaIcon = "/Insta.png";
 const tiktokIcon = "/Tiktok.png";
 const youtubeIcon = "/Youtube.png";
 
+// Social media URLs
+const SOCIAL_LINKS = {
+  x: "https://x.com/upcraftystudio",
+  instagram: "https://www.instagram.com/upcraftystudio",
+  tiktok: "https://www.tiktok.com/@upcraftystudio?lang=en",
+  youtube: "https://www.youtube.com/@upcrafty"
+};
+
 const SocialIcons: React.FC = () => {
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
@@ -23,7 +31,7 @@ const SocialIcons: React.FC = () => {
     <div className="flex items-center justify-center space-x-6">
       {/* X (Twitter) */}
       <a 
-        href="#" 
+        href={SOCIAL_LINKS.x} 
         className={iconStyle} 
         aria-label="X (Twitter)"
         target="_blank"
@@ -38,7 +46,7 @@ const SocialIcons: React.FC = () => {
       
       {/* Instagram */}
       <a 
-        href="#" 
+        href={SOCIAL_LINKS.instagram} 
         className={iconStyle} 
         aria-label="Instagram"
         target="_blank"
@@ -53,7 +61,7 @@ const SocialIcons: React.FC = () => {
       
       {/* TikTok */}
       <a 
-        href="#" 
+        href={SOCIAL_LINKS.tiktok} 
         className={iconStyle} 
         aria-label="TikTok"
         target="_blank"
@@ -68,7 +76,7 @@ const SocialIcons: React.FC = () => {
       
       {/* YouTube */}
       <a 
-        href="#" 
+        href={SOCIAL_LINKS.youtube} 
         className={iconStyle} 
         aria-label="YouTube"
         target="_blank"
