@@ -52,12 +52,13 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
   }
   
   if (size === "footer") {
-    // Bottom center logo - match the size of social icons on mobile
+    // Bottom center logo - use appropriate size for mobile
     return (
       <img 
         src={bottomLogoImage}
         alt="Upcrafty Logo" 
-        className="h-[14px] w-[14px] md:h-[38px] md:w-[38px]"
+        style={{ width: "36.6px", height: "39.1px" }}
+        className="md:h-[38px] md:w-[38px]"
       />
     );
   }
