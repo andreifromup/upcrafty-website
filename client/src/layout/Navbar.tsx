@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
           width: isMobileDevice ? "90px" : "107px", 
           height: isMobileDevice ? "28px" : "34px"
         }}
-        onClick={() => console.log("Contact button clicked")}
+        onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}
       >
         Contact
       </Button>
