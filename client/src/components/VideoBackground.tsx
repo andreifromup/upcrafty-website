@@ -140,40 +140,40 @@ const VideoBackground: React.FC = () => {
         </div>
       )}
       
-      {/* Video element - edge-to-edge for mobile */}
-      <video
-        ref={videoRef}
-        autoPlay={true}
-        muted={true}
-        loop={true}
-        playsInline={true}
-        preload="auto"
-        className={`absolute inset-0 object-cover ${
-          isMobileDevice ? 'h-[65vh] md:h-full' : 'h-full'
-        } w-full`}
-        src={getVideoSource()}
-        onLoadedData={handleVideoLoaded}
-        onError={() => setVideoError("Failed to load video")}
-      >
-        <source src={getVideoSource()} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      
-      {/* Diagonal divider and black background for mobile view */}
-      {isMobileDevice && (
-        <>
-          {/* Black background below the diagonal - exact height from reference */}
-          <div className="absolute bottom-0 left-0 w-full h-[40vh] bg-black md:hidden"></div>
-          
-          {/* Diagonal divider - exact angle matching mobile.png reference */}
-          <div className="absolute top-[60vh] left-0 w-full h-[10vh] md:hidden" 
-               style={{
-                 background: 'linear-gradient(170deg, transparent 0%, transparent 49%, black 50%, black 100%)',
-                 zIndex: 1
-               }}>
-          </div>
-        </>
-      )}
+      {/* Main container - for mobile, use clip-path for diagonal cut */}
+      <div className="absolute inset-0">
+        {/* Video element - edge-to-edge for mobile with precise clip-path */}
+        <video
+          ref={videoRef}
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          playsInline={true}
+          preload="auto"
+          className={`absolute inset-0 object-cover w-full h-full ${
+            isMobileDevice ? 'md:h-full' : 'h-full'
+          }`}
+          style={isMobileDevice ? {
+            clipPath: 'polygon(0 0, 100% 0, 100% 55%, 0% 70%)'
+          } : {}}
+          src={getVideoSource()}
+          onLoadedData={handleVideoLoaded}
+          onError={() => setVideoError("Failed to load video")}
+        >
+          <source src={getVideoSource()} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Black background for mobile view - exact diagonal cut matching reference */}
+        {isMobileDevice && (
+          <div 
+            className="absolute inset-0 bg-black md:hidden" 
+            style={{
+              clipPath: 'polygon(0 69%, 100% 54%, 100% 100%, 0 100%)'
+            }}
+          ></div>
+        )}
+      </div>
     </div>
   );
 };
