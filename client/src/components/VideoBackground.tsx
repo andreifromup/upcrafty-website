@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-// Using direct URLs to our public folder with a cache-busting timestamp
-const timestamp = Date.now();
-const desktopHighQuality = `/background-desktop_1.mp4?v=${timestamp}`;
-const desktopLowQuality = `/background-desktop-low.mp4?v=${timestamp}`;
-const mobileHighQuality = `/background-mobile.mp4?v=${timestamp}`;
-const mobileLowQuality = `/background-mobile-low.mp4?v=${timestamp}`;
+// Define video sources with fixed URLs (no dynamic cache busting to prevent reload issues)
+const desktopHighQuality = `/background-desktop_1.mp4`;
+const desktopLowQuality = `/background-desktop-low.mp4`;
+const mobileHighQuality = `/background-mobile.mp4`;
+const mobileLowQuality = `/background-mobile-low.mp4`;
 
 // Type for Network Information API
 interface NetworkInformation extends EventTarget {
@@ -21,13 +20,13 @@ interface NavigatorWithConnection extends Navigator {
 }
 
 const VideoBackground: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  // Separate refs for desktop and mobile videos
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const isMobileDevice = useIsMobile();
   const [isSlowConnection, setIsSlowConnection] = useState<boolean>(false);
   const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<string | null>(null);
-
-  // Handle video loading based on screen size
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   
   // Update window width on resize for responsive video selection
@@ -40,53 +39,82 @@ const VideoBackground: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-  // Force play the video when it's loaded
+  // Play the correct video based on device type
   useEffect(() => {
-    if (videoRef.current) {
-      const playVideo = async () => {
-        try {
-          // Try to play the video
-          await videoRef.current?.play();
-          console.log("Video playing successfully");
-          
-          // Log the current source for debugging
-          const currentSrc = videoRef.current?.currentSrc || 'unknown';
-          console.log("Current video source:", currentSrc);
-          
-          // Log video dimensions and quality
-          if (videoRef.current) {
-            console.log("Video dimensions:", {
-              videoWidth: videoRef.current.videoWidth,
-              videoHeight: videoRef.current.videoHeight,
-              displayWidth: videoRef.current.clientWidth,
-              displayHeight: videoRef.current.clientHeight
+    let currentVideoRef = isMobileDevice ? mobileVideoRef : desktopVideoRef;
+    
+    // Handle video playback safely
+    const playVideo = async () => {
+      if (!currentVideoRef.current) return;
+      
+      try {
+        // Reset video error if any
+        setVideoError(null);
+        
+        // Start playback and handle the promise
+        const playPromise = currentVideoRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log("Video playing successfully");
+              if (currentVideoRef.current) {
+                console.log("Current video source:", currentVideoRef.current.currentSrc);
+                console.log("Video dimensions:", {
+                  videoWidth: currentVideoRef.current.videoWidth,
+                  videoHeight: currentVideoRef.current.videoHeight,
+                  displayWidth: currentVideoRef.current.clientWidth,
+                  displayHeight: currentVideoRef.current.clientHeight
+                });
+              }
+            })
+            .catch(error => {
+              // Only set error if component is still mounted
+              console.error("Error playing video:", error);
+              setVideoError(error instanceof Error ? error.message : String(error));
             });
-          }
-        } catch (error) {
-          console.error("Error playing video:", error);
-          setVideoError(error instanceof Error ? error.message : String(error));
         }
-      };
-
-      // Play video when component mounts
-      playVideo();
-      
-      // Play video when it's loaded
-      videoRef.current.addEventListener('loadeddata', playVideo);
-      videoRef.current.addEventListener('loadedmetadata', () => {
-        console.log("Video metadata loaded");
-      });
-      
-      return () => {
-        videoRef.current?.removeEventListener('loadeddata', playVideo);
-        videoRef.current?.removeEventListener('loadedmetadata', () => {});
-      };
-    }
-  }, [windowWidth]); // Re-run when window width changes
+      } catch (error) {
+        console.error("Error in playVideo function:", error);
+        setVideoError(error instanceof Error ? error.message : String(error));
+      }
+    };
+    
+    // Don't set up event listeners until the component is fully mounted
+    const timer = setTimeout(() => {
+      if (currentVideoRef.current) {
+        // Set up event listeners
+        const loadedDataHandler = () => {
+          playVideo();
+          setVideoLoaded(true);
+        };
+        
+        const metadataHandler = () => {
+          console.log("Video metadata loaded");
+        };
+        
+        currentVideoRef.current.addEventListener('loadeddata', loadedDataHandler);
+        currentVideoRef.current.addEventListener('loadedmetadata', metadataHandler);
+        
+        // Initial attempt to play video
+        if (currentVideoRef.current.readyState >= 3) { // HAVE_FUTURE_DATA or higher
+          loadedDataHandler();
+        }
+        
+        return () => {
+          if (currentVideoRef.current) {
+            currentVideoRef.current.removeEventListener('loadeddata', loadedDataHandler);
+            currentVideoRef.current.removeEventListener('loadedmetadata', metadataHandler);
+          }
+        };
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [isMobileDevice, windowWidth]); // Re-run when device type or window size changes
 
   // Check connection speed
   useEffect(() => {
-    // Check connection speed if the Network Information API is available
     if ('connection' in navigator) {
       const nav = navigator as NavigatorWithConnection;
       
@@ -120,25 +148,17 @@ const VideoBackground: React.FC = () => {
     setIsSlowConnection(false);
   }, []);
 
-  // Choose the appropriate video source based on device width and connection
-  const getVideoSource = () => {
-    // Use window.innerWidth for more reliable device detection
-    const isMobileWidth = window.innerWidth <= 768;
-    
-    if (isMobileWidth) {
-      const source = isSlowConnection ? mobileLowQuality : mobileHighQuality;
-      console.log("Loading mobile video:", source);
-      return source;
-    } else {
-      const source = isSlowConnection ? desktopLowQuality : desktopHighQuality;
-      console.log("Loading desktop video:", source);
-      return source;
-    }
+  // Choose the appropriate video source based on device and connection speed
+  const getDesktopVideoSource = () => {
+    const source = isSlowConnection ? desktopLowQuality : desktopHighQuality;
+    console.log("Loading desktop video:", source);
+    return source;
   };
-
-  // Handle video loading
-  const handleVideoLoaded = () => {
-    setVideoLoaded(true);
+  
+  const getMobileVideoSource = () => {
+    const source = isSlowConnection ? mobileLowQuality : mobileHighQuality;
+    console.log("Loading mobile video:", source);
+    return source;
   };
 
   return (
@@ -156,66 +176,58 @@ const VideoBackground: React.FC = () => {
       )}
       
       {/* Desktop layout - full screen video */}
-      {!isMobileDevice && (
-        <div className="absolute inset-0 hidden md:block">
+      <div className={`absolute inset-0 ${isMobileDevice ? 'hidden' : 'hidden md:block'}`}>
+        <video
+          ref={desktopVideoRef}
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          playsInline={true}
+          preload="auto"
+          className="absolute inset-0 object-cover w-full h-full"
+          onLoadedData={() => setVideoLoaded(true)}
+          onError={() => setVideoError("Failed to load desktop video")}
+        >
+          <source src={getDesktopVideoSource()} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      {/* Mobile layout - fixed height video with diagonal cut and black background */}
+      <div className={`absolute inset-0 ${isMobileDevice ? 'block md:hidden' : 'hidden'}`}>
+        {/* Full black background for the entire screen */}
+        <div className="absolute inset-0 bg-black"></div>
+        
+        {/* Video container with fixed height of 751px as per Figma */}
+        <div className="absolute top-0 left-0 w-full h-[751px] overflow-hidden z-10">
           <video
-            ref={videoRef}
+            ref={mobileVideoRef}
             autoPlay={true}
             muted={true}
             loop={true}
             playsInline={true}
             preload="auto"
             className="absolute inset-0 object-cover w-full h-full"
-            src={getVideoSource()}
-            key={getVideoSource()} 
-            onLoadedData={handleVideoLoaded}
-            onError={() => setVideoError("Failed to load video")}
+            onLoadedData={() => setVideoLoaded(true)}
+            onError={() => setVideoError("Failed to load mobile video")}
           >
-            <source src={getVideoSource()} type="video/mp4" />
+            <source src={getMobileVideoSource()} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-      )}
-      
-      {/* Mobile layout - fixed height video (751px) with diagonal cut and black background */}
-      {isMobileDevice && (
-        <div className="absolute inset-0 block md:hidden">
-          {/* Full black background for the entire screen */}
-          <div className="absolute inset-0 bg-black"></div>
-          
-          {/* Video container with fixed height of 751px as per Figma */}
-          <div className="absolute top-0 left-0 w-full h-[751px] overflow-hidden z-10">
-            <video
-              ref={videoRef}
-              autoPlay={true}
-              muted={true}
-              loop={true}
-              playsInline={true}
-              preload="auto"
-              className="absolute inset-0 object-cover w-full h-full"
-              src={getVideoSource()}
-              key={getVideoSource()}
-              onLoadedData={handleVideoLoaded}
-              onError={() => setVideoError("Failed to load video")}
-            >
-              <source src={getVideoSource()} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          
-          {/* Diagonal overlay - moved lower as requested */}
-          <div 
-            className="absolute z-20 bg-black" 
-            style={{
-              width: '100%',
-              height: '150px',
-              top: '650px', // Moved lower (was 600px)
-              transform: 'skewY(10deg)',
-              transformOrigin: 'bottom left',
-            }}
-          ></div>
-        </div>
-      )}
+        
+        {/* Diagonal overlay - positioned at 650px from top */}
+        <div 
+          className="absolute z-20 bg-black" 
+          style={{
+            width: '100%',
+            height: '150px',
+            top: '650px',
+            transform: 'skewY(10deg)',
+            transformOrigin: 'bottom left',
+          }}
+        ></div>
+      </div>
     </div>
   );
 };
