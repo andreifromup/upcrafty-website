@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/layout/Navbar";
+import Footer from "@/layout/Footer";
 import VideoBackground from "@/components/VideoBackground";
 
 const Home: React.FC = () => {

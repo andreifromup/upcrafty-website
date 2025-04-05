@@ -1,19 +1,6 @@
 import React from "react";
-import { useIsMobile } from "../hooks/use-mobile";
-
-// Use string URLs instead of direct imports
-const xIcon = "/X.png";
-const instaIcon = "/Insta.png";
-const tiktokIcon = "/Tiktok.png";
-const youtubeIcon = "/Youtube.png";
-
-// Social media URLs
-const SOCIAL_LINKS = {
-  x: "https://x.com/upcraftystudio",
-  instagram: "https://www.instagram.com/upcraftystudio",
-  tiktok: "https://www.tiktok.com/@upcraftystudio?lang=en",
-  youtube: "https://www.youtube.com/@upcrafty"
-};
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ICONS, SOCIAL_LINKS } from "@/assets/constants";
 
 const SocialIcons: React.FC = () => {
   const isMobileDevice = useIsMobile();
@@ -38,7 +25,7 @@ const SocialIcons: React.FC = () => {
         rel="noopener noreferrer"
       >
         <img 
-          src={xIcon} 
+          src={ICONS.x} 
           alt="X (Twitter)" 
           className={iconSizes.x}
         />
@@ -53,7 +40,7 @@ const SocialIcons: React.FC = () => {
         rel="noopener noreferrer"
       >
         <img 
-          src={instaIcon} 
+          src={ICONS.instagram} 
           alt="Instagram" 
           className={iconSizes.instagram}
         />
@@ -68,7 +55,7 @@ const SocialIcons: React.FC = () => {
         rel="noopener noreferrer"
       >
         <img 
-          src={tiktokIcon} 
+          src={ICONS.tiktok} 
           alt="TikTok" 
           className={iconSizes.tiktok}
         />
@@ -83,7 +70,7 @@ const SocialIcons: React.FC = () => {
         rel="noopener noreferrer"
       >
         <img 
-          src={youtubeIcon} 
+          src={ICONS.youtube} 
           alt="YouTube" 
           className={iconSizes.youtube}
         />

@@ -1,11 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-// Define video sources with fixed URLs (no dynamic cache busting to prevent reload issues)
-const desktopHighQuality = `/background-desktop_1.mp4`;
-const desktopLowQuality = `/background-desktop-low.mp4`;
-const mobileHighQuality = `/background-mobile.mp4`;
-const mobileLowQuality = `/background-mobile-low.mp4`;
+import { VIDEOS } from '@/assets/constants';
 
 // Type for Network Information API
 interface NetworkInformation extends EventTarget {
@@ -150,13 +145,13 @@ const VideoBackground: React.FC = () => {
 
   // Choose the appropriate video source based on device and connection speed
   const getDesktopVideoSource = () => {
-    const source = isSlowConnection ? desktopLowQuality : desktopHighQuality;
+    const source = isSlowConnection ? VIDEOS.desktopLow : VIDEOS.desktopHigh;
     console.log("Loading desktop video:", source);
     return source;
   };
   
   const getMobileVideoSource = () => {
-    const source = isSlowConnection ? mobileLowQuality : mobileHighQuality;
+    const source = isSlowConnection ? VIDEOS.mobileLow : VIDEOS.mobileHigh;
     console.log("Loading mobile video:", source);
     return source;
   };
