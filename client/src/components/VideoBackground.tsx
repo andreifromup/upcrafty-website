@@ -203,13 +203,13 @@ const VideoBackground: React.FC = () => {
             </video>
           </div>
           
-          {/* Diagonal overlay - simplified approach to avoid runtime errors */}
+          {/* Diagonal overlay - moved lower as requested */}
           <div 
             className="absolute z-20 bg-black" 
             style={{
               width: '100%',
               height: '150px',
-              top: '600px', // Fixed position from top instead of using calc
+              top: '650px', // Moved lower (was 600px)
               transform: 'skewY(10deg)',
               transformOrigin: 'bottom left',
             }}
