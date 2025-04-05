@@ -155,41 +155,67 @@ const VideoBackground: React.FC = () => {
         </div>
       )}
       
-      {/* Main container - for mobile, use clip-path for diagonal cut */}
-      <div className="absolute inset-0">
-        {/* Video element - edge-to-edge for mobile with bottom-left to top-right diagonal cut */}
-        <video
-          ref={videoRef}
-          autoPlay={true}
-          muted={true}
-          loop={true}
-          playsInline={true}
-          preload="auto"
-          className={`absolute inset-0 object-cover w-full h-full ${
-            isMobileDevice ? 'md:h-full' : 'h-full'
-          }`}
-          style={isMobileDevice ? {
-            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' // Bottom-left to top-right diagonal cut as specified
-          } : {}}
-          src={getVideoSource()}
-          key={getVideoSource()} // Force recreation when source changes
-          onLoadedData={handleVideoLoaded}
-          onError={() => setVideoError("Failed to load video")}
-        >
-          <source src={getVideoSource()} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        
-        {/* Black background for mobile view - positioned directly underneath the diagonal cut */}
-        {isMobileDevice && (
+      {/* Desktop layout - full screen video */}
+      {!isMobileDevice && (
+        <div className="absolute inset-0 hidden md:block">
+          <video
+            ref={videoRef}
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            playsInline={true}
+            preload="auto"
+            className="absolute inset-0 object-cover w-full h-full"
+            src={getVideoSource()}
+            key={getVideoSource()} 
+            onLoadedData={handleVideoLoaded}
+            onError={() => setVideoError("Failed to load video")}
+          >
+            <source src={getVideoSource()} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
+      
+      {/* Mobile layout - fixed height video (751px) with diagonal cut and black background */}
+      {isMobileDevice && (
+        <div className="absolute inset-0 block md:hidden">
+          {/* Full black background for the entire screen */}
+          <div className="absolute inset-0 bg-black"></div>
+          
+          {/* Video container with fixed height of 751px as per Figma */}
+          <div className="absolute top-0 left-0 w-full h-[751px] overflow-hidden z-10">
+            <video
+              ref={videoRef}
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              playsInline={true}
+              preload="auto"
+              className="absolute inset-0 object-cover w-full h-full"
+              src={getVideoSource()}
+              key={getVideoSource()}
+              onLoadedData={handleVideoLoaded}
+              onError={() => setVideoError("Failed to load video")}
+            >
+              <source src={getVideoSource()} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+          {/* Diagonal overlay for the bottom-right corner of the video */}
           <div 
-            className="absolute inset-0 bg-black md:hidden" 
+            className="absolute z-20 bg-black" 
             style={{
-              clipPath: 'polygon(0 100%, 100% 84%, 100% 100%, 0 100%)' // Aligned with video cut, stopping just above center logo
+              width: '100%',
+              height: '180px', // Height of diagonal section
+              bottom: 'calc(100% - 751px)', // Position at the bottom of the video
+              transform: 'skewY(8deg)', // Create diagonal angle (adjust as needed)
+              transformOrigin: 'bottom left', // Rotate from bottom left
             }}
           ></div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
