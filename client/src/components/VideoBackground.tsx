@@ -157,7 +157,7 @@ const VideoBackground: React.FC = () => {
       
       {/* Main container - for mobile, use clip-path for diagonal cut */}
       <div className="absolute inset-0">
-        {/* Video element - edge-to-edge for mobile with reversed diagonal cut */}
+        {/* Video element - edge-to-edge for mobile with bottom-left to top-right diagonal cut */}
         <video
           ref={videoRef}
           autoPlay={true}
@@ -169,7 +169,7 @@ const VideoBackground: React.FC = () => {
             isMobileDevice ? 'md:h-full' : 'h-full'
           }`}
           style={isMobileDevice ? {
-            clipPath: 'polygon(0 0, 100% 0, 100% 68%, 0% 40%)' // Reversed diagonal stopping above the logo position
+            clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' // Bottom-left to top-right diagonal cut as specified
           } : {}}
           src={getVideoSource()}
           key={getVideoSource()} // Force recreation when source changes
@@ -180,12 +180,12 @@ const VideoBackground: React.FC = () => {
           Your browser does not support the video tag.
         </video>
         
-        {/* Black background for mobile view - reversed diagonal cut with bottom-left to top-right direction */}
+        {/* Black background for mobile view - positioned directly underneath the diagonal cut */}
         {isMobileDevice && (
           <div 
             className="absolute inset-0 bg-black md:hidden" 
             style={{
-              clipPath: 'polygon(0 39%, 100% 67%, 100% 100%, 0 100%)' // Reversed diagonal just above logo position
+              clipPath: 'polygon(0 100%, 100% 84%, 100% 100%, 0 100%)' // Aligned with video cut, stopping just above center logo
             }}
           ></div>
         )}
