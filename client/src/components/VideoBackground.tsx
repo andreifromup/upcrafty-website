@@ -209,8 +209,8 @@ const VideoBackground: React.FC = () => {
             style={{
               width: '100%',
               height: '120px', // Reduced height for steeper angle
-              bottom: 'calc(100% - 720px)', // Moved lower to be right above the logo (751px - ~30px)
-              transform: 'skewY(12deg)', // Increased angle for steeper diagonal
+              bottom: 'calc(100% - 650px)', // Moved 10% higher (~70px higher from previous 720px position)
+              transform: 'skewY(12deg)', // Steep diagonal angle
               transformOrigin: 'bottom left', // Rotate from bottom left
             }}
           ></div>
