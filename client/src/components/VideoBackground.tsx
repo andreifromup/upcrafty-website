@@ -203,15 +203,15 @@ const VideoBackground: React.FC = () => {
             </video>
           </div>
           
-          {/* Diagonal overlay for the bottom-right corner of the video */}
+          {/* Diagonal overlay - simplified approach to avoid runtime errors */}
           <div 
             className="absolute z-20 bg-black" 
             style={{
               width: '100%',
-              height: '120px', // Reduced height for steeper angle
-              bottom: 'calc(100% - 650px)', // Moved 10% higher (~70px higher from previous 720px position)
-              transform: 'skewY(12deg)', // Steep diagonal angle
-              transformOrigin: 'bottom left', // Rotate from bottom left
+              height: '150px',
+              top: '600px', // Fixed position from top instead of using calc
+              transform: 'skewY(10deg)',
+              transformOrigin: 'bottom left',
             }}
           ></div>
         </div>
