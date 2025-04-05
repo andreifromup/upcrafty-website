@@ -208,9 +208,9 @@ const VideoBackground: React.FC = () => {
             className="absolute z-20 bg-black" 
             style={{
               width: '100%',
-              height: '180px', // Height of diagonal section
-              bottom: 'calc(100% - 751px)', // Position at the bottom of the video
-              transform: 'skewY(8deg)', // Create diagonal angle (adjust as needed)
+              height: '120px', // Reduced height for steeper angle
+              bottom: 'calc(100% - 720px)', // Moved lower to be right above the logo (751px - ~30px)
+              transform: 'skewY(12deg)', // Increased angle for steeper diagonal
               transformOrigin: 'bottom left', // Rotate from bottom left
             }}
           ></div>
