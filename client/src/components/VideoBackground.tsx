@@ -211,13 +211,13 @@ const VideoBackground: React.FC = () => {
           </video>
         </div>
         
-        {/* Diagonal overlay - positioned at 650px from top */}
+        {/* Diagonal overlay - positioned to be right above the central logo */}
         <div 
           className="absolute z-20 bg-black" 
           style={{
             width: '100%',
             height: '150px',
-            top: '650px',
+            top: '550px',  // Moved up to be above the central logo
             transform: 'skewY(10deg)',
             transformOrigin: 'bottom left',
           }}
