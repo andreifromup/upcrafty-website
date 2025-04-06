@@ -236,18 +236,20 @@ const VideoBackground: React.FC = () => {
           </video>
         </div>
         
-        {/* Diagonal overlay - positioned to be right above the central logo */}
-        <div 
-          className="absolute z-20 bg-black" 
-          style={{
-            width: '100%',
-            height: '100%',  // Extended height to fill the entire viewport
-            // Use calculated responsive position based on screen size
-            top: `${overlayPosition}px`,
-            transform: 'skewY(10deg)',
-            transformOrigin: 'bottom left',
-          }}
-        ></div>
+        {/* Diagonal overlay - temporarily hidden */}
+        {false && (
+          <div 
+            className="absolute z-20 bg-black" 
+            style={{
+              width: '100%',
+              height: '100%',  // Extended height to fill the entire viewport
+              // Use calculated responsive position based on screen size
+              top: `${overlayPosition}px`,
+              transform: 'skewY(10deg)',
+              transformOrigin: 'bottom left',
+            }}
+          ></div>
+        )}
       </div>
     </div>
   );
