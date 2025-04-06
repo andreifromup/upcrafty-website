@@ -195,22 +195,29 @@ const VideoBackground: React.FC = () => {
         </div>
       )}
       
-      {/* Desktop layout - full screen video */}
+      {/* Desktop layout - full screen video with enhanced responsiveness */}
       <div className={`absolute inset-0 ${isMobileDevice ? 'hidden' : 'hidden md:block'}`}>
-        <video
-          ref={desktopVideoRef}
-          autoPlay={true}
-          muted={true}
-          loop={true}
-          playsInline={true}
-          preload="auto"
-          className="absolute inset-0 object-cover w-full h-full"
-          onLoadedData={() => setVideoLoaded(true)}
-          onError={() => setVideoError("Failed to load desktop video")}
-        >
-          <source src={getDesktopVideoSource()} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        <div className="relative w-full h-full">
+          <video
+            ref={desktopVideoRef}
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            playsInline={true}
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover min-h-full min-w-full"
+            style={{
+              objectPosition: 'center center',
+              // Ensures the video scales properly on all desktop screen sizes
+              // while maintaining aspect ratio and filling the container
+            }}
+            onLoadedData={() => setVideoLoaded(true)}
+            onError={() => setVideoError("Failed to load desktop video")}
+          >
+            <source src={getDesktopVideoSource()} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
       
       {/* Mobile layout - fixed height video with diagonal cut and black background */}
@@ -218,22 +225,29 @@ const VideoBackground: React.FC = () => {
         {/* Full black background for the entire screen */}
         <div className="absolute inset-0 bg-black"></div>
         
-        {/* Video container with responsive height based on viewport */}
+        {/* Video container with enhanced responsive sizing for all mobile screen sizes */}
         <div className="absolute top-0 left-0 w-full h-full max-h-screen overflow-hidden z-10">
-          <video
-            ref={mobileVideoRef}
-            autoPlay={true}
-            muted={true}
-            loop={true}
-            playsInline={true}
-            preload="auto"
-            className="absolute inset-0 object-cover w-full h-full"
-            onLoadedData={() => setVideoLoaded(true)}
-            onError={() => setVideoError("Failed to load mobile video")}
-          >
-            <source src={getMobileVideoSource()} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="relative w-full h-full">
+            <video
+              ref={mobileVideoRef}
+              autoPlay={true}
+              muted={true}
+              loop={true}
+              playsInline={true}
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover min-h-full min-w-full" 
+              style={{
+                objectPosition: 'center center', 
+                // The video will scale to cover the entire container while maintaining aspect ratio
+                // This ensures no empty spaces on different screen sizes
+              }}
+              onLoadedData={() => setVideoLoaded(true)}
+              onError={() => setVideoError("Failed to load mobile video")}
+            >
+              <source src={getMobileVideoSource()} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
         
         {/* Diagonal overlay - temporarily hidden */}
