@@ -216,8 +216,8 @@ const VideoBackground: React.FC = () => {
           className="absolute z-20 bg-black" 
           style={{
             width: '100%',
-            height: '150px',
-            top: '550px',  // Moved up to be above the central logo
+            height: '100%',  // Extended height to fill the entire viewport
+            top: '550px',    // Positioned above the central logo
             transform: 'skewY(10deg)',
             transformOrigin: 'bottom left',
           }}
