@@ -29,17 +29,17 @@ const VideoBackground: React.FC = () => {
   // Calculate optimal overlay position based on screen height
   useEffect(() => {
     const calculateOverlayPosition = () => {
-      // Position the diagonal cut much higher in the screen 
-      // to be right above the central logo
+      // Position the diagonal cut in the lower part of the screen
+      // right above the central logo (approximately 65-70% down the screen)
       const height = window.innerHeight;
       let position = 0;
       
       if (height < 667) { // iPhone 8 and smaller
-        position = height * 0.30; // Much higher on small screens
+        position = height * 0.60; // Lower position on small screens
       } else if (height < 812) { // iPhone X/11 size
-        position = height * 0.33; // Higher position for medium screens
+        position = height * 0.65; // Lower position for medium screens
       } else {
-        position = height * 0.35; // Higher position for larger screens
+        position = height * 0.68; // Lower position for larger screens
       }
       
       setOverlayPosition(position);
