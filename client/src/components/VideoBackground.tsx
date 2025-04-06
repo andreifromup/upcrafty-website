@@ -23,11 +23,36 @@ const VideoBackground: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   const [videoError, setVideoError] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [overlayPosition, setOverlayPosition] = useState(0);
   
-  // Update window width on resize for responsive video selection
+  // Calculate optimal overlay position based on screen height
   useEffect(() => {
+    const calculateOverlayPosition = () => {
+      // For smaller screens, position at 45% of viewport height
+      // For larger screens, position at 50% of viewport height
+      const height = window.innerHeight;
+      let position = 0;
+      
+      if (height < 667) { // iPhone 8 and smaller
+        position = height * 0.40; // Above logo for very small screens
+      } else if (height < 812) { // iPhone X/11 size
+        position = height * 0.45; // Above logo for medium screens
+      } else {
+        position = height * 0.48; // Above logo for larger screens
+      }
+      
+      setOverlayPosition(position);
+    };
+    
+    // Calculate initial position
+    calculateOverlayPosition();
+    
+    // Update dimensions on resize
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+      calculateOverlayPosition();
     };
     
     window.addEventListener('resize', handleResize);
@@ -193,8 +218,8 @@ const VideoBackground: React.FC = () => {
         {/* Full black background for the entire screen */}
         <div className="absolute inset-0 bg-black"></div>
         
-        {/* Video container with fixed height of 751px as per Figma */}
-        <div className="absolute top-0 left-0 w-full h-[751px] overflow-hidden z-10">
+        {/* Video container with responsive height based on viewport */}
+        <div className="absolute top-0 left-0 w-full h-full max-h-screen overflow-hidden z-10">
           <video
             ref={mobileVideoRef}
             autoPlay={true}
@@ -217,7 +242,8 @@ const VideoBackground: React.FC = () => {
           style={{
             width: '100%',
             height: '100%',  // Extended height to fill the entire viewport
-            top: '550px',    // Positioned above the central logo
+            // Use calculated responsive position based on screen size
+            top: `${overlayPosition}px`,
             transform: 'skewY(10deg)',
             transformOrigin: 'bottom left',
           }}
