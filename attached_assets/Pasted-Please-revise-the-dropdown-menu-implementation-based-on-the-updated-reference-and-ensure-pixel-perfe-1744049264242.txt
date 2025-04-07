@@ -1,0 +1,31 @@
+Please revise the dropdown menu implementation based on the updated reference and ensure pixel-perfect accuracy with the Figma design. Here are the exact required fixes:
+
+1. Replace the current dropdown logo with the **black logo** provided. It should appear only once, at the top left, in the correct size, with the **orange hover effect on desktop**.
+2. **Hide the entire footer** when the dropdown is open.
+3. Also **hide the orange CONTACT button** when the dropdown is open.
+4. The **three default portfolio images** should only be shown when no subcategory is selected. When a category is selected, those should disappear and be replaced dynamically later.
+5. Ensure the portfolio images are displayed with **correct padding, spacing, and sizing** according to the Figma layout.
+6. Add the **soft background highlight box** behind the category titles (ILLUSTRATIONS, GAMES, etc.). The box properties are:
+   - Width: 322px
+   - Height: 33px
+   - Radius: 8px
+   - Background: #EDEAE7 at 50% opacity
+7. Fix typography and alignment for all text labels:
+   - Font: Inter
+   - Size: 18px for titles (uppercase, bold), 16px for sub-items (regular)
+   - Align all left
+   - Match vertical spacing as in Figma
+   - Respect exact category and subcategory order from the design.
+8. Remove the "Featured Projects" label – it is not present in the design.
+9. Update the **X button**:
+   - Place it at the top right.
+   - Add the **white circular semi-transparent background** behind it, as shown in Figma.
+10. Move the **social icons** (X, Instagram, TikTok, YouTube) inside the dropdown, fixed at the bottom.
+   - Remove them from the footer while the dropdown is open.
+11. Apply a **black transparent overlay** or subtle **blur effect** on the video background when the dropdown is active, without stopping or pausing the video loop.
+12. Make sure the dropdown is:
+   - **Full-width (1725px)** on large screens (e.g. 1728px width),
+   - But still **responsive on smaller desktops/laptops** (ex: 1440px).
+13. Keep the layout consistent with both desktop and mobile variants, and ensure that nothing overlaps (e.g. icons, logo, or footer).
+
+Let me know once all of these are done so I can verify the accuracy step-by-step.

@@ -199,9 +199,9 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
         </div>
       )}
       
-      {/* Blur overlay that appears when dropdown is open */}
+      {/* Black transparent overlay and blur effect that appears when dropdown is open */}
       {blur && (
-        <div className="absolute inset-0 backdrop-blur-sm z-10"></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-10"></div>
       )}
       
       {/* Desktop layout - full screen video with enhanced responsiveness */}

@@ -30,8 +30,8 @@ const Home: React.FC = () => {
           onDropdownClose={() => setIsDropdownOpen(false)}
         />
         
-        {/* Bottom Footer - Positioned with exact symmetrical spacing */}
-        <Footer />
+        {/* Bottom Footer - Hidden when dropdown is open */}
+        <Footer isDropdownOpen={isDropdownOpen} />
       </div>
     </div>
   );

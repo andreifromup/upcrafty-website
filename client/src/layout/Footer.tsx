@@ -3,8 +3,15 @@ import Logo from "@/components/Logo";
 import SocialIcons from "@/components/SocialIcons";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  isDropdownOpen?: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
   const isMobile = useIsMobile();
+  
+  // Hide footer completely when dropdown is open
+  if (isDropdownOpen) return null;
   
   return (
     <div className="w-full px-0 md:px-[54px] pb-5 md:pb-[40px] pt-0">
