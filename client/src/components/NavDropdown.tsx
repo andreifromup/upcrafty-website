@@ -48,14 +48,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {isMobile && (
           <>
             <div className="flex flex-col h-full">
-              <div className="p-6 pt-20">
-                {/* Logo - mobile version with same size as in header */}
-                <div className="flex items-center mb-8 group" style={{ position: 'relative' }}>
-                  <Logo size="header" useBlackLogo={true} />
+              <div className="pt-0">
+                {/* Logo - mobile version with same exact position as in header */}
+                <div className="px-[20px] sm:px-[35px] md:px-[54px] pt-[15px] sm:pt-[18px] md:pt-[40px] flex items-center mb-8 group cursor-pointer">
+                  <Logo size="header" useBlackLogo={true} includeDropdown={true} />
                 </div>
 
                 {/* Navigation buttons - stacked vertically */}
-                <div className="overflow-y-auto">
+                <div className="overflow-y-auto px-[20px] sm:px-[35px] md:px-[54px] mt-4">
                   {NAV_CATEGORIES.map((category, idx) => (
                     <div key={idx} className="mb-6">
                       <a 
@@ -140,9 +140,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1920px] mx-auto">
             {/* Logo - exactly the same size and position as in header */}
-            <div className="absolute" style={{ top: '45px', left: '70px' }}>
-              <div className="flex items-center group">
-                <Logo size="header" useBlackLogo={true} />
+            <div className="absolute px-[20px] sm:px-[35px] md:px-[54px] pt-[15px] sm:pt-[18px] md:pt-[40px]">
+              <div className="flex items-center group cursor-pointer">
+                <Logo size="header" useBlackLogo={true} includeDropdown={true} />
               </div>
             </div>
 
