@@ -34,13 +34,17 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           bg-white text-black overflow-hidden
           ${isMobile 
             ? 'fixed inset-0 flex flex-col w-full' 
-            : 'fixed top-0 left-0 w-full h-[572px] max-w-[1725px] flex mx-auto right-0'
+            : 'fixed top-0 flex mx-auto'
           }
         `}
         onClick={(e) => e.stopPropagation()}
         style={{ 
           left: isMobile ? 0 : '50%', 
           transform: isMobile ? 'none' : 'translateX(-50%)',
+          width: isMobile ? '100%' : '1725px',
+          height: isMobile ? '100%' : '572px',
+          maxWidth: '100vw',
+          maxHeight: isMobile ? '100vh' : '80vh'
         }}
       >
         {/* Mobile Layout */}
@@ -139,7 +143,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {!isMobile && (
           <div className="flex h-full w-full">
             {/* Logo and Navigation columns */}
-            <div className="w-[45%] p-12 pt-16 overflow-y-auto">
+            <div className="w-[775px] p-12 pt-16 overflow-y-auto">
               {/* Logo */}
               <div className="flex items-center mb-10 group">
                 <Logo size="header" useBlackLogo={true} />
@@ -183,7 +187,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Social Icons at bottom */}
-              <div className="flex space-x-6 absolute bottom-6 left-12">
+              <div className="flex space-x-6 absolute bottom-8 left-12">
                 <a href={SOCIAL_LINKS.x} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
                   <img src={ICONS.x} alt="X" className="w-5 h-5 opacity-70 hover:opacity-100" />
                 </a>
@@ -201,11 +205,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Right side - portfolio images (only shown when no category selected) */}
             {!selectedCategory && (
-              <div className="w-[55%] bg-white flex flex-col pt-16">
+              <div className="w-[950px] bg-white flex flex-col pt-16 pr-6">
                 {/* Portfolio images - arranged as in reference */}
-                <div className="flex h-full overflow-hidden">
+                <div className="flex h-full overflow-hidden gap-7">
                   {PORTFOLIO_IMAGES.default.map((image, idx) => (
-                    <div key={idx} className="flex-1 px-4">
+                    <div key={idx} className="flex-1">
                       <img 
                         src={image} 
                         alt={`Portfolio item ${idx + 1}`} 

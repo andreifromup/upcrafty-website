@@ -16,15 +16,26 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div className="flex items-center group cursor-pointer">
-        {/* Logo image that changes to orange on hover - only on desktop */}
+        {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* Vector logo with color switching */}
+          {/* Vector logo with color switching but same position */}
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`h-full w-auto absolute transition-colors duration-300 ${useBlackLogo ? 'invert-[1]' : ''} ${!isMobile ? 'group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]' : ''}`}
+            className={`w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              height: "39.1px"
+              height: "39.1px",
+              filter: useBlackLogo ? 'invert(1)' : 'none'
+            }}
+            onMouseOver={(e) => {
+              if (!isMobile) {
+                e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+              }
+            }}
+            onMouseOut={(e) => {
+              if (!isMobile) {
+                e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+              }
             }}
           />
         </div>
@@ -34,7 +45,20 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`absolute w-full h-full transition-colors duration-300 ${useBlackLogo ? 'invert-[1]' : ''} ${!isMobile ? 'group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]' : ''}`}
+              className={`absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+              style={{
+                filter: useBlackLogo ? 'invert(1)' : 'none'
+              }}
+              onMouseOver={(e) => {
+                if (!isMobile) {
+                  e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+                }
+              }}
+              onMouseOut={(e) => {
+                if (!isMobile) {
+                  e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+                }
+              }}
             />
           </div>
         )}
