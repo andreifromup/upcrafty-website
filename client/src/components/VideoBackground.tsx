@@ -2,6 +2,10 @@ import { useEffect, useState, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { VIDEOS } from '@/assets/constants';
 
+interface VideoBackgroundProps {
+  blur?: boolean;
+}
+
 // Type for Network Information API
 interface NetworkInformation extends EventTarget {
   effectiveType: string;
@@ -14,7 +18,7 @@ interface NavigatorWithConnection extends Navigator {
   connection: NetworkInformation;
 }
 
-const VideoBackground: React.FC = () => {
+const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
   // Separate refs for desktop and mobile videos
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
@@ -195,6 +199,11 @@ const VideoBackground: React.FC = () => {
         </div>
       )}
       
+      {/* Blur overlay that appears when dropdown is open */}
+      {blur && (
+        <div className="absolute inset-0 backdrop-blur-sm z-10"></div>
+      )}
+      
       {/* Desktop layout - full screen video with enhanced responsiveness */}
       <div className={`absolute inset-0 ${isMobileDevice ? 'hidden' : 'hidden md:block'}`}>
         <div className="relative w-full h-full">
@@ -205,7 +214,7 @@ const VideoBackground: React.FC = () => {
             loop={true}
             playsInline={true}
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover min-h-full min-w-full"
+            className={`absolute inset-0 w-full h-full object-cover min-h-full min-w-full ${blur ? 'brightness-75' : ''}`}
             style={{
               objectPosition: 'center center',
               // Ensures the video scales properly on all desktop screen sizes
@@ -226,7 +235,7 @@ const VideoBackground: React.FC = () => {
         <div className="absolute inset-0 bg-black"></div>
         
         {/* Video container with enhanced responsive sizing for all mobile screen sizes */}
-        <div className="absolute top-0 left-0 w-full h-full max-h-screen overflow-hidden z-10">
+        <div className="absolute top-0 left-0 w-full h-full max-h-screen overflow-hidden z-0">
           <div className="relative w-full h-full">
             <video
               ref={mobileVideoRef}
@@ -235,7 +244,7 @@ const VideoBackground: React.FC = () => {
               loop={true}
               playsInline={true}
               preload="auto"
-              className="absolute inset-0 w-full h-full object-cover min-h-full min-w-full" 
+              className={`absolute inset-0 w-full h-full object-cover min-h-full min-w-full ${blur ? 'brightness-75' : ''}`} 
               style={{
                 objectPosition: 'center center', 
                 // The video will scale to cover the entire container while maintaining aspect ratio

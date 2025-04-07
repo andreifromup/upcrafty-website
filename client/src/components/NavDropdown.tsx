@@ -7,62 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-// Sample data structure for navigation categories
-interface NavCategory {
-  name: string;
-  subcategories: { name: string; items: string[] }[];
-}
-
-// Sample data for portfolio images
-const portfolioImages = [
-  "/IMG_1818.png",
-  "/IMG_1819.png",
-  // Add more portfolio images here
-];
-
-// Sample navigation categories and items
-const navCategories: NavCategory[] = [
-  {
-    name: "ANIMATION",
-    subcategories: [
-      { 
-        name: "3D MOTION GRAPHICS", 
-        items: ["Creative", "Corporate"] 
-      },
-      { 
-        name: "2D MOTION GRAPHICS", 
-        items: ["Explainer Videos", "Corporate", "Social Media"] 
-      },
-    ],
-  },
-  {
-    name: "FILM",
-    subcategories: [
-      { 
-        name: "COMMERCIALS", 
-        items: ["15s", "30s", "60s"] 
-      },
-      { 
-        name: "DOCUMENTARIES", 
-        items: ["Short", "Feature"] 
-      },
-    ],
-  },
-  {
-    name: "STUDIO",
-    subcategories: [
-      { 
-        name: "PHOTOGRAPHY", 
-        items: ["Product", "Portrait"] 
-      },
-      { 
-        name: "SOUND DESIGN", 
-        items: ["Music", "SFX"] 
-      },
-    ],
-  },
-];
+import { X, ArrowLeft, ArrowRight } from "lucide-react";
+import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -76,16 +22,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
       onClick={onClose}
     >
       {/* Dropdown container that prevents click propagation */}
       <div 
         className={`
-          bg-black text-white
+          bg-white text-black overflow-hidden
           ${isMobile 
-            ? 'fixed inset-0 flex flex-col justify-between' 
-            : 'absolute top-[81px] left-0 w-[1725px] max-w-full h-[572px] flex'
+            ? 'fixed inset-0 flex flex-col' 
+            : 'absolute top-[81px] left-0 w-full max-w-[1725px] h-[572px] flex mx-auto right-0'
           }
         `}
         onClick={(e) => e.stopPropagation()}
@@ -95,48 +41,53 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <>
             {/* Navigation buttons - stacked vertically */}
             <div className="p-6 flex-1 overflow-y-auto">
-              {navCategories.map((category) => (
-                <div key={category.name} className="mb-6">
-                  <h2 className="text-lg font-medium mb-2">{category.name}</h2>
+              {NAV_CATEGORIES.map((category, idx) => (
+                <div key={idx} className="mb-6">
+                  <a 
+                    href="#" 
+                    className="text-[16px] font-medium uppercase tracking-wider block py-2 hover:text-[#FF6600]"
+                  >
+                    {category.name}
+                  </a>
                   
-                  {category.subcategories.map((subcategory) => (
-                    <div key={subcategory.name} className="ml-4 mb-2">
-                      <h3 className="text-sm font-medium mb-1">{subcategory.name}</h3>
-                      
-                      <ul className="ml-4">
-                        {subcategory.items.map((item) => (
-                          <li key={item} className="text-sm py-1">
-                            <a href="#" className="hover:text-[#FF6600]">{item}</a>
-                          </li>
-                        ))}
-                      </ul>
+                  {category.subcategories.length > 0 && (
+                    <div className="ml-4 mt-2">
+                      {category.subcategories.map((subcategory, subIdx) => (
+                        <a 
+                          key={subIdx} 
+                          href="#" 
+                          className="text-[14px] block py-1.5 hover:text-[#FF6600]"
+                        >
+                          {subcategory.name}
+                        </a>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
               ))}
             </div>
             
             {/* Portfolio carousel at the bottom */}
-            <div className="p-4 border-t border-gray-800">
-              <h3 className="text-sm font-medium mb-2">PORTFOLIO</h3>
+            <div className="p-4 border-t border-gray-200">
+              <h3 className="text-[14px] font-medium mb-3 uppercase">PORTFOLIO</h3>
               
               <Carousel className="w-full">
                 <CarouselContent>
-                  {portfolioImages.map((image, index) => (
-                    <CarouselItem key={index} className="basis-2/3">
+                  {PORTFOLIO_IMAGES.default.map((image, idx) => (
+                    <CarouselItem key={idx} className="basis-4/5">
                       <div className="p-1">
                         <img 
                           src={image} 
-                          alt={`Portfolio item ${index + 1}`} 
-                          className="w-full h-32 object-cover rounded"
+                          alt={`Portfolio item ${idx + 1}`} 
+                          className="w-full h-40 object-cover"
                         />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <div className="flex justify-center mt-2">
-                  <CarouselPrevious className="relative static mx-1" />
-                  <CarouselNext className="relative static mx-1" />
+                <div className="flex justify-center mt-4">
+                  <CarouselPrevious className="mx-2 p-2 rounded-full border border-black hover:bg-gray-100 static" />
+                  <CarouselNext className="mx-2 p-2 rounded-full border border-black hover:bg-gray-100 static" />
                 </div>
               </Carousel>
             </div>
@@ -145,58 +96,61 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         
         {/* Desktop Layout */}
         {!isMobile && (
-          <>
+          <div className="flex h-full">
             {/* Left side - navigation categories */}
-            <div className="w-2/3 p-10 flex flex-wrap">
-              {navCategories.map((category) => (
-                <div key={category.name} className="w-1/3 mb-8">
-                  <h2 className="text-xl font-medium mb-4 text-[#FF6600]">{category.name}</h2>
+            <div className="w-1/2 p-12 overflow-y-auto flex flex-wrap content-start">
+              {NAV_CATEGORIES.map((category, idx) => (
+                <div key={idx} className="w-1/3 mb-8">
+                  <a 
+                    href="#" 
+                    className="text-[16px] font-medium uppercase tracking-wider block mb-4 hover:text-[#FF6600]"
+                  >
+                    {category.name}
+                  </a>
                   
-                  {category.subcategories.map((subcategory) => (
-                    <div key={subcategory.name} className="mb-4">
-                      <h3 className="text-base font-medium mb-2">{subcategory.name}</h3>
-                      
-                      <ul>
-                        {subcategory.items.map((item) => (
-                          <li key={item} className="text-sm py-1">
-                            <a href="#" className="hover:text-[#FF6600] transition-colors">{item}</a>
-                          </li>
-                        ))}
-                      </ul>
+                  {category.subcategories.length > 0 && (
+                    <div>
+                      {category.subcategories.map((subcategory, subIdx) => (
+                        <a 
+                          key={subIdx} 
+                          href="#" 
+                          className="text-[14px] block py-1 hover:text-[#FF6600]"
+                        >
+                          {subcategory.name}
+                        </a>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 </div>
               ))}
             </div>
             
             {/* Right side - portfolio images */}
-            <div className="w-1/3 p-10">
-              <h3 className="text-xl font-medium mb-6 text-[#FF6600]">PORTFOLIO</h3>
+            <div className="w-1/2 p-12 bg-gray-50 flex flex-col">
+              <h3 className="text-[16px] font-medium mb-6 uppercase">FEATURED PROJECTS</h3>
               
-              <div className="grid grid-cols-3 gap-4">
-                {portfolioImages.slice(0, 3).map((image, index) => (
-                  <div key={index} className="aspect-square overflow-hidden">
+              <div className="grid grid-cols-3 gap-6 flex-1">
+                {PORTFOLIO_IMAGES.default.map((image, idx) => (
+                  <div key={idx} className="overflow-hidden">
                     <img 
                       src={image} 
-                      alt={`Portfolio item ${index + 1}`} 
+                      alt={`Portfolio item ${idx + 1}`} 
                       className="w-full h-full object-cover"
                     />
                   </div>
                 ))}
               </div>
             </div>
-          </>
+          </div>
         )}
         
         {/* Close button */}
         <button 
-          className="absolute top-4 right-4 text-white hover:text-[#FF6600]"
+          className="absolute top-6 right-6 text-black hover:text-[#FF6600]"
           onClick={onClose}
+          aria-label="Close menu"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+          <X size={24} />
         </button>
       </div>
     </div>

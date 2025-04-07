@@ -2,7 +2,11 @@ import React from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ICONS, SOCIAL_LINKS } from "@/assets/constants";
 
-const SocialIcons: React.FC = () => {
+interface SocialIconsProps {
+  inverted?: boolean;
+}
+
+const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
   
@@ -27,7 +31,7 @@ const SocialIcons: React.FC = () => {
         <img 
           src={ICONS.x} 
           alt="X (Twitter)" 
-          className={iconSizes.x}
+          className={`${iconSizes.x} ${inverted ? 'invert' : ''}`}
         />
       </a>
       
@@ -42,7 +46,7 @@ const SocialIcons: React.FC = () => {
         <img 
           src={ICONS.instagram} 
           alt="Instagram" 
-          className={iconSizes.instagram}
+          className={`${iconSizes.instagram} ${inverted ? 'invert' : ''}`}
         />
       </a>
       
@@ -57,7 +61,7 @@ const SocialIcons: React.FC = () => {
         <img 
           src={ICONS.tiktok} 
           alt="TikTok" 
-          className={iconSizes.tiktok}
+          className={`${iconSizes.tiktok} ${inverted ? 'invert' : ''}`}
         />
       </a>
       
@@ -72,7 +76,7 @@ const SocialIcons: React.FC = () => {
         <img 
           src={ICONS.youtube} 
           alt="YouTube" 
-          className={iconSizes.youtube}
+          className={`${iconSizes.youtube} ${inverted ? 'invert' : ''}`}
         />
       </a>
     </div>

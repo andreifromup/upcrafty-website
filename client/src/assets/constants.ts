@@ -8,6 +8,7 @@ export const ICONS = {
   
   // Logo Images
   logo: "/sigla.png",
+  logoBlack: "/Black Logo.png",
   logoBottom: "/sigla bottom.png",
   
   // Other
@@ -41,3 +42,51 @@ export const SOCIAL_LINKS = {
   tiktok: "https://www.tiktok.com/@upcraftystudio?lang=en",
   youtube: "https://www.youtube.com/@upcrafty"
 };
+
+// Portfolio images
+export const PORTFOLIO_IMAGES = {
+  default: [
+    "/Photo 1.png",
+    "/Photo 2.png",
+    "/Photo 3.png"
+  ]
+};
+
+// Navigation structure for dropdown menu
+export const NAV_CATEGORIES = [
+  {
+    name: "ILLUSTRATIONS",
+    subcategories: [
+      { name: "CARTOON", items: [] },
+      { name: "CHARACTER DESIGN", items: [] }
+    ]
+  },
+  {
+    name: "GAMES",
+    subcategories: [
+      { name: "MOBILE GAMES", items: [] }
+    ]
+  },
+  {
+    name: "ANIMATIONS",
+    subcategories: [
+      { name: "2D ANIMATIONS", items: [] },
+      { name: "MOTION GRAPHICS", items: [] }
+    ]
+  },
+  {
+    name: "3D",
+    subcategories: [
+      { name: "ENVIRONMENT", items: [] },
+      { name: "CHARACTER MODELING", items: [] }
+    ]
+  },
+  {
+    name: "ABOUT US",
+    subcategories: []
+  },
+  {
+    name: "CONTACT",
+    subcategories: []
+  }
+];

@@ -5,9 +5,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
   includeDropdown?: boolean;
+  useBlackLogo?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false }) => {
+const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, useBlackLogo = false }) => {
   const isMobile = useIsMobile();
   
   // Use the specific dimensions from the design specs
@@ -17,33 +18,37 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false })
       <div className="flex items-center group cursor-pointer">
         {/* Logo image that changes to orange on hover - only on desktop */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* White logo (visible by default) */}
+          {/* White or Black logo (visible by default) */}
           <img 
-            src={ICONS.logo} 
+            src={useBlackLogo ? ICONS.logoBlack : ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`h-full w-auto absolute transition-opacity duration-300 ${!isMobile ? 'group-hover:opacity-0' : ''}`}
+            className={`h-full w-auto absolute transition-opacity duration-300 ${!isMobile && !useBlackLogo ? 'group-hover:opacity-0' : ''}`}
           />
-          {/* Orange logo (hidden by default, visible on hover on desktop only) */}
-          <img 
-            src={ICONS.logo} 
-            alt="Upcrafty Logo" 
-            className={`h-full w-auto absolute transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
-          />
+          {/* Orange logo (hidden by default, visible on hover on desktop only) - only for white logo */}
+          {!useBlackLogo && (
+            <img 
+              src={ICONS.logo} 
+              alt="Upcrafty Logo" 
+              className={`h-full w-auto absolute transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
+            />
+          )}
         </div>
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* White polygon (default) */}
+            {/* White or Black polygon (default) */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`absolute w-full h-full transition-opacity duration-300 ${!isMobile ? 'group-hover:opacity-0' : ''}`}
+              className={`absolute w-full h-full transition-opacity duration-300 ${useBlackLogo ? 'invert' : ''} ${!isMobile && !useBlackLogo ? 'group-hover:opacity-0' : ''}`}
             />
-            {/* Orange polygon (on hover on desktop only) */}
-            <img 
-              src={ICONS.polygon} 
-              alt="Dropdown" 
-              className={`absolute w-full h-full transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
-            />
+            {/* Orange polygon (on hover on desktop only) - only for white logo */}
+            {!useBlackLogo && (
+              <img 
+                src={ICONS.polygon} 
+                alt="Dropdown" 
+                className={`absolute w-full h-full transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
+              />
+            )}
           </div>
         )}
       </div>
