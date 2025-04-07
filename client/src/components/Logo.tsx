@@ -22,9 +22,8 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            className={`h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              height: "39.1px",
               filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
             onMouseOver={(e) => {

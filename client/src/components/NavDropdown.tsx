@@ -52,8 +52,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <>
             <div className="flex flex-col h-full">
               <div className="p-6 pt-20">
-                {/* Logo */}
-                <div className="flex items-center mb-8 group">
+                {/* Logo - mobile version with same size as in header */}
+                <div className="flex items-center mb-8 group" style={{ position: 'relative' }}>
                   <Logo size="header" useBlackLogo={true} />
                 </div>
 
@@ -144,8 +144,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <div className="flex h-full w-full">
             {/* Logo and Navigation columns */}
             <div className="w-[775px] p-12 pt-16 overflow-y-auto">
-              {/* Logo */}
-              <div className="flex items-center mb-10 group">
+              {/* Logo - exactly the same size and position as in header */}
+              <div className="flex items-center mb-10 group" style={{ position: 'absolute', top: '45px', left: '70px' }}>
                 <Logo size="header" useBlackLogo={true} />
               </div>
 
