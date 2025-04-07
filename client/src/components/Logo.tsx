@@ -23,6 +23,10 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             src={useBlackLogo ? ICONS.logoBlack : ICONS.logo} 
             alt="Upcrafty Logo" 
             className={`h-full w-auto absolute transition-opacity duration-300 ${!isMobile && !useBlackLogo ? 'group-hover:opacity-0' : ''}`}
+            style={{
+              width: useBlackLogo ? 'auto' : undefined,
+              height: useBlackLogo ? '39.1px' : undefined
+            }}
           />
           {/* Orange logo (hidden by default, visible on hover on desktop only) - only for white logo */}
           {!useBlackLogo && (
