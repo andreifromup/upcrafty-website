@@ -17,7 +17,7 @@ export const ICONS = {
 
 // Video files for different platforms and network conditions
 export const VIDEOS = {
-  desktopHigh: "/background-desktop_1.mp4",
+  desktopHigh: "/background-desktop.mp4",
   desktopLow: "/background-desktop-low.mp4",
   mobileHigh: "/background-mobile.mp4",
   mobileLow: "/background-mobile-low.mp4"
