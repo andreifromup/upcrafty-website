@@ -34,16 +34,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           bg-white text-black overflow-hidden
           ${isMobile 
             ? 'fixed inset-0 flex flex-col w-full' 
-            : 'fixed top-0 flex mx-auto'
+            : 'fixed top-0 left-0 right-0 flex justify-center w-full'
           }
         `}
         onClick={(e) => e.stopPropagation()}
         style={{ 
-          left: isMobile ? 0 : '50%', 
-          transform: isMobile ? 'none' : 'translateX(-50%)',
-          width: isMobile ? '100%' : '1725px',
+          width: '100%',
           height: isMobile ? '100%' : '572px',
-          maxWidth: '100vw',
           maxHeight: isMobile ? '100vh' : '80vh'
         }}
       >
@@ -141,16 +138,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         
         {/* Desktop Layout */}
         {!isMobile && (
-          <div className="flex h-full w-full">
-            {/* Logo and Navigation columns */}
-            <div className="w-[775px] p-12 pt-16 overflow-y-auto">
-              {/* Logo - exactly the same size and position as in header */}
-              <div className="flex items-center mb-10 group" style={{ position: 'absolute', top: '45px', left: '70px' }}>
+          <div className="flex h-full w-full max-w-[1920px] mx-auto">
+            {/* Logo - exactly the same size and position as in header */}
+            <div className="absolute" style={{ top: '45px', left: '70px' }}>
+              <div className="flex items-center group">
                 <Logo size="header" useBlackLogo={true} />
               </div>
+            </div>
 
+            {/* Logo and Navigation columns */}
+            <div className="w-[40%] p-12 pt-16 overflow-y-auto">
               {/* Menu Categories - arranged in columns */}
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap mt-12">
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className="w-1/2 mb-8 pr-4">
                     <a 
@@ -205,7 +204,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Right side - portfolio images (only shown when no category selected) */}
             {!selectedCategory && (
-              <div className="w-[950px] bg-white flex flex-col pt-16 pr-6">
+              <div className="w-[60%] bg-white flex flex-col pt-16 pr-12">
                 {/* Portfolio images - arranged as in reference */}
                 <div className="flex h-full overflow-hidden gap-7">
                   {PORTFOLIO_IMAGES.default.map((image, idx) => (
