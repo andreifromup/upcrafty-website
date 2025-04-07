@@ -18,41 +18,24 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
       <div className="flex items-center group cursor-pointer">
         {/* Logo image that changes to orange on hover - only on desktop */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* White or Black logo (visible by default) */}
+          {/* Vector logo with color switching */}
           <img 
-            src={useBlackLogo ? ICONS.logoBlack : ICONS.logo} 
+            src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`h-full w-auto absolute transition-opacity duration-300 ${!isMobile && !useBlackLogo ? 'group-hover:opacity-0' : ''}`}
+            className={`h-full w-auto absolute transition-colors duration-300 ${useBlackLogo ? 'invert-[1]' : ''} ${!isMobile ? 'group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]' : ''}`}
             style={{
-              width: useBlackLogo ? 'auto' : undefined,
-              height: useBlackLogo ? '39.1px' : undefined
+              height: "39.1px"
             }}
           />
-          {/* Orange logo (hidden by default, visible on hover on desktop only) - only for white logo */}
-          {!useBlackLogo && (
-            <img 
-              src={ICONS.logo} 
-              alt="Upcrafty Logo" 
-              className={`h-full w-auto absolute transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
-            />
-          )}
         </div>
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* White or Black polygon (default) */}
+            {/* Dropdown polygon that changes color with the logo */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`absolute w-full h-full transition-opacity duration-300 ${useBlackLogo ? 'invert' : ''} ${!isMobile && !useBlackLogo ? 'group-hover:opacity-0' : ''}`}
+              className={`absolute w-full h-full transition-colors duration-300 ${useBlackLogo ? 'invert-[1]' : ''} ${!isMobile ? 'group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]' : ''}`}
             />
-            {/* Orange polygon (on hover on desktop only) - only for white logo */}
-            {!useBlackLogo && (
-              <img 
-                src={ICONS.polygon} 
-                alt="Dropdown" 
-                className={`absolute w-full h-full transition-opacity duration-300 opacity-0 ${!isMobile ? 'group-hover:opacity-100' : ''} [filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]`}
-              />
-            )}
           </div>
         )}
       </div>

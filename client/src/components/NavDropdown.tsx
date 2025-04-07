@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { X } from "lucide-react";
 import { NAV_CATEGORIES, PORTFOLIO_IMAGES, ICONS, SOCIAL_LINKS } from "@/assets/constants";
+import Logo from "@/components/Logo";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -49,11 +50,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <div className="p-6 pt-20">
                 {/* Logo */}
                 <div className="flex items-center mb-8 group">
-                  <img 
-                    src={ICONS.logoBlack} 
-                    alt="Upcrafty Logo" 
-                    className="w-[36.6px] h-[39.1px] transition-all duration-300 group-hover:filter group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
-                  />
+                  <Logo size="header" useBlackLogo={true} />
                 </div>
 
                 {/* Navigation buttons - stacked vertically */}
@@ -62,22 +59,22 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     <div key={idx} className="mb-6">
                       <a 
                         href="#" 
-                        className="text-[18px] font-bold uppercase tracking-wider block py-2 hover:text-[#FF6600]"
+                        className="text-[18px] font-bold uppercase block py-2 hover:text-[#FF6600]"
                         onClick={(e) => {
                           e.preventDefault();
                           setSelectedCategory(selectedCategory === category.name ? null : category.name);
                         }}
                       >
                         <div 
-                          className={`py-1 px-2 rounded-lg ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
-                          style={{ width: '322px', height: '33px', display: 'flex', alignItems: 'center' }}
+                          className={`py-[6px] px-3 rounded-[6px] flex items-center ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
+                          style={{ width: '322px', height: '33px' }}
                         >
                           {category.name}
                         </div>
                       </a>
                       
                       {category.subcategories.length > 0 && (
-                        <div className="ml-4 mt-2">
+                        <div className="ml-8 mt-2">
                           {category.subcategories.map((subcategory, subIdx) => (
                             <a 
                               key={subIdx} 
@@ -94,7 +91,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
               
-              {/* Portfolio carousel at the bottom */}
+              {/* Portfolio carousel at the bottom - only when no category selected */}
               {!selectedCategory && (
                 <div className="p-4 mt-auto border-t border-gray-200">
                   <Carousel className="w-full">
@@ -120,7 +117,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               )}
               
               {/* Social Icons at bottom */}
-              <div className="flex space-x-6 mt-auto p-4 justify-center">
+              <div className="flex space-x-6 mt-auto p-4 justify-center border-t border-gray-100">
                 <a href={SOCIAL_LINKS.x} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
                   <img src={ICONS.x} alt="X" className="w-5 h-5 opacity-70 hover:opacity-100" />
                 </a>
@@ -145,11 +142,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             <div className="w-[45%] p-12 pt-16 overflow-y-auto">
               {/* Logo */}
               <div className="flex items-center mb-10 group">
-                <img 
-                  src={ICONS.logoBlack} 
-                  alt="Upcrafty Logo" 
-                  className="w-[36.6px] h-[39.1px] mr-2 transition-all duration-300 group-hover:filter group-hover:[filter:brightness(0)_saturate(100%)_invert(49%)_sepia(75%)_saturate(5338%)_hue-rotate(1deg)_brightness(103%)_contrast(105%)]"
-                />
+                <Logo size="header" useBlackLogo={true} />
               </div>
 
               {/* Menu Categories - arranged in columns */}
@@ -158,22 +151,22 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className="w-1/2 mb-8 pr-4">
                     <a 
                       href="#" 
-                      className="text-[18px] font-bold uppercase tracking-wider block mb-4 hover:text-[#FF6600]"
+                      className="text-[18px] font-bold uppercase block mb-4 hover:text-[#FF6600]"
                       onClick={(e) => {
                         e.preventDefault();
                         setSelectedCategory(selectedCategory === category.name ? null : category.name);
                       }}
                     >
                       <div 
-                        className={`py-1 px-2 rounded-lg ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
-                        style={{ width: '322px', height: '33px', display: 'flex', alignItems: 'center' }}
+                        className={`py-[6px] px-3 rounded-[6px] flex items-center ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
+                        style={{ width: '322px', height: '33px' }}
                       >
                         {category.name}
                       </div>
                     </a>
                     
                     {category.subcategories.length > 0 && (
-                      <div className="ml-4">
+                      <div className="ml-8">
                         {category.subcategories.map((subcategory, subIdx) => (
                           <a 
                             key={subIdx} 
@@ -206,17 +199,17 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Right side - portfolio images */}
+            {/* Right side - portfolio images (only shown when no category selected) */}
             {!selectedCategory && (
-              <div className="w-[55%] bg-white flex flex-col">
+              <div className="w-[55%] bg-white flex flex-col pt-16">
                 {/* Portfolio images - arranged as in reference */}
                 <div className="flex h-full overflow-hidden">
                   {PORTFOLIO_IMAGES.default.map((image, idx) => (
-                    <div key={idx} className="flex-1 p-6">
+                    <div key={idx} className="flex-1 px-4">
                       <img 
                         src={image} 
                         alt={`Portfolio item ${idx + 1}`} 
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-cover rounded-[8px]"
                       />
                     </div>
                   ))}
