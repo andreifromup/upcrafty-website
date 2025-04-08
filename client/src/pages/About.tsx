@@ -62,7 +62,7 @@ const About: React.FC = () => {
             <div 
               className="bg-black text-white border border-black rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] h-[40px] w-[120px] flex items-center justify-center cursor-pointer active:bg-white active:text-black active:scale-95 transition-all duration-300"
               style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.open('/', '_self')}
             >
               Home
             </div>
