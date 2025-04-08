@@ -14,22 +14,18 @@ const About: React.FC = () => {
   
   // Enable scrolling and set appropriate body classes
   useEffect(() => {
-    // Add about-page class and remove homepage class
+    // Add about-page class with smooth scrolling and remove homepage class
     document.body.classList.add('about-page');
     document.body.classList.remove('homepage');
     
-    // Force the document to be scrollable
-    document.documentElement.style.overflow = "auto";
+    // Let the body be natural height
     document.documentElement.style.height = "auto";
-    document.body.style.overflow = "auto";
     document.body.style.height = "auto";
     
     // Clean up when component unmounts
     return () => {
       document.body.classList.remove('about-page');
-      document.documentElement.style.overflow = "";
       document.documentElement.style.height = "";
-      document.body.style.overflow = "";
       document.body.style.height = "";
     };
   }, []);
@@ -44,8 +40,8 @@ const About: React.FC = () => {
         />
       </div>
       
-      {/* Scrollable Content Container */}
-      <div className="container mx-auto px-4 py-8 md:py-12 overflow-y-auto">
+      {/* Scrollable Content Container - Using native scroll */}
+      <div className="container mx-auto px-4 py-8 md:py-12">
         {/* Video Section - first element at the top */}
         <div className="w-full max-w-3xl mx-auto mb-8 rounded-lg overflow-hidden shadow-lg">
           <AboutVideo className="aspect-video" />
