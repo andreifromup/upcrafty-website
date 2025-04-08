@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
       <div
         className={`
           px-[20px] sm:px-[35px] md:px-[54px] 
-          pt-[15px] sm:pt-[18px] md:pt-[40px] 
+          pt-[15px] sm:pt-[18px] md:pt-[32px] 
           pb-0 flex justify-between items-center w-full
           absolute top-0 left-0 right-0 
           z-[100]

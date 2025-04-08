@@ -126,15 +126,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
-            {/* Left section - Navigation - fixed and aligned to the left */}
-            <div className="w-[40%] min-w-[500px] p-12 pt-[100px] overflow-y-auto" style={{ flexShrink: 0 }}>
+            {/* Left section - Navigation - fixed and aligned to the left with same padding as logo */}
+            <div className="w-[40%] min-w-[500px] pl-[54px] pr-4 pt-[100px] overflow-y-auto" style={{ flexShrink: 0 }}>
               {/* Menu Categories - arranged in columns */}
-              <div className="flex flex-wrap mt-12">
+              <div className="flex flex-wrap mt-6">
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className="w-1/2 mb-8 pr-4">
+                  <div key={idx} className="w-1/2 mb-5 pr-4">
                     <a 
                       href="#" 
-                      className="text-[18px] font-bold uppercase block mb-4 hover:text-[#FF6600]"
+                      className="text-[18px] font-bold uppercase block mb-3 hover:text-[#FF6600]"
                       onClick={(e) => {
                         e.preventDefault();
                         setSelectedCategory(selectedCategory === category.name ? null : category.name);
@@ -142,7 +142,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     >
                       <div 
                         className={`py-[6px] px-3 rounded-[6px] flex items-center ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
-                        style={{ width: '322px', height: '33px' }}
                       >
                         {category.name}
                       </div>
@@ -154,7 +153,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="text-[16px] font-normal block py-1.5 hover:text-[#FF6600]"
+                            className="text-[16px] font-normal block py-1 hover:text-[#FF6600]"
                           >
                             {subcategory.name}
                           </a>
@@ -165,73 +164,70 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 ))}
               </div>
               
-              {/* Desktop social icons on the bottom left */}
-              <div className="absolute bottom-8 left-12">
+              {/* Desktop social icons on the bottom left - same padding as logo */}
+              <div className="absolute bottom-8 left-[54px]">
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
             
-            {/* Right section - Portfolio images with independent positioning */}
+            {/* Right section - Portfolio images matching Figma reference */}
             {!selectedCategory && (
-              <div className="flex-1 relative bg-white h-full pt-16 pr-12 overflow-hidden">
-                {/* Portfolio images with absolute positioning to respect vertical alignment */}
-                <div className="relative w-full h-full overflow-visible" style={{ minHeight: '540px' }}>
-                  {/* Left image - positioned at middle-left */}
+              <div className="flex-1 relative bg-white h-full overflow-hidden">
+                {/* Portfolio images with absolute positioning to match Figma */}
+                <div className="relative w-full h-[572px] overflow-hidden">
+                  {/* Left image - aligned to bottom edge with overflow hidden */}
                   <div 
-                    className="absolute overflow-visible" 
+                    className="absolute w-[300px] h-[400px] overflow-hidden" 
                     style={{ 
-                      left: '10%', 
-                      top: '50%',
-                      transform: 'translateY(-40%)'
+                      left: '44px', 
+                      bottom: '0',
                     }}
                   >
                     <img 
                       src={PORTFOLIO_IMAGES.default[0]} 
                       alt="Featured project 1" 
-                      className="w-auto h-auto object-contain"
-                      style={{ 
-                        maxWidth: "min(362px, 22vw)",
-                        maxHeight: "467px"
+                      className="w-full h-auto object-cover"
+                      style={{
+                        objectPosition: "center top",
+                        transform: "scale(1.2)"
                       }}
                     />
                   </div>
                   
-                  {/* Middle image - positioned higher */}
+                  {/* Middle image - positioned slightly higher than others */}
                   <div 
-                    className="absolute overflow-visible" 
+                    className="absolute w-[300px] h-[480px] overflow-hidden" 
                     style={{ 
-                      left: '50%', 
-                      top: '30%',
-                      transform: 'translateX(-50%)'
+                      left: 'calc(50% - 150px)', 
+                      bottom: '60px',
                     }}
                   >
                     <img 
                       src={PORTFOLIO_IMAGES.default[1]} 
                       alt="Featured project 2" 
-                      className="w-auto h-auto object-contain"
-                      style={{ 
-                        maxWidth: "min(362px, 22vw)",
-                        maxHeight: "467px"
+                      className="w-full h-auto object-cover"
+                      style={{
+                        objectPosition: "center top",
+                        transform: "scale(1.2)"
                       }}
                     />
                   </div>
                   
-                  {/* Right image - positioned at middle-right */}
+                  {/* Right image - aligned to bottom edge with overflow hidden */}
                   <div 
-                    className="absolute overflow-visible" 
+                    className="absolute w-[300px] h-[400px] overflow-hidden" 
                     style={{ 
-                      right: '10%', 
-                      top: '50%',
-                      transform: 'translateY(-40%)'
+                      right: '44px', 
+                      bottom: '0',
                     }}
                   >
                     <img 
-                      src={PORTFOLIO_IMAGES.default[2]} 
+                      src={PORTFOLIO_IMAGES.default[2]}
                       alt="Featured project 3" 
-                      className="w-auto h-auto object-contain"
-                      style={{ 
-                        maxWidth: "min(362px, 22vw)",
-                        maxHeight: "467px"
+                      className="w-full h-auto object-cover"
+                      style={{
+                        objectPosition: "center top",
+                        transform: "scale(1.2)"
                       }}
                     />
                   </div>
