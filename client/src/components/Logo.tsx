@@ -96,7 +96,8 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               alt="Dropdown" 
               className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
-                filter: useBlackLogo ? 'invert(1)' : 'none'
+                filter: useBlackLogo ? 'invert(1)' : 'none',
+                transform: useBlackLogo ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
             />
           </div>
