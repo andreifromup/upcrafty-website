@@ -62,7 +62,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-55px]' : ''}`}>
                       <a 
                         href={category.name === "ABOUT US" ? "/about" : "#"} 
-                        className={`uppercase block py-2 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
+                        className={`uppercase block py-2 ${!category.isTitle ? 'md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95' : ''} transition-all duration-150`}
                         onClick={(e) => {
                           if (category.name === "CONTACT") {
                             e.preventDefault();
@@ -109,7 +109,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             <a 
                               key={subIdx} 
                               href="#" 
-                              className="block hover:text-[#FF6600]"
+                              className="block md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150"
                             >
                               <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
                                 {subcategory.name}
@@ -139,8 +139,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       ))}
                     </CarouselContent>
                     <div className="flex justify-center mt-4">
-                      <CarouselPrevious className="mx-2 p-2 rounded-full border border-black hover:bg-gray-100 static" />
-                      <CarouselNext className="mx-2 p-2 rounded-full border border-black hover:bg-gray-100 static" />
+                      <CarouselPrevious className="mx-2 p-2 rounded-full border border-black md:hover:bg-gray-100 active:bg-gray-100 active:scale-95 transition-all duration-150 static" />
+                      <CarouselNext className="mx-2 p-2 rounded-full border border-black md:hover:bg-gray-100 active:bg-gray-100 active:scale-95 transition-all duration-150 static" />
                     </div>
                   </Carousel>
                 </div>
@@ -167,7 +167,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-55px]' : ''} mb-5 pr-4`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block mb-3 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
+                      className={`uppercase block mb-3 ${!category.isTitle ? 'md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150' : ''}`}
                       onClick={(e) => {
                         if (category.name === "CONTACT") {
                           e.preventDefault();
@@ -214,7 +214,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="block hover:text-[#FF6600]"
+                            className="block md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150"
                           >
                             <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
                               {subcategory.name}
@@ -302,7 +302,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         
         {/* Close button with circular background */}
         <button 
-          className="absolute top-6 right-6 text-black p-2 rounded-full bg-white/70 hover:bg-white/90 transition-all"
+          className="absolute top-6 right-6 text-black p-2 rounded-full bg-white/70 md:hover:bg-white/90 active:bg-white/90 active:scale-95 transition-all duration-150"
           onClick={onClose}
           aria-label="Close menu"
         >

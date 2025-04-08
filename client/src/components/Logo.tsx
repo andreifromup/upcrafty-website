@@ -36,6 +36,16 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
                 e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
               }
             }}
+            onTouchStart={(e) => {
+              if (isMobile) {
+                e.currentTarget.style.transform = 'scale(0.95)';
+              }
+            }}
+            onTouchEnd={(e) => {
+              if (isMobile) {
+                e.currentTarget.style.transform = 'scale(1)';
+              }
+            }}
           />
         </div>
         {includeDropdown && (
@@ -56,6 +66,16 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               onMouseOut={(e) => {
                 if (!isMobile) {
                   e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+                }
+              }}
+              onTouchStart={(e) => {
+                if (isMobile) {
+                  e.currentTarget.style.transform = 'scale(0.95)';
+                }
+              }}
+              onTouchEnd={(e) => {
+                if (isMobile) {
+                  e.currentTarget.style.transform = 'scale(1)';
                 }
               }}
             />

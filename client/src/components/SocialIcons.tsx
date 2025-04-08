@@ -9,7 +9,7 @@ interface SocialIconsProps {
 
 const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown = false }) => {
   const isMobileDevice = useIsMobile();
-  const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
+  const iconStyle = "transition-all duration-300 md:hover:opacity-70 md:hover:scale-110 active:opacity-70 active:scale-95";
   
   // If in dropdown, always use black icons
   // If not inverted (like on About page or dropdown), use black icons

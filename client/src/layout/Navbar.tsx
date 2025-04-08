@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({
       >
         {/* Logo with dropdown arrow - responsive sizing */}
         <div 
-          className="flex items-center cursor-pointer" 
+          className="flex items-center cursor-pointer active:scale-95 transition-all duration-150" 
           onClick={toggleDropdown}
         >
           <Logo 
@@ -66,12 +66,12 @@ const Navbar: React.FC<NavbarProps> = ({
           <Button 
             className={`
               ${isAboutPage || useBlackButton
-                ? "bg-black hover:bg-white text-white hover:text-black border border-black" 
-                : "bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] border-none"
+                ? "bg-black md:hover:bg-white text-white md:hover:text-black border border-black active:bg-white active:text-black" 
+                : "bg-[#FF6600] md:hover:bg-white text-white md:hover:text-[#FF6600] border-none active:bg-white active:text-[#FF6600]"
               } 
               rounded-full uppercase font-normal
               tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
-              h-[28px] md:h-[34px] w-[90px] md:w-[107px] p-0 transition-colors duration-300
+              h-[28px] md:h-[34px] w-[90px] md:w-[107px] p-0 transition-colors duration-300 active:scale-95
             `}
             style={{ 
               width: isMobileDevice ? "90px" : "107px", 
