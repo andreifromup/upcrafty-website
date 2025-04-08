@@ -62,8 +62,8 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
   
   return (
     <div className={`w-full ${className}`}>
-      <div className="flex justify-end">
-        <h2 className="text-left font-bold text-lg md:text-xl mb-3 text-gray-700 tracking-wide">
+      <div className="flex justify-start">
+        <h2 className="text-left font-bold text-lg md:text-xl mb-1 text-gray-700 tracking-wide">
           Trusted by
         </h2>
       </div>
@@ -95,7 +95,7 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
         {/* Scrolling content container */}
         <div 
           ref={innerRef}
-          className="flex overflow-x-scroll scrollbar-hide py-6"
+          className="flex overflow-x-scroll scrollbar-hide pt-2 pb-6"
           style={{ 
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
