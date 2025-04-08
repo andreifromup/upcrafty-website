@@ -59,8 +59,14 @@ const About: React.FC = () => {
         <div className="flex justify-center mb-8">
           <Link to="/">
             <Button 
-              className="bg-black md:hover:bg-white text-white md:hover:text-black border border-black rounded-full uppercase font-normal
-              tracking-[2px] text-[14px] leading-[20px] h-[40px] w-[120px] transition-colors duration-300 active:bg-white active:text-black active:scale-95"
+              className={`
+                ${isMobile 
+                  ? "bg-black text-white border border-black active:bg-white active:text-black active:scale-95" 
+                  : "bg-black hover:bg-white text-white hover:text-black border border-black active:bg-white active:text-black active:scale-95"
+                }
+                rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] 
+                h-[40px] w-[120px] transition-all duration-300
+              `}
             >
               Home
             </Button>

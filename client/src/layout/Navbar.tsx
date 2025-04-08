@@ -66,8 +66,12 @@ const Navbar: React.FC<NavbarProps> = ({
           <Button 
             className={`
               ${isAboutPage || useBlackButton
-                ? "bg-black md:hover:bg-white text-white md:hover:text-black border border-black active:scale-95 active:bg-white active:text-black" 
-                : "bg-[#FF6600] md:hover:bg-white text-white md:hover:text-[#FF6600] border-none active:scale-95 active:bg-white active:text-[#FF6600]"
+                ? isMobileDevice 
+                  ? "bg-black text-white border border-black active:scale-95 active:bg-white active:text-black" 
+                  : "bg-black hover:bg-white text-white hover:text-black border border-black active:scale-95 active:bg-white active:text-black"
+                : isMobileDevice
+                  ? "bg-[#FF6600] text-white border-none active:scale-95 active:bg-white active:text-[#FF6600]" 
+                  : "bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] border-none active:scale-95 active:bg-white active:text-[#FF6600]"
               } 
               rounded-full uppercase font-normal
               tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
