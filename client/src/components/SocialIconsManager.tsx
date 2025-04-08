@@ -22,8 +22,8 @@ const SocialIconsManager: React.FC<SocialIconsManagerProps> = ({ isDropdownOpen 
   // For mobile with dropdown open - social icons appear inside dropdown at bottom-center
   // This is handled directly in NavDropdown component
 
-  // For footer (dropdown closed) on both mobile and desktop
-  if (!isDropdownOpen) {
+  // For footer (dropdown closed) on desktop only
+  if (!isDropdownOpen && !isMobile) {
     return (
       <div className="fixed right-[20px] sm:right-[35px] md:right-[54px] bottom-[20px] sm:bottom-[35px] md:bottom-[40px] z-[60]">
         <SocialIcons inverted={false} />
@@ -31,7 +31,9 @@ const SocialIconsManager: React.FC<SocialIconsManagerProps> = ({ isDropdownOpen 
     );
   }
 
-  // Don't render anything when dropdown is open as the icons are managed by NavDropdown
+  // Don't render anything when dropdown is open or on mobile as the icons are managed differently:
+  // - For dropdown open: Icons are handled by NavDropdown component
+  // - For mobile closed: Icons are handled by Footer component
   return null;
 };
 

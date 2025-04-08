@@ -22,6 +22,11 @@ const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
           <Logo size="footer" />
         </div>
         
+        {/* Social icons below logo for mobile */}
+        <div className="mb-4">
+          <SocialIcons inverted={false} />
+        </div>
+        
         {/* Copyright text at bottom - exact style from reference */}
         <div className="text-center font-normal text-white">
           <p className="text-[12px] leading-[16px]">© 2025 Upcrafty Co. All Rights Reserved.</p>
