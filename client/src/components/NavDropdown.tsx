@@ -94,10 +94,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       {/* Dropdown container that prevents click propagation */}
       <div 
         className={`
-          bg-white text-black overflow-hidden z-[100]
+          bg-white text-black z-[100]
           ${isMobile 
-            ? 'fixed inset-0 flex flex-col w-full' 
-            : 'fixed top-0 left-0 right-0 flex justify-center w-full'
+            ? 'fixed inset-0 flex flex-col w-full overflow-y-auto' 
+            : 'fixed top-0 left-0 right-0 flex justify-center w-full overflow-hidden'
           }
         `}
         onClick={(e) => e.stopPropagation()}
@@ -114,8 +114,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Space for the logo which is now in the Navbar component */}
               <div className="invisible h-[60px]"></div>
 
-              {/* Navigation buttons - stacked vertically */}
-              <div className="overflow-y-auto mt-4" style={{ paddingLeft: LEFT_PADDING }}>
+              {/* Navigation buttons - stacked vertically - Enable scrolling */}
+              <div className="overflow-y-auto mt-4 flex-grow pb-20" style={{ paddingLeft: LEFT_PADDING, maxHeight: 'calc(100vh - 200px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-55px]' : ''}`}>
                     <a 
@@ -169,11 +169,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="block md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150"
+                            className="block active:text-[#FF6600] active:scale-95 transition-all duration-150"
                           >
-                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
-                              {subcategory.name}
-                            </span>
+                            <div className="py-1">
+                              <span className="font-inter font-normal text-[16px] leading-[30px] uppercase pl-[12px]">
+                                {subcategory.name}
+                              </span>
+                            </div>
                           </a>
                         ))}
                       </div>
