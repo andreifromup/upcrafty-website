@@ -71,20 +71,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }}
                       >
                         {category.isTitle ? (
-                          // Title styling with container - with position relative wrapper for alignment
-                          <div className="relative">
-                            <div 
-                              className={`py-[6.5px] px-[12px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50 absolute`}
-                              style={{ 
-                                width: 'min(322px, 100%)', 
-                                maxWidth: 'calc(100% - 20px)',
-                                left: 0
-                              }}
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              {/* Empty div to create space */}
-                            </div>
-                            <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase relative z-10">
+                          // Title styling with container - positioned to align text with items
+                          <div 
+                            className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
+                            style={{ 
+                              width: 'min(322px, 100%)', 
+                              maxWidth: 'calc(100% - 20px)',
+                              paddingLeft: '12px', // Internal padding for the bg container
+                              marginLeft: '-12px'  // Negative margin to align text with items
+                            }}
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
                               {category.name}
                             </span>
                           </div>
@@ -169,20 +167,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       }}
                     >
                       {category.isTitle ? (
-                        // Title styling with container - with position relative wrapper for alignment
-                        <div className="relative">
-                          <div 
-                            className={`py-[6.5px] px-[12px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50 absolute`}
-                            style={{ 
-                              width: 'min(322px, 100%)', 
-                              maxWidth: 'calc(100% - 20px)',
-                              left: 0
-                            }}
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            {/* Empty div to create space */}
-                          </div>
-                          <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase relative z-10">
+                        // Title styling with container - positioned to align text with items
+                        <div 
+                          className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
+                          style={{ 
+                            width: 'min(322px, 100%)', 
+                            maxWidth: 'calc(100% - 20px)',
+                            paddingLeft: '12px', // Internal padding for the bg container
+                            marginLeft: '-12px'  // Negative margin to align text with items
+                          }}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
                             {category.name}
                           </span>
                         </div>
