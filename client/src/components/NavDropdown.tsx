@@ -148,9 +148,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
             {/* Left section - Navigation - fixed and aligned to the left with same padding as logo */}
-            <div className="w-[40%] min-w-[500px] pt-[100px] sticky top-0 left-0 h-full" style={{ flexShrink: 0, paddingLeft: LEFT_PADDING }}>
+            <div className="w-[40%] min-w-[500px] flex flex-col h-full" style={{ flexShrink: 0, paddingLeft: LEFT_PADDING }}>
+              <div className="pt-[100px]"></div>
               {/* Menu Categories - arranged in columns */}
-              <div className="flex flex-wrap mt-6 overflow-y-auto max-h-[calc(100vh-200px)]">
+              <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-12px]' : ''} mb-5 pr-4`}>
                     <a 
@@ -205,7 +206,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Desktop social icons on the bottom left - same padding as logo */}
-              <div className="absolute bottom-8" style={{ left: LEFT_PADDING }}>
+              <div className="mt-auto mb-8">
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
