@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
 import AboutVideo from "@/components/AboutVideo";
+import ClientLogoCarousel from "@/components/ClientLogoCarousel";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -48,6 +49,11 @@ const About: React.FC = () => {
         {/* Video Section - first element at the top */}
         <div className="w-full max-w-3xl mx-auto mb-8 rounded-lg overflow-hidden shadow-lg">
           <AboutVideo className="aspect-video" />
+        </div>
+        
+        {/* Client Logo Carousel Section */}
+        <div className="w-full max-w-3xl mx-auto mb-12">
+          <ClientLogoCarousel />
         </div>
         
         {/* Content section with left-aligned title and text */}

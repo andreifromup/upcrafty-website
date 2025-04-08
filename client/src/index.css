@@ -58,3 +58,13 @@ body.about-page #root {
   /* Styles for mobile touch friendly buttons */
   /* We're now using actual div elements instead of buttons on mobile to avoid hover issues */
 }
+
+/* Custom utility class to hide scrollbars across browsers */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}

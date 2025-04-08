@@ -70,6 +70,18 @@ export const PORTFOLIO_IMAGES = {
   ]
 };
 
+// Client logos for the About page carousel
+export const CLIENT_LOGOS = [
+  "/Bento 1x.png",
+  "/Bucharest 1x.png",
+  "/Cowcow 1x.png",
+  "/Meegos 1x.png",
+  "/Sentries 1x.png",
+  "/Smoofs 1x.png",
+  "/Smyths 1x.png",
+  "/Windify 1x.png"
+];
+
 // Navigation structure for dropdown menu
 export const NAV_CATEGORIES = [
   {
