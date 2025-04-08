@@ -8,7 +8,8 @@ interface AboutVideoProps {
 const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoUrl = VIDEOS.aboutUs;
+  // Hardcode the direct URL to avoid any confusion
+  const videoUrl = "/about-us-video.mp4";
 
   // Setup video playback on component mount
   useEffect(() => {
@@ -48,9 +49,25 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
     }
   }, []);
 
+  // Log direct access to video
+  useEffect(() => {
+    fetch(videoUrl)
+      .then(response => {
+        console.log("Video fetch response:", response.status, response.statusText);
+        if (!response.ok) {
+          throw new Error(`Video fetch failed: ${response.status} ${response.statusText}`);
+        }
+        return response;
+      })
+      .catch(error => {
+        console.error("Error fetching video:", error);
+      });
+  }, []);
+
   return (
     <div className={`overflow-hidden ${className}`}>
-      <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center">
+        {/* Use an explicit poster image for better UX while video loads */}
         <video
           ref={videoRef}
           className="w-full h-full object-cover"
