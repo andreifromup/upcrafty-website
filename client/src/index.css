@@ -69,13 +69,13 @@ body.about-page #root {
   display: none; /* Chrome, Safari and Opera */
 }
 
-/* Animation for the logo carousel */
+/* Animation for the logo carousel - true infinite scroll */
 @keyframes slideLogos {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%); /* Move one full set width */
+    transform: translateX(-50%); /* Move exactly one set width, not the full container */
   }
 }
 

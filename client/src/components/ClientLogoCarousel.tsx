@@ -44,47 +44,29 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
         <div className="pt-2 pb-6 overflow-hidden">
           {/* Animated content - uses CSS animation for smooth scrolling */}
           <div className="logo-carousel-animation">
-            {/* First set of logos */}
-            <div className="flex logo-set">
-              {CLIENT_LOGOS.map((logo, index) => (
-                <div 
-                  key={`original-${index}`}
-                  className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
-                  style={{ 
-                    width: isMobile ? '100px' : '160px',
-                    height: isMobile ? '80px' : '120px'
-                  }}
-                >
-                  <img 
-                    src={logo} 
-                    alt={`Client logo ${index + 1}`}
-                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                  />
-                </div>
-              ))}
-            </div>
-            
-            {/* Second set of logos - needed for seamless infinite loop */}
-            <div className="flex logo-set">
-              {CLIENT_LOGOS.map((logo, index) => (
-                <div 
-                  key={`duplicate-${index}`}
-                  className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
-                  style={{ 
-                    width: isMobile ? '100px' : '160px',
-                    height: isMobile ? '80px' : '120px'
-                  }}
-                >
-                  <img 
-                    src={logo} 
-                    alt={`Client logo ${index + 1}`}
-                    className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                  />
-                </div>
-              ))}
-            </div>
+            {/* For true infinite scroll, we need to duplicate the logo set */}
+            {/* This technique creates a seamless loop by duplicating the items and only animating half the width */}
+            {[...Array(4)].map((_, setIndex) => (
+              <div className="flex logo-set" key={`set-${setIndex}`}>
+                {CLIENT_LOGOS.map((logo, logoIndex) => (
+                  <div 
+                    key={`logo-${setIndex}-${logoIndex}`}
+                    className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
+                    style={{ 
+                      width: isMobile ? '100px' : '160px',
+                      height: isMobile ? '80px' : '120px'
+                    }}
+                  >
+                    <img 
+                      src={logo} 
+                      alt={`Client logo ${logoIndex + 1}`}
+                      className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                      style={{ maxWidth: '100%', maxHeight: '100%' }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
