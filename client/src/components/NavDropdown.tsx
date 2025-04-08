@@ -313,7 +313,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               opacity: '0.5'
             }}
           >
-            <X size={8} strokeWidth={2} />
+            <X size={16} strokeWidth={1.5} />
           </button>
         )}
       </div>
