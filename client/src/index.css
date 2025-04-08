@@ -54,4 +54,30 @@ body.about-page #root {
   .contact-button {
     @apply text-[12px] tracking-[1.5px] leading-[16px] h-[28px] w-[90px];
   }
+  
+  /* Disable hover effects on mobile - important flag forces priority */
+  .mobile-no-hover:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    transform: none !important;
+    opacity: 1 !important;
+    border-color: inherit !important;
+  }
+  
+  /* Direct forced style for specific button hover issues */
+  button.mobile-no-hover:hover {
+    background-color: black !important;
+    color: white !important;
+  }
+  
+  /* Special cases for different button types */
+  .about-page button.mobile-no-hover:hover {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .contact-orange-button.mobile-no-hover:hover {
+    background-color: #FF6600 !important;
+    color: white !important;
+  }
 }
