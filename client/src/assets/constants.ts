@@ -68,16 +68,16 @@ export const NAV_CATEGORIES = [
     ]
   },
   {
-    name: "GAMES",
-    subcategories: [
-      { name: "MOBILE GAMES", items: [] }
-    ]
-  },
-  {
     name: "ANIMATIONS",
     subcategories: [
       { name: "2D ANIMATIONS", items: [] },
       { name: "MOTION GRAPHICS", items: [] }
+    ]
+  },
+  {
+    name: "GAMES",
+    subcategories: [
+      { name: "MOBILE GAMES", items: [] }
     ]
   },
   {
@@ -89,10 +89,8 @@ export const NAV_CATEGORIES = [
   },
   {
     name: "ABOUT US",
-    subcategories: []
-  },
-  {
-    name: "CONTACT",
-    subcategories: []
+    subcategories: [
+      { name: "CONTACT", items: [] }
+    ]
   }
 ];

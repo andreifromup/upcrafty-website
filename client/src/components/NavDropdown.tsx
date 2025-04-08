@@ -54,22 +54,23 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 <div className="invisible h-[60px]"></div>
 
                 {/* Navigation buttons - stacked vertically */}
-                <div className="overflow-y-auto px-[20px] sm:px-[35px] md:px-[54px] mt-4">
+                <div className="overflow-y-auto px-[54px] mt-4">
                   {NAV_CATEGORIES.map((category, idx) => (
                     <div key={idx} className="mb-6">
                       <a 
                         href="#" 
-                        className="text-[18px] font-bold uppercase block py-2 hover:text-[#FF6600]"
+                        className="uppercase block py-2 hover:text-[#FF6600]"
                         onClick={(e) => {
                           e.preventDefault();
                           setSelectedCategory(selectedCategory === category.name ? null : category.name);
                         }}
                       >
                         <div 
-                          className={`py-[6px] px-3 rounded-[6px] flex items-center ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
-                          style={{ width: '322px', height: '33px' }}
+                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start w-[322px] h-[33px] bg-[#EDEAE7]/50`}
                         >
-                          {category.name}
+                          <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                            {category.name}
+                          </span>
                         </div>
                       </a>
                       
@@ -134,16 +135,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className="w-1/2 mb-5 pr-4">
                     <a 
                       href="#" 
-                      className="text-[18px] font-bold uppercase block mb-3 hover:text-[#FF6600]"
+                      className="uppercase block mb-3 hover:text-[#FF6600]"
                       onClick={(e) => {
                         e.preventDefault();
                         setSelectedCategory(selectedCategory === category.name ? null : category.name);
                       }}
                     >
                       <div 
-                        className={`py-[6px] px-3 rounded-[6px] flex items-center ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : ''}`}
+                        className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start w-[322px] h-[33px] ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : 'bg-[#EDEAE7]/50'}`}
                       >
-                        {category.name}
+                        <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                          {category.name}
+                        </span>
                       </div>
                     </a>
                     
@@ -165,7 +168,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Desktop social icons on the bottom left - same padding as logo */}
-              <div className="absolute bottom-8 left-[54px]">
+              <div className="fixed bottom-8 left-[54px]">
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
