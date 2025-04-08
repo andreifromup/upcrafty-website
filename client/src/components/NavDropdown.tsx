@@ -300,14 +300,22 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           </div>
         )}
         
-        {/* Close button with circular background */}
-        <button 
-          className="absolute top-6 right-6 text-black p-2 rounded-full bg-white/70 md:hover:bg-white/90 active:bg-white/90 active:scale-95 transition-all duration-150"
-          onClick={onClose}
-          aria-label="Close menu"
-        >
-          <X size={24} />
-        </button>
+        {/* Close button - only shown on desktop with specific styling */}
+        {!isMobile && (
+          <button 
+            className="absolute top-6 right-6 rounded-full transition-all duration-150 flex items-center justify-center"
+            onClick={onClose}
+            aria-label="Close menu"
+            style={{
+              width: '29px',
+              height: '29px',
+              backgroundColor: '#EDEAE7',
+              opacity: '0.5'
+            }}
+          >
+            <X size={8} strokeWidth={2} />
+          </button>
+        )}
       </div>
     </div>
   );
