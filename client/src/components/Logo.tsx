@@ -99,6 +99,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: useBlackLogo ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
+              id="dropdown-arrow"
             />
           </div>
         )}
