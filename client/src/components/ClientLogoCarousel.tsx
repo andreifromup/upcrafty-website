@@ -62,9 +62,11 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
   
   return (
     <div className={`w-full ${className}`}>
-      <h2 className="text-left font-bold text-2xl md:text-3xl my-6 text-gray-700 tracking-wide">
-        Trusted by
-      </h2>
+      <div className="flex justify-end">
+        <h2 className="text-left font-bold text-lg md:text-xl mb-3 text-gray-700 tracking-wide">
+          Trusted by
+        </h2>
+      </div>
       
       {/* Carousel container with fade mask */}
       <div 

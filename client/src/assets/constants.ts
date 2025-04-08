@@ -72,14 +72,14 @@ export const PORTFOLIO_IMAGES = {
 
 // Client logos for the About page carousel
 export const CLIENT_LOGOS = [
-  "/Bento 1x.png",
-  "/Bucharest 1x.png",
-  "/Cowcow 1x.png",
-  "/Meegos 1x.png",
-  "/Sentries 1x.png",
-  "/Smoofs 1x.png",
-  "/Smyths 1x.png",
-  "/Windify 1x.png"
+  "/Bento 2x.png",
+  "/Bucharest 2x.png",
+  "/Cowcow 2x.png",
+  "/Meegos 2x.png",
+  "/Sentries 2x.png",
+  "/Smoofs 2x.png",
+  "/Smyths 2x.png",
+  "/Windify 2x.png"
 ];
 
 // Navigation structure for dropdown menu
