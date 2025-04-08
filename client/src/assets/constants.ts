@@ -24,10 +24,10 @@ export const ICONS = {
 
 // Video files for different platforms and network conditions
 export const VIDEOS = {
-  desktopHigh: "/background-desktop.mp4",
-  desktopLow: "/background-desktop-low.mp4",
-  mobileHigh: "/background-mobile.mp4",
-  mobileLow: "/background-mobile-low.mp4"
+  desktopHigh: "/desktop.mp4",
+  desktopLow: "/desktop-low.mp4",
+  mobileHigh: "/mobil.mp4",
+  mobileLow: "/mobil-low.mp4"
 };
 
 // Logo sizing configurations
