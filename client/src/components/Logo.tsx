@@ -15,36 +15,76 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
   if (size === "header") {
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
-      <div className="flex items-center group cursor-pointer">
+      <div 
+        className="flex items-center cursor-pointer group"
+        onMouseEnter={(e) => {
+          if (!isMobile) {
+            // Apply orange filter to both logo and dropdown arrow
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              logoImg.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+            }
+            
+            if (dropdownImg) {
+              dropdownImg.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+            }
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isMobile) {
+            // Reset both logo and dropdown arrow to original color
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+            }
+            
+            if (dropdownImg) {
+              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+            }
+          }
+        }}
+        onTouchStart={(e) => {
+          if (isMobile) {
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              logoImg.style.transform = 'scale(0.95)';
+            }
+            
+            if (dropdownImg) {
+              dropdownImg.style.transform = 'scale(0.95)';
+            }
+          }
+        }}
+        onTouchEnd={(e) => {
+          if (isMobile) {
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              logoImg.style.transform = 'scale(1)';
+            }
+            
+            if (dropdownImg) {
+              dropdownImg.style.transform = 'scale(1)';
+            }
+          }
+        }}
+      >
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
           {/* Vector logo with color switching but same position */}
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
               filter: useBlackLogo ? 'invert(1)' : 'none'
-            }}
-            onMouseOver={(e) => {
-              if (!isMobile) {
-                e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
-              }
-            }}
-            onMouseOut={(e) => {
-              if (!isMobile) {
-                e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-              }
-            }}
-            onTouchStart={(e) => {
-              if (isMobile) {
-                e.currentTarget.style.transform = 'scale(0.95)';
-              }
-            }}
-            onTouchEnd={(e) => {
-              if (isMobile) {
-                e.currentTarget.style.transform = 'scale(1)';
-              }
             }}
           />
         </div>
@@ -54,29 +94,9 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none'
-              }}
-              onMouseOver={(e) => {
-                if (!isMobile) {
-                  e.currentTarget.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
-                }
-              }}
-              onMouseOut={(e) => {
-                if (!isMobile) {
-                  e.currentTarget.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-                }
-              }}
-              onTouchStart={(e) => {
-                if (isMobile) {
-                  e.currentTarget.style.transform = 'scale(0.95)';
-                }
-              }}
-              onTouchEnd={(e) => {
-                if (isMobile) {
-                  e.currentTarget.style.transform = 'scale(1)';
-                }
               }}
             />
           </div>
