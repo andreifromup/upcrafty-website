@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({
             <img 
               src={ICONS.blackCenterLogo} 
               alt="Logo" 
-              className="w-[36.6px] h-[39.1px]"
+              className="w-[28px] h-[30px]"
             />
           ) : (
             <Logo size="footer" />
