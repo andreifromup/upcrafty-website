@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply bg-black text-white overflow-hidden;
+    @apply bg-black text-white;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     /* Exact 12px for mobile and 15px for desktop */
@@ -26,9 +26,18 @@
   }
 }
 
-/* Ensure proper overflow handling */
-html, body, #root {
+/* Ensure proper overflow handling for the homepage */
+body.homepage, body.homepage #root {
   @apply h-full w-full overflow-hidden;
+}
+
+/* Allow scrolling on the about page */
+body.about-page {
+  @apply overflow-y-auto;
+}
+
+body.about-page #root {
+  @apply min-h-screen w-full overflow-visible;
 }
 
 /* Custom classes for responsive text */

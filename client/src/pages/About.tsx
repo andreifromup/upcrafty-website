@@ -13,30 +13,42 @@ const About: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Allow scrolling on the body
+  // Enable scrolling and set appropriate body classes
   useEffect(() => {
+    // Add about-page class and remove homepage class
+    document.body.classList.add('about-page');
+    document.body.classList.remove('homepage');
+    
+    // Force the document to be scrollable
+    document.documentElement.style.overflow = "auto";
+    document.documentElement.style.height = "auto";
     document.body.style.overflow = "auto";
     document.body.style.height = "auto";
     
-    // Clean up
+    // Clean up when component unmounts
     return () => {
+      document.body.classList.remove('about-page');
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.height = "";
       document.body.style.overflow = "";
       document.body.style.height = "";
     };
   }, []);
   
   return (
-    <div className="bg-white text-black font-['Inter'] font-normal antialiased min-h-screen overflow-auto">
-      {/* Top Navigation */}
-      <Navbar 
-        onDropdownOpen={() => setIsDropdownOpen(true)}
-        onDropdownClose={() => setIsDropdownOpen(false)}
-      />
+    <div className="bg-white text-black font-['Inter'] font-normal antialiased">
+      {/* Fixed Top Navigation */}
+      <div className="sticky top-0 left-0 right-0 z-50 bg-white">
+        <Navbar 
+          onDropdownOpen={() => setIsDropdownOpen(true)}
+          onDropdownClose={() => setIsDropdownOpen(false)}
+        />
+      </div>
       
-      {/* Content area - centered with padding */}
-      <div className="container mx-auto px-4 py-12 pt-24 md:pt-32">
+      {/* Scrollable Content Container */}
+      <div className="container mx-auto px-4 py-8 md:py-12 overflow-y-auto">
         {/* Page Title */}
-        <h1 className="text-4xl font-medium mb-8 text-center">About Us</h1>
+        <h1 className="text-4xl font-medium mb-8 text-center pt-12 md:pt-16">About Us</h1>
         
         {/* Video Section - not full screen */}
         <div className="w-full max-w-3xl mx-auto mb-12 rounded-lg overflow-hidden shadow-lg">
@@ -72,6 +84,17 @@ const About: React.FC = () => {
             nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla porttitor 
             accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. 
             Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+          </p>
+          <p className="mb-4">
+            Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed, convallis 
+            at tellus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. 
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, 
+            auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+          </p>
+          <p className="mb-4">
+            Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada. 
+            Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Cras ultricies ligula 
+            sed magna dictum porta.
           </p>
           <p className="mb-4">
             Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed, convallis 

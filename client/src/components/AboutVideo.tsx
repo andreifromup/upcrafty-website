@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { VIDEOS } from "@/assets/constants";
 
 interface AboutVideoProps {
   className?: string;
@@ -7,7 +8,7 @@ interface AboutVideoProps {
 const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoUrl = "/About%20us%20video.mp4";
+  const videoUrl = VIDEOS.aboutUs;
 
   // Setup video playback on component mount
   useEffect(() => {
@@ -49,8 +50,7 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
 
   return (
     <div className={`overflow-hidden ${className}`}>
-      {/* Add a static fallback image in case video doesn't play */}
-      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+      <div className="w-full h-full bg-gray-100 flex items-center justify-center">
         <video
           ref={videoRef}
           className="w-full h-full object-cover"

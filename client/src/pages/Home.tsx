@@ -7,13 +7,16 @@ const Home: React.FC = () => {
   // State to track if dropdown is open
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
-  // Set overflow hidden on body to prevent scrolling
+  // Set overflow hidden on body to prevent scrolling and add homepage class
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.body.classList.add('homepage');
+    document.body.classList.remove('about-page');
     
     // Clean up when component unmounts
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove('homepage');
     };
   }, []);
   
