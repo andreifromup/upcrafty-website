@@ -206,7 +206,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Desktop social icons on the bottom left - same padding as logo */}
-              <div className="mt-auto mb-8">
+              <div className="absolute bottom-8" style={{ left: LEFT_PADDING }}>
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
