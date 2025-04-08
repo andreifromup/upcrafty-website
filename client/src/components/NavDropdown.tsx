@@ -62,10 +62,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     <div key={idx} className="mb-6">
                       <a 
                         href="#" 
-                        className="uppercase block py-2 hover:text-[#FF6600]"
+                        className={`uppercase block py-2 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
                         onClick={(e) => {
                           e.preventDefault();
-                          setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                          if (!category.isTitle) {
+                            setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                          }
                         }}
                       >
                         {category.isTitle ? (
@@ -76,8 +78,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                               width: 'min(322px, 100%)', 
                               maxWidth: 'calc(100% - 20px)'
                             }}
+                            onClick={(e) => e.preventDefault()}
                           >
-                            <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                            <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
                               {category.name}
                             </span>
                           </div>
@@ -152,10 +155,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} mb-5 pr-4`}>
                     <a 
                       href="#" 
-                      className="uppercase block mb-3 hover:text-[#FF6600]"
+                      className={`uppercase block mb-3 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
                       onClick={(e) => {
                         e.preventDefault();
-                        setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                        if (!category.isTitle) {
+                          setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                        }
                       }}
                     >
                       {category.isTitle ? (
@@ -166,8 +171,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             width: 'min(322px, 100%)', 
                             maxWidth: 'calc(100% - 20px)'
                           }}
+                          onClick={(e) => e.preventDefault()}
                         >
-                          <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                          <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
                             {category.name}
                           </span>
                         </div>
