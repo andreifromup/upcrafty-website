@@ -29,29 +29,30 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
   
   return (
     <>
-      {/* Navbar - Hidden when dropdown is open */}
-      {!isDropdownOpen && (
-        <div
-          className={`
-            px-[20px] sm:px-[35px] md:px-[54px] 
-            pt-[15px] sm:pt-[18px] md:pt-[40px] 
-            pb-0 flex justify-between items-center w-full
-            relative z-[60]
-          `}
+      {/* Navbar - Always visible, regardless of dropdown state */}
+      <div
+        className={`
+          px-[20px] sm:px-[35px] md:px-[54px] 
+          pt-[15px] sm:pt-[18px] md:pt-[40px] 
+          pb-0 flex justify-between items-center w-full
+          absolute top-0 left-0 right-0 
+          z-[100]
+        `}
+      >
+        {/* Logo with dropdown arrow - responsive sizing */}
+        <div 
+          className="flex items-center cursor-pointer" 
+          onClick={toggleDropdown}
         >
-          {/* Logo with dropdown arrow - responsive sizing */}
-          <div 
-            className="flex items-center cursor-pointer" 
-            onClick={toggleDropdown}
-          >
-            <Logo 
-              size="header" 
-              includeDropdown={true} 
-              useBlackLogo={isDropdownOpen}
-            />
-          </div>
-          
-          {/* Contact Button - Exact match to reference mobile.png */}
+          <Logo 
+            size="header" 
+            includeDropdown={true} 
+            useBlackLogo={isDropdownOpen}
+          />
+        </div>
+        
+        {/* Contact Button - Only visible when dropdown is closed */}
+        {!isDropdownOpen && (
           <Button 
             className="bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] rounded-full uppercase font-normal
             tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
@@ -64,32 +65,13 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
           >
             Contact
           </Button>
-        </div>
-      )}
+        )}
+      </div>
       
-      {/* Social Icons - Hidden when dropdown is open */}
+      {/* Social Icons - Only visible when dropdown is closed */}
       {!isDropdownOpen && (
         <div className="fixed right-[20px] sm:right-[35px] md:right-[54px] bottom-[20px] sm:bottom-[35px] md:bottom-[40px] z-[60]">
           <SocialIcons inverted={isDropdownOpen} />
-        </div>
-      )}
-      
-      {/* Logo-only when dropdown closed - for showing just the logo when dropdown opens */}
-      {isDropdownOpen && (
-        <div
-          className={`
-            px-[20px] sm:px-[35px] md:px-[54px] 
-            pt-[15px] sm:pt-[18px] md:pt-[40px] 
-            pb-0 flex justify-between items-center w-full
-            relative z-[60]
-          `}
-        >
-          <div className="invisible">
-            <Logo 
-              size="header" 
-              includeDropdown={true}
-            />
-          </div>
         </div>
       )}
       

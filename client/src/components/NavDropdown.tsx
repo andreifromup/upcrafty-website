@@ -26,7 +26,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     <div 
       className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
       onClick={onClose}
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 90 }}
     >
       {/* Dropdown container that prevents click propagation */}
       <div 
@@ -48,11 +48,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {isMobile && (
           <>
             <div className="flex flex-col h-full">
-              <div className="pt-0">
-                {/* Logo - mobile version with same exact position as in header */}
-                <div className="px-[20px] sm:px-[35px] md:px-[54px] pt-[15px] sm:pt-[18px] md:pt-[40px] flex items-center mb-8 group cursor-pointer">
-                  <Logo size="header" useBlackLogo={true} includeDropdown={true} />
-                </div>
+              <div className="pt-[80px]"> 
+                {/* Space for the logo which is now in the Navbar component */}
+                <div className="invisible h-[60px]"></div>
 
                 {/* Navigation buttons - stacked vertically */}
                 <div className="overflow-y-auto px-[20px] sm:px-[35px] md:px-[54px] mt-4">
@@ -139,15 +137,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {/* Desktop Layout */}
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1920px] mx-auto">
-            {/* Logo - exactly the same size and position as in header */}
-            <div className="absolute px-[20px] sm:px-[35px] md:px-[54px] pt-[15px] sm:pt-[18px] md:pt-[40px]">
-              <div className="flex items-center group cursor-pointer">
-                <Logo size="header" useBlackLogo={true} includeDropdown={true} />
-              </div>
-            </div>
 
-            {/* Logo and Navigation columns */}
-            <div className="w-[40%] p-12 pt-16 overflow-y-auto">
+            {/* Navigation columns - without logo since it's in the navbar */}
+            <div className="w-[40%] p-12 pt-[100px] overflow-y-auto">
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-12">
                 {NAV_CATEGORIES.map((category, idx) => (
