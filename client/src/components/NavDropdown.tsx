@@ -97,43 +97,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <Carousel className="w-full">
                     <CarouselContent>
                       {PORTFOLIO_IMAGES.default.map((image, idx) => (
-                        <CarouselItem key={idx} className="basis-4/5">
-                          <div 
-                            className="relative mx-auto"
-                            style={{ 
-                              width: '280px', 
-                              height: '340px',
-                              overflow: 'visible' 
-                            }}
-                          >
-                            {/* White background container with rounded corners and shadow */}
-                            <div 
-                              className="absolute inset-0 rounded-[24px]"
-                              style={{
-                                backgroundColor: 'white',
-                                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)'
-                              }}
-                            ></div>
-                            
-                            {/* Image container with overflow visible to allow images to extend beyond container */}
-                            <div 
-                              className="relative w-full h-full"
-                              style={{ overflow: 'visible' }}
-                            >
-                              <img 
-                                src={image} 
-                                alt={`Featured project ${idx + 1}`} 
-                                className="absolute"
-                                style={{ 
-                                  width: '100%',
-                                  height: '100%',
-                                  objectFit: 'contain',
-                                  top: '0',
-                                  left: '0'
-                                }}
-                              />
-                            </div>
-                          </div>
+                        <CarouselItem key={idx} className="basis-4/5 flex justify-center">
+                          <img 
+                            src={image} 
+                            alt={`Featured project ${idx + 1}`} 
+                            className="max-h-[340px] max-w-[280px] w-auto h-auto object-contain"
+                          />
                         </CarouselItem>
                       ))}
                     </CarouselContent>
@@ -158,7 +127,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
             {/* Navigation columns - without logo since it's in the navbar */}
-            <div className="w-[40%] p-12 pt-[100px] overflow-y-auto">
+            <div className="w-[40%] min-w-[500px] p-12 pt-[100px] overflow-y-auto">
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-12">
                 {NAV_CATEGORIES.map((category, idx) => (
@@ -205,50 +174,20 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             {/* Right side - portfolio images (only shown when no category selected) */}
             {!selectedCategory && (
               <div className="w-[60%] bg-white flex items-center justify-center pt-16 pr-12">
-                {/* Portfolio images - arranged as in reference */}
-                <div className="flex justify-center items-center h-full">
-                  <div 
-                    className="flex gap-8" 
-                    style={{ overflow: 'visible' }}
-                  >
+                {/* Portfolio images - arranged horizontally with fixed width and gap */}
+                <div className="max-w-full">
+                  <div className="flex-wrap lg:flex-nowrap flex justify-center items-center gap-8">
                     {PORTFOLIO_IMAGES.default.map((image, idx) => (
-                      <div 
+                      <img 
                         key={idx} 
-                        className="relative"
+                        src={image} 
+                        alt={`Featured project ${idx + 1}`} 
+                        className="w-auto h-auto object-contain"
                         style={{ 
-                          width: '362px', 
-                          height: '467px',
-                          overflow: 'visible'
+                          maxWidth: "min(362px, 100%)",
+                          maxHeight: "467px"
                         }}
-                      >
-                        {/* White background container with rounded corners and shadow */}
-                        <div 
-                          className="absolute inset-0 rounded-[24px]"
-                          style={{
-                            backgroundColor: 'white',
-                            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)'
-                          }}
-                        ></div>
-                        
-                        {/* Image container with overflow visible to allow images to extend beyond container */}
-                        <div 
-                          className="relative w-full h-full"
-                          style={{ overflow: 'visible' }}
-                        >
-                          <img 
-                            src={image} 
-                            alt={`Featured project ${idx + 1}`} 
-                            className="absolute"
-                            style={{ 
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'contain',
-                              top: '0',
-                              left: '0'
-                            }}
-                          />
-                        </div>
-                      </div>
+                      />
                     ))}
                   </div>
                 </div>
