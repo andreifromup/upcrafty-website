@@ -62,8 +62,8 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
   
   return (
     <div className={`w-full ${className}`}>
-      <h2 className="text-center font-bold text-2xl md:text-3xl mb-6 text-gray-700 tracking-wide">
-        We've Worked With
+      <h2 className="text-left font-bold text-2xl md:text-3xl my-6 text-gray-700 tracking-wide">
+        Trusted by
       </h2>
       
       {/* Carousel container with fade mask */}
