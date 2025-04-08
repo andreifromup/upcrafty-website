@@ -68,3 +68,41 @@ body.about-page #root {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Animation for the logo carousel */
+@keyframes slideLogos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* Move one full set width */
+  }
+}
+
+/* Container for the animated logos */
+.logo-carousel-animation {
+  display: flex;
+  width: fit-content;
+  animation: slideLogos 60s linear infinite; /* Very slow 60-second animation cycle */
+  will-change: transform; /* Optimize for performance */
+}
+
+/* Adjust animation speed for mobile */
+@media (max-width: 768px) {
+  .logo-carousel-animation {
+    animation: slideLogos 70s linear infinite; /* Slightly slower on mobile */
+  }
+}
+
+/* Pause the animation on hover for better UX */
+.logo-carousel-container:hover .logo-carousel-animation {
+  animation-play-state: paused;
+}
+
+/* Ensure smooth animation on all browsers */
+.logo-carousel-animation {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
