@@ -95,9 +95,9 @@ const About: React.FC = () => {
           {/* Home Button - moved under the text */}
           <div className="flex justify-start mb-8">
             {isMobile ? (
-              // Mobile version with inline styles to prevent hover
+              // Mobile version matching the Contact button size
               <div 
-                className="bg-black text-white border border-black rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] h-[40px] w-[120px] flex items-center justify-center cursor-pointer active:bg-white active:text-black active:scale-95 transition-all duration-300"
+                className="bg-black text-white border border-black rounded-full uppercase font-normal tracking-[1.5px] text-[12px] leading-[16px] h-[28px] w-[90px] flex items-center justify-center cursor-pointer active:bg-white active:text-black active:scale-95 transition-all duration-300"
                 style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
                 onClick={() => window.open('/', '_self')}
               >
