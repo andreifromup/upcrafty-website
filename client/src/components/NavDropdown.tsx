@@ -53,6 +53,38 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   if (!isOpen) return null;
 
+  // Reusable category menu item component
+  const MenuItemWithHoverEffect = ({ name, isTitle = false, onClick }: { name: string, isTitle?: boolean, onClick?: (e: React.MouseEvent) => void }) => (
+    <div 
+      className={`relative py-[6.5px] ${isTitle ? '' : 'group'} flex items-center justify-start h-[33px]`}
+      style={{ 
+        width: 'min(322px, 100%)', 
+        maxWidth: 'calc(100% - 20px)'
+      }}
+      onClick={onClick}
+    >
+      {/* Background for title or hover effect for non-title */}
+      <div 
+        className={`absolute inset-0 rounded-[8px] 
+          ${isTitle 
+            ? 'bg-[#EDEAE7]/50' 
+            : 'bg-[#BCBCBC]/50 opacity-0 md:group-hover:opacity-100 transition-opacity duration-150'
+          }`}
+      ></div>
+      
+      {/* Text content - styled differently for titles and subtitles */}
+      <span 
+        className={`relative z-10 uppercase pl-[12px] font-inter
+          ${isTitle 
+            ? 'font-medium text-[16px] leading-[20px] tracking-[2px]' 
+            : 'font-normal text-[16px] leading-[20px]'
+          }`}
+      >
+        {name}
+      </span>
+    </div>
+  );
+
   return (
     <div 
       className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm cursor-pointer"
@@ -62,12 +94,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       {/* Dropdown container that prevents click propagation */}
       <div 
         className={`
-          bg-white text-black overflow-hidden
+          bg-white text-black overflow-hidden z-[100]
           ${isMobile 
             ? 'fixed inset-0 flex flex-col w-full' 
             : 'fixed top-0 left-0 right-0 flex justify-center w-full'
           }
-          z-[100]
         `}
         onClick={(e) => e.stopPropagation()}
         style={{ 
@@ -89,7 +120,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-55px]' : ''}`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block py-2 ${!category.isTitle ? 'md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95' : ''} transition-all duration-150`}
+                      className={`uppercase block py-2 ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
                       onClick={(e) => {
                         try {
                           if (category.name === "CONTACT") {
@@ -110,14 +141,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }
                       }}
                     >
+                      {/* For mobile, we don't change the hover effect */}
                       {category.isTitle ? (
-                        // Title styling with container - with proper padding inside
                         <div 
                           className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                           style={{ 
                             width: 'min(322px, 100%)', 
                             maxWidth: 'calc(100% - 20px)',
-                            paddingLeft: '12px' // Internal padding for the bg container
+                            paddingLeft: '12px'
                           }}
                           onClick={(e) => e.preventDefault()}
                         >
@@ -126,8 +157,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                       ) : (
-                        // Subtitle styling without container - padded slightly to match 
-                        // the visual alignment of text inside the containers
                         <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block pl-[12px]">
                           {category.name}
                         </span>
@@ -197,7 +226,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-55px]' : ''} mb-5 pr-4`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block mb-3 ${!category.isTitle ? 'md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150' : ''}`}
+                      className="uppercase block mb-3 active:scale-95 transition-all duration-150"
                       onClick={(e) => {
                         try {
                           if (category.name === "CONTACT") {
@@ -218,28 +247,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }
                       }}
                     >
-                      {category.isTitle ? (
-                        // Title styling with container - with proper padding inside
-                        <div 
-                          className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
-                          style={{ 
-                            width: 'min(322px, 100%)', 
-                            maxWidth: 'calc(100% - 20px)',
-                            paddingLeft: '12px' // Internal padding for the bg container
-                          }}
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
-                            {category.name}
-                          </span>
-                        </div>
-                      ) : (
-                        // Subtitle styling without container - padded slightly to match 
-                        // the visual alignment of text inside the containers
-                        <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block pl-[12px]">
-                          {category.name}
-                        </span>
-                      )}
+                      {/* Use the reusable component with hover effect */}
+                      <MenuItemWithHoverEffect 
+                        name={category.name} 
+                        isTitle={category.isTitle}
+                        onClick={category.isTitle ? (e) => e.preventDefault() : undefined} 
+                      />
                     </a>
                     
                     {category.subcategories && category.subcategories.length > 0 && (
@@ -248,11 +261,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="block md:hover:text-[#FF6600] active:text-[#FF6600] active:scale-95 transition-all duration-150"
+                            className="block active:scale-95 transition-all duration-150"
                           >
-                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
-                              {subcategory.name}
-                            </span>
+                            {/* Use the reusable component with hover effect for subcategories too */}
+                            <MenuItemWithHoverEffect name={subcategory.name} />
                           </a>
                         ))}
                       </div>
