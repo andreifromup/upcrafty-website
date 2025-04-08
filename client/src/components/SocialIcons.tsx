@@ -10,7 +10,10 @@ interface SocialIconsProps {
 const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown = false }) => {
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
-  const iconColor = inDropdown ? "" : inverted ? "invert filter brightness-0" : "";
+  
+  // When in dropdown: use invert filter to make icons black
+  // When not in dropdown: use invert based on inverted prop
+  const iconColor = inDropdown ? "invert filter brightness-0" : inverted ? "invert filter brightness-0" : "";
   
   // Exact sizes to match reference image
   const iconSizes = {
