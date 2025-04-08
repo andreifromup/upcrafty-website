@@ -11,6 +11,11 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
   
+  // If in dropdown, always use black icons
+  // If not inverted (like on About page or dropdown), use black icons
+  // Otherwise use white icons (like on homepage)
+  const useBlackIcons = inDropdown || !inverted;
+  
   // Exact sizes to match reference image
   const iconSizes = {
     x: isMobileDevice ? "w-[14px] h-[14.3px]" : "w-[16px] h-[16.35px]",
@@ -30,7 +35,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={inDropdown ? ICONS.xBlack : ICONS.x} 
+          src={useBlackIcons ? ICONS.xBlack : ICONS.x} 
           alt="X (Twitter)" 
           className={iconSizes.x}
         />
@@ -45,7 +50,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={inDropdown ? ICONS.instagramBlack : ICONS.instagram} 
+          src={useBlackIcons ? ICONS.instagramBlack : ICONS.instagram} 
           alt="Instagram" 
           className={iconSizes.instagram}
         />
@@ -60,7 +65,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={inDropdown ? ICONS.tiktokBlack : ICONS.tiktok} 
+          src={useBlackIcons ? ICONS.tiktokBlack : ICONS.tiktok} 
           alt="TikTok" 
           className={iconSizes.tiktok}
         />
@@ -75,7 +80,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={inDropdown ? ICONS.youtubeBlack : ICONS.youtube} 
+          src={useBlackIcons ? ICONS.youtubeBlack : ICONS.youtube} 
           alt="YouTube" 
           className={iconSizes.youtube}
         />

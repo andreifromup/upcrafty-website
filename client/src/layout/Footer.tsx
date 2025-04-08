@@ -2,12 +2,19 @@ import React from "react";
 import Logo from "@/components/Logo";
 import SocialIcons from "@/components/SocialIcons";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ICONS } from "@/assets/constants";
 
 interface FooterProps {
   isDropdownOpen?: boolean;
+  textColor?: string;
+  useDarkLogo?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
+const Footer: React.FC<FooterProps> = ({ 
+  isDropdownOpen = false, 
+  textColor = "text-white",
+  useDarkLogo = false
+}) => {
   const isMobile = useIsMobile();
   
   // Hide footer completely when dropdown is open
@@ -19,16 +26,24 @@ const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
       <div className="flex flex-col items-center md:hidden">
         {/* Logo on top - perfectly centered, same size as social icons */}
         <div className="flex justify-center mb-4">
-          <Logo size="footer" />
+          {useDarkLogo ? (
+            <img 
+              src={ICONS.blackCenterLogo} 
+              alt="Logo" 
+              className="w-[38px] h-[38px]"
+            />
+          ) : (
+            <Logo size="footer" />
+          )}
         </div>
         
         {/* Social icons below logo for mobile */}
         <div className="mb-4">
-          <SocialIcons inverted={false} />
+          <SocialIcons inverted={!useDarkLogo} />
         </div>
         
         {/* Copyright text at bottom - exact style from reference */}
-        <div className="text-center font-normal text-white">
+        <div className={`text-center font-normal ${textColor}`}>
           <p className="text-[12px] leading-[16px]">© 2025 Upcrafty Co. All Rights Reserved.</p>
         </div>
       </div>
@@ -37,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
       <div className="hidden md:flex justify-between items-center w-full relative">
         {/* Copyright Text - Left with exact specifications from design */}
         <div 
-          className="text-white text-[15px] leading-[20px] font-normal whitespace-nowrap"
+          className={`${textColor} text-[15px] leading-[20px] font-normal whitespace-nowrap`}
           style={{
             width: "294px",
             height: "20px",
@@ -49,7 +64,15 @@ const Footer: React.FC<FooterProps> = ({ isDropdownOpen = false }) => {
         
         {/* Center Logo - Exactly 38x38px and perfectly centered */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Logo size="footer" />
+          {useDarkLogo ? (
+            <img 
+              src={ICONS.blackCenterLogo} 
+              alt="Logo" 
+              className="w-[38px] h-[38px]"
+            />
+          ) : (
+            <Logo size="footer" />
+          )}
         </div>
       </div>
     </div>

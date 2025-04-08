@@ -16,6 +16,7 @@ export const ICONS = {
   logo: "/sigla.png",
   logoBlack: "/Black Logo.png",
   logoBottom: "/sigla bottom.png",
+  blackCenterLogo: "/black-center-logo.png",
   
   // Other
   polygon: "/Polygon 2.png",
@@ -25,9 +26,10 @@ export const ICONS = {
 // Video files for different platforms and network conditions
 export const VIDEOS = {
   desktopHigh: "/desktop.mp4",
-  desktopLow: "/desktop-low.mp4",
+  desktopLow: "/desktop low.mp4",
   mobileHigh: "/mobil.mp4",
-  mobileLow: "/mobil-low.mp4"
+  mobileLow: "/mobil low.mp4",
+  aboutUs: "/About us video.mp4"
 };
 
 // Logo sizing configurations

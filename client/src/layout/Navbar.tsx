@@ -4,15 +4,25 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import NavDropdown from "@/components/NavDropdown";
 import SocialIconsManager from "@/components/SocialIconsManager";
+import { useLocation } from "wouter";
 
 interface NavbarProps {
   onDropdownOpen?: () => void;
   onDropdownClose?: () => void;
+  useBlackButton?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
+const Navbar: React.FC<NavbarProps> = ({ 
+  onDropdownOpen, 
+  onDropdownClose, 
+  useBlackButton = false 
+}) => {
   const isMobileDevice = useIsMobile();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [location] = useLocation();
+  
+  // Determine if we're on About page
+  const isAboutPage = location === "/about";
   
   // Notify parent component when dropdown state changes
   useEffect(() => {
@@ -35,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
           px-[20px] sm:px-[35px] md:px-[54px] 
           pt-[15px] sm:pt-[18px] md:pt-[32px] 
           pb-0 flex justify-between items-center w-full
-          absolute top-0 left-0 right-0 
+          ${isAboutPage ? 'relative' : 'absolute'} top-0 left-0 right-0 
           z-[100]
         `}
       >
@@ -47,16 +57,22 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
           <Logo 
             size="header" 
             includeDropdown={true} 
-            useBlackLogo={isDropdownOpen}
+            useBlackLogo={isDropdownOpen || isAboutPage}
           />
         </div>
         
         {/* Contact Button - Only visible when dropdown is closed */}
         {!isDropdownOpen && (
           <Button 
-            className="bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] rounded-full uppercase font-normal
-            tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
-            h-[28px] md:h-[34px] w-[90px] md:w-[107px] p-0 transition-colors duration-300 border-none"
+            className={`
+              ${isAboutPage || useBlackButton
+                ? "bg-black hover:bg-white text-white hover:text-black border border-black" 
+                : "bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] border-none"
+              } 
+              rounded-full uppercase font-normal
+              tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
+              h-[28px] md:h-[34px] w-[90px] md:w-[107px] p-0 transition-colors duration-300
+            `}
             style={{ 
               width: isMobileDevice ? "90px" : "107px", 
               height: isMobileDevice ? "28px" : "34px"
