@@ -54,7 +54,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 <div className="invisible h-[60px]"></div>
 
                 {/* Navigation buttons - stacked vertically */}
-                <div className="overflow-y-auto px-[54px] mt-4">
+                <div className="overflow-y-auto mt-4" style={{ paddingLeft: '54px', paddingRight: '54px' }}>
                   {NAV_CATEGORIES.map((category, idx) => (
                     <div key={idx} className="mb-6">
                       <a 
@@ -66,13 +66,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }}
                       >
                         {category.isTitle ? (
-                          // Title styling with container and border
+                          // Title styling with container - no border
                           <div 
-                            className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start border border-[#EDEAE7] h-[33px] bg-[#EDEAE7]/50`}
+                            className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                             style={{ 
                               width: 'min(322px, 100%)', 
-                              maxWidth: 'calc(100% - 20px)',
-                              borderWidth: '0.2px'
+                              maxWidth: 'calc(100% - 20px)'
                             }}
                           >
                             <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
@@ -80,8 +79,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             </span>
                           </div>
                         ) : (
-                          // Subtitle styling without container
-                          <div className="pl-8">
+                          // Subtitle styling without container - left-aligned to match titles
+                          <div>
                             <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
                               {category.name}
                             </span>
@@ -145,7 +144,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
             {/* Left section - Navigation - fixed and aligned to the left with same padding as logo */}
-            <div className="w-[40%] min-w-[500px] pl-[54px] pr-4 pt-[100px] overflow-y-auto" style={{ flexShrink: 0 }}>
+            <div className="w-[40%] min-w-[500px] pt-[100px] overflow-y-auto" style={{ flexShrink: 0, paddingLeft: '54px' }}>
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6">
                 {NAV_CATEGORIES.map((category, idx) => (
@@ -159,13 +158,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       }}
                     >
                       {category.isTitle ? (
-                        // Title styling with container and border
+                        // Title styling with container - no border
                         <div 
-                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start border border-[#EDEAE7] h-[33px] bg-[#EDEAE7]/50`}
+                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                           style={{ 
                             width: 'min(322px, 100%)', 
-                            maxWidth: 'calc(100% - 20px)',
-                            borderWidth: '0.2px'
+                            maxWidth: 'calc(100% - 20px)'
                           }}
                         >
                           <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
@@ -173,8 +171,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                       ) : (
-                        // Subtitle styling without container
-                        <div className="pl-8">
+                        // Subtitle styling without container - left-aligned to match titles
+                        <div>
                           <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
                             {category.name}
                           </span>
@@ -202,7 +200,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Desktop social icons on the bottom left - same padding as logo */}
-              <div className="absolute bottom-8 left-[54px]">
+              <div className="absolute bottom-8" style={{ left: '54px' }}>
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
