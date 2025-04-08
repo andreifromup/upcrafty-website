@@ -11,10 +11,6 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
   
-  // When in dropdown: use invert filter to make icons black
-  // When not in dropdown: use invert based on inverted prop
-  const iconColor = inDropdown ? "invert filter brightness-0" : inverted ? "invert filter brightness-0" : "";
-  
   // Exact sizes to match reference image
   const iconSizes = {
     x: isMobileDevice ? "w-[14px] h-[14.3px]" : "w-[16px] h-[16.35px]",
@@ -34,9 +30,9 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={ICONS.x} 
+          src={inDropdown ? ICONS.xBlack : ICONS.x} 
           alt="X (Twitter)" 
-          className={`${iconSizes.x} ${iconColor}`}
+          className={iconSizes.x}
         />
       </a>
       
@@ -49,9 +45,9 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={ICONS.instagram} 
+          src={inDropdown ? ICONS.instagramBlack : ICONS.instagram} 
           alt="Instagram" 
-          className={`${iconSizes.instagram} ${iconColor}`}
+          className={iconSizes.instagram}
         />
       </a>
       
@@ -64,9 +60,9 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={ICONS.tiktok} 
+          src={inDropdown ? ICONS.tiktokBlack : ICONS.tiktok} 
           alt="TikTok" 
-          className={`${iconSizes.tiktok} ${iconColor}`}
+          className={iconSizes.tiktok}
         />
       </a>
       
@@ -79,9 +75,9 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
         rel="noopener noreferrer"
       >
         <img 
-          src={ICONS.youtube} 
+          src={inDropdown ? ICONS.youtubeBlack : ICONS.youtube} 
           alt="YouTube" 
-          className={`${iconSizes.youtube} ${iconColor}`}
+          className={iconSizes.youtube}
         />
       </a>
     </div>

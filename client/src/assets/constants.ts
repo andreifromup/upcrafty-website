@@ -1,10 +1,16 @@
 // Image assets for icons
 export const ICONS = {
-  // Social Media Icons
-  x: "/X.png",
-  instagram: "/Insta.png",
-  tiktok: "/Tiktok.png",
-  youtube: "/Youtube.png",
+  // Social Media Icons - White versions for homepage/footer
+  x: "/X white.png",
+  instagram: "/Instagram white.png",
+  tiktok: "/TikTok white.png",
+  youtube: "/Youtube white.png",
+  
+  // Social Media Icons - Black versions for dropdown menu
+  xBlack: "/X black.png",
+  instagramBlack: "/Instagram black.png",
+  tiktokBlack: "/TikTok black.png",
+  youtubeBlack: "/Youtube black.png",
   
   // Logo Images
   logo: "/sigla.png",
