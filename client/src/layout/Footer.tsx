@@ -3,6 +3,7 @@ import Logo from "@/components/Logo";
 import SocialIcons from "@/components/SocialIcons";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ICONS } from "@/assets/constants";
+import { useLocation } from "wouter";
 
 interface FooterProps {
   isDropdownOpen?: boolean;
@@ -16,6 +17,10 @@ const Footer: React.FC<FooterProps> = ({
   useDarkLogo = false
 }) => {
   const isMobile = useIsMobile();
+  const [location] = useLocation();
+  
+  // Determine if we're on the homepage
+  const isHomePage = location === "/";
   
   // Hide footer completely when dropdown is open
   if (isDropdownOpen) return null;
@@ -37,10 +42,12 @@ const Footer: React.FC<FooterProps> = ({
           )}
         </div>
         
-        {/* Social icons below logo for mobile */}
-        <div className="mb-4">
-          <SocialIcons inverted={!useDarkLogo} />
-        </div>
+        {/* Social icons below logo for mobile - only on homepage */}
+        {isHomePage && (
+          <div className="mb-4">
+            <SocialIcons inverted={!useDarkLogo} />
+          </div>
+        )}
         
         {/* Copyright text at bottom - exact style from reference */}
         <div className={`text-center font-normal ${textColor}`}>

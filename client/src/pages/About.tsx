@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
 import AboutVideo from "@/components/AboutVideo";
-import SocialIcons from "@/components/SocialIcons";
 import { ICONS } from "@/assets/constants";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import SocialIcons from "@/components/SocialIcons";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const About: React.FC = () => {
   // State to track if dropdown is open
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isMobile = useIsMobile();
   
   return (
     <div className="bg-white text-black font-['Inter'] font-normal antialiased">
@@ -22,9 +24,9 @@ const About: React.FC = () => {
         />
         
         {/* Content area - centered with padding */}
-        <div className="flex-grow flex flex-col items-center px-4 py-12 max-w-6xl mx-auto">
+        <div className="flex-grow flex flex-col items-center px-4 py-12 max-w-6xl mx-auto overflow-y-auto">
           {/* Page Title */}
-          <h1 className="text-4xl font-medium mb-8 text-center">About Us</h1>
+          <h1 className="text-4xl font-medium mb-8 text-center pt-14 md:pt-20">About Us</h1>
           
           {/* Video Section - not full screen */}
           <div className="w-full max-w-3xl mb-12 rounded-lg overflow-hidden shadow-lg">
@@ -71,9 +73,9 @@ const About: React.FC = () => {
           />
         </div>
         
-        {/* Social Icons - Bottom Right */}
-        {!isDropdownOpen && (
-          <div className="fixed bottom-12 right-12 z-20">
+        {/* Social Icons - Bottom Right - Only on desktop and when dropdown is closed */}
+        {!isDropdownOpen && !isMobile && (
+          <div className="fixed right-[54px] bottom-[40px] z-[60]">
             <SocialIcons inverted={false} />
           </div>
         )}
