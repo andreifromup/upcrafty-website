@@ -7,10 +7,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { X } from "lucide-react";
 import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
-import Logo from "@/components/Logo";
 import SocialIcons from "@/components/SocialIcons";
+import CloseButton from "@/components/CloseButton";
 
 // Common constant for consistent left padding
 const LEFT_PADDING = '54px';
@@ -28,8 +27,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
-      onClick={onClose}
+      className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm cursor-pointer"
+      onClick={() => {
+        console.log("Clicked backdrop");
+        if (onClose && typeof onClose === 'function') {
+          onClose();
+        }
+      }}
       style={{ zIndex: 90 }}
     >
       {/* Dropdown container that prevents click propagation */}
@@ -300,15 +304,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           </div>
         )}
         
-        {/* Close button - only shown on desktop with simple X icon */}
+        {/* Close button - only shown on desktop */}
         {!isMobile && (
-          <button 
-            className="absolute top-6 right-6 z-[100] p-2"
-            onClick={onClose}
-            aria-label="Close menu"
-          >
-            <X size={24} strokeWidth={2} />
-          </button>
+          <CloseButton onClose={onClose} />
         )}
       </div>
     </div>

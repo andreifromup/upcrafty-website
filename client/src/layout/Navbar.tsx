@@ -114,7 +114,10 @@ const Navbar: React.FC<NavbarProps> = ({
       {/* Navigation Dropdown */}
       <NavDropdown 
         isOpen={isDropdownOpen} 
-        onClose={() => setIsDropdownOpen(false)} 
+        onClose={() => {
+          console.log("Closing dropdown from NavDropdown");
+          setIsDropdownOpen(false);
+        }} 
       />
     </>
   );
