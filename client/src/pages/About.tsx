@@ -110,21 +110,7 @@ const About: React.FC = () => {
         </div>
       </div>
       
-      {/* Center Black Logo */}
-      <div className="flex justify-center mb-8">
-        <img 
-          src={ICONS.blackCenterLogo} 
-          alt="Logo" 
-          className="w-[38px] h-[38px]"
-        />
-      </div>
-      
-      {/* Social Icons - Bottom Right - Only on desktop and when dropdown is closed */}
-      {!isDropdownOpen && !isMobile && (
-        <div className="fixed right-[54px] bottom-[40px] z-[60]">
-          <SocialIcons inverted={false} />
-        </div>
-      )}
+      {/* Social Icons in bottom right will now be handled by the Footer component */}
       
       {/* Bottom Footer - Hidden when dropdown is open with black text */}
       <Footer isDropdownOpen={isDropdownOpen} textColor="text-black" useDarkLogo={true} />

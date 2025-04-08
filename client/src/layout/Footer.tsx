@@ -42,12 +42,10 @@ const Footer: React.FC<FooterProps> = ({
           )}
         </div>
         
-        {/* Social icons below logo for mobile - only on homepage */}
-        {isHomePage && (
-          <div className="mb-4">
-            <SocialIcons inverted={!useDarkLogo} />
-          </div>
-        )}
+        {/* Social icons below logo for mobile - on all pages */}
+        <div className="mb-4">
+          <SocialIcons inverted={!useDarkLogo} />
+        </div>
         
         {/* Copyright text at bottom - exact style from reference */}
         <div className={`text-center font-normal ${textColor}`}>
@@ -80,6 +78,11 @@ const Footer: React.FC<FooterProps> = ({
           ) : (
             <Logo size="footer" />
           )}
+        </div>
+
+        {/* Social Icons - Right Side */}
+        <div className="flex items-center">
+          <SocialIcons inverted={!useDarkLogo} />
         </div>
       </div>
     </div>
