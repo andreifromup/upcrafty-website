@@ -37,16 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({
     // Toggle dropdown state
     const newState = !isDropdownOpen;
     setIsDropdownOpen(newState);
-    
-    // Explicitly handle arrow rotation on mobile devices
-    if (isMobileDevice) {
-      // Find the dropdown arrow element
-      const arrowElement = document.getElementById('dropdown-arrow');
-      if (arrowElement) {
-        // Manually rotate the arrow based on dropdown state
-        arrowElement.style.transform = newState ? 'rotate(180deg)' : 'rotate(0deg)';
-      }
-    }
+    // No need to manually rotate arrow anymore, handled by Logo component
   };
   
   return (
@@ -70,6 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({
             size="header" 
             includeDropdown={true} 
             useBlackLogo={isDropdownOpen || isAboutPage}
+            isDropdownOpen={isDropdownOpen}
           />
         </div>
         
@@ -129,14 +121,7 @@ const Navbar: React.FC<NavbarProps> = ({
         onClose={() => {
           console.log("Closing dropdown from NavDropdown");
           setIsDropdownOpen(false);
-          
-          // Also reset arrow rotation when dropdown is closed from inside
-          if (isMobileDevice) {
-            const arrowElement = document.getElementById('dropdown-arrow');
-            if (arrowElement) {
-              arrowElement.style.transform = 'rotate(0deg)';
-            }
-          }
+          // Arrow rotation is now handled by the Logo component via isDropdownOpen prop
         }} 
       />
     </>

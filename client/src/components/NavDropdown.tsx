@@ -29,14 +29,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const handleClose = () => {
     if (onClose && typeof onClose === 'function') {
       try {
-        // Reset arrow rotation manually for mobile when dropdown closes
-        if (isMobile) {
-          const arrowElement = document.getElementById('dropdown-arrow');
-          if (arrowElement) {
-            arrowElement.style.transform = 'rotate(0deg)';
-          }
-        }
-        
+        // Arrow rotation is now handled in the Logo component via props
         onClose();
       } catch (error) {
         console.error("Error closing dropdown:", error);

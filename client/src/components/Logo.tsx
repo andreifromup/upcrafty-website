@@ -1,15 +1,19 @@
 import React from "react";
 import { ICONS, LOGOS } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLocation } from "wouter";
 
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
   includeDropdown?: boolean;
   useBlackLogo?: boolean;
+  isDropdownOpen?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, useBlackLogo = false }) => {
+const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, useBlackLogo = false, isDropdownOpen = false }) => {
   const isMobile = useIsMobile();
+  const [location] = useLocation();
+  const isAboutPage = location === "/about";
   
   // Use the specific dimensions from the design specs
   if (size === "header") {
@@ -97,7 +101,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
-                transform: useBlackLogo ? 'rotate(180deg)' : 'rotate(0deg)'
+                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
               id="dropdown-arrow"
             />
