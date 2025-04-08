@@ -70,14 +70,13 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
         {/* Use an explicit poster image for better UX while video loads */}
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover pointer-events-none"
           src={videoUrl}
           loop
           muted
           playsInline
           preload="auto"
           autoPlay
-          controls
         >
           <source src={videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
