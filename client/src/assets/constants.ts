@@ -62,35 +62,43 @@ export const PORTFOLIO_IMAGES = {
 export const NAV_CATEGORIES = [
   {
     name: "ILLUSTRATIONS",
+    isTitle: true,
     subcategories: [
-      { name: "CARTOON", items: [] },
-      { name: "CHARACTER DESIGN", items: [] }
+      { name: "CARTOON", isTitle: false, items: [] },
+      { name: "CHARACTER DESIGN", isTitle: false, items: [] }
     ]
   },
   {
     name: "ANIMATIONS",
+    isTitle: true,
     subcategories: [
-      { name: "2D ANIMATIONS", items: [] },
-      { name: "MOTION GRAPHICS", items: [] }
+      { name: "2D ANIMATIONS", isTitle: false, items: [] },
+      { name: "MOTION GRAPHICS", isTitle: false, items: [] }
     ]
   },
   {
     name: "GAMES",
+    isTitle: true,
     subcategories: [
-      { name: "MOBILE GAMES", items: [] }
+      { name: "MOBILE GAMES", isTitle: false, items: [] }
     ]
   },
   {
     name: "3D",
+    isTitle: true,
     subcategories: [
-      { name: "ENVIRONMENT", items: [] },
-      { name: "CHARACTER MODELING", items: [] }
+      { name: "ENVIRONMENT", isTitle: false, items: [] },
+      { name: "CHARACTER MODELING", isTitle: false, items: [] }
     ]
   },
   {
     name: "ABOUT US",
-    subcategories: [
-      { name: "CONTACT", items: [] }
-    ]
+    isTitle: false,
+    subcategories: []
+  },
+  {
+    name: "CONTACT",
+    isTitle: false,
+    subcategories: []
   }
 ];

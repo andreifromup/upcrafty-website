@@ -65,13 +65,28 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           setSelectedCategory(selectedCategory === category.name ? null : category.name);
                         }}
                       >
-                        <div 
-                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start w-[322px] h-[33px] bg-[#EDEAE7]/50`}
-                        >
-                          <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
-                            {category.name}
-                          </span>
-                        </div>
+                        {category.isTitle ? (
+                          // Title styling with container and border
+                          <div 
+                            className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start border border-[#EDEAE7] h-[33px] bg-[#EDEAE7]/50`}
+                            style={{ 
+                              width: 'min(322px, 100%)', 
+                              maxWidth: 'calc(100% - 20px)',
+                              borderWidth: '0.2px'
+                            }}
+                          >
+                            <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                              {category.name}
+                            </span>
+                          </div>
+                        ) : (
+                          // Subtitle styling without container
+                          <div className="pl-8">
+                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                              {category.name}
+                            </span>
+                          </div>
+                        )}
                       </a>
                       
                       {category.subcategories.length > 0 && (
@@ -80,9 +95,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             <a 
                               key={subIdx} 
                               href="#" 
-                              className="text-[16px] font-normal block py-1.5 hover:text-[#FF6600]"
+                              className="block hover:text-[#FF6600]"
                             >
-                              {subcategory.name}
+                              <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                                {subcategory.name}
+                              </span>
                             </a>
                           ))}
                         </div>
@@ -132,7 +149,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6">
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className="w-1/2 mb-5 pr-4">
+                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} mb-5 pr-4`}>
                     <a 
                       href="#" 
                       className="uppercase block mb-3 hover:text-[#FF6600]"
@@ -141,13 +158,28 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         setSelectedCategory(selectedCategory === category.name ? null : category.name);
                       }}
                     >
-                      <div 
-                        className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start w-[322px] h-[33px] ${selectedCategory === category.name ? 'bg-[#EDEAE7]/50' : 'bg-[#EDEAE7]/50'}`}
-                      >
-                        <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
-                          {category.name}
-                        </span>
-                      </div>
+                      {category.isTitle ? (
+                        // Title styling with container and border
+                        <div 
+                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start border border-[#EDEAE7] h-[33px] bg-[#EDEAE7]/50`}
+                          style={{ 
+                            width: 'min(322px, 100%)', 
+                            maxWidth: 'calc(100% - 20px)',
+                            borderWidth: '0.2px'
+                          }}
+                        >
+                          <span className="font-inter font-normal text-[16px] leading-[20px] tracking-[2px] uppercase">
+                            {category.name}
+                          </span>
+                        </div>
+                      ) : (
+                        // Subtitle styling without container
+                        <div className="pl-8">
+                          <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                            {category.name}
+                          </span>
+                        </div>
+                      )}
                     </a>
                     
                     {category.subcategories.length > 0 && (
@@ -156,9 +188,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="text-[16px] font-normal block py-1 hover:text-[#FF6600]"
+                            className="block hover:text-[#FF6600]"
                           >
-                            {subcategory.name}
+                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                              {subcategory.name}
+                            </span>
                           </a>
                         ))}
                       </div>
