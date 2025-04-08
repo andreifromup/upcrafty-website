@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
+import { NAV_CATEGORIES, PORTFOLIO_IMAGES, COLORS } from "@/assets/constants";
 import SocialIcons from "@/components/SocialIcons";
 
 // Common constant for consistent left padding
@@ -170,7 +170,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="block active:text-[#FF6600] active:scale-95 transition-all duration-150"
+                            className={`block active:text-[${COLORS.orange}] active:scale-95 transition-all duration-150`}
                           >
                             <div className="py-1">
                               <span className="font-inter font-normal text-[16px] leading-[30px] uppercase pl-[12px]">

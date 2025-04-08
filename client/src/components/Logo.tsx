@@ -1,5 +1,5 @@
 import React from "react";
-import { ICONS, LOGOS } from "@/assets/constants";
+import { ICONS, LOGOS, COLORS, ORANGE_FILTER } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "wouter";
 
@@ -28,11 +28,11 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
             
             if (logoImg) {
-              logoImg.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+              logoImg.style.filter = ORANGE_FILTER;
             }
             
             if (dropdownImg) {
-              dropdownImg.style.filter = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+              dropdownImg.style.filter = ORANGE_FILTER;
             }
           }
         }}
