@@ -157,12 +157,21 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-55px]' : ''} mb-5 pr-4`}>
                     <a 
-                      href="#" 
+                      href={category.name === "ABOUT US" ? "/about" : "#"} 
                       className={`uppercase block mb-3 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
                       onClick={(e) => {
-                        e.preventDefault();
-                        if (!category.isTitle) {
+                        if (category.name === "CONTACT") {
+                          e.preventDefault();
+                          window.open("https://tally.so/r/m6Pl1P", "_blank");
+                          onClose();
+                        } else if (category.name === "ABOUT US") {
+                          // Let the link navigate naturally to /about
+                          onClose();
+                        } else if (!category.isTitle) {
+                          e.preventDefault();
                           setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                        } else {
+                          e.preventDefault();
                         }
                       }}
                     >
