@@ -71,14 +71,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }}
                       >
                         {category.isTitle ? (
-                          // Title styling with container - positioned to align text with items
+                          // Title styling with container - with proper padding inside
                           <div 
                             className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                             style={{ 
                               width: 'min(322px, 100%)', 
                               maxWidth: 'calc(100% - 20px)',
-                              paddingLeft: '12px', // Internal padding for the bg container
-                              marginLeft: '-12px'  // Negative margin to align text with items
+                              paddingLeft: '12px' // Internal padding for the bg container
                             }}
                             onClick={(e) => e.preventDefault()}
                           >
@@ -87,8 +86,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             </span>
                           </div>
                         ) : (
-                          // Subtitle styling without container - same left alignment as titles
-                          <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
+                          // Subtitle styling without container - padded slightly to match 
+                          // the visual alignment of text inside the containers
+                          <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block pl-[12px]">
                             {category.name}
                           </span>
                         )}
@@ -102,7 +102,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                               href="#" 
                               className="block hover:text-[#FF6600]"
                             >
-                              <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                              <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
                                 {subcategory.name}
                               </span>
                             </a>
@@ -167,14 +167,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       }}
                     >
                       {category.isTitle ? (
-                        // Title styling with container - positioned to align text with items
+                        // Title styling with container - with proper padding inside
                         <div 
                           className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                           style={{ 
                             width: 'min(322px, 100%)', 
                             maxWidth: 'calc(100% - 20px)',
-                            paddingLeft: '12px', // Internal padding for the bg container
-                            marginLeft: '-12px'  // Negative margin to align text with items
+                            paddingLeft: '12px' // Internal padding for the bg container
                           }}
                           onClick={(e) => e.preventDefault()}
                         >
@@ -183,8 +182,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                       ) : (
-                        // Subtitle styling without container - same left alignment as titles
-                        <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
+                        // Subtitle styling without container - padded slightly to match 
+                        // the visual alignment of text inside the containers
+                        <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block pl-[12px]">
                           {category.name}
                         </span>
                       )}
@@ -198,7 +198,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             href="#" 
                             className="block hover:text-[#FF6600]"
                           >
-                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
+                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase pl-[12px]">
                               {subcategory.name}
                             </span>
                           </a>
