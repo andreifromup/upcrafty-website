@@ -167,9 +167,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 ))}
               </div>
               
-              {/* Desktop social icons placeholder */}
+              {/* Desktop social icons on the bottom left */}
               <div className="absolute bottom-8 left-12">
-                {/* Social icons are now managed in the Navbar component */}
+                <SocialIcons inDropdown={true} />
               </div>
             </div>
             

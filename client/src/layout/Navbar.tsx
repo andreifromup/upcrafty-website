@@ -3,7 +3,7 @@ import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import NavDropdown from "@/components/NavDropdown";
-import SocialIcons from "@/components/SocialIcons";
+import SocialIconsManager from "@/components/SocialIconsManager";
 
 interface NavbarProps {
   onDropdownOpen?: () => void;
@@ -68,12 +68,8 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
         )}
       </div>
       
-      {/* Social Icons - Position and color changes based on dropdown state */}
-      {!isMobileDevice && (
-        <div className="fixed right-[20px] sm:right-[35px] md:right-[54px] bottom-[20px] sm:bottom-[35px] md:bottom-[40px] z-[110]">
-          <SocialIcons inverted={!isDropdownOpen} inDropdown={isDropdownOpen} />
-        </div>
-      )}
+      {/* Social Icons - Managed centrally to only appear in one location */}
+      <SocialIconsManager isDropdownOpen={isDropdownOpen} />
       
       {/* Navigation Dropdown */}
       <NavDropdown 
