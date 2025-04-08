@@ -4,11 +4,13 @@ import { ICONS, SOCIAL_LINKS } from "@/assets/constants";
 
 interface SocialIconsProps {
   inverted?: boolean;
+  inDropdown?: boolean;
 }
 
-const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
+const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown = false }) => {
   const isMobileDevice = useIsMobile();
   const iconStyle = "transition-all duration-300 hover:opacity-70 hover:scale-110";
+  const iconColor = inDropdown ? "" : inverted ? "invert filter brightness-0" : "";
   
   // Exact sizes to match reference image
   const iconSizes = {
@@ -31,7 +33,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
         <img 
           src={ICONS.x} 
           alt="X (Twitter)" 
-          className={`${iconSizes.x} ${inverted ? 'invert' : ''}`}
+          className={`${iconSizes.x} ${iconColor}`}
         />
       </a>
       
@@ -46,7 +48,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
         <img 
           src={ICONS.instagram} 
           alt="Instagram" 
-          className={`${iconSizes.instagram} ${inverted ? 'invert' : ''}`}
+          className={`${iconSizes.instagram} ${iconColor}`}
         />
       </a>
       
@@ -61,7 +63,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
         <img 
           src={ICONS.tiktok} 
           alt="TikTok" 
-          className={`${iconSizes.tiktok} ${inverted ? 'invert' : ''}`}
+          className={`${iconSizes.tiktok} ${iconColor}`}
         />
       </a>
       
@@ -76,7 +78,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false }) => {
         <img 
           src={ICONS.youtube} 
           alt="YouTube" 
-          className={`${iconSizes.youtube} ${inverted ? 'invert' : ''}`}
+          className={`${iconSizes.youtube} ${iconColor}`}
         />
       </a>
     </div>

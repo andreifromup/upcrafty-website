@@ -8,8 +8,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { X } from "lucide-react";
-import { NAV_CATEGORIES, PORTFOLIO_IMAGES, ICONS, SOCIAL_LINKS } from "@/assets/constants";
+import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 import Logo from "@/components/Logo";
+import SocialIcons from "@/components/SocialIcons";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -115,20 +116,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 </div>
               )}
               
-              {/* Social Icons at bottom */}
+              {/* Mobile-only social icons at bottom */}
               <div className="flex space-x-6 mt-auto p-4 justify-center border-t border-gray-100">
-                <a href={SOCIAL_LINKS.x} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.x} alt="X" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.instagram} alt="Instagram" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.tiktok} alt="TikTok" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.youtube} alt="YouTube" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
+                <SocialIcons inDropdown={true} />
               </div>
             </div>
           </>
@@ -177,20 +167,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 ))}
               </div>
               
-              {/* Social Icons at bottom */}
-              <div className="flex space-x-6 absolute bottom-8 left-12">
-                <a href={SOCIAL_LINKS.x} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.x} alt="X" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.instagram} alt="Instagram" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.tiktok} alt="TikTok" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
-                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-black hover:text-[#FF6600]">
-                  <img src={ICONS.youtube} alt="YouTube" className="w-5 h-5 opacity-70 hover:opacity-100" />
-                </a>
+              {/* Desktop social icons placeholder */}
+              <div className="absolute bottom-8 left-12">
+                {/* Social icons are now managed in the Navbar component */}
               </div>
             </div>
             

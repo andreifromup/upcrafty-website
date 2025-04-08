@@ -23,12 +23,15 @@ const Home: React.FC = () => {
       <VideoBackground blur={isDropdownOpen} />
       
       {/* Main container - Fixed dimensions with symmetric spacing */}
-      <div className="fixed top-0 left-0 right-0 bottom-0 flex flex-col justify-between z-10 overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 bottom-0 flex flex-col h-full z-10 overflow-hidden">
         {/* Top Navigation */}
         <Navbar 
           onDropdownOpen={() => setIsDropdownOpen(true)}
           onDropdownClose={() => setIsDropdownOpen(false)}
         />
+        
+        {/* Spacer to push footer to bottom */}
+        <div className="flex-grow"></div>
         
         {/* Bottom Footer - Hidden when dropdown is open */}
         <Footer isDropdownOpen={isDropdownOpen} />

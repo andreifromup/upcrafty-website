@@ -68,10 +68,10 @@ const Navbar: React.FC<NavbarProps> = ({ onDropdownOpen, onDropdownClose }) => {
         )}
       </div>
       
-      {/* Social Icons - Only visible when dropdown is closed */}
-      {!isDropdownOpen && (
-        <div className="fixed right-[20px] sm:right-[35px] md:right-[54px] bottom-[20px] sm:bottom-[35px] md:bottom-[40px] z-[60]">
-          <SocialIcons inverted={isDropdownOpen} />
+      {/* Social Icons - Position and color changes based on dropdown state */}
+      {!isMobileDevice && (
+        <div className="fixed right-[20px] sm:right-[35px] md:right-[54px] bottom-[20px] sm:bottom-[35px] md:bottom-[40px] z-[110]">
+          <SocialIcons inverted={!isDropdownOpen} inDropdown={isDropdownOpen} />
         </div>
       )}
       
