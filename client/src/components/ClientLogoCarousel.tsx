@@ -15,69 +15,121 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
 
   // Setup seamless infinite scrolling carousel
   useEffect(() => {
-    if (!innerRef.current || !carouselRef.current) return;
-    
-    // Calculate scrolling speed based on device type and screen size
-    const getScrollSpeed = () => {
-      if (isMobile) return 0.5;
+    // Short delay to ensure element is fully rendered
+    const initTimeout = setTimeout(() => {
+      if (!innerRef.current || !carouselRef.current) return;
       
-      const screenWidth = window.innerWidth;
-      if (screenWidth >= 1920) return 1.2;
-      if (screenWidth >= 1440) return 1;
-      return 0.8;
-    };
-    
-    // Set starting position slightly offset from 0 to avoid initial flicker
-    if (innerRef.current.scrollLeft === 0) {
-      innerRef.current.scrollLeft = 1;
-    }
-    
-    // Get the width of the original logo set
-    const getLogoSetWidth = () => {
-      const originalSet = innerRef.current?.querySelector('.logo-set');
-      return originalSet ? (originalSet as HTMLElement).offsetWidth : 0;
-    };
-    
-    // Get initial set width
-    const logoSetWidth = getLogoSetWidth();
-    if (!logoSetWidth) return;
-    
-    const scrollSpeed = getScrollSpeed();
-    
-    // Animation function for smooth scrolling
-    const animate = () => {
-      if (!innerRef.current) return;
-      
-      // Increment the scroll position by the calculated speed
-      innerRef.current.scrollLeft += scrollSpeed;
-      
-      // When we reach the end of the first set, reset position to create seamless loop
-      if (innerRef.current.scrollLeft >= logoSetWidth) {
-        // This is the critical part for seamless scrolling:
-        // We subtract exactly one set width so visually nothing changes
-        // but we're now looking at the duplicate set instead of the original
-        innerRef.current.scrollLeft -= logoSetWidth;
+      // We need to force a repaint to ensure mobile devices properly initialize
+      if (innerRef.current.scrollLeft === 0) {
+        innerRef.current.style.display = 'none';
+        // Force repaint
+        void innerRef.current.offsetHeight;
+        innerRef.current.style.display = '';
+        innerRef.current.scrollLeft = 1; // Slight offset to avoid flicker
       }
       
-      // Continue animation
+      // Get the width of the original logo set
+      const getLogoSetWidth = () => {
+        const originalSet = innerRef.current?.querySelector('.logo-set');
+        return originalSet ? (originalSet as HTMLElement).offsetWidth : 0;
+      };
+      
+      // Get initial set width
+      const logoSetWidth = getLogoSetWidth();
+      if (!logoSetWidth) return;
+      
+      // Calculate scrolling speed based on device type and screen size
+      const getScrollSpeed = () => {
+        // Force stronger speed for mobile to ensure visible scrolling
+        if (isMobile) return 1.2;
+        
+        const screenWidth = window.innerWidth;
+        if (screenWidth >= 1920) return 2.0;
+        if (screenWidth >= 1440) return 1.8;
+        return 1.5;
+      };
+      
+      const scrollSpeed = getScrollSpeed();
+      
+      // Animation function for smooth scrolling
+      const animate = () => {
+        if (!innerRef.current) return;
+        
+        // Increment the scroll position by the calculated speed
+        innerRef.current.scrollLeft += scrollSpeed;
+        
+        // When we reach the end of the first set, reset position to create seamless loop
+        if (innerRef.current.scrollLeft >= logoSetWidth) {
+          // This is the critical part for seamless scrolling:
+          // We subtract exactly one set width so visually nothing changes
+          // but we're now looking at the duplicate set instead of the original
+          innerRef.current.scrollLeft -= logoSetWidth;
+        }
+        
+        // Continue animation
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      
+      // Start animation loop
       animationRef.current = requestAnimationFrame(animate);
-    };
-    
-    // Start animation loop
-    animationRef.current = requestAnimationFrame(animate);
+      
+      // Force a check to ensure mobile animation is running
+      if (isMobile) {
+        // Double-check animation is running after a short delay
+        const checkAnimation = setTimeout(() => {
+          if (innerRef.current && innerRef.current.scrollLeft < 10) {
+            // Animation might not be working, force restart
+            cancelAnimationFrame(animationRef.current);
+            innerRef.current.scrollLeft = 1; // Reset position
+            animationRef.current = requestAnimationFrame(animate);
+          }
+        }, 500);
+        
+        return () => clearTimeout(checkAnimation);
+      }
+    }, 100); // Short delay for initialization
     
     // Handle window resize to ensure proper scrolling speed
     const handleResize = () => {
-      // No need to do anything complex here, just let it continue scrolling
-      // The scroll speed will adapt based on the device type
+      // Reset animation on significant size changes (like rotation)
+      cancelAnimationFrame(animationRef.current);
+      
+      // Small delay to let DOM update
+      setTimeout(() => {
+        if (!innerRef.current) return;
+        
+        // Restart animation
+        const animate = () => {
+          if (!innerRef.current) return;
+          
+          // Calculate speed for current device using the same logic as initial setup
+          const speed = isMobile ? 1.2 : (window.innerWidth >= 1920 ? 2.0 : window.innerWidth >= 1440 ? 1.8 : 1.5);
+          innerRef.current.scrollLeft += speed;
+          
+          // Get width for reset point
+          const set = innerRef.current.querySelector('.logo-set') as HTMLElement;
+          const width = set ? set.offsetWidth : 0;
+          
+          if (width && innerRef.current.scrollLeft >= width) {
+            innerRef.current.scrollLeft -= width;
+          }
+          
+          animationRef.current = requestAnimationFrame(animate);
+        };
+        
+        animationRef.current = requestAnimationFrame(animate);
+      }, 150);
     };
     
     window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
     
     // Clean up on unmount
     return () => {
+      clearTimeout(initTimeout);
       cancelAnimationFrame(animationRef.current);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, [isMobile]);
   
