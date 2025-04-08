@@ -71,12 +71,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }}
                       >
                         {category.isTitle ? (
-                          // Title styling with container - no border
+                          // Title styling with container - positioned to align text with items
                           <div 
-                            className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
+                            className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                             style={{ 
                               width: 'min(322px, 100%)', 
-                              maxWidth: 'calc(100% - 20px)'
+                              maxWidth: 'calc(100% - 20px)',
+                              paddingLeft: '12px', // Internal padding for the bg container
+                              marginLeft: '-12px'  // Negative margin to align text with items
                             }}
                             onClick={(e) => e.preventDefault()}
                           >
@@ -85,7 +87,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             </span>
                           </div>
                         ) : (
-                          // Subtitle styling without container - left-aligned to match titles
+                          // Subtitle styling without container - same left alignment as titles
                           <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
                             {category.name}
                           </span>
@@ -93,7 +95,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       </a>
                       
                       {category.subcategories.length > 0 && (
-                        <div className="mt-2 pl-0">
+                        <div className="mt-2">
                           {category.subcategories.map((subcategory, subIdx) => (
                             <a 
                               key={subIdx} 
@@ -165,12 +167,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       }}
                     >
                       {category.isTitle ? (
-                        // Title styling with container - no border
+                        // Title styling with container - positioned to align text with items
                         <div 
-                          className={`py-[6.5px] px-3 rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
+                          className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
                           style={{ 
                             width: 'min(322px, 100%)', 
-                            maxWidth: 'calc(100% - 20px)'
+                            maxWidth: 'calc(100% - 20px)',
+                            paddingLeft: '12px', // Internal padding for the bg container
+                            marginLeft: '-12px'  // Negative margin to align text with items
                           }}
                           onClick={(e) => e.preventDefault()}
                         >
@@ -179,7 +183,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                       ) : (
-                        // Subtitle styling without container - left-aligned to match titles
+                        // Subtitle styling without container - same left alignment as titles
                         <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
                           {category.name}
                         </span>
@@ -187,7 +191,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     </a>
                     
                     {category.subcategories.length > 0 && (
-                      <div className="pl-0">
+                      <div className="mt-2">
                         {category.subcategories.map((subcategory, subIdx) => (
                           <a 
                             key={subIdx} 
