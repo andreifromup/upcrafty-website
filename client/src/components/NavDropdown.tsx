@@ -126,8 +126,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
-            {/* Navigation columns - without logo since it's in the navbar */}
-            <div className="w-[40%] min-w-[500px] p-12 pt-[100px] overflow-y-auto">
+            {/* Left section - Navigation - fixed and aligned to the left */}
+            <div className="w-[40%] min-w-[500px] p-12 pt-[100px] overflow-y-auto" style={{ flexShrink: 0 }}>
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-12">
                 {NAV_CATEGORIES.map((category, idx) => (
@@ -171,24 +171,69 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Right side - portfolio images (only shown when no category selected) */}
+            {/* Right section - Portfolio images with independent positioning */}
             {!selectedCategory && (
-              <div className="w-[60%] bg-white flex items-center justify-center pt-16 pr-12">
-                {/* Portfolio images - arranged horizontally with fixed width and gap */}
-                <div className="max-w-full">
-                  <div className="flex-wrap lg:flex-nowrap flex justify-center items-center gap-8">
-                    {PORTFOLIO_IMAGES.default.map((image, idx) => (
-                      <img 
-                        key={idx} 
-                        src={image} 
-                        alt={`Featured project ${idx + 1}`} 
-                        className="w-auto h-auto object-contain"
-                        style={{ 
-                          maxWidth: "min(362px, 100%)",
-                          maxHeight: "467px"
-                        }}
-                      />
-                    ))}
+              <div className="flex-1 relative bg-white h-full pt-16 pr-12 overflow-hidden">
+                {/* Portfolio images with absolute positioning to respect vertical alignment */}
+                <div className="relative w-full h-full overflow-visible" style={{ minHeight: '540px' }}>
+                  {/* Left image - positioned at middle-left */}
+                  <div 
+                    className="absolute overflow-visible" 
+                    style={{ 
+                      left: '10%', 
+                      top: '50%',
+                      transform: 'translateY(-40%)'
+                    }}
+                  >
+                    <img 
+                      src={PORTFOLIO_IMAGES.default[0]} 
+                      alt="Featured project 1" 
+                      className="w-auto h-auto object-contain"
+                      style={{ 
+                        maxWidth: "min(362px, 22vw)",
+                        maxHeight: "467px"
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Middle image - positioned higher */}
+                  <div 
+                    className="absolute overflow-visible" 
+                    style={{ 
+                      left: '50%', 
+                      top: '30%',
+                      transform: 'translateX(-50%)'
+                    }}
+                  >
+                    <img 
+                      src={PORTFOLIO_IMAGES.default[1]} 
+                      alt="Featured project 2" 
+                      className="w-auto h-auto object-contain"
+                      style={{ 
+                        maxWidth: "min(362px, 22vw)",
+                        maxHeight: "467px"
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Right image - positioned at middle-right */}
+                  <div 
+                    className="absolute overflow-visible" 
+                    style={{ 
+                      right: '10%', 
+                      top: '50%',
+                      transform: 'translateY(-40%)'
+                    }}
+                  >
+                    <img 
+                      src={PORTFOLIO_IMAGES.default[2]} 
+                      alt="Featured project 3" 
+                      className="w-auto h-auto object-contain"
+                      style={{ 
+                        maxWidth: "min(362px, 22vw)",
+                        maxHeight: "467px"
+                      }}
+                    />
                   </div>
                 </div>
               </div>
