@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/carousel";
 import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 import SocialIcons from "@/components/SocialIcons";
-import CloseButton from "@/components/CloseButton";
 
 // Common constant for consistent left padding
 const LEFT_PADDING = '54px';
@@ -304,10 +303,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           </div>
         )}
         
-        {/* Close button - only shown on desktop */}
-        {!isMobile && (
-          <CloseButton onClose={onClose} />
-        )}
+        {/* Close button removed as requested */}
       </div>
     </div>
   );
