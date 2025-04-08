@@ -29,13 +29,13 @@ const Footer: React.FC<FooterProps> = ({
     <div className="w-full px-0 md:px-[54px] pb-5 md:pb-[40px] pt-0 mt-auto">
       {/* Mobile Layout for small screens - matching exact reference */}
       <div className="flex flex-col items-center md:hidden">
-        {/* Logo on top - perfectly centered, same size as social icons */}
+        {/* Logo on top - perfectly centered with same size as homepage mobile logo */}
         <div className="flex justify-center mb-4">
           {useDarkLogo ? (
             <img 
               src={ICONS.blackCenterLogo} 
               alt="Logo" 
-              className="w-[38px] h-[38px]"
+              className="w-[36.6px] h-[39.1px]"
             />
           ) : (
             <Logo size="footer" />
