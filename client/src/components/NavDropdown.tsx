@@ -12,6 +12,9 @@ import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 import Logo from "@/components/Logo";
 import SocialIcons from "@/components/SocialIcons";
 
+// Common constant for consistent left padding
+const LEFT_PADDING = '54px';
+
 interface NavDropdownProps {
   isOpen: boolean;
   onClose: () => void;
@@ -54,7 +57,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 <div className="invisible h-[60px]"></div>
 
                 {/* Navigation buttons - stacked vertically */}
-                <div className="overflow-y-auto mt-4" style={{ paddingLeft: '54px', paddingRight: '54px' }}>
+                <div className="overflow-y-auto mt-4" style={{ paddingLeft: LEFT_PADDING }}>
                   {NAV_CATEGORIES.map((category, idx) => (
                     <div key={idx} className="mb-6">
                       <a 
@@ -80,16 +83,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </div>
                         ) : (
                           // Subtitle styling without container - left-aligned to match titles
-                          <div>
-                            <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
-                              {category.name}
-                            </span>
-                          </div>
+                          <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
+                            {category.name}
+                          </span>
                         )}
                       </a>
                       
                       {category.subcategories.length > 0 && (
-                        <div className="ml-8 mt-2">
+                        <div className="mt-2 pl-8">
                           {category.subcategories.map((subcategory, subIdx) => (
                             <a 
                               key={subIdx} 
@@ -132,7 +133,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               )}
               
               {/* Mobile-only social icons at bottom */}
-              <div className="flex space-x-6 mt-auto p-4 justify-center border-t border-gray-100">
+              <div className="flex mt-auto p-4 border-t border-gray-100" style={{ paddingLeft: LEFT_PADDING }}>
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
@@ -144,7 +145,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
             {/* Left section - Navigation - fixed and aligned to the left with same padding as logo */}
-            <div className="w-[40%] min-w-[500px] pt-[100px] overflow-y-auto" style={{ flexShrink: 0, paddingLeft: '54px' }}>
+            <div className="w-[40%] min-w-[500px] pt-[100px] overflow-y-auto" style={{ flexShrink: 0, paddingLeft: LEFT_PADDING }}>
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6">
                 {NAV_CATEGORIES.map((category, idx) => (
@@ -172,16 +173,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         </div>
                       ) : (
                         // Subtitle styling without container - left-aligned to match titles
-                        <div>
-                          <span className="font-inter font-normal text-[16px] leading-[35px] uppercase">
-                            {category.name}
-                          </span>
-                        </div>
+                        <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block">
+                          {category.name}
+                        </span>
                       )}
                     </a>
                     
                     {category.subcategories.length > 0 && (
-                      <div className="ml-8">
+                      <div className="pl-8">
                         {category.subcategories.map((subcategory, subIdx) => (
                           <a 
                             key={subIdx} 
@@ -200,7 +199,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Desktop social icons on the bottom left - same padding as logo */}
-              <div className="absolute bottom-8" style={{ left: '54px' }}>
+              <div className="absolute bottom-8" style={{ left: LEFT_PADDING }}>
                 <SocialIcons inDropdown={true} />
               </div>
             </div>
