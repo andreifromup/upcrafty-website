@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CLIENT_LOGOS } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -9,56 +9,77 @@ interface ClientLogoCarouselProps {
 const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>(0);
   const isMobile = useIsMobile();
+  const [duplicatesCount, setDuplicatesCount] = useState(2); // Default to 2 duplicate sets
 
-  // Get count of logos to display at once based on screen width
-  const getVisibleLogoCount = (): number => {
-    if (typeof window === 'undefined') return 3; 
-    if (window.innerWidth < 640) return 2; // Mobile
-    if (window.innerWidth < 1024) return 3; // Tablet
-    return 4; // Desktop
-  };
-
-  // Setup auto-scrolling carousel with infinite loop effect
+  // Setup seamless infinite scrolling carousel
   useEffect(() => {
     if (!innerRef.current || !carouselRef.current) return;
     
-    // First, clone the logos for the infinite scroll effect
-    const logoItems = innerRef.current.querySelectorAll('.logo-item');
-    if (!logoItems.length) return;
-    
-    // Clone each logo to create the infinite loop illusion
-    const clonedItems = Array.from(logoItems).map(item => item.cloneNode(true));
-    clonedItems.forEach(item => {
-      innerRef.current?.appendChild(item);
-    });
-    
-    // Now set up the animation
-    const scrollSpeed = 1; // pixels per frame
-    const animate = () => {
-      if (!innerRef.current || !carouselRef.current) return;
+    // Calculate scrolling speed based on device type and screen size
+    const getScrollSpeed = () => {
+      if (isMobile) return 0.5;
       
-      // If we've scrolled the full width of the original set of logos, reset position
-      if (innerRef.current.scrollLeft >= logoItems.length * logoItems[0].clientWidth) {
-        innerRef.current.scrollLeft = 0;
-      } else {
-        innerRef.current.scrollLeft += scrollSpeed;
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 1920) return 1.2;
+      if (screenWidth >= 1440) return 1;
+      return 0.8;
+    };
+    
+    // Set starting position slightly offset from 0 to avoid initial flicker
+    if (innerRef.current.scrollLeft === 0) {
+      innerRef.current.scrollLeft = 1;
+    }
+    
+    // Get the width of the original logo set
+    const getLogoSetWidth = () => {
+      const originalSet = innerRef.current?.querySelector('.logo-set');
+      return originalSet ? (originalSet as HTMLElement).offsetWidth : 0;
+    };
+    
+    // Get initial set width
+    const logoSetWidth = getLogoSetWidth();
+    if (!logoSetWidth) return;
+    
+    const scrollSpeed = getScrollSpeed();
+    
+    // Animation function for smooth scrolling
+    const animate = () => {
+      if (!innerRef.current) return;
+      
+      // Increment the scroll position by the calculated speed
+      innerRef.current.scrollLeft += scrollSpeed;
+      
+      // When we reach the end of the first set, reset position to create seamless loop
+      if (innerRef.current.scrollLeft >= logoSetWidth) {
+        // This is the critical part for seamless scrolling:
+        // We subtract exactly one set width so visually nothing changes
+        // but we're now looking at the duplicate set instead of the original
+        innerRef.current.scrollLeft -= logoSetWidth;
       }
       
+      // Continue animation
       animationRef.current = requestAnimationFrame(animate);
     };
     
-    // Start and manage the animation
-    const animationRef = { current: 0 };
+    // Start animation loop
     animationRef.current = requestAnimationFrame(animate);
     
-    // Clean up animation on unmount
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+    // Handle window resize to ensure proper scrolling speed
+    const handleResize = () => {
+      // No need to do anything complex here, just let it continue scrolling
+      // The scroll speed will adapt based on the device type
     };
-  }, []);
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up on unmount
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
   
   return (
     <div className={`w-full ${className}`}>
@@ -99,27 +120,72 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
+            msOverflowStyle: 'none',
+            scrollBehavior: 'auto'
           }}
         >
-          {/* Logo items */}
-          {CLIENT_LOGOS.map((logo, index) => (
-            <div 
-              key={index}
-              className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
-              style={{ 
-                width: isMobile ? '100px' : '160px',
-                height: isMobile ? '80px' : '120px'
-              }}
-            >
-              <img 
-                src={logo} 
-                alt={`Client logo ${index + 1}`}
-                className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                style={{ maxWidth: '100%', maxHeight: '100%' }}
-              />
-            </div>
-          ))}
+          {/* Original logo set */}
+          <div className="logo-set flex">
+            {CLIENT_LOGOS.map((logo, index) => (
+              <div 
+                key={`original-${index}`}
+                className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
+                style={{ 
+                  width: isMobile ? '100px' : '160px',
+                  height: isMobile ? '80px' : '120px'
+                }}
+              >
+                <img 
+                  src={logo} 
+                  alt={`Client logo ${index + 1}`}
+                  className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                />
+              </div>
+            ))}
+          </div>
+          
+          {/* First duplicate set */}
+          <div className="logo-set flex">
+            {CLIENT_LOGOS.map((logo, index) => (
+              <div 
+                key={`duplicate-1-${index}`}
+                className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
+                style={{ 
+                  width: isMobile ? '100px' : '160px',
+                  height: isMobile ? '80px' : '120px'
+                }}
+              >
+                <img 
+                  src={logo} 
+                  alt={`Client logo ${index + 1}`}
+                  className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                />
+              </div>
+            ))}
+          </div>
+          
+          {/* Second duplicate set for extra safety */}
+          <div className="logo-set flex">
+            {CLIENT_LOGOS.map((logo, index) => (
+              <div 
+                key={`duplicate-2-${index}`}
+                className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
+                style={{ 
+                  width: isMobile ? '100px' : '160px',
+                  height: isMobile ? '80px' : '120px'
+                }}
+              >
+                <img 
+                  src={logo} 
+                  alt={`Client logo ${index + 1}`}
+                  className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
