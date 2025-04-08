@@ -55,29 +55,40 @@ body.about-page #root {
     @apply text-[12px] tracking-[1.5px] leading-[16px] h-[28px] w-[90px];
   }
   
-  /* Disable hover effects on mobile - important flag forces priority */
-  .mobile-no-hover:hover {
-    background-color: inherit !important;
-    color: inherit !important;
-    transform: none !important;
-    opacity: 1 !important;
-    border-color: inherit !important;
+  /* Completely disable ALL hover effects on About page for mobile devices */
+  @media (hover: hover) {
+    /* Only apply hover styles when the device supports hover */
+    .about-page button:hover, .about-page a:hover {
+      /* Normal hover behavior allowed */
+    }
   }
   
-  /* Direct forced style for specific button hover issues */
-  button.mobile-no-hover:hover {
-    background-color: black !important;
-    color: white !important;
-  }
-  
-  /* Special cases for different button types */
-  .about-page button.mobile-no-hover:hover {
-    background-color: white !important;
-    color: black !important;
-  }
-  
-  .contact-orange-button.mobile-no-hover:hover {
-    background-color: #FF6600 !important;
-    color: white !important;
+  @media (hover: none) {
+    /* For touch devices that don't support hover */
+    .about-page button:hover, .about-page a:hover {
+      /* Completely disable all hover effects */
+      background-color: initial !important;
+      color: initial !important;
+      transform: none !important;
+      border-color: initial !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    /* Force the original styles without hover */
+    .about-page button.bg-black:hover {
+      background-color: black !important;
+      color: white !important;
+    }
+    
+    .about-page button.bg-white:hover {
+      background-color: white !important;
+      color: black !important;
+    }
+    
+    .about-page .navbar-contact:hover {
+      background-color: #FF6600 !important;
+      color: white !important;
+    }
   }
 }

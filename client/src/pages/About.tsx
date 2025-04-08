@@ -61,7 +61,7 @@ const About: React.FC = () => {
             <Button 
               className={`
                 ${isMobile 
-                  ? "bg-black text-white border border-black active:bg-white active:text-black active:scale-95 mobile-no-hover" 
+                  ? "bg-black text-white border border-black active:bg-white active:text-black active:scale-95" 
                   : "bg-black hover:bg-white text-white hover:text-black border border-black active:bg-white active:text-black active:scale-95"
                 }
                 rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] 

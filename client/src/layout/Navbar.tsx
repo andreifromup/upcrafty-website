@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   ? "bg-black text-white border border-black active:scale-95 active:bg-white active:text-black mobile-no-hover" 
                   : "bg-black hover:bg-white text-white hover:text-black border border-black active:scale-95 active:bg-white active:text-black"
                 : isMobileDevice
-                  ? "bg-[#FF6600] text-white border-none active:scale-95 active:bg-white active:text-[#FF6600] mobile-no-hover contact-orange-button" 
+                  ? "bg-[#FF6600] text-white border-none active:scale-95 active:bg-white active:text-[#FF6600] navbar-contact" 
                   : "bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] border-none active:scale-95 active:bg-white active:text-[#FF6600]"
               } 
               rounded-full uppercase font-normal
