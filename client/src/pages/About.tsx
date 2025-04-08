@@ -55,22 +55,27 @@ const About: React.FC = () => {
           <AboutVideo className="aspect-video" />
         </div>
         
-        {/* Home Button */}
+        {/* Home Button - Different implementation for mobile and desktop */}
         <div className="flex justify-center mb-8">
-          <Link to="/">
-            <Button 
-              className={`
-                ${isMobile 
-                  ? "bg-black text-white border border-black active:bg-white active:text-black active:scale-95" 
-                  : "bg-black hover:bg-white text-white hover:text-black border border-black active:bg-white active:text-black active:scale-95"
-                }
-                rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] 
-                h-[40px] w-[120px] transition-all duration-300
-              `}
+          {isMobile ? (
+            // Mobile version with inline styles to prevent hover
+            <div 
+              className="bg-black text-white border border-black rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] h-[40px] w-[120px] flex items-center justify-center cursor-pointer active:bg-white active:text-black active:scale-95 transition-all duration-300"
+              style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
+              onClick={() => window.location.href = '/'}
             >
               Home
-            </Button>
-          </Link>
+            </div>
+          ) : (
+            // Desktop version with normal hover behavior
+            <Link to="/">
+              <Button 
+                className="bg-black hover:bg-white text-white hover:text-black border border-black active:bg-white active:text-black active:scale-95 rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] h-[40px] w-[120px] transition-all duration-300"
+              >
+                Home
+              </Button>
+            </Link>
+          )}
         </div>
         
         {/* Text Content - Lorem Ipsum placeholder with proper styling */}
