@@ -93,7 +93,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       </a>
                       
                       {category.subcategories.length > 0 && (
-                        <div className="mt-2 pl-8">
+                        <div className="mt-2 pl-0">
                           {category.subcategories.map((subcategory, subIdx) => (
                             <a 
                               key={subIdx} 
@@ -186,7 +186,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     </a>
                     
                     {category.subcategories.length > 0 && (
-                      <div className="pl-8">
+                      <div className="pl-0">
                         {category.subcategories.map((subcategory, subIdx) => (
                           <a 
                             key={subIdx} 
