@@ -59,7 +59,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 {/* Navigation buttons - stacked vertically */}
                 <div className="overflow-y-auto mt-4" style={{ paddingLeft: LEFT_PADDING }}>
                   {NAV_CATEGORIES.map((category, idx) => (
-                    <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-30px]' : ''}`}>
+                    <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-55px]' : ''}`}>
                       <a 
                         href="#" 
                         className={`uppercase block py-2 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
@@ -153,7 +153,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-30px]' : ''} mb-5 pr-4`}>
+                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-55px]' : ''} mb-5 pr-4`}>
                     <a 
                       href="#" 
                       className={`uppercase block mb-3 ${!category.isTitle ? 'hover:text-[#FF6600]' : ''}`}
