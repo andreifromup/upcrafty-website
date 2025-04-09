@@ -62,7 +62,7 @@ const About: React.FC = () => {
             {/* Section: Who We Are */}
             <section className="mb-16">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="w-8 h-1 bg-[#FF6600] mr-4 rounded-full"></span>
+                <span className="text-gray-300 font-medium text-xl mr-3">01</span>
                 Who We Are
               </h3>
               
@@ -108,7 +108,7 @@ const About: React.FC = () => {
             {/* Section: What We Do */}
             <section className="mb-16">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="w-8 h-1 bg-[#FF6600] mr-4 rounded-full"></span>
+                <span className="text-gray-300 font-medium text-xl mr-3">02</span>
                 What We Do
               </h3>
               
@@ -119,33 +119,39 @@ const About: React.FC = () => {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">Project Packages</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Project Packages</h4>
                     <p className="text-gray-700">Games, apps, brands, NFT/crypto projects</p>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">Illustration & Design</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Illustration & Design</h4>
                     <p className="text-gray-700">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">3D Modeling</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">3D Modeling</h4>
                     <p className="text-gray-700">Character and environment modeling</p>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">Game Development</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
                     <p className="text-gray-700">Complete game design and development</p>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">Web Development</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Web Development</h4>
                     <p className="text-gray-700">Responsive websites and web applications</p>
                   </div>
                   
-                  <div className="bg-white p-5 rounded-lg shadow-sm border border-t-2 border-t-[#FF6600]">
-                    <h4 className="font-medium text-lg mb-2">Sound Design</h4>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Sound Design</h4>
                     <p className="text-gray-700"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
                   </div>
                 </div>
@@ -155,40 +161,40 @@ const About: React.FC = () => {
             {/* Section: What Sets Us Apart */}
             <section className="mb-16">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="w-8 h-1 bg-[#FF6600] mr-4 rounded-full"></span>
+                <span className="text-gray-300 font-medium text-xl mr-3">03</span>
                 What Sets Us Apart
               </h3>
               
               <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm">
-                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">1</div>
+                  <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">1</div>
                     <div>
-                      <h4 className="font-medium">Full Creative Team</h4>
+                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Full Creative Team</h4>
                       <p className="text-gray-700 mt-1">Covers <span className="text-[#FF6600] font-medium">all creative areas</span> in-house</p>
                     </div>
                   </div>
                   
-                  <div className="flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm">
-                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">2</div>
+                  <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">2</div>
                     <div>
-                      <h4 className="font-medium">Strong Collaboration</h4>
+                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Strong Collaboration</h4>
                       <p className="text-gray-700 mt-1">Ensures <span className="text-[#FF6600] font-medium">fast delivery</span> on projects</p>
                     </div>
                   </div>
                   
-                  <div className="flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm">
-                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">3</div>
+                  <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">3</div>
                     <div>
-                      <h4 className="font-medium">Clear Communication</h4>
+                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Clear Communication</h4>
                       <p className="text-gray-700 mt-1"><span className="text-[#FF6600] font-medium">Step-by-step</span> approach throughout</p>
                     </div>
                   </div>
                   
-                  <div className="flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm">
-                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">4</div>
+                  <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">4</div>
                     <div>
-                      <h4 className="font-medium">Personalized Approach</h4>
+                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Personalized Approach</h4>
                       <p className="text-gray-700 mt-1">Understanding your <span className="text-[#FF6600] font-medium">unique vision</span></p>
                     </div>
                   </div>
@@ -207,29 +213,29 @@ const About: React.FC = () => {
             {/* Section: What Drives Us */}
             <section className="mb-10">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="w-8 h-1 bg-[#FF6600] mr-4 rounded-full"></span>
+                <span className="text-gray-300 font-medium text-xl mr-3">04</span>
                 What Drives Us
               </h3>
               
               <div className="space-y-8">
-                <div className="bg-white rounded-lg p-8 shadow-sm border-t border-gray-200">
+                <div className="group bg-white rounded-lg p-8 shadow-sm border-t border-gray-200 hover:shadow-md transition-all duration-300">
                   <div className="max-w-3xl mx-auto">
                     <div className="space-y-6">
-                      <p className="text-lg leading-relaxed">
+                      <p className="text-lg leading-relaxed group-hover:scale-[1.01] transition-transform duration-300">
                         We're motivated by the challenge of creating something truly great — 
                         not just visually, but in <span className="text-[#FF6600] font-medium">every detail</span>. 
                         We believe that good work comes from clarity, collaboration, and a 
                         genuine interest in the result.
                       </p>
                       
-                      <p className="text-lg leading-relaxed">
+                      <p className="text-lg leading-relaxed group-hover:scale-[1.01] transition-transform duration-300">
                         For us, success isn't just about finishing a project. It's about building 
                         something that feels complete, creative, and worth sharing.
                       </p>
                     </div>
                     
                     <div className="mt-8 pt-8 border-t border-gray-100">
-                      <div className="bg-black p-6 rounded-lg text-white text-center">
+                      <div className="bg-black p-6 rounded-lg text-white text-center hover:scale-[1.01] transition-transform duration-300">
                         <p className="text-xl font-medium mb-0">
                           If you're building something exciting, we'd love to be part of it.
                         </p>
