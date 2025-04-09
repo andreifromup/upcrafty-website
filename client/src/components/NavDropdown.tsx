@@ -1,126 +1,119 @@
-import React, { useState, useEffect } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
-import {
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { 
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
   CarouselPrevious,
+  CarouselNext
 } from "@/components/ui/carousel";
-import { NAV_CATEGORIES, PORTFOLIO_IMAGES, COLORS } from "@/assets/constants";
+import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
-
-// Common constant for consistent left padding
-const LEFT_PADDING = '54px';
-
-// No need to import separate images as we'll use the same ones from PORTFOLIO_IMAGES
+import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 
 interface NavDropdownProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+/**
+ * Consistent left padding across components 
+ */
+const LEFT_PADDING = "80px";
+
+/**
+ * Mobile & Desktop Menu Dropdown Component
+ * 
+ * This component is displayed when the user clicks the logo in the navbar.
+ * It features different layouts for mobile and desktop.
+ */
 const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const portfolioImages = PORTFOLIO_IMAGES.default;
+  // For carousel indicators
+  const [activeIndex, setActiveIndex] = useState(0);
   
-  // Safety check for portfolio images
-  const portfolioImages = PORTFOLIO_IMAGES?.default || [];
+  // Close dropdown when user presses escape key
+  const handleEsc = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  }, [onClose]);
   
-  // We'll use desktop portfolio images for mobile too
+  // Add/remove event listeners
+  useEffect(() => {
+    if (isOpen) {
+      // Add escape key listener
+      document.addEventListener("keydown", handleEsc);
+      
+      // Disable body scrolling when dropdown is open
+      document.body.style.overflow = "hidden";
+    }
+    
+    return () => {
+      // Clean up listeners and re-enable scrolling
+      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen, handleEsc]);
   
-  // Safely handle the close action
+  // Handle dropdown close
   const handleClose = () => {
-    if (onClose && typeof onClose === 'function') {
-      try {
-        // Arrow rotation is now handled in the Logo component via props
-        onClose();
-      } catch (error) {
-        console.error("Error closing dropdown:", error);
-      }
+    onClose();
+  };
+  
+  // Handle clicks outside the dropdown content
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Check if click is outside the dropdown content
+    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+      handleClose();
     }
   };
   
-  // Close dropdown when ESC key is pressed
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        handleClose();
-      }
-    };
-    
-    window.addEventListener('keydown', handleEsc);
-    
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [isOpen]);
-  
-  // Disable body scrolling when dropdown is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+  // Menu Item component with hover effect
+  const MenuItemWithHoverEffect: React.FC<{ 
+    name: string; 
+    isTitle?: boolean; 
+    onClick?: (e: React.MouseEvent) => void 
+  }> = ({ name, isTitle = false, onClick }) => {
+    // Desktop menu items with hover effect
+    if (!isMobile) {
+      return (
+        <div 
+          className={`
+            relative overflow-hidden group 
+            ${isTitle ? 'mb-3 font-medium' : 'font-normal'} 
+            ${isTitle ? 'text-[15px] leading-[20px]' : 'text-[15px] leading-[20px]'}
+          `}
+          onClick={onClick}
+        >
+          <span className="relative z-10">{name}</span>
+          <div 
+            className="absolute bottom-0 left-0 w-full h-[1px] bg-black transform origin-left scale-x-0 
+                      group-hover:scale-x-100 transition-transform duration-300"
+          ></div>
+        </div>
+      );
     }
     
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+    // Mobile items don't have hover effect
+    return (
+      <span className={`${isTitle ? 'font-medium' : 'font-normal'}`}>{name}</span>
+    );
+  };
   
   if (!isOpen) return null;
-
-  // Reusable category menu item component
-  const MenuItemWithHoverEffect = ({ name, isTitle = false, onClick }: { name: string, isTitle?: boolean, onClick?: (e: React.MouseEvent) => void }) => (
-    <div 
-      className={`relative py-[6.5px] ${isTitle ? '' : 'group'} flex items-center justify-start h-[33px]`}
-      style={{ 
-        width: 'min(322px, 100%)', 
-        maxWidth: 'calc(100% - 20px)'
-      }}
-      onClick={onClick}
-    >
-      {/* Background for title or hover effect for non-title */}
-      <div 
-        className={`absolute inset-0 rounded-[8px] 
-          ${isTitle 
-            ? 'bg-[#EDEAE7]/50' 
-            : 'bg-[#BCBCBC]/50 opacity-0 md:group-hover:opacity-100 transition-opacity duration-150'
-          }`}
-      ></div>
-      
-      {/* Text content - styled differently for titles and subtitles */}
-      <span 
-        className={`relative z-10 uppercase pl-[12px] font-inter
-          ${isTitle 
-            ? 'font-medium text-[16px] leading-[20px] tracking-[2px]' 
-            : 'font-normal text-[16px] leading-[20px]'
-          }`}
-      >
-        {name}
-      </span>
-    </div>
-  );
-
+  
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm cursor-pointer"
-      onClick={handleClose}
-      style={{ zIndex: 90 }}
+      className="fixed inset-0 z-50 bg-white overflow-hidden"
+      onClick={handleOutsideClick}
     >
-      {/* Dropdown container that prevents click propagation */}
       <div 
-        className={`
-          bg-white text-black z-[100]
-          ${isMobile 
-            ? 'fixed inset-0 flex flex-col w-full overflow-hidden' 
-            : 'fixed top-0 left-0 right-0 flex justify-center w-full overflow-hidden'
-          }
-        `}
-        onClick={(e) => e.stopPropagation()}
-        style={{ 
-          width: '100%',
+        ref={contentRef} 
+        className="w-full h-full overflow-auto" 
+        style={{
           height: isMobile ? '100%' : '572px',
           maxHeight: isMobile ? '100vh' : '80vh'
         }}
@@ -198,20 +191,26 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Portfolio carousel at the bottom - exact match to reference */}
-            <div className="mt-auto mb-6 relative">
+            <div className="mt-auto mb-2 relative">
               {/* Gradient overlays for fade effect on the sides */}
-              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+              <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
+              <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
               
-              {/* Custom focused carousel */}
-              <Carousel className="w-full" opts={{ 
-                align: 'center',
-                loop: true,
-                containScroll: false,
-              }}>
-                <CarouselContent>
+              {/* Custom focused carousel with tighter images */}
+              <Carousel 
+                className="w-full" 
+                opts={{ 
+                  align: 'center',
+                  loop: true,
+                  containScroll: false,
+                }}
+                onSelect={(api) => {
+                  setActiveIndex(api.selectedScrollSnap());
+                }}
+              >
+                <CarouselContent className="-ml-4">
                   {portfolioImages.map((image, idx) => (
-                    <CarouselItem key={idx} className="basis-3/5 flex justify-center px-0">
+                    <CarouselItem key={idx} className="basis-1/2 pl-0 flex justify-center">
                       <div className="h-full flex justify-center items-center">
                         <img 
                           src={image} 
@@ -224,6 +223,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   ))}
                 </CarouselContent>
               </Carousel>
+              
+              {/* Indicator dots */}
+              <div className="flex justify-center items-center mt-4 mb-4">
+                {portfolioImages.map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'}`}
+                  ></div>
+                ))}
+              </div>
             </div>
             
             {/* Social icons at bottom - center aligned */}
