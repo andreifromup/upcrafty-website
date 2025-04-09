@@ -52,10 +52,10 @@ const About: React.FC = () => {
           <ClientLogoCarousel />
         </div>
         
-        {/* Content section with left-aligned title and text */}
+        {/* Content section with centered title and text */}
         <div className="max-w-3xl mx-auto mb-8 px-1">
-          {/* Title - left aligned */}
-          <h1 className="text-4xl font-medium mb-4 text-left">About Us</h1>
+          {/* Title - center aligned */}
+          <h1 className="text-4xl font-medium mb-8 text-center">About Us</h1>
           
           {/* Text Content with modern, clean design */}
           <div className="text-black mb-8 text-left">
