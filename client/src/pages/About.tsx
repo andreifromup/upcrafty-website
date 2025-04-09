@@ -140,7 +140,7 @@ const About: React.FC = () => {
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Custom gameplay systems, game logic, UI integration & builds across platforms</p>
+                    <p className="text-gray-700 text-sm md:text-base">Custom gameplay systems, game logic, and UI integration – specialized in mobile platforms</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
@@ -150,7 +150,7 @@ const About: React.FC = () => {
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Sound Design</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Original music, sound effects, voiceover editing, and audio implementation</p>
+                    <p className="text-gray-700 text-sm md:text-base">Audio production and sound engineering</p>
                   </div>
                 </div>
               </div>
