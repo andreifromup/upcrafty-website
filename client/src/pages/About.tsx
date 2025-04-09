@@ -73,32 +73,32 @@ const About: React.FC = () => {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                  <div className="bg-white p-6 rounded-lg border border-gray-100 hover:shadow-md transition-all duration-300">
+                  <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="mb-4 w-full flex justify-between items-start">
                       <h4 className="text-lg font-medium">Collaborative Process</h4>
-                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-[#FF6600]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-600">
-                      We work closely together on every project. While each of us has a clear role, we often collaborate across disciplines 
+                    <p className="text-gray-700">
+                      We work closely together on every project. While each of us has a clear role, we often <span className="text-[#FF6600] font-medium">collaborate across disciplines</span> 
                       to bring the best ideas to life.
                     </p>
                   </div>
                   
-                  <div className="bg-white p-6 rounded-lg border border-gray-100 hover:shadow-md transition-all duration-300">
+                  <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="mb-4 w-full flex justify-between items-start">
                       <h4 className="text-lg font-medium">Extensive Experience</h4>
-                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-[#FF6600]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                       </div>
                     </div>
-                    <p className="text-gray-600">
-                      Our brand has been active for the past 3 years, but our combined experience spans over 6 to 15+ years.
+                    <p className="text-gray-700">
+                      Our brand has been active for the past 3 years, but our combined experience spans <span className="text-[#FF6600] font-medium">over 6 to 15+ years</span>.
                     </p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ const About: React.FC = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="text-gray-600">Games, apps, brands, NFT/crypto projects</div>
+                      <div className="text-gray-700">Games, apps, brands, <span className="text-[#FF6600] font-medium">NFT/crypto</span> projects</div>
                     </div>
                     
                     <div className="min-w-[260px] max-w-[260px] bg-white p-5 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -150,7 +150,7 @@ const About: React.FC = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="text-gray-600">Animation, UI/UX design</div>
+                      <div className="text-gray-700">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></div>
                     </div>
                     
                     <div className="min-w-[260px] max-w-[260px] bg-white p-5 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -162,7 +162,7 @@ const About: React.FC = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="text-gray-600">Character and environment modeling</div>
+                      <div className="text-gray-700"><span className="text-[#FF6600] font-medium">Character</span> and environment modeling</div>
                     </div>
                     
                     <div className="min-w-[260px] max-w-[260px] bg-white p-5 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -174,7 +174,7 @@ const About: React.FC = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="text-gray-600">Game development, web development</div>
+                      <div className="text-gray-700">Game development, <span className="text-[#FF6600] font-medium">web development</span></div>
                     </div>
                     
                     <div className="min-w-[260px] max-w-[260px] bg-white p-5 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -186,7 +186,7 @@ const About: React.FC = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="text-gray-600">Audio production and sound engineering</div>
+                      <div className="text-gray-700"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</div>
                     </div>
                   </div>
                 </div>
@@ -202,43 +202,43 @@ const About: React.FC = () => {
               
               <div className="mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-300">
-                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">1</div>
+                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium text-[#FF6600]">1</div>
                     <div>
                       <h4 className="font-medium text-lg mb-1">Full Creative Team</h4>
-                      <p className="text-gray-600">A comprehensive team that covers all creative areas in-house</p>
+                      <p className="text-gray-700">A comprehensive team that covers <span className="text-[#FF6600] font-medium">all creative areas</span> in-house</p>
                     </div>
                   </div>
                   
-                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-300">
-                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">2</div>
+                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium text-[#FF6600]">2</div>
                     <div>
                       <h4 className="font-medium text-lg mb-1">Strong Collaboration</h4>
-                      <p className="text-gray-600">Efficient teamwork that ensures fast delivery on all projects</p>
+                      <p className="text-gray-700">Efficient teamwork that ensures <span className="text-[#FF6600] font-medium">fast delivery</span> on all projects</p>
                     </div>
                   </div>
                   
-                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-300">
-                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">3</div>
+                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium text-[#FF6600]">3</div>
                     <div>
                       <h4 className="font-medium text-lg mb-1">Clear Communication</h4>
-                      <p className="text-gray-600">Structured, step-by-step approach throughout every project phase</p>
+                      <p className="text-gray-700">Structured, <span className="text-[#FF6600] font-medium">step-by-step</span> approach throughout every project phase</p>
                     </div>
                   </div>
                   
-                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 hover:shadow-md transition-all duration-300">
-                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium">4</div>
+                  <div className="group flex gap-5 items-start p-5 rounded-lg bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="bg-gray-100 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium text-[#FF6600]">4</div>
                     <div>
                       <h4 className="font-medium text-lg mb-1">Personalized Approach</h4>
-                      <p className="text-gray-600">Custom solutions focused on understanding your unique vision</p>
+                      <p className="text-gray-700">Custom solutions focused on understanding your <span className="text-[#FF6600] font-medium">unique vision</span></p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gray-900 text-white p-6 rounded-lg">
+                <div className="bg-black text-white p-6 rounded-lg shadow-md">
                   <p className="mb-0">
                     We've completed <span className="font-medium text-[#FF6600]">over 50 projects</span> so far, mostly with startups and early-stage teams. 
-                    We're now looking to grow alongside more established clients who are ready to take things to the next 
+                    We're now looking to grow alongside <span className="font-medium">more established clients</span> who are ready to take things to the next 
                     level — but we'll always keep space for fresh, meaningful ideas.
                   </p>
                 </div>
@@ -253,24 +253,24 @@ const About: React.FC = () => {
               </div>
               
               <div className="mt-6">
-                <div className="bg-white rounded-lg border border-gray-100 p-8 mb-8">
+                <div className="bg-white rounded-lg border border-gray-100 p-8 mb-8 shadow-sm">
                   <div className="max-w-3xl mx-auto">
                     <div className="mb-8">
                       <p className="text-lg leading-relaxed mb-4">
                         We're motivated by the challenge of creating something truly great — 
-                        <span className="font-medium">not just visually, but in every detail</span>. 
-                        We believe that good work comes from clarity, collaboration, and a 
+                        not just visually, but in <span className="text-[#FF6600] font-medium">every detail</span>. 
+                        We believe that good work comes from <span className="font-medium">clarity, collaboration</span>, and a 
                         genuine interest in the result.
                       </p>
                       
                       <p className="text-lg leading-relaxed">
                         For us, success isn't just about finishing a project. It's about building 
-                        something that feels <span className="font-medium">complete, creative, and worth sharing</span>.
+                        something that feels <span className="text-[#FF6600] font-medium">complete, creative, and worth sharing</span>.
                       </p>
                     </div>
                     
                     <div className="border-t border-gray-100 pt-8">
-                      <div className="bg-black p-6 rounded-lg text-white text-center">
+                      <div className="bg-black p-6 rounded-lg text-white text-center shadow-md">
                         <p className="text-xl font-medium mb-0">
                           If you're building something exciting, we'd love to be part of it.
                         </p>
