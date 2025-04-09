@@ -13,10 +13,7 @@ import SocialIcons from "@/components/SocialIcons";
 // Common constant for consistent left padding
 const LEFT_PADDING = '54px';
 
-// Import the portfolio images from attached assets
-import portfolioImage1 from "@assets/Smyths 2x.png";
-import portfolioImage2 from "@assets/Bucharest 2x.png";
-import portfolioImage3 from "@assets/Windify 2x.png";
+// No need to import separate images as we'll use the same ones from PORTFOLIO_IMAGES
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -30,8 +27,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   // Safety check for portfolio images
   const portfolioImages = PORTFOLIO_IMAGES?.default || [];
   
-  // Portfolio images for mobile dropdown
-  const mobilePortfolioImages = [portfolioImage1, portfolioImage2, portfolioImage3];
+  // We'll use desktop portfolio images for mobile too
   
   // Safely handle the close action
   const handleClose = () => {
@@ -133,17 +129,17 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {isMobile && (
           <div className="flex flex-col h-full justify-between">
             {/* Logo area - fixed at top */}
-            <div className="pt-14 px-4 mb-4">
+            <div className="pt-6 px-4 mb-2">
               <img 
                 src="/black center logo.png" 
                 alt="Upcrafty" 
-                className="h-10 mx-1 mb-4"
+                className="h-6 mx-1 mb-0"
               />
             </div>
             
-            {/* Menu Categories - Exact match to the reference */}
+            {/* Menu Categories - Exact match to the reference with smaller spacing */}
             <div className="flex-grow overflow-hidden px-4">
-              <div className="flex flex-col">
+              <div className="flex flex-col space-y-0.5">
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className="mb-1">
                     <a 
@@ -206,15 +202,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Portfolio carousel at the bottom - exact match to reference */}
-            <div className="px-2 mt-auto mb-12">
+            <div className="px-2 mt-auto mb-6">
               <Carousel className="w-full">
                 <CarouselContent>
-                  {mobilePortfolioImages.map((image, idx) => (
+                  {portfolioImages.map((image, idx) => (
                     <CarouselItem key={idx} className="basis-1/3 md:basis-1/3 flex justify-center">
                       <img 
                         src={image} 
                         alt={`Featured project ${idx + 1}`} 
-                        className="h-24 w-24 object-cover rounded-lg"
+                        className="h-[110px] w-[110px] object-cover rounded-lg"
                       />
                     </CarouselItem>
                   ))}
