@@ -51,7 +51,7 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
                 {CLIENT_LOGOS.map((logo, logoIndex) => (
                   <div 
                     key={`logo-${setIndex}-${logoIndex}`}
-                    className="logo-item flex-shrink-0 mx-4 md:mx-8 transition-transform duration-300 hover:scale-110"
+                    className={`logo-item flex-shrink-0 mx-4 md:mx-8 transition-all duration-300 ${!isMobile ? 'md:hover:scale-105 md:hover:opacity-85' : ''}`}
                     style={{ 
                       width: isMobile ? '100px' : '160px',
                       height: isMobile ? '80px' : '120px'

@@ -48,7 +48,7 @@ const About: React.FC = () => {
         </div>
         
         {/* Client Logo Carousel Section */}
-        <div className="w-full max-w-3xl mx-auto mb-2">
+        <div className="w-full max-w-3xl mx-auto mb-0">
           <ClientLogoCarousel />
         </div>
         
@@ -62,7 +62,7 @@ const About: React.FC = () => {
             {/* Section: Who We Are */}
             <section className="mb-16 snap-start">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-300 font-medium text-xl mr-3">01</span>
+                <span className="text-gray-500 font-medium text-xl mr-3">01</span>
                 Who We Are
               </h3>
               
@@ -112,7 +112,7 @@ const About: React.FC = () => {
             {/* Section: What We Do */}
             <section className="mb-16 snap-start p-6 rounded-lg bg-[#FAFAFA]">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-300 font-medium text-xl mr-3">02</span>
+                <span className="text-gray-500 font-medium text-xl mr-3">02</span>
                 What We Do
               </h3>
               
@@ -159,7 +159,7 @@ const About: React.FC = () => {
             {/* Section: What Sets Us Apart */}
             <section className="mb-16 snap-start">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-300 font-medium text-xl mr-3">03</span>
+                <span className="text-gray-500 font-medium text-xl mr-3">03</span>
                 What Sets Us Apart
               </h3>
               
@@ -211,7 +211,7 @@ const About: React.FC = () => {
             {/* Section: What Drives Us */}
             <section className="mb-10 snap-start">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-300 font-medium text-xl mr-3">04</span>
+                <span className="text-gray-500 font-medium text-xl mr-3">04</span>
                 What Drives Us
               </h3>
               
@@ -241,7 +241,7 @@ const About: React.FC = () => {
                             <span className="inline-block ml-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">→</span>
                           </p>
                         </div>
-                        <p className="text-sm text-gray-400 mt-2 opacity-70">Let's talk about your idea</p>
+                        <p className="text-sm text-gray-300 mt-2 font-semibold">Let's talk about your idea</p>
                       </div>
                     </div>
                   </div>
