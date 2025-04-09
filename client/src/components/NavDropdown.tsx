@@ -128,17 +128,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {/* Mobile Layout - Exact match to the reference image */}
         {isMobile && (
           <div className="flex flex-col h-full justify-between">
-            {/* Logo area - fixed at top */}
-            <div className="pt-6 px-4 mb-2">
-              <img 
-                src="/black center logo.png" 
-                alt="Upcrafty" 
-                className="h-6 mx-1 mb-0"
-              />
+            {/* Logo area - fixed at top with more spacing below */}
+            <div className="pt-6 px-4 mb-14">
+              {/* Intentionally empty to create space - actual logo is in the Navbar */}
             </div>
             
-            {/* Menu Categories - Exact match to the reference with smaller spacing */}
-            <div className="flex-grow overflow-hidden px-4">
+            {/* Menu Categories - Exact match to the reference with proper spacing to not overlap with logo */}
+            <div className="flex-grow overflow-hidden px-4 mt-4">
               <div className="flex flex-col space-y-0.5">
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className="mb-1">
