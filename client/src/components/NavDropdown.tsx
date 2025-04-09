@@ -63,24 +63,56 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen && isMobile) {
       // This effect runs when the dropdown opens on mobile
-      // Find carousel data container
       const setupCarouselTracking = () => {
-        const container = document.querySelector('[data-embla-container]');
-        if (container) {
-          const api = (container as any)._emblaApi;
-          if (api && typeof api.on === 'function') {
-            // Listen for slide changes (select event)
-            api.on('select', () => {
-              const currentIndex = api.selectedScrollSnap();
-              setActiveIndex(currentIndex);
-              console.log("Slide tracking event:", currentIndex);
-            });
+        try {
+          // Direct approach to find the carousel element
+          const container = document.querySelector('[data-embla-container]');
+          if (container) {
+            const api = (container as any)._emblaApi;
+            if (api) {
+              // Force a slide change event to sync indicators on load
+              setActiveIndex(api.selectedScrollSnap());
+              
+              // Listen for all possible slide change events
+              const handleSlideChange = () => {
+                const currentIndex = api.selectedScrollSnap();
+                setActiveIndex(currentIndex);
+                console.log("Carousel updated to slide:", currentIndex);
+              };
+              
+              // Listen for multiple events to catch all cases
+              api.on('select', handleSlideChange);
+              api.on('slidesInView', handleSlideChange);
+              api.on('settle', handleSlideChange);
+              
+              // Manually attach a mutation observer to detect DOM changes in the carousel
+              const observer = new MutationObserver(() => {
+                handleSlideChange();
+              });
+              
+              observer.observe(container, { 
+                childList: true, 
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['class', 'style'] 
+              });
+              
+              // Return cleanup function
+              return () => {
+                api.off('select', handleSlideChange);
+                api.off('slidesInView', handleSlideChange);
+                api.off('settle', handleSlideChange);
+                observer.disconnect();
+              };
+            }
           }
+        } catch (error) {
+          console.error("Error setting up carousel tracking:", error);
         }
       };
       
       // Allow time for the carousel to initialize
-      const timer = setTimeout(setupCarouselTracking, 100);
+      const timer = setTimeout(setupCarouselTracking, 150);
       
       return () => {
         clearTimeout(timer);
@@ -248,17 +280,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   {portfolioImages.map((image, idx) => (
                     <CarouselItem key={idx} className="basis-1/2 pl-0 flex justify-center">
                       <div className="h-full flex justify-center items-center">
-                        <img 
-                          src={image} 
-                          alt={`Featured project ${idx + 1}`} 
-                          className="w-[189px] h-[257px] object-cover rounded-lg"
-                          style={{ 
-                            width: '189px',
-                            height: '257px',
-                            objectFit: 'cover',
-                            objectPosition: 'center'
-                          }}
-                        />
+                        {/* Fixed exact dimensions to ensure all images have identical height/width */}
+                        <div className="w-[189px] h-[257px] overflow-hidden rounded-lg">
+                          <img 
+                            src={image} 
+                            alt={`Featured project ${idx + 1}`}
+                            className="w-full h-full"
+                            style={{ 
+                              objectFit: 'cover',
+                              objectPosition: 'center'
+                            }}
+                          />
+                        </div>
                       </div>
                     </CarouselItem>
                   ))}
@@ -272,16 +305,23 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     key={index}
                     className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'} cursor-pointer`}
                     onClick={() => {
-                      // Update active index when dot is clicked
-                      setActiveIndex(index);
-                      
                       // Find the carousel element and scroll to the clicked index
-                      const carousel = document.querySelector('[data-embla-container]');
-                      if (carousel) {
-                        const api = (carousel as any)._emblaApi;
-                        if (api && typeof api.scrollTo === 'function') {
-                          api.scrollTo(index);
+                      try {
+                        // First update active index when dot is clicked
+                        setActiveIndex(index);
+                        
+                        // Find the carousel API 
+                        const container = document.querySelector('[data-embla-container]');
+                        if (container) {
+                          const api = (container as any)._emblaApi;
+                          if (api && typeof api.scrollTo === 'function') {
+                            // Scroll to the selected index
+                            api.scrollTo(index);
+                            console.log("Dot clicked, scrolling to:", index);
+                          }
                         }
+                      } catch (error) {
+                        console.error("Error navigating carousel:", error);
                       }
                     }}
                   ></div>
