@@ -133,7 +133,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className="mb-1">
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
+                      className={`uppercase block text-black ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
                       onClick={(e) => {
                         try {
                           if (category.name === "CONTACT") {
@@ -159,12 +159,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         <div 
                           className="py-1.5 my-1 rounded-lg flex items-center bg-[#EDEAE7]/50"
                         >
-                          <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4">
+                          <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4 text-black">
                             {category.name}
                           </span>
                         </div>
                       ) : (
-                        <span className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1">
+                        <span className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1 text-black">
                           {category.name}
                         </span>
                       )}
@@ -176,9 +176,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className="block active:scale-95 transition-all duration-150"
+                            className="block active:scale-95 transition-all duration-150 text-black"
                           >
-                            <span className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5">
+                            <span className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black">
                               {subcategory.name}
                             </span>
                           </a>
@@ -203,9 +203,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   align: 'center',
                   loop: true,
                   containScroll: false,
+                  dragFree: false,
                 }}
-                onSelect={(api) => {
-                  setActiveIndex(api.selectedScrollSnap());
+                onSelect={(api: any) => {
+                  if (api && typeof api.selectedScrollSnap === 'function') {
+                    const index = api.selectedScrollSnap();
+                    setActiveIndex(index);
+                  }
                 }}
               >
                 <CarouselContent className="-ml-4">
@@ -216,7 +220,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           src={image} 
                           alt={`Featured project ${idx + 1}`} 
                           className="w-[189px] h-[257px] object-cover rounded-lg"
-                          style={{ objectFit: 'cover' }}
+                          style={{ 
+                            width: '189px',
+                            height: '257px',
+                            objectFit: 'cover',
+                            objectPosition: 'center'
+                          }}
                         />
                       </div>
                     </CarouselItem>
@@ -224,12 +233,25 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 </CarouselContent>
               </Carousel>
               
-              {/* Indicator dots */}
+              {/* Indicator dots - clickable for direct navigation */}
               <div className="flex justify-center items-center mt-4 mb-4">
                 {portfolioImages.map((_, index) => (
                   <div 
                     key={index}
-                    className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'}`}
+                    className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'} cursor-pointer`}
+                    onClick={() => {
+                      // Update active index when dot is clicked
+                      setActiveIndex(index);
+                      
+                      // Find the carousel element and scroll to the clicked index
+                      const carousel = document.querySelector('[data-embla-container]');
+                      if (carousel) {
+                        const api = (carousel as any)._emblaApi;
+                        if (api && typeof api.scrollTo === 'function') {
+                          api.scrollTo(index);
+                        }
+                      }
+                    }}
                   ></div>
                 ))}
               </div>
