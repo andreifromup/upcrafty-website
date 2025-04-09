@@ -202,16 +202,28 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Portfolio carousel at the bottom - exact match to reference */}
-            <div className="px-2 mt-auto mb-6">
-              <Carousel className="w-full">
+            <div className="mt-auto mb-6 relative">
+              {/* Gradient overlays for fade effect on the sides */}
+              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
+              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
+              
+              {/* Custom focused carousel */}
+              <Carousel className="w-full" opts={{ 
+                align: 'center',
+                loop: true,
+                containScroll: false,
+              }}>
                 <CarouselContent>
                   {portfolioImages.map((image, idx) => (
-                    <CarouselItem key={idx} className="basis-1/3 md:basis-1/3 flex justify-center">
-                      <img 
-                        src={image} 
-                        alt={`Featured project ${idx + 1}`} 
-                        className="h-[110px] w-[110px] object-cover rounded-lg"
-                      />
+                    <CarouselItem key={idx} className="basis-3/5 flex justify-center px-0">
+                      <div className="h-full flex justify-center items-center">
+                        <img 
+                          src={image} 
+                          alt={`Featured project ${idx + 1}`} 
+                          className="w-[189px] h-[257px] object-cover rounded-lg"
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
