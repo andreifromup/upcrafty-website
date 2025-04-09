@@ -62,7 +62,7 @@ const About: React.FC = () => {
             {/* Section: Who We Are */}
             <section className="mb-16 snap-start">
               <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">01</span>
+                <span className="text-gray-500 font-medium text-base md:text-xl mr-3">01</span>
                 Who We Are
               </h3>
               
@@ -104,7 +104,7 @@ const About: React.FC = () => {
                 </div>
                 
                 <div className="text-gray-700 italic border-l-2 border-gray-200 pl-4 py-2">
-                  <span className="font-bold">Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.</span>
+                  <span className="font-bold text-sm md:text-base">Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.</span>
                 </div>
               </div>
             </section>
@@ -112,7 +112,7 @@ const About: React.FC = () => {
             {/* Section: What We Do */}
             <section className="mb-16 snap-start p-6 rounded-lg bg-[#FAFAFA]">
               <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">02</span>
+                <span className="text-gray-500 font-medium text-base md:text-xl mr-3">02</span>
                 What We Do
               </h3>
               
@@ -125,32 +125,32 @@ const About: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Project Packages</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Games, apps, brands, NFT/crypto projects</p>
+                    <p className="text-gray-700 text-sm md:text-base">Full delivery for games, apps, brands, and NFT/crypto projects – from concept to launch</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
-                    <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Illustration & Design</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
+                    <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Illustration, Animation & Design</h4>
+                    <p className="text-gray-700 text-sm md:text-base">Branding, illustration, UI/UX, web & visual design, and 2D animation</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
-                    <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">3D Modeling</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Character and environment modeling</p>
+                    <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">3D Design</h4>
+                    <p className="text-gray-700 text-sm md:text-base">Modeling, rigging, environment & character art, and 3D animation</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Complete game design and development</p>
+                    <p className="text-gray-700 text-sm md:text-base">Custom gameplay systems, game logic, UI integration & builds across platforms</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Web Development</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Responsive websites and web applications</p>
+                    <p className="text-gray-700 text-sm md:text-base">Responsive websites and web apps – design, development, and deployment</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Sound Design</h4>
-                    <p className="text-gray-700 text-sm md:text-base"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
+                    <p className="text-gray-700 text-sm md:text-base">Original music, sound effects, voiceover editing, and audio implementation</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ const About: React.FC = () => {
             {/* Section: What Sets Us Apart */}
             <section className="mb-16 snap-start">
               <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">03</span>
+                <span className="text-gray-500 font-medium text-base md:text-xl mr-3">03</span>
                 What Sets Us Apart
               </h3>
               
@@ -211,7 +211,7 @@ const About: React.FC = () => {
             {/* Section: What Drives Us */}
             <section className="mb-10 snap-start">
               <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">04</span>
+                <span className="text-gray-500 font-medium text-base md:text-xl mr-3">04</span>
                 What Drives Us
               </h3>
               
@@ -234,9 +234,10 @@ const About: React.FC = () => {
                     
                     <div className="mt-8 pt-8 border-t border-gray-100">
                       {isMobile ? (
-                        // Mobile version - smaller, cleaner CTA button
-                        <div className="group bg-black p-4 rounded-full text-white text-center cursor-pointer active:bg-black/90 transition-all duration-300" 
-                          onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}>
+                        // Mobile version - smaller, cleaner CTA button with press animation
+                        <div className="group bg-black p-4 rounded-full text-white text-center cursor-pointer active:bg-white active:text-black active:scale-95 transition-all duration-300" 
+                          onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}
+                          style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>
                           <p className="text-base font-medium mb-0">
                             Let's talk about your idea
                           </p>
