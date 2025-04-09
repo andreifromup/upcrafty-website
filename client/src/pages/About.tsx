@@ -41,14 +41,14 @@ const About: React.FC = () => {
       </div>
       
       {/* Scrollable Content Container - Using native scroll */}
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <div className="container mx-auto px-4 py-4 md:py-6">
         {/* Video Section - first element at the top */}
-        <div className="w-full max-w-3xl mx-auto mb-8 rounded-lg overflow-hidden shadow-lg">
+        <div className="w-full max-w-3xl mx-auto mb-4 rounded-lg overflow-hidden shadow-lg">
           <AboutVideo className="aspect-video" />
         </div>
         
         {/* Client Logo Carousel Section */}
-        <div className="w-full max-w-3xl mx-auto mb-12">
+        <div className="w-full max-w-3xl mx-auto mb-6">
           <ClientLogoCarousel />
         </div>
         
@@ -104,7 +104,7 @@ const About: React.FC = () => {
                 </div>
                 
                 <div className="text-gray-700 italic border-l-2 border-gray-200 pl-4 py-2">
-                  Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.
+                  <span className="font-bold">Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.</span>
                 </div>
               </div>
             </section>
@@ -123,40 +123,34 @@ const About: React.FC = () => {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Project Packages</h4>
-                    <p className="text-gray-700 relative z-10">Games, apps, brands, NFT/crypto projects</p>
+                    <p className="text-gray-700">Games, apps, brands, NFT/crypto projects</p>
                   </div>
                   
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Illustration & Design</h4>
-                    <p className="text-gray-700 relative z-10">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
+                    <p className="text-gray-700">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
                   </div>
                   
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">3D Modeling</h4>
-                    <p className="text-gray-700 relative z-10">Character and environment modeling</p>
+                    <p className="text-gray-700">Character and environment modeling</p>
                   </div>
                   
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
-                    <p className="text-gray-700 relative z-10">Complete game design and development</p>
+                    <p className="text-gray-700">Complete game design and development</p>
                   </div>
                   
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Web Development</h4>
-                    <p className="text-gray-700 relative z-10">Responsive websites and web applications</p>
+                    <p className="text-gray-700">Responsive websites and web applications</p>
                   </div>
                   
-                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden border-b border-transparent hover:border-b hover:border-[#FF6600]">
-                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Sound Design</h4>
-                    <p className="text-gray-700 relative z-10"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
+                    <p className="text-gray-700"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
                   </div>
                 </div>
               </div>
