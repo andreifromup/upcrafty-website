@@ -61,6 +61,39 @@ body.about-page #root {
   @apply text-[15px] leading-[20px];
 }
 
+/* Better typography for the About page */
+.prose h3 {
+  color: #000;
+  margin-top: 1.5em;
+}
+
+/* First heading doesn't need top margin */
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.prose ul {
+  margin-bottom: 1.5em;
+}
+
+/* Make text smaller on mobile */
+@media (max-width: 768px) {
+  .prose {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .prose h3 {
+    font-size: 18px;
+    margin-top: 1.25em;
+    margin-bottom: 0.75em;
+  }
+  
+  .prose ul {
+    padding-left: 1rem;
+  }
+}
+
 /* Responsive spacing adjustments */
 @media (max-width: 768px) {
   .contact-button {

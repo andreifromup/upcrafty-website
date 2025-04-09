@@ -53,38 +53,64 @@ const About: React.FC = () => {
         </div>
         
         {/* Content section with left-aligned title and text */}
-        <div className="max-w-3xl mx-auto mb-8">
+        <div className="max-w-3xl mx-auto mb-8 px-1">
           {/* Title - left aligned */}
           <h1 className="text-4xl font-medium mb-6 text-left">About Us</h1>
           
-          {/* Text Content - left aligned */}
+          {/* Text Content - left aligned with sections */}
           <div className="prose prose-lg text-black mb-8 text-left">
+            <h3 className="text-2xl font-medium mb-3 text-left">Who We Are</h3>
             <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget felis eget urna ultricies ultricies. 
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, 
-              auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+              We're Upcrafty, a creative studio formed by a team of five professionals — each specialized in their own area:
+              illustration & animation, 3D design, game development, web development, and sound design.
             </p>
             <p className="mb-4">
-              Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl 
-              tempus convallis quis ac lectus. Cras ultricies ligula sed magna dictum porta. Curabitur aliquet quam id dui 
-              posuere blandit. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.
+              We work closely together on every project. While each of us has a clear role, we often collaborate across disciplines 
+              to bring the best ideas to life.
+            </p>
+            <p className="mb-6">
+              Our brand has been active for the past 3 years, but our combined experience spans over 6 to 15+ years.
+              Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.
+            </p>
+            
+            <h3 className="text-2xl font-medium mb-3 text-left">What We Do</h3>
+            <p className="mb-4">
+              We offer both individual services and complete creative solutions.
+              Whether it's a game, mobile app, website, or brand — we can handle the entire journey, from concept to launch.
+            </p>
+            <p className="mb-4">Our services include:</p>
+            <ul className="list-disc pl-5 mb-6 space-y-2">
+              <li>Full project packages (games, apps, brands, NFT/crypto projects)</li>
+              <li>Illustration, animation, and UI/UX design</li>
+              <li>3D character and environment modeling</li>
+              <li>Game development and web development</li>
+              <li>Sound design and audio production</li>
+            </ul>
+            
+            <h3 className="text-2xl font-medium mb-3 text-left">What Sets Us Apart</h3>
+            <ul className="list-disc pl-5 mb-6 space-y-2">
+              <li>A full creative team that covers all areas in-house</li>
+              <li>Strong collaboration and fast delivery</li>
+              <li>Clear, step-by-step communication throughout every project</li>
+              <li>A personalized approach focused on understanding your vision from the start</li>
+            </ul>
+            <p className="mb-6">
+              We've completed over 50 projects so far, mostly with startups and early-stage teams. We're now looking to grow 
+              alongside more established clients who are ready to take things to the next level — but we'll always keep space 
+              for fresh, meaningful ideas.
+            </p>
+            
+            <h3 className="text-2xl font-medium mb-3 text-left">What Drives Us</h3>
+            <p className="mb-4">
+              We're motivated by the challenge of creating something truly great — not just visually, but in every detail.
+              We believe that good work comes from clarity, collaboration, and a genuine interest in the result.
             </p>
             <p className="mb-4">
-              Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Praesent sapien massa, convallis a pellentesque 
-              nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla porttitor 
-              accumsan tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. 
-              Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+              For us, success isn't just about finishing a project. It's about building something that feels complete, 
+              creative, and worth sharing.
             </p>
-            <p className="mb-4">
-              Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed, convallis 
-              at tellus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. 
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, 
-              auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-            </p>
-            <p className="mb-4">
-              Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada. 
-              Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Cras ultricies ligula 
-              sed magna dictum porta.
+            <p className="mb-4 text-lg md:text-xl font-medium text-black">
+              If you're building something exciting, we'd love to be part of it.
             </p>
           </div>
           
