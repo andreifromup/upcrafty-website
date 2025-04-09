@@ -55,19 +55,19 @@ const About: React.FC = () => {
         {/* Content section with centered title and text */}
         <div className="max-w-3xl mx-auto mb-8 px-1 md:snap-none sm:snap-y sm:snap-mandatory sm:overflow-y-auto">
           {/* Title - center aligned */}
-          <h1 className="text-4xl font-medium mb-8 text-center">About Us</h1>
+          <h1 className="text-3xl md:text-4xl font-medium mb-6 md:mb-8 text-center">About Us</h1>
           
           {/* Text Content with modern, clean design */}
           <div className="text-black mb-8 text-left">
             {/* Section: Who We Are */}
             <section className="mb-16 snap-start">
-              <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-xl mr-3">01</span>
+              <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
+                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">01</span>
                 Who We Are
               </h3>
               
               <div className="space-y-8">
-                <p className="text-lg leading-relaxed max-w-3xl">
+                <p className="text-base md:text-lg leading-relaxed max-w-3xl">
                   We're <span className="font-bold">Upcrafty</span>, a creative studio formed by a team of five professionals — <span className="text-[#FF6600]">each specialized in their own area</span>:
                   illustration & animation, 3D design, game development, web development, and sound design.
                 </p>
@@ -111,13 +111,13 @@ const About: React.FC = () => {
             
             {/* Section: What We Do */}
             <section className="mb-16 snap-start p-6 rounded-lg bg-[#FAFAFA]">
-              <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-xl mr-3">02</span>
+              <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
+                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">02</span>
                 What We Do
               </h3>
               
               <div className="space-y-8">
-                <p className="text-lg leading-relaxed max-w-3xl">
+                <p className="text-base md:text-lg leading-relaxed max-w-3xl">
                   We offer both individual services and complete creative solutions.
                   Whether it's a game, mobile app, website, or brand — we can handle the entire journey, from <span className="text-[#FF6600] font-medium">concept to launch</span>.
                 </p>
@@ -125,32 +125,32 @@ const About: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Project Packages</h4>
-                    <p className="text-gray-700">Games, apps, brands, NFT/crypto projects</p>
+                    <p className="text-gray-700 text-sm md:text-base">Games, apps, brands, NFT/crypto projects</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Illustration & Design</h4>
-                    <p className="text-gray-700">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
+                    <p className="text-gray-700 text-sm md:text-base">Animation, <span className="text-[#FF6600] font-medium">UI/UX design</span></p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">3D Modeling</h4>
-                    <p className="text-gray-700">Character and environment modeling</p>
+                    <p className="text-gray-700 text-sm md:text-base">Character and environment modeling</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
-                    <p className="text-gray-700">Complete game design and development</p>
+                    <p className="text-gray-700 text-sm md:text-base">Complete game design and development</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Web Development</h4>
-                    <p className="text-gray-700">Responsive websites and web applications</p>
+                    <p className="text-gray-700 text-sm md:text-base">Responsive websites and web applications</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Sound Design</h4>
-                    <p className="text-gray-700"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
+                    <p className="text-gray-700 text-sm md:text-base"><span className="text-[#FF6600] font-medium">Audio production</span> and sound engineering</p>
                   </div>
                 </div>
               </div>
@@ -158,8 +158,8 @@ const About: React.FC = () => {
             
             {/* Section: What Sets Us Apart */}
             <section className="mb-16 snap-start">
-              <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-xl mr-3">03</span>
+              <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
+                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">03</span>
                 What Sets Us Apart
               </h3>
               
@@ -168,38 +168,38 @@ const About: React.FC = () => {
                   <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">1</div>
                     <div>
-                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Full Creative Team</h4>
-                      <p className="text-gray-700 mt-1">Covers <span className="text-[#FF6600] font-medium">all creative areas</span> in-house</p>
+                      <h4 className="font-bold text-base md:text-lg group-hover:text-[#FF6600] transition-colors duration-300">Full Creative Team</h4>
+                      <p className="text-gray-700 text-sm md:text-base mt-1">Covers <span className="text-[#FF6600] font-medium">all creative areas</span> in-house</p>
                     </div>
                   </div>
                   
                   <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">2</div>
                     <div>
-                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Strong Collaboration</h4>
-                      <p className="text-gray-700 mt-1">Ensures <span className="text-[#FF6600] font-medium">fast delivery</span> on projects</p>
+                      <h4 className="font-bold text-base md:text-lg group-hover:text-[#FF6600] transition-colors duration-300">Strong Collaboration</h4>
+                      <p className="text-gray-700 text-sm md:text-base mt-1">Ensures <span className="text-[#FF6600] font-medium">fast delivery</span> on projects</p>
                     </div>
                   </div>
                   
                   <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">3</div>
                     <div>
-                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Clear Communication</h4>
-                      <p className="text-gray-700 mt-1"><span className="text-[#FF6600] font-medium">Step-by-step</span> approach throughout</p>
+                      <h4 className="font-bold text-base md:text-lg group-hover:text-[#FF6600] transition-colors duration-300">Clear Communication</h4>
+                      <p className="text-gray-700 text-sm md:text-base mt-1"><span className="text-[#FF6600] font-medium">Step-by-step</span> approach throughout</p>
                     </div>
                   </div>
                   
                   <div className="group flex gap-4 items-center bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                     <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium transition-transform group-hover:scale-110 duration-300">4</div>
                     <div>
-                      <h4 className="font-medium group-hover:text-[#FF6600] transition-colors duration-300">Personalized Approach</h4>
-                      <p className="text-gray-700 mt-1">Understanding your <span className="text-[#FF6600] font-medium">unique vision</span></p>
+                      <h4 className="font-bold text-base md:text-lg group-hover:text-[#FF6600] transition-colors duration-300">Personalized Approach</h4>
+                      <p className="text-gray-700 text-sm md:text-base mt-1">Understanding your <span className="text-[#FF6600] font-medium">unique vision</span></p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="bg-black text-white p-6 rounded-lg">
-                  <p className="mb-0 leading-relaxed">
+                  <p className="mb-0 text-base md:text-lg leading-relaxed">
                     We've completed <span className="text-[#FF6600] font-medium">over 50 projects</span> so far, mostly with startups and early-stage teams. 
                     We're now looking to grow alongside more established clients who are ready to take things to the next 
                     level — but we'll always keep space for fresh, meaningful ideas.
@@ -210,8 +210,8 @@ const About: React.FC = () => {
             
             {/* Section: What Drives Us */}
             <section className="mb-10 snap-start">
-              <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
-                <span className="text-gray-500 font-medium text-xl mr-3">04</span>
+              <h3 className="text-xl md:text-3xl font-medium mb-6 md:mb-8 flex items-center">
+                <span className="text-gray-500 font-medium text-lg md:text-xl mr-3">04</span>
                 What Drives Us
               </h3>
               
@@ -219,14 +219,14 @@ const About: React.FC = () => {
                 <div className="bg-white rounded-lg p-8 shadow-sm border-t border-gray-200">
                   <div className="max-w-3xl mx-auto">
                     <div className="space-y-6">
-                      <p className="text-lg leading-relaxed">
+                      <p className="text-base md:text-lg leading-relaxed">
                         We're motivated by the challenge of creating something truly great — 
                         not just visually, but in <span className="text-[#FF6600] font-medium">every detail</span>. 
                         We believe that good work comes from clarity, collaboration, and a 
                         genuine interest in the result.
                       </p>
                       
-                      <p className="text-lg leading-relaxed">
+                      <p className="text-base md:text-lg leading-relaxed">
                         For us, success isn't just about finishing a project. It's about building 
                         something that feels complete, creative, and worth sharing.
                       </p>
@@ -236,7 +236,7 @@ const About: React.FC = () => {
                       <div className="group bg-black p-6 rounded-full text-white text-center cursor-pointer hover:bg-black/90 transition-all duration-300" 
                         onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}>
                         <div className="flex items-center justify-center">
-                          <p className="text-xl font-medium mb-0 group-hover:scale-[1.02] transition-transform duration-300">
+                          <p className="text-lg md:text-xl font-medium mb-0 group-hover:scale-[1.02] transition-transform duration-300">
                             If you're building something exciting, we'd love to be part of it
                             <span className="inline-block ml-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">→</span>
                           </p>
