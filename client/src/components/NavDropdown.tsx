@@ -3,8 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
-  CarouselNext
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
@@ -30,8 +28,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<any>(null);
   const portfolioImages = PORTFOLIO_IMAGES.default;
+  
   // For carousel indicators
   const [activeIndex, setActiveIndex] = useState(0);
   
@@ -58,67 +56,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen, handleEsc]);
-  
-  // Setup carousel slide tracking for mobile indicator dots
-  useEffect(() => {
-    if (isOpen && isMobile) {
-      // This effect runs when the dropdown opens on mobile
-      const setupCarouselTracking = () => {
-        try {
-          // Direct approach to find the carousel element
-          const container = document.querySelector('[data-embla-container]');
-          if (container) {
-            const api = (container as any)._emblaApi;
-            if (api) {
-              // Force a slide change event to sync indicators on load
-              setActiveIndex(api.selectedScrollSnap());
-              
-              // Listen for all possible slide change events
-              const handleSlideChange = () => {
-                const currentIndex = api.selectedScrollSnap();
-                setActiveIndex(currentIndex);
-                console.log("Carousel updated to slide:", currentIndex);
-              };
-              
-              // Listen for multiple events to catch all cases
-              api.on('select', handleSlideChange);
-              api.on('slidesInView', handleSlideChange);
-              api.on('settle', handleSlideChange);
-              
-              // Manually attach a mutation observer to detect DOM changes in the carousel
-              const observer = new MutationObserver(() => {
-                handleSlideChange();
-              });
-              
-              observer.observe(container, { 
-                childList: true, 
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['class', 'style'] 
-              });
-              
-              // Return cleanup function
-              return () => {
-                api.off('select', handleSlideChange);
-                api.off('slidesInView', handleSlideChange);
-                api.off('settle', handleSlideChange);
-                observer.disconnect();
-              };
-            }
-          }
-        } catch (error) {
-          console.error("Error setting up carousel tracking:", error);
-        }
-      };
-      
-      // Allow time for the carousel to initialize
-      const timer = setTimeout(setupCarouselTracking, 150);
-      
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [isOpen, isMobile]);
   
   // Handle dropdown close
   const handleClose = () => {
@@ -252,78 +189,82 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Portfolio carousel at the bottom - exact match to reference */}
-            <div className="mt-auto mb-2 relative">
+            {/* Custom simple carousel - mobile only */}
+            <div className="mt-auto pt-4 mb-2 relative">
               {/* Gradient overlays for fade effect on the sides */}
               <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
               <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
               
-              {/* Custom focused carousel with tighter images */}
-              <Carousel 
-                ref={carouselRef}
-                className="w-full" 
-                opts={{ 
-                  align: 'center',
-                  loop: true,
-                  containScroll: false,
-                  dragFree: false,
-                }}
-                onSelect={(api: any) => {
-                  if (api && typeof api.selectedScrollSnap === 'function') {
-                    const index = api.selectedScrollSnap();
-                    setActiveIndex(index);
-                    console.log("Slide changed to:", index);
-                  }
-                }}
-              >
-                <CarouselContent className="-ml-4">
+              {/* Simple fixed-height carousel with CSS transitions */}
+              <div className="overflow-hidden relative h-[257px]">
+                <div 
+                  className="flex transition-transform duration-300 ease-in-out"
+                  style={{ 
+                    transform: `translateX(calc(50% - 94.5px - ${activeIndex * 189}px))`,
+                    height: "257px"
+                  }}
+                >
                   {portfolioImages.map((image, idx) => (
-                    <CarouselItem key={idx} className="basis-1/2 pl-0 flex justify-center">
-                      <div className="h-full flex justify-center items-center">
-                        {/* Fixed exact dimensions to ensure all images have identical height/width */}
-                        <div className="w-[189px] h-[257px] overflow-hidden rounded-lg">
-                          <img 
-                            src={image} 
-                            alt={`Featured project ${idx + 1}`}
-                            className="w-full h-full"
-                            style={{ 
-                              objectFit: 'cover',
-                              objectPosition: 'center'
-                            }}
-                          />
-                        </div>
+                    <div 
+                      key={idx} 
+                      className="flex-shrink-0 mx-2 cursor-pointer"
+                      onClick={() => {
+                        // Navigate to previous or next slide on click
+                        const newIndex = idx > activeIndex 
+                          ? Math.min(activeIndex + 1, portfolioImages.length - 1)
+                          : Math.max(activeIndex - 1, 0);
+                        setActiveIndex(newIndex);
+                      }}
+                    >
+                      <div className="w-[189px] h-[257px] overflow-hidden rounded-lg">
+                        <img 
+                          src={image} 
+                          alt={`Featured project ${idx + 1}`}
+                          className="w-full h-full object-cover object-center"
+                        />
                       </div>
-                    </CarouselItem>
+                    </div>
                   ))}
-                </CarouselContent>
-              </Carousel>
+                </div>
+              </div>
               
-              {/* Indicator dots - clickable for direct navigation */}
+              {/* Touch swipe handling */}
+              <div 
+                className="absolute inset-0 z-20"
+                onTouchStart={(e) => {
+                  const touchStartX = e.touches[0].clientX;
+                  
+                  const handleTouchEnd = (e: TouchEvent) => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const diffX = touchEndX - touchStartX;
+                    
+                    // Detect swipe direction and navigate
+                    if (Math.abs(diffX) > 50) { // Minimum swipe distance
+                      if (diffX > 0) {
+                        // Swiped right - go to previous
+                        setActiveIndex(prev => Math.max(0, prev - 1));
+                      } else {
+                        // Swiped left - go to next
+                        setActiveIndex(prev => Math.min(portfolioImages.length - 1, prev + 1));
+                      }
+                    }
+                    
+                    // Remove event listener
+                    document.removeEventListener('touchend', handleTouchEnd);
+                  };
+                  
+                  // Add touch end event listener
+                  document.addEventListener('touchend', handleTouchEnd);
+                }}
+              ></div>
+              
+              {/* Indicator dots */}
               <div className="flex justify-center items-center mt-4 mb-4">
                 {portfolioImages.map((_, index) => (
                   <div 
                     key={index}
                     className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'} cursor-pointer`}
-                    onClick={() => {
-                      // Find the carousel element and scroll to the clicked index
-                      try {
-                        // First update active index when dot is clicked
-                        setActiveIndex(index);
-                        
-                        // Find the carousel API 
-                        const container = document.querySelector('[data-embla-container]');
-                        if (container) {
-                          const api = (container as any)._emblaApi;
-                          if (api && typeof api.scrollTo === 'function') {
-                            // Scroll to the selected index
-                            api.scrollTo(index);
-                            console.log("Dot clicked, scrolling to:", index);
-                          }
-                        }
-                      } catch (error) {
-                        console.error("Error navigating carousel:", error);
-                      }
-                    }}
+                    onClick={() => setActiveIndex(index)}
                   ></div>
                 ))}
               </div>
@@ -339,7 +280,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         {/* Desktop Layout - unchanged */}
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
-
             {/* Left section - Navigation - fixed and aligned to the left with same padding as logo */}
             <div className="w-[40%] min-w-[500px] flex flex-col h-full" style={{ flexShrink: 0, paddingLeft: LEFT_PADDING }}>
               <div className="pt-[100px]"></div>
