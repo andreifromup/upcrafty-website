@@ -57,243 +57,268 @@ const About: React.FC = () => {
           {/* Title - left aligned */}
           <h1 className="text-4xl font-medium mb-6 text-left">About Us</h1>
           
-          {/* Text Content with super clean, minimalist design */}
+          {/* Text Content with elegant, clean, modern design */}
           <div className="text-black mb-8 text-left">
-            {/* Section: Who We Are */}
-            <div className="mb-20">
-              <div className="flex items-center mb-8 border-b border-[#FF6600]/10 pb-2">
-                <span className="text-[#FF6600] font-medium text-xl mr-3">01</span>
-                <h3 className="text-2xl md:text-3xl font-medium">Who We Are</h3>
+            {/* WHO WE ARE */}
+            <section className="mb-24">
+              {/* Section header with accent line and number */}
+              <div className="flex items-center mb-10">
+                <div className="bg-[#FF6600] h-[3px] w-8 mr-4"></div>
+                <h3 className="text-3xl md:text-4xl font-medium">Who We Are</h3>
+                <span className="ml-auto text-gray-200 font-medium">01</span>
               </div>
               
-              <div className="mt-8">
-                <p className="text-lg mb-10 leading-relaxed max-w-3xl">
-                  <span className="text-xl md:text-2xl font-medium block mb-2 text-[#FF6600]">We're Upcrafty.</span>
-                  A creative studio formed by a team of five professionals — each specialized in their own area:
-                  <span className="bg-[#FF6600]/5 px-1 py-0.5 mx-0.5 rounded-sm">illustration & animation</span>,
-                  <span className="bg-[#FF6600]/5 px-1 py-0.5 mx-0.5 rounded-sm">3D design</span>,
-                  <span className="bg-[#FF6600]/5 px-1 py-0.5 mx-0.5 rounded-sm">game development</span>,
-                  <span className="bg-[#FF6600]/5 px-1 py-0.5 mx-0.5 rounded-sm">web development</span>, and
-                  <span className="bg-[#FF6600]/5 px-1 py-0.5 mx-0.5 rounded-sm">sound design</span>.
+              <div className="mt-10">
+                {/* Introduction with bold company name */}
+                <h4 className="text-2xl md:text-3xl mb-6 font-medium">
+                  We're <span className="text-[#FF6600]">Upcrafty</span>.
+                </h4>
+                
+                <p className="text-lg mb-12 leading-relaxed max-w-3xl">
+                  A creative studio formed by a team of five professionals — each specialized in their own area.
+                  We bring together expertise in illustration, animation, 3D design, game development, web development, 
+                  and sound design to create comprehensive solutions for our clients.
                 </p>
                 
+                {/* Key features in card format */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                  <div className="bg-white p-6 rounded-lg border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="mb-4 flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center text-[#FF6600] flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                      </div>
-                      <h4 className="text-lg font-medium">Collaborative Process</h4>
-                    </div>
-                    <p className="text-gray-600">
-                      We work closely together on every project. While each of us has a clear role, we often collaborate across disciplines 
-                      to bring the <span className="text-[#FF6600] font-medium">best ideas</span> to life.
+                  {/* Team collaboration card */}
+                  <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#FF6600]">
+                    <h4 className="text-xl font-medium mb-4 flex items-center">
+                      <span className="w-2 h-2 bg-[#FF6600] rounded-full mr-2"></span>
+                      Collaborative Process
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">
+                      We work closely together on every project. Each team member brings their unique expertise, 
+                      but we collaborate across disciplines to elevate the final result.
                     </p>
                   </div>
                   
-                  <div className="bg-white p-6 rounded-lg border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="mb-4 flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center text-[#FF6600] flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                      </div>
-                      <h4 className="text-lg font-medium">Extensive Experience</h4>
-                    </div>
-                    <p className="text-gray-600">
-                      Our brand has been active for the past 3 years, but our combined experience spans over <span className="text-[#FF6600] font-medium">6 to 15+ years</span>.
+                  {/* Experience card */}
+                  <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#FF6600]">
+                    <h4 className="text-xl font-medium mb-4 flex items-center">
+                      <span className="w-2 h-2 bg-[#FF6600] rounded-full mr-2"></span>
+                      Extensive Experience
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">
+                      While Upcrafty has been active for 3 years, our combined professional experience spans over 6 to 15+ years 
+                      across various creative fields.
                     </p>
                   </div>
                 </div>
                 
-                <div className="bg-[#FF6600]/5 p-6 rounded-lg italic text-lg border-l-4 border-[#FF6600]">
-                  <p className="max-w-3xl mb-0">
-                    Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.
+                {/* Company philosophy */}
+                <div className="bg-black p-8 rounded-xl text-white">
+                  <p className="text-lg italic mb-0 leading-relaxed">
+                    "Upcrafty was born out of shared passion and strong creative alignment — a team built around 
+                    trust, skill, and a common vision."
                   </p>
                 </div>
               </div>
-            </div>
+            </section>
             
-            {/* Section: What We Do */}
-            <div className="mb-20">
-              <div className="flex items-center mb-8 border-b border-[#FF6600]/10 pb-2">
-                <span className="text-[#FF6600] font-medium text-xl mr-3">02</span>
-                <h3 className="text-2xl md:text-3xl font-medium">What We Do</h3>
+            {/* WHAT WE DO */}
+            <section className="mb-24">
+              {/* Section header with accent line and number */}
+              <div className="flex items-center mb-10">
+                <div className="bg-[#FF6600] h-[3px] w-8 mr-4"></div>
+                <h3 className="text-3xl md:text-4xl font-medium">What We Do</h3>
+                <span className="ml-auto text-gray-200 font-medium">02</span>
               </div>
               
-              <div className="mt-8">
-                <p className="text-lg mb-10 leading-relaxed">
-                  We offer both <span className="font-medium text-[#FF6600] underline underline-offset-4 decoration-1">individual services</span> and <span className="font-medium text-[#FF6600] underline underline-offset-4 decoration-1">complete creative solutions</span>.
+              <div className="mt-10">
+                <p className="text-lg mb-10 leading-relaxed bg-white p-6 rounded-xl shadow-sm border-l-4 border-[#FF6600]">
+                  We offer both <span className="font-medium">individual services</span> and <span className="font-medium">complete creative solutions</span>.
                   Whether it's a game, mobile app, website, or brand — we can handle the entire journey, from concept to launch.
                 </p>
                 
-                <div className="relative mb-5">
-                  <div className="absolute -left-2 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10"></div>
-                  <div className="absolute -right-2 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10"></div>
+                {/* Services horizontal scroll with understated elegant design */}
+                <div className="mb-10 bg-white p-6 md:p-8 rounded-xl shadow-sm">
+                  <h4 className="text-xl font-medium mb-6 flex items-center text-[#FF6600]">
+                    <span className="w-2 h-2 bg-[#FF6600] rounded-full mr-2"></span>
+                    Our Services
+                  </h4>
                   
-                  <div className="flex overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory gap-5">
-                    <div className="min-w-[270px] max-w-[270px] bg-white p-6 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:border-[#FF6600] transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center flex-shrink-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[#FF6600]">
+                  <div className="relative">
+                    <div className="absolute -left-2 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10"></div>
+                    <div className="absolute -right-2 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10"></div>
+                    
+                    <div className="flex overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory gap-6">
+                      {/* Project Packages */}
+                      <div className="min-w-[260px] max-w-[260px] bg-gray-50 p-5 rounded-lg snap-start flex-shrink-0 hover:bg-[#FF6600]/5 transition-all duration-300 border border-gray-100">
+                        <div className="flex items-center gap-3 mb-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FF6600" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                           </svg>
+                          <h5 className="font-medium text-lg">Project Packages</h5>
                         </div>
-                        <div className="font-medium text-lg">Project Packages</div>
+                        <p className="text-gray-600 text-sm">Games, apps, brands, NFT/crypto projects</p>
                       </div>
-                      <div className="text-gray-600 ml-14">Games, apps, brands, NFT/crypto projects</div>
-                    </div>
-                    
-                    <div className="min-w-[270px] max-w-[270px] bg-white p-6 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:border-[#FF6600] transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center flex-shrink-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[#FF6600]">
+                      
+                      {/* Illustration & Design */}
+                      <div className="min-w-[260px] max-w-[260px] bg-gray-50 p-5 rounded-lg snap-start flex-shrink-0 hover:bg-[#FF6600]/5 transition-all duration-300 border border-gray-100">
+                        <div className="flex items-center gap-3 mb-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FF6600" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
                           </svg>
+                          <h5 className="font-medium text-lg">Illustration & Design</h5>
                         </div>
-                        <div className="font-medium text-lg">Illustration & Design</div>
+                        <p className="text-gray-600 text-sm">Animation, UI/UX design</p>
                       </div>
-                      <div className="text-gray-600 ml-14">Animation, UI/UX design</div>
-                    </div>
-                    
-                    <div className="min-w-[270px] max-w-[270px] bg-white p-6 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:border-[#FF6600] transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center flex-shrink-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[#FF6600]">
+                      
+                      {/* 3D Modeling */}
+                      <div className="min-w-[260px] max-w-[260px] bg-gray-50 p-5 rounded-lg snap-start flex-shrink-0 hover:bg-[#FF6600]/5 transition-all duration-300 border border-gray-100">
+                        <div className="flex items-center gap-3 mb-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FF6600" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
                           </svg>
+                          <h5 className="font-medium text-lg">3D Modeling</h5>
                         </div>
-                        <div className="font-medium text-lg">3D Modeling</div>
+                        <p className="text-gray-600 text-sm">Character and environment modeling</p>
                       </div>
-                      <div className="text-gray-600 ml-14">Character and environment modeling</div>
-                    </div>
-                    
-                    <div className="min-w-[270px] max-w-[270px] bg-white p-6 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:border-[#FF6600] transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center flex-shrink-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[#FF6600]">
+                      
+                      {/* Development */}
+                      <div className="min-w-[260px] max-w-[260px] bg-gray-50 p-5 rounded-lg snap-start flex-shrink-0 hover:bg-[#FF6600]/5 transition-all duration-300 border border-gray-100">
+                        <div className="flex items-center gap-3 mb-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FF6600" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
                           </svg>
+                          <h5 className="font-medium text-lg">Development</h5>
                         </div>
-                        <div className="font-medium text-lg">Development</div>
+                        <p className="text-gray-600 text-sm">Game development, web development</p>
                       </div>
-                      <div className="text-gray-600 ml-14">Game development, web development</div>
-                    </div>
-                    
-                    <div className="min-w-[270px] max-w-[270px] bg-white p-6 rounded-lg shadow-sm snap-start flex-shrink-0 border border-gray-100 hover:border-[#FF6600] transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-[#FF6600]/10 flex items-center justify-center flex-shrink-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-[#FF6600]">
+                      
+                      {/* Sound Design */}
+                      <div className="min-w-[260px] max-w-[260px] bg-gray-50 p-5 rounded-lg snap-start flex-shrink-0 hover:bg-[#FF6600]/5 transition-all duration-300 border border-gray-100">
+                        <div className="flex items-center gap-3 mb-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#FF6600" className="w-5 h-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
                           </svg>
+                          <h5 className="font-medium text-lg">Sound Design</h5>
                         </div>
-                        <div className="font-medium text-lg">Sound Design</div>
+                        <p className="text-gray-600 text-sm">Audio production and sound engineering</p>
                       </div>
-                      <div className="text-gray-600 ml-14">Audio production and sound engineering</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-sm text-gray-500 mt-4">
+                    <span className="px-2 py-1 rounded bg-gray-50">← Swipe to explore all services →</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            {/* WHAT SETS US APART */}
+            <section className="mb-24">
+              {/* Section header with accent line and number */}
+              <div className="flex items-center mb-10">
+                <div className="bg-[#FF6600] h-[3px] w-8 mr-4"></div>
+                <h3 className="text-3xl md:text-4xl font-medium">What Sets Us Apart</h3>
+                <span className="ml-auto text-gray-200 font-medium">03</span>
+              </div>
+              
+              <div className="mt-10">
+                {/* USP points displayed as elegant numbered cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  {/* Point 1: Full Creative Team */}
+                  <div className="bg-white p-6 rounded-xl shadow-sm flex gap-5 items-start hover:shadow-md transition-all duration-300 group">
+                    <div className="bg-[#FF6600] w-10 h-10 flex-shrink-0 rounded-lg flex items-center justify-center text-white font-medium">1</div>
+                    <div>
+                      <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Full Creative Team</h4>
+                      <p className="text-gray-600 mb-0 leading-relaxed">A comprehensive team that covers all creative areas in-house for seamless project execution.</p>
+                    </div>
+                  </div>
+                  
+                  {/* Point 2: Strong Collaboration */}
+                  <div className="bg-white p-6 rounded-xl shadow-sm flex gap-5 items-start hover:shadow-md transition-all duration-300 group">
+                    <div className="bg-[#FF6600] w-10 h-10 flex-shrink-0 rounded-lg flex items-center justify-center text-white font-medium">2</div>
+                    <div>
+                      <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Strong Collaboration</h4>
+                      <p className="text-gray-600 mb-0 leading-relaxed">Efficient teamwork ensures fast delivery and high-quality results on all projects.</p>
+                    </div>
+                  </div>
+                  
+                  {/* Point 3: Clear Communication */}
+                  <div className="bg-white p-6 rounded-xl shadow-sm flex gap-5 items-start hover:shadow-md transition-all duration-300 group">
+                    <div className="bg-[#FF6600] w-10 h-10 flex-shrink-0 rounded-lg flex items-center justify-center text-white font-medium">3</div>
+                    <div>
+                      <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Clear Communication</h4>
+                      <p className="text-gray-600 mb-0 leading-relaxed">Structured, step-by-step approach with clear communication throughout every project phase.</p>
+                    </div>
+                  </div>
+                  
+                  {/* Point 4: Personalized Approach */}
+                  <div className="bg-white p-6 rounded-xl shadow-sm flex gap-5 items-start hover:shadow-md transition-all duration-300 group">
+                    <div className="bg-[#FF6600] w-10 h-10 flex-shrink-0 rounded-lg flex items-center justify-center text-white font-medium">4</div>
+                    <div>
+                      <h4 className="font-medium text-lg mb-2 group-hover:text-[#FF6600] transition-colors duration-300">Personalized Approach</h4>
+                      <p className="text-gray-600 mb-0 leading-relaxed">Custom solutions focused on understanding your unique vision and specific needs.</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="text-center text-sm text-gray-500">
-                  <span>← Swipe for more services →</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Section: What Sets Us Apart */}
-            <div className="mb-20">
-              <div className="flex items-center mb-8 border-b border-[#FF6600]/10 pb-2">
-                <span className="text-[#FF6600] font-medium text-xl mr-3">03</span>
-                <h3 className="text-2xl md:text-3xl font-medium">What Sets Us Apart</h3>
-              </div>
-              
-              <div className="mt-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                  <div className="group flex gap-5 items-start p-6 rounded-lg bg-white border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="bg-[#FF6600]/10 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center text-[#FF6600] font-medium">1</div>
+                {/* Track record callout */}
+                <div className="bg-black text-white p-8 rounded-xl shadow-md">
+                  <div className="flex items-start gap-4">
+                    <div className="text-[#FF6600] text-4xl font-medium">50+</div>
                     <div>
-                      <h4 className="font-medium text-lg mb-2">Full Creative Team</h4>
-                      <p className="text-gray-600 mb-0">A comprehensive team that covers all <span className="text-[#FF6600]">creative areas</span> in-house</p>
-                    </div>
-                  </div>
-                  
-                  <div className="group flex gap-5 items-start p-6 rounded-lg bg-white border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="bg-[#FF6600]/10 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center text-[#FF6600] font-medium">2</div>
-                    <div>
-                      <h4 className="font-medium text-lg mb-2">Strong Collaboration</h4>
-                      <p className="text-gray-600 mb-0">Efficient teamwork that ensures <span className="text-[#FF6600]">fast delivery</span> on all projects</p>
-                    </div>
-                  </div>
-                  
-                  <div className="group flex gap-5 items-start p-6 rounded-lg bg-white border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="bg-[#FF6600]/10 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center text-[#FF6600] font-medium">3</div>
-                    <div>
-                      <h4 className="font-medium text-lg mb-2">Clear Communication</h4>
-                      <p className="text-gray-600 mb-0">Structured, <span className="text-[#FF6600]">step-by-step approach</span> throughout every project phase</p>
-                    </div>
-                  </div>
-                  
-                  <div className="group flex gap-5 items-start p-6 rounded-lg bg-white border border-gray-100 hover:border-[#FF6600] hover:shadow-sm transition-all duration-300">
-                    <div className="bg-[#FF6600]/10 w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center text-[#FF6600] font-medium">4</div>
-                    <div>
-                      <h4 className="font-medium text-lg mb-2">Personalized Approach</h4>
-                      <p className="text-gray-600 mb-0">Custom solutions focused on understanding your <span className="text-[#FF6600]">unique vision</span></p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-black text-white p-8 rounded-lg">
-                  <p className="flex items-start gap-2 mb-0 text-lg">
-                    <span className="text-[#FF6600] text-2xl flex-shrink-0">✓</span>
-                    <span>
-                      We've completed <span className="font-medium text-[#FF6600]">over 50 projects</span> so far, mostly with startups and early-stage teams. 
-                      We're now looking to grow alongside more established clients who are ready to take things to the next 
-                      level — but we'll always keep space for fresh, meaningful ideas.
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Section: What Drives Us */}
-            <div className="mb-12">
-              <div className="flex items-center mb-8 border-b border-[#FF6600]/10 pb-2">
-                <span className="text-[#FF6600] font-medium text-xl mr-3">04</span>
-                <h3 className="text-2xl md:text-3xl font-medium">What Drives Us</h3>
-              </div>
-              
-              <div className="mt-8">
-                <div className="bg-white rounded-lg border border-gray-100 p-8 mb-10">
-                  <div className="max-w-3xl mx-auto">
-                    <div className="mb-10">
-                      <p className="text-lg leading-relaxed mb-5">
-                        <span className="bg-[#FF6600]/5 px-2 py-1 font-medium inline-block mb-2 border-l-2 border-[#FF6600]">Our motivation:</span><br />
-                        We're driven by the challenge of creating something truly great — 
-                        <span className="font-medium">not just visually, but in every detail</span>. 
-                        We believe that good work comes from clarity, collaboration, and a 
-                        genuine interest in the result.
+                      <h4 className="text-xl font-medium mb-3">Projects Completed</h4>
+                      <p className="mb-0 text-gray-300 leading-relaxed">
+                        We've worked mostly with startups and early-stage teams. We're now looking to grow alongside more established clients 
+                        who are ready to take things to the next level — but we'll always keep space for fresh, meaningful ideas.
                       </p>
-                      
-                      <p className="text-lg leading-relaxed">
-                        <span className="bg-[#FF6600]/5 px-2 py-1 font-medium inline-block mb-2 border-l-2 border-[#FF6600]">Our definition of success:</span><br />
-                        For us, success isn't just about finishing a project. It's about building 
-                        something that feels <span className="text-[#FF6600] font-medium">complete, creative, and worth sharing</span>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            {/* WHAT DRIVES US */}
+            <section className="mb-16">
+              {/* Section header with accent line and number */}
+              <div className="flex items-center mb-10">
+                <div className="bg-[#FF6600] h-[3px] w-8 mr-4"></div>
+                <h3 className="text-3xl md:text-4xl font-medium">What Drives Us</h3>
+                <span className="ml-auto text-gray-200 font-medium">04</span>
+              </div>
+              
+              <div className="mt-10">
+                <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    {/* Motivation */}
+                    <div className="border-l-[3px] border-[#FF6600] pl-6">
+                      <h4 className="text-xl font-medium mb-4 text-[#FF6600]">Our Motivation</h4>
+                      <p className="text-gray-700 leading-relaxed">
+                        We're driven by the challenge of creating something truly great — 
+                        not just visually, but in every detail. We believe that good work comes 
+                        from clarity, collaboration, and a genuine interest in the result.
                       </p>
                     </div>
                     
-                    <div className="border-t border-gray-100 pt-8">
-                      <div className="bg-black p-8 rounded-lg text-white text-center">
-                        <p className="text-2xl font-medium mb-0">
-                          If you're building something exciting, we'd <span className="text-[#FF6600]">love to be part of it</span>.
-                        </p>
-                      </div>
+                    {/* Definition of Success */}
+                    <div className="border-l-[3px] border-[#FF6600] pl-6">
+                      <h4 className="text-xl font-medium mb-4 text-[#FF6600]">Our Definition of Success</h4>
+                      <p className="text-gray-700 leading-relaxed">
+                        For us, success isn't just about finishing a project. It's about building 
+                        something that feels complete, creative, and worth sharing with the world.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Final CTA */}
+                  <div className="bg-gradient-to-r from-black to-[#333] p-8 rounded-xl text-white text-center">
+                    <p className="text-2xl font-medium mb-2">
+                      If you're building something exciting,<br />
+                      <span className="text-[#FF6600]">we'd love to be part of it.</span>
+                    </p>
+                    
+                    <div className="mt-4 text-gray-400">
+                      Let's create something great together.
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
           </div>
           
           {/* Home Button - moved under the text */}
