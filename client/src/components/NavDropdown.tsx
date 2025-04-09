@@ -30,6 +30,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<any>(null);
   const portfolioImages = PORTFOLIO_IMAGES.default;
   // For carousel indicators
   const [activeIndex, setActiveIndex] = useState(0);
@@ -57,6 +58,35 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen, handleEsc]);
+  
+  // Setup carousel slide tracking for mobile indicator dots
+  useEffect(() => {
+    if (isOpen && isMobile) {
+      // This effect runs when the dropdown opens on mobile
+      // Find carousel data container
+      const setupCarouselTracking = () => {
+        const container = document.querySelector('[data-embla-container]');
+        if (container) {
+          const api = (container as any)._emblaApi;
+          if (api && typeof api.on === 'function') {
+            // Listen for slide changes (select event)
+            api.on('select', () => {
+              const currentIndex = api.selectedScrollSnap();
+              setActiveIndex(currentIndex);
+              console.log("Slide tracking event:", currentIndex);
+            });
+          }
+        }
+      };
+      
+      // Allow time for the carousel to initialize
+      const timer = setTimeout(setupCarouselTracking, 100);
+      
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [isOpen, isMobile]);
   
   // Handle dropdown close
   const handleClose = () => {
@@ -198,6 +228,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               
               {/* Custom focused carousel with tighter images */}
               <Carousel 
+                ref={carouselRef}
                 className="w-full" 
                 opts={{ 
                   align: 'center',
@@ -209,6 +240,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   if (api && typeof api.selectedScrollSnap === 'function') {
                     const index = api.selectedScrollSnap();
                     setActiveIndex(index);
+                    console.log("Slide changed to:", index);
                   }
                 }}
               >
