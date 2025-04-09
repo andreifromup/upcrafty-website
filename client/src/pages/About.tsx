@@ -233,7 +233,7 @@ const About: React.FC = () => {
                     </div>
                     
                     <div className="mt-8 pt-8 border-t border-gray-100">
-                      <div className="group bg-black p-6 rounded-[8px] text-white text-center cursor-pointer hover:bg-black/90 transition-all duration-300" 
+                      <div className="group bg-black p-6 rounded-full text-white text-center cursor-pointer hover:bg-black/90 transition-all duration-300" 
                         onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}>
                         <div className="flex items-center justify-center">
                           <p className="text-xl font-medium mb-0 group-hover:scale-[1.02] transition-transform duration-300">
