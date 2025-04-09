@@ -13,6 +13,11 @@ import SocialIcons from "@/components/SocialIcons";
 // Common constant for consistent left padding
 const LEFT_PADDING = '54px';
 
+// Import the portfolio images from attached assets
+import portfolioImage1 from "@assets/Smyths 2x.png";
+import portfolioImage2 from "@assets/Bucharest 2x.png";
+import portfolioImage3 from "@assets/Windify 2x.png";
+
 interface NavDropdownProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,6 +29,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   // Safety check for portfolio images
   const portfolioImages = PORTFOLIO_IMAGES?.default || [];
+  
+  // Portfolio images for mobile dropdown
+  const mobilePortfolioImages = [portfolioImage1, portfolioImage2, portfolioImage3];
   
   // Safely handle the close action
   const handleClose = () => {
@@ -49,6 +57,19 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     
     return () => {
       window.removeEventListener('keydown', handleEsc);
+    };
+  }, [isOpen]);
+  
+  // Disable body scrolling when dropdown is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
   
@@ -97,7 +118,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
         className={`
           bg-white text-black z-[100]
           ${isMobile 
-            ? 'fixed inset-0 flex flex-col w-full overflow-y-auto' 
+            ? 'fixed inset-0 flex flex-col w-full overflow-hidden' 
             : 'fixed top-0 left-0 right-0 flex justify-center w-full overflow-hidden'
           }
         `}
@@ -108,20 +129,26 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
           maxHeight: isMobile ? '100vh' : '80vh'
         }}
       >
-        {/* Mobile Layout */}
+        {/* Mobile Layout - Exact match to the reference image */}
         {isMobile && (
-          <div className="flex flex-col h-full">
-            <div className="pt-[80px]"> 
-              {/* Space for the logo which is now in the Navbar component */}
-              <div className="invisible h-[60px]"></div>
-
-              {/* Navigation buttons - stacked vertically - Enable scrolling */}
-              <div className="overflow-y-auto mt-4 flex-grow pb-20" style={{ paddingLeft: LEFT_PADDING, maxHeight: 'calc(100vh - 200px)' }}>
+          <div className="flex flex-col h-full justify-between">
+            {/* Logo area - fixed at top */}
+            <div className="pt-14 px-4 mb-4">
+              <img 
+                src="/black center logo.png" 
+                alt="Upcrafty" 
+                className="h-10 mx-1 mb-4"
+              />
+            </div>
+            
+            {/* Menu Categories - Exact match to the reference */}
+            <div className="flex-grow overflow-hidden px-4">
+              <div className="flex flex-col">
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className={`mb-6 ${category.name === "CONTACT" ? 'mt-[-55px]' : ''}`}>
+                  <div key={idx} className="mb-1">
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block py-2 ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
+                      className={`uppercase block ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
                       onClick={(e) => {
                         try {
                           if (category.name === "CONTACT") {
@@ -142,41 +169,33 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }
                       }}
                     >
-                      {/* For mobile, we don't change the hover effect */}
+                      {/* Styled to match the reference exactly */}
                       {category.isTitle ? (
                         <div 
-                          className={`py-[6.5px] rounded-[8px] flex items-center justify-start h-[33px] bg-[#EDEAE7]/50`}
-                          style={{ 
-                            width: 'min(322px, 100%)', 
-                            maxWidth: 'calc(100% - 20px)',
-                            paddingLeft: '12px'
-                          }}
-                          onClick={(e) => e.preventDefault()}
+                          className="py-1.5 my-1 rounded-lg flex items-center bg-[#EDEAE7]/50"
                         >
-                          <span className="font-inter font-medium text-[16px] leading-[20px] tracking-[2px] uppercase">
+                          <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4">
                             {category.name}
                           </span>
                         </div>
                       ) : (
-                        <span className="font-inter font-normal text-[16px] leading-[35px] uppercase block pl-[12px]">
+                        <span className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1">
                           {category.name}
                         </span>
                       )}
                     </a>
                     
                     {category.subcategories && category.subcategories.length > 0 && (
-                      <div className="mt-2">
+                      <div>
                         {category.subcategories.map((subcategory, subIdx) => (
                           <a 
                             key={subIdx} 
                             href="#" 
-                            className={`block active:text-[${COLORS.orange}] active:scale-95 transition-all duration-150`}
+                            className="block active:scale-95 transition-all duration-150"
                           >
-                            <div className="py-1">
-                              <span className="font-inter font-normal text-[16px] leading-[30px] uppercase pl-[12px]">
-                                {subcategory.name}
-                              </span>
-                            </div>
+                            <span className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5">
+                              {subcategory.name}
+                            </span>
                           </a>
                         ))}
                       </div>
@@ -186,37 +205,31 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Portfolio carousel at the bottom - only when no category selected */}
-            {!selectedCategory && portfolioImages.length > 0 && (
-              <div className="p-4 mt-auto border-t border-gray-200">
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {portfolioImages.map((image, idx) => (
-                      <CarouselItem key={idx} className="basis-4/5 flex justify-center">
-                        <img 
-                          src={image} 
-                          alt={`Featured project ${idx + 1}`} 
-                          className="max-h-[340px] max-w-[280px] w-auto h-auto object-contain"
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center mt-4">
-                    <CarouselPrevious className="mx-2 p-2 rounded-full border border-black md:hover:bg-gray-100 active:bg-gray-100 active:scale-95 transition-all duration-150 static" />
-                    <CarouselNext className="mx-2 p-2 rounded-full border border-black md:hover:bg-gray-100 active:bg-gray-100 active:scale-95 transition-all duration-150 static" />
-                  </div>
-                </Carousel>
-              </div>
-            )}
+            {/* Portfolio carousel at the bottom - exact match to reference */}
+            <div className="px-2 mt-auto mb-12">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {mobilePortfolioImages.map((image, idx) => (
+                    <CarouselItem key={idx} className="basis-1/3 md:basis-1/3 flex justify-center">
+                      <img 
+                        src={image} 
+                        alt={`Featured project ${idx + 1}`} 
+                        className="h-24 w-24 object-cover rounded-lg"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            </div>
             
-            {/* Mobile-only social icons at bottom */}
-            <div className="flex mt-auto p-4 border-t border-gray-100" style={{ paddingLeft: LEFT_PADDING }}>
+            {/* Social icons at bottom - center aligned */}
+            <div className="flex justify-center pb-4 pt-2">
               <SocialIcons inDropdown={true} />
             </div>
           </div>
         )}
         
-        {/* Desktop Layout */}
+        {/* Desktop Layout - unchanged */}
         {!isMobile && (
           <div className="flex h-full w-full max-w-[1725px] mx-auto">
 
