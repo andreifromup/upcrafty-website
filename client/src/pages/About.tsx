@@ -110,7 +110,7 @@ const About: React.FC = () => {
             </section>
             
             {/* Section: What We Do */}
-            <section className="mb-16 snap-start">
+            <section className="mb-16 snap-start p-6 rounded-lg bg-[#FAFAFA]">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
                 <span className="text-gray-300 font-medium text-xl mr-3">02</span>
                 What We Do
@@ -156,8 +156,8 @@ const About: React.FC = () => {
               </div>
             </section>
             
-            {/* Section: What Sets Us Apart - with light gray background */}
-            <section className="mb-16 p-6 rounded-lg bg-[#FAFAFA] snap-start">
+            {/* Section: What Sets Us Apart */}
+            <section className="mb-16 snap-start">
               <h3 className="text-2xl md:text-3xl font-medium mb-8 flex items-center">
                 <span className="text-gray-300 font-medium text-xl mr-3">03</span>
                 What Sets Us Apart
@@ -233,7 +233,7 @@ const About: React.FC = () => {
                     </div>
                     
                     <div className="mt-8 pt-8 border-t border-gray-100">
-                      <div className="group bg-black p-6 rounded-lg text-white text-center cursor-pointer hover:bg-black/90 transition-all duration-300" 
+                      <div className="group bg-black p-6 rounded-[8px] text-white text-center cursor-pointer hover:bg-black/90 transition-all duration-300" 
                         onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}>
                         <div className="flex items-center justify-center">
                           <p className="text-xl font-medium mb-0 group-hover:scale-[1.02] transition-transform duration-300">
