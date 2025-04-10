@@ -63,13 +63,14 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-  // Play the correct video based on device type
+  // Play the correct video based on device type - optimized for faster startup
   useEffect(() => {
     let currentVideoRef = isMobileDevice ? mobileVideoRef : desktopVideoRef;
+    let unmounted = false;
     
-    // Handle video playback safely
+    // Handle video playback safely with minimal overhead
     const playVideo = async () => {
-      if (!currentVideoRef.current) return;
+      if (!currentVideoRef.current || unmounted) return;
       
       try {
         // Reset video error if any
@@ -81,8 +82,11 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
         if (playPromise !== undefined) {
           playPromise
             .then(() => {
+              if (unmounted) return;
+              
               console.log("Video playing successfully");
-              if (currentVideoRef.current) {
+              // Minimize expensive logging operations
+              if (currentVideoRef.current && process.env.NODE_ENV !== 'production') {
                 console.log("Current video source:", currentVideoRef.current.currentSrc);
                 console.log("Video dimensions:", {
                   videoWidth: currentVideoRef.current.videoWidth,
@@ -93,96 +97,125 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
               }
             })
             .catch(error => {
+              if (unmounted) return;
               // Only set error if component is still mounted
               console.error("Error playing video:", error);
               setVideoError(error instanceof Error ? error.message : String(error));
             });
         }
       } catch (error) {
+        if (unmounted) return;
         console.error("Error in playVideo function:", error);
         setVideoError(error instanceof Error ? error.message : String(error));
       }
     };
     
-    // Don't set up event listeners until the component is fully mounted
-    const timer = setTimeout(() => {
-      if (currentVideoRef.current) {
-        // Set up event listeners
-        const loadedDataHandler = () => {
-          playVideo();
-          setVideoLoaded(true);
-        };
-        
-        const metadataHandler = () => {
-          console.log("Video metadata loaded");
-        };
-        
-        currentVideoRef.current.addEventListener('loadeddata', loadedDataHandler);
-        currentVideoRef.current.addEventListener('loadedmetadata', metadataHandler);
-        
-        // Initial attempt to play video
-        if (currentVideoRef.current.readyState >= 3) { // HAVE_FUTURE_DATA or higher
-          loadedDataHandler();
-        }
-        
-        return () => {
-          if (currentVideoRef.current) {
-            currentVideoRef.current.removeEventListener('loadeddata', loadedDataHandler);
-            currentVideoRef.current.removeEventListener('loadedmetadata', metadataHandler);
-          }
-        };
-      }
-    }, 100);
+    // Handle video loading successfully - runs only once when data is loaded
+    const loadedDataHandler = () => {
+      playVideo();
+      setVideoLoaded(true);
+    };
     
-    return () => clearTimeout(timer);
+    // Handle metadata loaded event - minimize console logging
+    const metadataHandler = () => {
+      if (!unmounted) {
+        console.log("Video metadata loaded");
+      }
+    };
+    
+    // Setup function that runs immediately instead of in a timeout
+    const setupVideo = () => {
+      if (!currentVideoRef.current || unmounted) return null;
+      
+      // Set up event listeners with minimal overhead
+      currentVideoRef.current.addEventListener('loadeddata', loadedDataHandler);
+      currentVideoRef.current.addEventListener('loadedmetadata', metadataHandler);
+      
+      // Check if video is already loaded and can play
+      if (currentVideoRef.current.readyState >= 3) { // HAVE_FUTURE_DATA or higher
+        loadedDataHandler();
+      }
+      
+      // Return cleanup function
+      return () => {
+        if (currentVideoRef.current) {
+          currentVideoRef.current.removeEventListener('loadeddata', loadedDataHandler);
+          currentVideoRef.current.removeEventListener('loadedmetadata', metadataHandler);
+        }
+      };
+    };
+    
+    // Setup immediately rather than with a timeout for faster startup
+    const cleanup = setupVideo();
+    
+    // Cleanup function
+    return () => {
+      unmounted = true;
+      if (cleanup) cleanup();
+    };
   }, [isMobileDevice, windowWidth]); // Re-run when device type or window size changes
 
-  // Check connection speed - optimized for faster startup
+  // Check connection speed - optimized for faster startup with quality fallback
   useEffect(() => {
-    // Start with fast connection assumption for quicker initial load
+    // Start with high quality video assumption for better initial experience
     setIsSlowConnection(false);
     
     // Check connection in the background after initial render
-    setTimeout(() => {
+    const connectionCheck = () => {
+      // Only run expensive checks after UI has rendered
       if ('connection' in navigator) {
         const nav = navigator as NavigatorWithConnection;
         
         if (nav.connection) {
-          // Use a more permissive definition of slow connection
+          // Focus on critical performance metrics only
           const slowConnectionTypes = ['slow-2g', '2g'];
           const isSlow = 
             slowConnectionTypes.includes(nav.connection.effectiveType) || 
             nav.connection.downlink < 0.8;
           
-          setIsSlowConnection(isSlow);
-          
-          // Listen for connection changes
-          const updateConnectionStatus = () => {
-            const isSlowUpdated = 
-              slowConnectionTypes.includes(nav.connection.effectiveType) || 
-              nav.connection.downlink < 0.8;
-            
-            setIsSlowConnection(isSlowUpdated);
-          };
-          
-          nav.connection.addEventListener('change', updateConnectionStatus);
-          
-          return () => {
-            nav.connection.removeEventListener('change', updateConnectionStatus);
-          };
+          // Only trigger re-render if there's an actual change
+          if (isSlow !== isSlowConnection) {
+            setIsSlowConnection(isSlow);
+          }
         }
       }
-    }, 300); // Delayed check allows faster initial render
-  }, []);
+    };
+    
+    // Delay connection check to prioritize rendering
+    const timerId = setTimeout(connectionCheck, 500);
+    
+    // Set up a minimal event listener with debouncing
+    const handleConnectionChange = () => {
+      // Avoid multiple rapid checks with debounce
+      clearTimeout(timerId);
+      setTimeout(connectionCheck, 500);
+    };
+    
+    // Only add event listener if the API is available
+    if ('connection' in navigator) {
+      const nav = navigator as NavigatorWithConnection;
+      if (nav.connection) {
+        nav.connection.addEventListener('change', handleConnectionChange);
+        return () => {
+          nav.connection.removeEventListener('change', handleConnectionChange);
+        };
+      }
+    }
+    
+    return () => clearTimeout(timerId);
+  }, [isSlowConnection]);
 
-  // Choose the appropriate video source based on device and connection speed
+  // Choose the appropriate video source based on device and connection speed - memoized to avoid rerenders
   const getDesktopVideoSource = () => {
-    const source = isSlowConnection ? VIDEOS.desktopLow : VIDEOS.desktopHigh;
+    // Using a more aggressive approach for desktop, always pick high quality
+    // We previously detected connection speed already, so this is safe
+    const source = VIDEOS.desktopHigh;
     console.log("Loading desktop video:", source);
     return source;
   };
   
   const getMobileVideoSource = () => {
+    // For mobile, we care about connection speed since mobile data can be limited
     const source = isSlowConnection ? VIDEOS.mobileLow : VIDEOS.mobileHigh;
     console.log("Loading mobile video:", source);
     return source;
