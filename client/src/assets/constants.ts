@@ -64,9 +64,9 @@ export const SOCIAL_LINKS = {
 // Portfolio images
 export const PORTFOLIO_IMAGES = {
   default: [
-    "/Photo%201.png",
-    "/Photo%202.png",
-    "/Photo%203.png"
+    "/attached_assets/transp 1.png",
+    "/attached_assets/transp 2.png",
+    "/attached_assets/transp 4.png"
   ]
 };
 
