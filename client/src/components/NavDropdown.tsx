@@ -225,18 +225,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
               
               {/* Simple fixed-height carousel with CSS transitions */}
-              <div className="overflow-hidden relative h-[257px]">
+              <div className="overflow-hidden relative h-[300px]">
                 <div 
                   className="flex transition-transform duration-300 ease-in-out"
                   style={{ 
-                    transform: `translateX(calc(50% - 94.5px - ${activeIndex * 189}px))`,
-                    height: "257px"
+                    transform: `translateX(calc(50% - 110px - ${activeIndex * 220}px))`,
+                    height: "300px"
                   }}
                 >
                   {portfolioImages.map((image, idx) => (
                     <div 
                       key={idx} 
-                      className="flex-shrink-0 mx-2 cursor-pointer"
+                      className="flex-shrink-0 mx-1 cursor-pointer"
                       onClick={() => {
                         // Navigate to previous or next slide on click
                         const newIndex = idx > activeIndex 
@@ -245,7 +245,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         setActiveIndex(newIndex);
                       }}
                     >
-                      <div className="w-[189px] h-[257px] overflow-hidden rounded-lg">
+                      <div className="w-[220px] h-[300px] overflow-hidden rounded-lg">
                         <img 
                           src={image} 
                           alt={`Featured project ${idx + 1}`}
