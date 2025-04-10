@@ -28,7 +28,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const portfolioImages = PORTFOLIO_IMAGES.default;
+  // Access images directly using their paths
+  const portfolioImages = [
+    "/transp 1.png",
+    "/transp 2.png", 
+    "/transp 4.png"
+  ];
   
   // For carousel indicators
   const [activeIndex, setActiveIndex] = useState(0);
@@ -310,7 +315,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-25px]' : category.name === "ABOUT US" ? 'mb-6' : ''} mb-5 pr-4`}>
+                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-2' : ''} mb-5 pr-4`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
                       className="uppercase block mb-3 active:scale-95 transition-all duration-150"
