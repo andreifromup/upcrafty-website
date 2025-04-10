@@ -32,6 +32,11 @@ const About: React.FC = () => {
   
   return (
     <div className="bg-white text-black font-['Inter'] font-normal antialiased">
+      {/* Blur overlay when dropdown is open */}
+      {isDropdownOpen && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"></div>
+      )}
+      
       {/* Fixed Top Navigation */}
       <div className="sticky top-0 left-0 right-0 z-50 bg-white">
         <Navbar 
