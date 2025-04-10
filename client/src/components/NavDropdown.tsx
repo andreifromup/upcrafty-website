@@ -28,6 +28,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [overlayType, setOverlayType] = useState<'image' | 'video'>('image');
   const [activeIndex, setActiveIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLDivElement>(null);
   
   // Define portfolio images for desktop view
   const portfolioImages = [
@@ -117,6 +118,30 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       document.body.style.overflow = "auto";
     };
   }, [isOpen, handleEsc]);
+  
+  // Special direct effect for closing with the button
+  useEffect(() => {
+    if (closeButtonRef.current && showOverlay) {
+      // Define click handler that directly uses state setter
+      const directCloseHandler = () => {
+        console.log('Direct close button handler called');
+        setShowOverlay(false);
+        setSelectedSubcategory(null);
+      };
+      
+      // Add native event listener directly to the DOM node
+      closeButtonRef.current.addEventListener('click', directCloseHandler);
+      closeButtonRef.current.addEventListener('touchend', directCloseHandler);
+      
+      // Clean up
+      return () => {
+        if (closeButtonRef.current) {
+          closeButtonRef.current.removeEventListener('click', directCloseHandler);
+          closeButtonRef.current.removeEventListener('touchend', directCloseHandler);
+        }
+      };
+    }
+  }, [showOverlay, closeButtonRef]);
   
   // Handle dropdown close
   const handleClose = () => {
@@ -341,25 +366,28 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   }}
                 />
                 
-                {/* Special corner area just for the close button - appears visually the same */}
-                <div className="fixed top-0 right-0 z-[80] w-[100px] h-[100px]">
-                  {/* ACTUAL CLICKABLE AREA */}
-                  <div 
-                    className="absolute top-0 right-0 w-[100px] h-[100px]"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      console.log('CORNER BUTTON CLICKED');
-                      setShowOverlay(false);
-                      setSelectedSubcategory(null);
-                    }}
-                  />
-                  
-                  {/* Visual button that matches appearance */}
-                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center pointer-events-none">
-                    <XIcon size={24} className="text-black" />
-                  </div>
-                </div>
+                {/* Native HTML button implementation for maximum compatibility */}
+                <button 
+                  ref={closeButtonRef}
+                  className="fixed top-6 right-6 z-[90] w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center cursor-pointer border-0 outline-none focus:outline-none"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('DIRECT BUTTON CLICK');
+                    setShowOverlay(false);
+                    setSelectedSubcategory(null);
+                  }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('DIRECT TOUCH END');
+                    setShowOverlay(false);
+                    setSelectedSubcategory(null);
+                  }}
+                  aria-label="Close overlay"
+                >
+                  <XIcon size={24} className="text-black" />
+                </button>
               </div>
             )}
           </div>
