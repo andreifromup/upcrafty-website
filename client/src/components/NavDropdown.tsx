@@ -319,27 +319,19 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <div className="fixed inset-0 bg-white z-[200]">
                 {/* Content container with close button on top */}
                 <div className="w-full h-full p-4 relative">
-                  {/* FINAL ATTEMPT: using <a> tag which tends to be most reliable on mobile browsers */}
-                  <a 
-                    href="#" 
-                    id="CLOSE_BUTTON"
-                    className="absolute top-0 right-0 w-[80px] h-[80px] flex items-center justify-center z-[999]"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      closeOverlay();
-                    }}
-                    style={{
-                      touchAction: 'manipulation',
-                      WebkitTapHighlightColor: 'transparent',
-                      cursor: 'pointer'
+                  {/* Simple native HTML element with inline function */}
+                  <div 
+                    className="absolute top-0 right-0 w-32 h-32 flex items-center justify-center z-[999]"
+                    onClick={() => {
+                      setShowOverlay(false);
+                      setSelectedSubcategory(null);
                     }}
                   >
-                    {/* This is the visible part that looks just like the design */}
+                    {/* Visual appearance of X button */}
                     <div className="w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center mt-6 mr-6">
-                      <XIcon size={24} className="text-black pointer-events-none" />
+                      <XIcon size={24} className="text-black" />
                     </div>
-                  </a>
+                  </div>
                   
                   {/* Content centered in remaining area - stop propagation on this area */}
                   <div 
