@@ -284,25 +284,25 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 </div>
                                 
                                 {/* Media display for each subcategory */}
-                                <div className="px-4 mt-2">
+                                <div className="pl-0 pr-4 mt-2">
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel 
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
                                       >
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16 pb-6">
+                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, imgIdx) => {
                                             // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
                                             
                                             return (
-                                              <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
+                                              <CarouselItem key={imgIdx} className={`pl-0 basis-full`}>
                                                 <div 
                                                   className={`relative overflow-hidden ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: '320px',
-                                                    height: '300px', 
+                                                    width: 'min(320px, 100%)',
+                                                    height: 'min(300px, 90vw)', 
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
@@ -340,14 +340,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16 pb-6">
+                                        <CarouselContent className="-ml-2 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className="pl-2 basis-full">
+                                            <CarouselItem key={vidIdx} className="pl-0 basis-full">
                                               <div 
                                                 className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: '320px',
-                                                  height: '300px', 
+                                                  width: 'min(320px, 100%)',
+                                                  height: 'min(300px, 90vw)', 
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
