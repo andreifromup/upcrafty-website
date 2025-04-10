@@ -315,7 +315,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-2' : ''} mb-5 pr-4`}>
+                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-32px]' : ''} mb-5 pr-4`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
                       className="uppercase block mb-3 active:scale-95 transition-all duration-150"
@@ -376,59 +376,56 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <div className="flex-1 relative bg-white h-full overflow-hidden">
                 {/* Portfolio images with absolute positioning to match Figma */}
                 <div className="relative w-full h-[572px] overflow-hidden">
-                  {/* Left image - aligned to bottom edge with overflow hidden */}
+                  {/* Left image - all images aligned in straight line */}
                   <div 
                     className="absolute w-[300px] h-[400px] overflow-hidden" 
                     style={{ 
                       left: '44px', 
-                      bottom: '0',
+                      bottom: '80px',
                     }}
                   >
                     <img 
                       src={portfolioImages[0]} 
                       alt="Featured project 1" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-full object-cover"
                       style={{
-                        objectPosition: "center top",
-                        transform: "scale(1.2)"
+                        objectPosition: "center top"
                       }}
                     />
                   </div>
                   
-                  {/* Middle image - positioned slightly higher than others */}
+                  {/* Middle image - same height and position as others */}
                   <div 
-                    className="absolute w-[300px] h-[480px] overflow-hidden" 
+                    className="absolute w-[300px] h-[400px] overflow-hidden" 
                     style={{ 
                       left: 'calc(50% - 150px)', 
-                      bottom: '60px',
+                      bottom: '80px',
                     }}
                   >
                     <img 
                       src={portfolioImages[1]} 
                       alt="Featured project 2" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-full object-cover"
                       style={{
-                        objectPosition: "center top",
-                        transform: "scale(1.2)"
+                        objectPosition: "center top"
                       }}
                     />
                   </div>
                   
-                  {/* Right image - aligned to bottom edge with overflow hidden */}
+                  {/* Right image - same height and position as others */}
                   <div 
                     className="absolute w-[300px] h-[400px] overflow-hidden" 
                     style={{ 
                       right: '44px', 
-                      bottom: '0',
+                      bottom: '80px',
                     }}
                   >
                     <img 
                       src={portfolioImages[2]}
                       alt="Featured project 3" 
-                      className="w-full h-auto object-cover"
+                      className="w-full h-full object-cover"
                       style={{
-                        objectPosition: "center top",
-                        transform: "scale(1.2)"
+                        objectPosition: "center top"
                       }}
                     />
                   </div>
