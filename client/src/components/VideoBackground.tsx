@@ -137,39 +137,42 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
     return () => clearTimeout(timer);
   }, [isMobileDevice, windowWidth]); // Re-run when device type or window size changes
 
-  // Check connection speed
+  // Check connection speed - optimized for faster startup
   useEffect(() => {
-    if ('connection' in navigator) {
-      const nav = navigator as NavigatorWithConnection;
-      
-      if (nav.connection) {
-        // Check if connection is slow
-        const slowConnectionTypes = ['slow-2g', '2g', '3g'];
-        const isSlow = 
-          slowConnectionTypes.includes(nav.connection.effectiveType) || 
-          nav.connection.downlink < 1.5;
-        
-        setIsSlowConnection(isSlow);
-        
-        // Listen for connection changes
-        const updateConnectionStatus = () => {
-          const isSlowUpdated = 
-            slowConnectionTypes.includes(nav.connection.effectiveType) || 
-            nav.connection.downlink < 1.5;
-          
-          setIsSlowConnection(isSlowUpdated);
-        };
-        
-        nav.connection.addEventListener('change', updateConnectionStatus);
-        
-        return () => {
-          nav.connection.removeEventListener('change', updateConnectionStatus);
-        };
-      }
-    }
-    
-    // Fallback for browsers that don't support the Network Information API
+    // Start with fast connection assumption for quicker initial load
     setIsSlowConnection(false);
+    
+    // Check connection in the background after initial render
+    setTimeout(() => {
+      if ('connection' in navigator) {
+        const nav = navigator as NavigatorWithConnection;
+        
+        if (nav.connection) {
+          // Use a more permissive definition of slow connection
+          const slowConnectionTypes = ['slow-2g', '2g'];
+          const isSlow = 
+            slowConnectionTypes.includes(nav.connection.effectiveType) || 
+            nav.connection.downlink < 0.8;
+          
+          setIsSlowConnection(isSlow);
+          
+          // Listen for connection changes
+          const updateConnectionStatus = () => {
+            const isSlowUpdated = 
+              slowConnectionTypes.includes(nav.connection.effectiveType) || 
+              nav.connection.downlink < 0.8;
+            
+            setIsSlowConnection(isSlowUpdated);
+          };
+          
+          nav.connection.addEventListener('change', updateConnectionStatus);
+          
+          return () => {
+            nav.connection.removeEventListener('change', updateConnectionStatus);
+          };
+        }
+      }
+    }, 300); // Delayed check allows faster initial render
   }, []);
 
   // Choose the appropriate video source based on device and connection speed

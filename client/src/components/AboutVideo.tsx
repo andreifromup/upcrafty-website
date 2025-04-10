@@ -49,19 +49,22 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
     }
   }, []);
 
-  // Log direct access to video
+  // Log direct access to video - optimized to not block rendering
   useEffect(() => {
-    fetch(videoUrl)
-      .then(response => {
-        console.log("Video fetch response:", response.status, response.statusText);
-        if (!response.ok) {
-          throw new Error(`Video fetch failed: ${response.status} ${response.statusText}`);
-        }
-        return response;
-      })
-      .catch(error => {
-        console.error("Error fetching video:", error);
-      });
+    // Delay non-critical fetch check to prioritize initial render
+    setTimeout(() => {
+      fetch(videoUrl)
+        .then(response => {
+          console.log("Video fetch response:", response.status, response.statusText);
+          if (!response.ok) {
+            throw new Error(`Video fetch failed: ${response.status} ${response.statusText}`);
+          }
+          return response;
+        })
+        .catch(error => {
+          console.error("Error fetching video:", error);
+        });
+    }, 500);
   }, []);
 
   return (
