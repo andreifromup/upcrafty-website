@@ -291,7 +291,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
                                       >
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, imgIdx) => {
                                             // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
@@ -332,7 +332,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                             );
                                           })}
                                         </CarouselContent>
-                                        {/* Navigation buttons removed as requested */}
+                                        {subcategory.mediaCount > 1 && (
+                                          <div className="flex justify-center gap-2 mt-4">
+                                            <CarouselPrevious className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                            <CarouselNext className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                          </div>
+                                        )}
                                       </Carousel>
                                     </>
                                   )}
@@ -340,7 +345,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className="pl-2 basis-full">
                                               <div 
@@ -372,7 +377,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                             </CarouselItem>
                                           ))}
                                         </CarouselContent>
-                                        {/* Navigation buttons removed as requested */}
+                                        {subcategory.mediaCount > 1 && (
+                                          <div className="flex justify-center gap-2 mt-4">
+                                            <CarouselPrevious className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                            <CarouselNext className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                          </div>
+                                        )}
                                       </Carousel>
                                     </>
                                   )}
