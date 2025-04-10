@@ -64,12 +64,30 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     setSelectedSubcategory(null);
   };
   
+  // This ensures the overlay can be closed by clicking anywhere on it
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    console.log('Overlay clicked');
+    // Close the overlay when clicking on the background or close button
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('overlay-background') || 
+        target.dataset.closeOverlay === 'true' || 
+        target.closest('[data-close-overlay="true"]')) {
+      handleCloseOverlay();
+    }
+  };
+  
   // Close dropdown when user presses escape key
   const handleEsc = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") {
-      onClose();
+      // If overlay is open, close it first instead of closing the whole dropdown
+      if (showOverlay) {
+        e.stopPropagation();
+        handleCloseOverlay();
+      } else {
+        onClose();
+      }
     }
-  }, [onClose]);
+  }, [onClose, showOverlay]);
   
   // Add/remove event listeners
   useEffect(() => {
@@ -256,16 +274,21 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             {/* Fullscreen overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
               <div 
-                className="fixed inset-0 bg-white z-[60] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-                onTouchMove={(e) => e.stopPropagation()}
+                className="fixed inset-0 bg-white z-[60] flex items-center justify-center overlay-background"
+                onClick={handleOverlayClick}
               >
-                <div className="relative w-full h-full flex items-center justify-center">
+                <div 
+                  className="relative w-full h-full flex items-center justify-center" 
+                  onTouchMove={(e) => e.preventDefault()}
+                >
                   
                   {/* Image overlay - fullscreen with centered content */}
                   {overlayType === 'image' && (
                     <div className="w-full h-full flex items-center justify-center px-8">
-                      <div className="relative w-full max-w-md max-h-[70vh] rounded-lg overflow-hidden">
+                      <div 
+                        className="relative w-full max-w-md max-h-[70vh] rounded-lg overflow-hidden"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <img 
                           src={portfolioImages[0]} 
                           alt={selectedSubcategory}
@@ -278,7 +301,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   {/* Video overlay - fullscreen with centered content */}
                   {overlayType === 'video' && (
                     <div className="w-full h-full flex items-center justify-center px-8">
-                      <div className="relative w-full max-w-md rounded-lg overflow-hidden aspect-video">
+                      <div 
+                        className="relative w-full max-w-md rounded-lg overflow-hidden aspect-video"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         {/* Video container */}
                         <div className="w-full h-full">
                           <img 
@@ -300,14 +326,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   
                   {/* Close button in top-right corner */}
                   <button 
-                    className="absolute top-6 right-6 z-20 p-3 rounded-full bg-black shadow-md active:scale-95 transition-transform"
+                    className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/80 shadow-md"
                     onClick={(e) => {
+                      console.log('X button clicked');
                       e.stopPropagation();
-                      handleCloseOverlay();
+                      e.preventDefault();
+                      setShowOverlay(false);
+                      setSelectedSubcategory(null);
                     }}
-                    style={{ touchAction: 'manipulation' }}
+                    data-close-overlay="true"
+                    aria-label="Close overlay"
                   >
-                    <XIcon size={24} className="text-white" />
+                    <XIcon size={24} className="text-black" data-close-overlay="true" />
                   </button>
                 </div>
               </div>
