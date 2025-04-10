@@ -1,5 +1,5 @@
-import React from "react";
-import { ICONS, LOGOS, COLORS, ORANGE_FILTER } from "@/assets/constants";
+import React, { useState } from "react";
+import { ICONS, LOGOS, COLORS } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "wouter";
 
@@ -20,19 +20,31 @@ const Logo: React.FC<LogoProps> = ({
   const [location] = useLocation();
   const isAboutPage = location === "/about";
   
+  // Simple hover state for desktop
+  const [hover, setHover] = useState(false);
+  
+  // The exact orange filter for #FF6512
+  const orangeFilter = "invert(45%) sepia(63%) saturate(4523%) hue-rotate(359deg) brightness(102%) contrast(107%)";
+  
   // Use the specific dimensions from the design specs
   if (size === "header") {
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
-      <div className="logo-container flex items-center cursor-pointer">
+      <div 
+        className="flex items-center cursor-pointer"
+        onMouseEnter={() => !isMobile && setHover(true)}
+        onMouseLeave={() => !isMobile && setHover(false)}
+      >
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className="logo-img h-full w-auto absolute"
+            className="h-full w-auto absolute transition-colors duration-200"
             style={{
-              filter: useBlackLogo ? 'invert(1)' : 'none'
+              filter: !isMobile && hover 
+                ? orangeFilter
+                : useBlackLogo ? 'invert(1)' : 'none'
             }}
           />
         </div>
@@ -42,9 +54,11 @@ const Logo: React.FC<LogoProps> = ({
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className="dropdown-img absolute w-full h-full"
+              className="absolute w-full h-full transition-colors duration-200"
               style={{
-                filter: useBlackLogo ? 'invert(1)' : 'none',
+                filter: !isMobile && hover 
+                ? orangeFilter
+                : useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
             />
