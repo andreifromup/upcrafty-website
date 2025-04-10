@@ -2,7 +2,6 @@ import React from "react";
 import { ICONS, LOGOS, COLORS, ORANGE_FILTER } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "wouter";
-import "./logo.css";
 
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
@@ -11,66 +10,53 @@ interface LogoProps {
   isDropdownOpen?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, useBlackLogo = false, isDropdownOpen = false }) => {
+const Logo: React.FC<LogoProps> = ({ 
+  size = "medium", 
+  includeDropdown = false, 
+  useBlackLogo = false, 
+  isDropdownOpen = false 
+}) => {
   const isMobile = useIsMobile();
   const [location] = useLocation();
   const isAboutPage = location === "/about";
+  
+  const [isHovered, setIsHovered] = React.useState(false);
   
   // Use the specific dimensions from the design specs
   if (size === "header") {
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div 
-        className={`logo-container flex items-center cursor-pointer ${useBlackLogo ? 'black-logo' : 'white-logo'} ${isMobile ? 'mobile' : ''}`}
-        onTouchStart={(e) => {
-          if (isMobile) {
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              logoImg.style.transform = 'scale(0.95)';
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.transform = 'scale(0.95)';
-            }
-          }
-        }}
-        onTouchEnd={(e) => {
-          if (isMobile) {
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              logoImg.style.transform = 'scale(1)';
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.transform = 'scale(1)';
-            }
-          }
-        }}
+        className="flex items-center cursor-pointer"
+        onMouseEnter={() => !isMobile && setIsHovered(true)}
+        onMouseLeave={() => !isMobile && setIsHovered(false)}
       >
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* Vector logo with color switching but same position */}
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className="logo-img h-full w-auto absolute transition-all duration-300"
+            className="h-full w-auto absolute transition-all duration-300"
+            style={{
+              filter: isHovered 
+                ? ORANGE_FILTER 
+                : useBlackLogo ? 'invert(1)' : 'none'
+            }}
           />
         </div>
+        
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* Dropdown polygon that changes color with the logo */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className="dropdown-img absolute w-full h-full transition-all duration-300"
+              className="absolute w-full h-full transition-all duration-300"
               style={{
+                filter: isHovered 
+                  ? ORANGE_FILTER 
+                  : useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
-              id="dropdown-arrow"
             />
           </div>
         )}
