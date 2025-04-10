@@ -314,24 +314,40 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <SocialIcons inDropdown={true} />
             </div>
             
-            {/* COMPLETELY SIMPLIFIED overlay system */}
+            {/* Completely isolated overlay system */}
             {showOverlay && selectedSubcategory && (
-              <div className="fixed inset-0 bg-white z-[200]">
-                {/* Content container with close button on top */}
-                <div className="w-full h-full p-4 relative">
-                  {/* Simple native HTML element with inline function */}
-                  <div 
-                    className="absolute top-0 right-0 w-32 h-32 flex items-center justify-center z-[999]"
-                    onClick={() => {
-                      setShowOverlay(false);
-                      setSelectedSubcategory(null);
-                    }}
-                  >
-                    {/* Visual appearance of X button */}
-                    <div className="w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center mt-6 mr-6">
-                      <XIcon size={24} className="text-black" />
-                    </div>
+              <div 
+                className="fixed inset-0 bg-white z-[9999]" 
+                style={{ pointerEvents: 'auto' }}
+              >
+                {/* X BUTTON - COMPLETELY ISOLATED WITH MULTIPLE EVENT HANDLERS */}
+                <button 
+                  className="fixed top-0 right-0 w-20 h-20 cursor-pointer bg-transparent border-0 outline-none"
+                  style={{ 
+                    zIndex: 10000,
+                    touchAction: 'manipulation'
+                  }}
+                  onClick={() => {
+                    setShowOverlay(false);
+                    setSelectedSubcategory(null);
+                  }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    setShowOverlay(false);
+                    setSelectedSubcategory(null);
+                  }}
+                  onTouchStart={(e) => {
+                    e.preventDefault(); // Prevent default touch behavior
+                  }}
+                >
+                  {/* Visual appearance of X button */}
+                  <div className="w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center mt-6 mr-6">
+                    <XIcon size={24} className="text-black" />
                   </div>
+                </button>
+                
+                {/* Content container - separate from the X button */}
+                <div className="w-full h-full p-4 relative" style={{ pointerEvents: 'auto' }}>
                   
                   {/* Content centered in remaining area - stop propagation on this area */}
                   <div 
