@@ -273,55 +273,55 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Fullscreen overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
-              <div className="fixed inset-0 bg-white z-[60]">
-                {/* Image overlay content */}
-                {overlayType === 'image' && (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="w-full max-w-md max-h-[70vh]">
-                      <img 
-                        src={portfolioImages[0]} 
-                        alt={selectedSubcategory}
-                        className="w-full h-full object-contain"
-                      />
+              <>
+                {/* Main content overlay */}
+                <div className="fixed inset-0 bg-white z-[60]">
+                  {/* Image overlay content */}
+                  {overlayType === 'image' && (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full max-w-md max-h-[70vh]">
+                        <img 
+                          src={portfolioImages[0]} 
+                          alt={selectedSubcategory}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-                
-                {/* Video overlay content */}
-                {overlayType === 'video' && (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <div className="w-full max-w-md aspect-video">
-                      <img 
-                        src={portfolioImages[2]} 
-                        alt={`${selectedSubcategory} video thumbnail`}
-                        className="w-full h-full object-contain"
-                      />
-                      
-                      {/* Play button */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
-                          <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
+                  )}
+                  
+                  {/* Video overlay content */}
+                  {overlayType === 'video' && (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-full max-w-md aspect-video">
+                        <img 
+                          src={portfolioImages[2]} 
+                          alt={`${selectedSubcategory} video thumbnail`}
+                          className="w-full h-full object-contain"
+                        />
+                        
+                        {/* Play button */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
+                            <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
-                
-                {/* Close button - completely standalone */}
-                <div className="absolute top-0 right-0 mt-6 mr-6 z-50">
-                  <button 
-                    className="p-4 rounded-full bg-black shadow-md"
-                    onClick={() => {
-                      console.log('NEW Close button clicked');
-                      setShowOverlay(false);
-                      setSelectedSubcategory(null);
-                    }}
-                    style={{ touchAction: 'manipulation' }}
-                  >
-                    <XIcon size={32} className="text-white" />
-                  </button>
+                  )}
                 </div>
-              </div>
+                
+                {/* Special div for close button, implemented as directly as possible */}
+                <div 
+                  className="fixed top-6 right-6 z-[70] w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center cursor-pointer"
+                  onClick={() => {
+                    console.log('DIRECT Close div clicked');
+                    setShowOverlay(false);
+                    setSelectedSubcategory(null);
+                  }}
+                >
+                  <XIcon size={24} className="text-black" />
+                </div>
+              </>
             )}
           </div>
         )}
