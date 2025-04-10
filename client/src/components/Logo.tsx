@@ -86,7 +86,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            className="logo-img h-full w-auto absolute transition-all duration-300"
             style={{
               filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
@@ -98,7 +98,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className="dropdown-img absolute w-full h-full transition-all duration-300"
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
