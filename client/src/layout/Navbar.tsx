@@ -120,8 +120,10 @@ const Navbar: React.FC<NavbarProps> = ({
       <NavDropdown 
         isOpen={isDropdownOpen} 
         onClose={() => {
-          console.log("Closing dropdown from NavDropdown");
-          setIsDropdownOpen(false);
+          // Keep the hover effect briefly when closing
+          setTimeout(() => {
+            setIsDropdownOpen(false);
+          }, 100);
           // Arrow rotation is now handled by the Logo component via isDropdownOpen prop
         }} 
       />
