@@ -174,16 +174,32 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
 
   // Choose the appropriate video source based on device and connection speed
   const getDesktopVideoSource = () => {
+    // Hard-code the timestamp for cache busting
+    const timestamp = Date.now();
     const source = isSlowConnection ? VIDEOS.desktopLow : VIDEOS.desktopHigh;
-    console.log("Loading desktop video:", source);
-    return source;
+    const sourceWithTimestamp = `${source}?v=${timestamp}`;
+    console.log("Loading desktop video:", sourceWithTimestamp);
+    return sourceWithTimestamp;
   };
   
   const getMobileVideoSource = () => {
+    // Hard-code the timestamp for cache busting
+    const timestamp = Date.now();
     const source = isSlowConnection ? VIDEOS.mobileLow : VIDEOS.mobileHigh;
-    console.log("Loading mobile video:", source);
-    return source;
+    const sourceWithTimestamp = `${source}?v=${timestamp}`;
+    console.log("Loading mobile video:", sourceWithTimestamp);
+    return sourceWithTimestamp;
   };
+  
+  // Force reload videos when component mounts
+  useEffect(() => {
+    if (desktopVideoRef.current) {
+      desktopVideoRef.current.load();
+    }
+    if (mobileVideoRef.current) {
+      mobileVideoRef.current.load();
+    }
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[-1] overflow-hidden">
@@ -220,10 +236,22 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
               // Ensures the video scales properly on all desktop screen sizes
               // while maintaining aspect ratio and filling the container
             }}
-            onLoadedData={() => setVideoLoaded(true)}
-            onError={() => setVideoError("Failed to load desktop video")}
+            onLoadedData={(e) => {
+              setVideoLoaded(true);
+              console.log("Current video source:", (e.target as HTMLVideoElement).currentSrc);
+              console.log("Video dimensions:", {
+                videoWidth: (e.target as HTMLVideoElement).videoWidth,
+                videoHeight: (e.target as HTMLVideoElement).videoHeight,
+                displayWidth: (e.target as HTMLVideoElement).offsetWidth,
+                displayHeight: (e.target as HTMLVideoElement).offsetHeight
+              });
+            }}
+            onError={(e) => {
+              setVideoError("Failed to load desktop video");
+              console.error("Desktop video error:", e);
+            }}
           >
-            <source src={getDesktopVideoSource()} type="video/mp4" />
+            <source src={getDesktopVideoSource()} type="video/mp4" key={`desktop-${Date.now()}`} />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -250,10 +278,22 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
                 // The video will scale to cover the entire container while maintaining aspect ratio
                 // This ensures no empty spaces on different screen sizes
               }}
-              onLoadedData={() => setVideoLoaded(true)}
-              onError={() => setVideoError("Failed to load mobile video")}
+              onLoadedData={(e) => {
+                setVideoLoaded(true);
+                console.log("Current mobile video source:", (e.target as HTMLVideoElement).currentSrc);
+                console.log("Mobile video dimensions:", {
+                  videoWidth: (e.target as HTMLVideoElement).videoWidth,
+                  videoHeight: (e.target as HTMLVideoElement).videoHeight,
+                  displayWidth: (e.target as HTMLVideoElement).offsetWidth,
+                  displayHeight: (e.target as HTMLVideoElement).offsetHeight
+                });
+              }}
+              onError={(e) => {
+                setVideoError("Failed to load mobile video");
+                console.error("Mobile video error:", e);
+              }}
             >
-              <source src={getMobileVideoSource()} type="video/mp4" />
+              <source src={getMobileVideoSource()} type="video/mp4" key={`mobile-${Date.now()}`} />
               Your browser does not support the video tag.
             </video>
           </div>
