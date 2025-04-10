@@ -153,7 +153,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         }
                       }}
                     >
-                      {/* Styled to match the reference exactly */}
+                      {/* Styled to match the reference exactly with consistent spacing */}
                       {category.isTitle ? (
                         <div 
                           className="py-1.5 my-1 rounded-lg flex items-center bg-[#EDEAE7]/50"
@@ -163,7 +163,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           </span>
                         </div>
                       ) : (
-                        <span className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1 text-black">
+                        <span 
+                          className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1 text-black"
+                          // Ensure consistent spacing for special menu items
+                          style={{ 
+                            padding: '0.375rem 1rem',
+                            margin: '0.25rem 0'
+                          }}
+                        >
                           {category.name}
                         </span>
                       )}
@@ -177,7 +184,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             href="#" 
                             className="block active:scale-95 transition-all duration-150 text-black"
                           >
-                            <span className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black">
+                            <span 
+                              className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
+                              style={{ 
+                                padding: '0.375rem 1rem',
+                                margin: '0.25rem 0'
+                              }}
+                            >
                               {subcategory.name}
                             </span>
                           </a>
