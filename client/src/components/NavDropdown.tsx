@@ -121,15 +121,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   return (
     <div 
-      className="fixed inset-0 z-50 bg-white overflow-hidden"
+      className={`fixed z-50 bg-white overflow-hidden ${isMobile ? 'inset-0' : 'top-0 left-0 right-0'}`}
       onClick={handleOutsideClick}
     >
       <div 
         ref={contentRef} 
-        className="w-full h-full overflow-auto" 
+        className={`w-full overflow-auto ${isMobile ? 'h-full' : ''}`}
         style={{
           height: isMobile ? '100%' : '572px',
-          maxHeight: isMobile ? '100vh' : '80vh'
+          maxHeight: isMobile ? '100vh' : '572px'
         }}
       >
         {/* Mobile Layout - Exact match to the reference image */}
