@@ -306,7 +306,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
-                                                    boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.15)'
+                                                    boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.08)'
                                                   }}
                                                 >
                                                   {/* Content inside the container - keeping it empty or using a placeholder */}
@@ -351,7 +351,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
-                                                  boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.15)'
+                                                  boxShadow: '0px 2px 6px rgba(0, 0, 0, 0.08)'
                                                 }}
                                               >
                                                 {/* Content inside the container with play button overlay */}
