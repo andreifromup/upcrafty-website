@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 className={`
                   ${isAboutPage || useBlackButton
                     ? "bg-black text-white border border-black"
-                    : "text-white border-none"
+                    : "bg-[#FF6512] text-white border-none"
                   }
                   rounded-full uppercase font-normal tracking-[1.5px] text-[12px] leading-[16px]
                   flex items-center justify-center cursor-pointer 
@@ -86,8 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 style={{ 
                   width: "90px", 
                   height: "28px",
-                  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
-                  backgroundColor: isAboutPage || useBlackButton ? undefined : "#FF6512"
+                  WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' 
                 }}
                 onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}
               >
@@ -96,11 +95,10 @@ const Navbar: React.FC<NavbarProps> = ({
             ) : (
               // Desktop version with hover effect
               <Button 
-                style={isAboutPage || useBlackButton ? undefined : { backgroundColor: "#FF6512" }}
                 className={`
                   ${isAboutPage || useBlackButton
                     ? "bg-black hover:bg-white text-white hover:text-black border border-black"
-                    : "text-white hover:bg-white hover:text-[#FF6512] border-none"
+                    : "bg-[#FF6512] hover:bg-white text-white hover:text-[#FF6512] border-none"
                   } 
                   rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] 
                   h-[34px] w-[107px] p-0 transition-all duration-300 active:scale-95

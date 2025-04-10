@@ -11,9 +11,6 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        brand: {
-          orange: "#FF6512"
-        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
