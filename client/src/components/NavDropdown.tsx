@@ -224,6 +224,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             key={subIdx} 
                             href="#" 
                             className="block active:scale-95 transition-all duration-150 text-black"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleSubcategoryClick(subcategory.name);
+                            }}
                           >
                             <span 
                               className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
@@ -243,92 +247,67 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Custom simple carousel - mobile only */}
-            <div className="mt-auto pt-4 mb-2 relative">
-              {/* Gradient overlays for fade effect on the sides */}
-              <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-white to-transparent z-10"></div>
-              <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
-              
-              {/* Simple fixed-height carousel with CSS transitions */}
-              <div className="overflow-hidden relative h-[300px]">
-                <div 
-                  className="flex transition-transform duration-300 ease-in-out"
-                  style={{ 
-                    transform: `translateX(calc(50% - 110px - ${activeIndex * 220}px))`,
-                    height: "300px"
-                  }}
-                >
-                  {portfolioImages.map((image, idx) => (
-                    <div 
-                      key={idx} 
-                      className="flex-shrink-0 mx-1 cursor-pointer"
-                      onClick={() => {
-                        // Navigate to previous or next slide on click
-                        const newIndex = idx > activeIndex 
-                          ? Math.min(activeIndex + 1, portfolioImages.length - 1)
-                          : Math.max(activeIndex - 1, 0);
-                        setActiveIndex(newIndex);
-                      }}
-                    >
-                      <div className="w-[220px] h-[300px] overflow-hidden rounded-lg">
-                        <img 
-                          src={image} 
-                          alt={`Featured project ${idx + 1}`}
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Touch swipe handling */}
-              <div 
-                className="absolute inset-0 z-20"
-                onTouchStart={(e) => {
-                  const touchStartX = e.touches[0].clientX;
-                  
-                  const handleTouchEnd = (e: TouchEvent) => {
-                    const touchEndX = e.changedTouches[0].clientX;
-                    const diffX = touchEndX - touchStartX;
-                    
-                    // Detect swipe direction and navigate
-                    if (Math.abs(diffX) > 50) { // Minimum swipe distance
-                      if (diffX > 0) {
-                        // Swiped right - go to previous
-                        setActiveIndex(prev => Math.max(0, prev - 1));
-                      } else {
-                        // Swiped left - go to next
-                        setActiveIndex(prev => Math.min(portfolioImages.length - 1, prev + 1));
-                      }
-                    }
-                    
-                    // Remove event listener
-                    document.removeEventListener('touchend', handleTouchEnd);
-                  };
-                  
-                  // Add touch end event listener
-                  document.addEventListener('touchend', handleTouchEnd);
-                }}
-              ></div>
-              
-              {/* Indicator dots */}
-              <div className="flex justify-center items-center mt-4 mb-4">
-                {portfolioImages.map((_, index) => (
-                  <div 
-                    key={index}
-                    className={`w-2.5 h-2.5 mx-1.5 rounded-full border border-black ${index === activeIndex ? 'bg-black' : 'bg-white'} cursor-pointer`}
-                    onClick={() => setActiveIndex(index)}
-                  ></div>
-                ))}
-              </div>
-            </div>
-            
             {/* Social icons at bottom - center aligned */}
-            <div className="flex justify-center pb-4 pt-2">
+            <div className="mt-auto flex justify-center pb-4 pt-2">
               <SocialIcons inDropdown={true} />
             </div>
+            
+            {/* Dynamic content overlay for subcategories */}
+            {showOverlay && selectedSubcategory && (
+              <div className="fixed bottom-0 left-0 right-0 bg-white z-[60] px-4 shadow-lg">
+                <div className="relative w-full">
+                  {/* Close button */}
+                  <button 
+                    className="absolute top-3 right-3 z-20 p-1"
+                    onClick={handleCloseOverlay}
+                  >
+                    <XIcon size={24} className="text-black" />
+                  </button>
+                  
+                  {/* Image overlay */}
+                  {overlayType === 'image' && (
+                    <div className="w-full py-6">
+                      <div className="rounded-lg overflow-hidden w-full aspect-[3/4] bg-gray-100">
+                        {/* This will be replaced with actual images later */}
+                        <div 
+                          className="w-full h-full flex items-center justify-center"
+                          style={{ 
+                            backgroundColor: selectedSubcategory === "CARTOON" ? "#ffaa00" :
+                                             selectedSubcategory === "CHARACTER DESIGN" ? "#7f4eff" :
+                                             selectedSubcategory === "ENVIRONMENT" ? "#00bf9a" : 
+                                             selectedSubcategory === "CHARACTER MODELING" ? "#ff4e4e" : "#eeeeee"
+                          }}
+                        >
+                          <p className="text-center text-white font-medium">
+                            {selectedSubcategory}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Video overlay */}
+                  {overlayType === 'video' && (
+                    <div className="w-full py-6">
+                      <div className="rounded-lg overflow-hidden w-full aspect-video bg-gray-100">
+                        {/* This will be replaced with actual videos later */}
+                        <div 
+                          className="w-full h-full flex items-center justify-center"
+                          style={{ 
+                            backgroundColor: selectedSubcategory === "2D ANIMATIONS" ? "#4e94ff" :
+                                             selectedSubcategory === "MOTION GRAPHICS" ? "#ff6b4e" : "#eeeeee"
+                          }}
+                        >
+                          <p className="text-center text-white font-medium">
+                            {selectedSubcategory} Video
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
         
@@ -380,6 +359,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             key={subIdx} 
                             href="#" 
                             className="block active:scale-95 transition-all duration-150"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleSubcategoryClick(subcategory.name);
+                            }}
                           >
                             {/* Use the reusable component with hover effect for subcategories too */}
                             <MenuItemWithHoverEffect name={subcategory.name} />
