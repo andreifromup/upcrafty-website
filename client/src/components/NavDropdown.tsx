@@ -286,16 +286,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, imgIdx) => (
-                                            <CarouselItem key={imgIdx} className={`pl-2 ${imgIdx === 0 ? 'basis-[85%]' : 'basis-[25%]'}`}>
-                                              <div className="relative rounded-lg overflow-hidden">
+                                            <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
+                                              <div className={`relative rounded-lg overflow-hidden ${imgIdx !== 0 ? 'opacity-80' : ''}`}>
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} image ${imgIdx + 1}`}
                                                   className="w-full aspect-square object-cover"
                                                 />
-                                                {/* Add a gradient fade to the right edge if there are multiple items */}
+                                                {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && imgIdx === 0 && (
                                                   <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
                                                 )}
@@ -316,10 +316,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className={`pl-2 ${vidIdx === 0 ? 'basis-[85%]' : 'basis-[25%]'}`}>
-                                              <div className="relative rounded-lg overflow-hidden">
+                                            <CarouselItem key={vidIdx} className={`pl-2 basis-full`}>
+                                              <div className={`relative rounded-lg overflow-hidden ${vidIdx !== 0 ? 'opacity-80' : ''}`}>
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} video ${vidIdx + 1}`}
@@ -331,7 +331,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
                                                   </div>
                                                 </div>
-                                                {/* Add a gradient fade to the right edge if there are multiple items */}
+                                                {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && vidIdx === 0 && (
                                                   <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
                                                 )}
