@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ICONS, LOGOS, COLORS } from "@/assets/constants";
+import { ICONS, LOGOS, COLORS, ORANGE_FILTER } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "wouter";
 
@@ -23,9 +23,6 @@ const Logo: React.FC<LogoProps> = ({
   // Simple hover state for desktop
   const [hover, setHover] = useState(false);
   
-  // The exact orange filter for #FF6512
-  const orangeFilter = "invert(45%) sepia(63%) saturate(4523%) hue-rotate(359deg) brightness(102%) contrast(107%)";
-  
   // Use the specific dimensions from the design specs
   if (size === "header") {
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
@@ -43,7 +40,7 @@ const Logo: React.FC<LogoProps> = ({
             className="h-full w-auto absolute transition-colors duration-200"
             style={{
               filter: !isMobile && hover 
-                ? orangeFilter
+                ? ORANGE_FILTER
                 : useBlackLogo ? 'invert(1)' : 'none'
             }}
           />
@@ -57,7 +54,7 @@ const Logo: React.FC<LogoProps> = ({
               className="absolute w-full h-full transition-colors duration-200"
               style={{
                 filter: !isMobile && hover 
-                ? orangeFilter
+                ? ORANGE_FILTER
                 : useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
