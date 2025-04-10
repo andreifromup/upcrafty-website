@@ -76,24 +76,39 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     isTitle?: boolean; 
     onClick?: (e: React.MouseEvent) => void 
   }> = ({ name, isTitle = false, onClick }) => {
-    // Desktop menu items with original hover animation
+    // Desktop menu items - match styling with mobile menu
     if (!isMobile) {
-      return (
-        <div 
-          className={`
-            relative overflow-hidden group 
-            ${isTitle ? 'mb-3 font-medium' : 'font-normal'} 
-            ${isTitle ? 'text-[15px] leading-[20px]' : 'text-[15px] leading-[20px]'}
-          `}
-          onClick={onClick}
-        >
-          <span className="relative z-10 text-black">{name}</span>
+      if (isTitle) {
+        return (
           <div 
-            className="absolute bottom-0 left-0 w-full h-[1px] bg-black transform origin-left scale-x-0 
-                      group-hover:scale-x-100 transition-transform duration-300"
-          ></div>
-        </div>
-      );
+            className="py-1.5 my-1 rounded-lg flex items-center bg-[#EDEAE7]/50"
+            onClick={onClick}
+          >
+            <span className="font-medium text-[15px] leading-[20px] tracking-[1px] uppercase px-4 text-black">
+              {name}
+            </span>
+          </div>
+        );
+      } else {
+        return (
+          <div 
+            className="relative overflow-hidden group"
+            onClick={onClick}
+            style={{ 
+              padding: '0.375rem 1rem',
+              margin: '0.25rem 0'
+            }}
+          >
+            <span className="font-normal text-[15px] leading-[20px] text-black relative z-10">
+              {name}
+            </span>
+            <div 
+              className="absolute bottom-0 left-0 w-full h-[1px] bg-black transform origin-left scale-x-0 
+                        group-hover:scale-x-100 transition-transform duration-300"
+            ></div>
+          </div>
+        );
+      }
     }
     
     // Mobile items don't have hover effect
@@ -299,7 +314,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Menu Categories - arranged in columns */}
               <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
-                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} mb-5 pr-4`}>
+                  <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-55px]' : ''} mb-5 pr-4`}>
                     <a 
                       href={category.name === "ABOUT US" ? "/about" : "#"} 
                       className="uppercase block mb-3 active:scale-95 transition-all duration-150"
