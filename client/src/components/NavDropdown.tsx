@@ -254,57 +254,70 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Dynamic content overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
-              <div className="fixed bottom-0 left-0 right-0 bg-white z-[60] px-4 shadow-lg">
+              <div className="fixed bottom-0 left-0 right-0 bg-white z-[60] pb-16 shadow-lg">
                 <div className="relative w-full">
-                  {/* Close button */}
-                  <button 
-                    className="absolute top-3 right-3 z-20 p-1"
-                    onClick={handleCloseOverlay}
-                  >
-                    <XIcon size={24} className="text-black" />
-                  </button>
                   
-                  {/* Image overlay */}
+                  {/* Image carousel overlay - matches the carousel.png screenshot */}
                   {overlayType === 'image' && (
-                    <div className="w-full py-6">
-                      <div className="rounded-lg overflow-hidden w-full aspect-[3/4] bg-gray-100">
-                        {/* This will be replaced with actual images later */}
-                        <div 
-                          className="w-full h-full flex items-center justify-center"
-                          style={{ 
-                            backgroundColor: selectedSubcategory === "CARTOON" ? "#ffaa00" :
-                                             selectedSubcategory === "CHARACTER DESIGN" ? "#7f4eff" :
-                                             selectedSubcategory === "ENVIRONMENT" ? "#00bf9a" : 
-                                             selectedSubcategory === "CHARACTER MODELING" ? "#ff4e4e" : "#eeeeee"
-                          }}
-                        >
-                          <p className="text-center text-white font-medium">
-                            {selectedSubcategory}
-                          </p>
+                    <div className="w-full">
+                      <div className="overflow-visible">
+                        {/* Horizontal image carousel */}
+                        <div className="flex gap-4 px-4 py-6 overflow-x-auto hide-scrollbar snap-x">
+                          {/* First image */}
+                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
+                            <img 
+                              src={portfolioImages[0]} 
+                              alt={`${selectedSubcategory} 1`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          
+                          {/* Second image */}
+                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
+                            <img 
+                              src={portfolioImages[1]} 
+                              alt={`${selectedSubcategory} 2`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          
+                          {/* Third image (if needed) */}
+                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
+                            <img 
+                              src={portfolioImages[2]} 
+                              alt={`${selectedSubcategory} 3`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
                   )}
                   
-                  {/* Video overlay */}
+                  {/* Video overlay - matches the video.png screenshot */}
                   {overlayType === 'video' && (
-                    <div className="w-full py-6">
-                      <div className="rounded-lg overflow-hidden w-full aspect-video bg-gray-100">
-                        {/* This will be replaced with actual videos later */}
-                        <div 
-                          className="w-full h-full flex items-center justify-center"
-                          style={{ 
-                            backgroundColor: selectedSubcategory === "2D ANIMATIONS" ? "#4e94ff" :
-                                             selectedSubcategory === "MOTION GRAPHICS" ? "#ff6b4e" : "#eeeeee"
-                          }}
-                        >
-                          <p className="text-center text-white font-medium">
-                            {selectedSubcategory} Video
-                          </p>
+                    <div className="w-full px-4 pt-6 pb-2">
+                      <div className="rounded-lg overflow-hidden w-full aspect-[3/2]">
+                        {/* Video container with aspect ratio */}
+                        <div className="relative w-full h-full">
+                          <img 
+                            src={portfolioImages[2]} 
+                            alt={`${selectedSubcategory} video thumbnail`}
+                            className="w-full h-full object-cover"
+                          />
+                          
+                          {/* Play button overlay - will be replaced with actual video */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
+                              <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   )}
+                  
+                  {/* No close button needed as tapping outside will close the overlay */}
                 </div>
               </div>
             )}
