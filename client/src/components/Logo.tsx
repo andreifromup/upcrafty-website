@@ -2,6 +2,7 @@ import React from "react";
 import { ICONS, LOGOS, COLORS, ORANGE_FILTER } from "@/assets/constants";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocation } from "wouter";
+import "./logo.css";
 
 interface LogoProps {
   size?: "small" | "medium" | "large" | "header" | "footer";
@@ -20,37 +21,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div 
-        className="flex items-center cursor-pointer group"
-        onMouseEnter={(e) => {
-          if (!isMobile) {
-            // Apply orange filter to both logo and dropdown arrow
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              logoImg.style.filter = ORANGE_FILTER;
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.filter = ORANGE_FILTER;
-            }
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!isMobile) {
-            // Reset both logo and dropdown arrow to original color
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-            }
-          }
-        }}
+        className={`logo-container flex items-center cursor-pointer ${useBlackLogo ? 'black-logo' : 'white-logo'} ${isMobile ? 'mobile' : ''}`}
         onTouchStart={(e) => {
           if (isMobile) {
             const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
@@ -87,9 +58,6 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
             className="logo-img h-full w-auto absolute transition-all duration-300"
-            style={{
-              filter: useBlackLogo ? 'invert(1)' : 'none'
-            }}
           />
         </div>
         {includeDropdown && (
@@ -100,7 +68,6 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               alt="Dropdown" 
               className="dropdown-img absolute w-full h-full transition-all duration-300"
               style={{
-                filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
               id="dropdown-arrow"
