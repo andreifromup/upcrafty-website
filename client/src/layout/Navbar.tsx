@@ -53,9 +53,9 @@ const Navbar: React.FC<NavbarProps> = ({
           z-[100]
         `}
       >
-        {/* Logo with dropdown arrow - responsive sizing */}
+        {/* Logo with dropdown arrow - responsive sizing, preserving hover effect */}
         <div 
-          className="flex items-center cursor-pointer active:scale-95 transition-all duration-150" 
+          className="flex items-center cursor-pointer hover:scale-100 active:scale-95 transition-all duration-150" 
           onClick={toggleDropdown}
         >
           <Logo 

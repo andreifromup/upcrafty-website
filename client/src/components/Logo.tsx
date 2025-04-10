@@ -39,15 +39,18 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
         onMouseLeave={(e) => {
           if (!isMobile) {
             // Reset both logo and dropdown arrow to original color
+            // But maintain the hover state when dropdown is open
             const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
             const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
             
             if (logoImg) {
-              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+              // Always keep the hover effect (orange filter) when dropdown is open
+              logoImg.style.filter = isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none');
             }
             
             if (dropdownImg) {
-              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+              // Always keep the hover effect (orange filter) when dropdown is open
+              dropdownImg.style.filter = isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none');
             }
           }
         }}
@@ -88,7 +91,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             alt="Upcrafty Logo" 
             className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              filter: useBlackLogo ? 'invert(1)' : 'none'
+              filter: isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none')
             }}
           />
         </div>
@@ -100,7 +103,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               alt="Dropdown" 
               className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
-                filter: useBlackLogo ? 'invert(1)' : 'none',
+                filter: isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none'),
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
               id="dropdown-arrow"
