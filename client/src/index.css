@@ -151,3 +151,14 @@ body.about-page #root {
   -webkit-perspective: 1000;
   perspective: 1000;
 }
+
+/* Fix for logo hover glitch */
+.logo-container .logo-img,
+.logo-container .dropdown-img {
+  transition: filter 0.2s ease !important;
+}
+
+.logo-container:hover .logo-img,
+.logo-container:hover .dropdown-img {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(42%) saturate(2938%) hue-rotate(354deg) brightness(100%) contrast(103%) !important;
+}

@@ -20,27 +20,19 @@ const Logo: React.FC<LogoProps> = ({
   const [location] = useLocation();
   const isAboutPage = location === "/about";
   
-  const [isHovered, setIsHovered] = React.useState(false);
-  
   // Use the specific dimensions from the design specs
   if (size === "header") {
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
-      <div 
-        className="flex items-center cursor-pointer"
-        onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={() => !isMobile && setIsHovered(false)}
-      >
+      <div className="logo-container flex items-center cursor-pointer">
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className="h-full w-auto absolute transition-all duration-300"
+            className="logo-img h-full w-auto absolute"
             style={{
-              filter: isHovered 
-                ? ORANGE_FILTER 
-                : useBlackLogo ? 'invert(1)' : 'none'
+              filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
           />
         </div>
@@ -50,11 +42,9 @@ const Logo: React.FC<LogoProps> = ({
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className="absolute w-full h-full transition-all duration-300"
+              className="dropdown-img absolute w-full h-full"
               style={{
-                filter: isHovered 
-                  ? ORANGE_FILTER 
-                  : useBlackLogo ? 'invert(1)' : 'none',
+                filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
             />
