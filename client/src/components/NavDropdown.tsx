@@ -283,59 +283,84 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <SocialIcons inDropdown={true} />
             </div>
             
-            {/* Fullscreen overlay for subcategories */}
+            {/* Fullscreen overlay for subcategories - START OF REPLACED SECTION */}
             {showOverlay && selectedSubcategory && (
-              <>
-                {/* Main content overlay */}
-                <div className="fixed inset-0 bg-white z-[60]">
-                  {/* Image overlay content */}
-                  {overlayType === 'image' && (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-full max-w-md max-h-[70vh]">
-                        <img 
-                          src={portfolioImages[0]} 
-                          alt={selectedSubcategory}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
+              <div id="subcategory-overlay" className="fixed inset-0 z-[60]">
+                {/* Background */}
+                <div className="fixed inset-0 bg-white" />
+                
+                {/* Image overlay content */}
+                {overlayType === 'image' && (
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+                    <div className="w-full max-w-md max-h-[70vh]">
+                      <img 
+                        src={portfolioImages[0]} 
+                        alt={selectedSubcategory}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                  )}
-                  
-                  {/* Video overlay content */}
-                  {overlayType === 'video' && (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-full max-w-md aspect-video">
-                        <img 
-                          src={portfolioImages[2]} 
-                          alt={`${selectedSubcategory} video thumbnail`}
-                          className="w-full h-full object-contain"
-                        />
-                        
-                        {/* Play button */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
-                            <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
-                          </div>
+                  </div>
+                )}
+                
+                {/* Video overlay content */}
+                {overlayType === 'video' && (
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+                    <div className="w-full max-w-md aspect-video">
+                      <img 
+                        src={portfolioImages[2]} 
+                        alt={`${selectedSubcategory} video thumbnail`}
+                        className="w-full h-full object-contain"
+                      />
+                      
+                      {/* Play button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
+                          <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
                         </div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
                 
-                {/* Close icon positioned with fixed button */}
+                {/* Full-screen transparent button layer BEHIND the visual X */}
                 <div
-                  className="fixed top-0 right-0 z-[70] w-20 h-20 flex items-center justify-center"
-                  onClick={() => {
-                    console.log('Closing from outer div handler');
+                  id="touch-close-layer" 
+                  className="fixed top-0 right-0 z-[65] w-full h-full"
+                  style={{ 
+                    background: 'transparent',
+                    width: '100vw',
+                    height: '100vh',
+                    cursor: 'default'
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('FULL SCREEN CLOSE CLICKED');
                     setShowOverlay(false);
                     setSelectedSubcategory(null);
                   }}
-                >
-                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center">
+                />
+                
+                {/* Special corner area just for the close button - appears visually the same */}
+                <div className="fixed top-0 right-0 z-[80] w-[100px] h-[100px]">
+                  {/* ACTUAL CLICKABLE AREA */}
+                  <div 
+                    className="absolute top-0 right-0 w-[100px] h-[100px]"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      console.log('CORNER BUTTON CLICKED');
+                      setShowOverlay(false);
+                      setSelectedSubcategory(null);
+                    }}
+                  />
+                  
+                  {/* Visual button that matches appearance */}
+                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center pointer-events-none">
                     <XIcon size={24} className="text-black" />
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         )}
