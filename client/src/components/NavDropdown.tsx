@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
-import { XIcon } from "lucide-react";
+import { XIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
-import { NAV_CATEGORIES } from "@/assets/constants";
+import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayType, setOverlayType] = useState<'image' | 'video'>('image');
   const [activeIndex, setActiveIndex] = useState(0);
@@ -44,7 +46,19 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     setSelectedSubcategory(null);
   };
   
-  // Handle subcategory click
+  // Handle toggle category expansion
+  const toggleCategoryExpansion = (categoryName: string) => {
+    setExpandedCategories(prev => {
+      // If category is already expanded, remove it from the list
+      if (prev.includes(categoryName)) {
+        return prev.filter(name => name !== categoryName);
+      }
+      // If not expanded, close any other expanded categories and add this one
+      return [categoryName];
+    });
+  };
+
+  // Handle subcategory click - now used for image display under categories
   const handleSubcategoryClick = (subcategory: string) => {
     // If the same subcategory is clicked again, close the overlay
     if (selectedSubcategory === subcategory && showOverlay) {
@@ -228,44 +242,95 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               {/* Intentionally empty to create space - actual logo is in the Navbar */}
             </div>
             
-            {/* Menu Categories - Exact match to the reference with proper spacing to not overlap with logo */}
-            <div className="flex-grow overflow-hidden px-4 mt-4">
+            {/* Menu Categories - With vertical scrolling when content overflows */}
+            <div className="flex-grow overflow-y-auto px-4 mt-4">
               <div className="flex flex-col space-y-0.5">
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className="mb-1">
-                    <a 
-                      href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className={`uppercase block text-black ${!category.isTitle ? 'active:scale-95 transition-all duration-150' : ''}`}
-                      onClick={(e) => {
-                        try {
-                          if (category.name === "CONTACT") {
-                            e.preventDefault();
-                            window.open("https://tally.so/r/m6Pl1P", "_blank");
-                            handleClose();
-                          } else if (category.name === "ABOUT US") {
-                            // Let the link navigate naturally to /about
-                            handleClose();
-                          } else if (!category.isTitle) {
-                            e.preventDefault();
-                            setSelectedCategory(selectedCategory === category.name ? null : category.name);
-                          } else {
-                            e.preventDefault();
-                          }
-                        } catch (error) {
-                          console.error("Error handling category click:", error);
-                        }
-                      }}
-                    >
-                      {/* Styled to match the reference exactly with consistent spacing */}
-                      {category.isTitle ? (
+                    {category.isTitle ? (
+                      <div className="mb-1">
+                        {/* Title category with arrow for expansion */}
                         <div 
-                          className="py-1.5 my-1 rounded-lg flex items-center bg-[#EDEAE7]/50"
+                          className="py-1.5 my-1 rounded-lg flex items-center justify-between bg-[#EDEAE7]/50 cursor-pointer"
+                          onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
                         >
                           <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4 text-black">
                             {category.name}
                           </span>
+                          {category.subcategories?.length > 0 && (
+                            <div className="pr-3">
+                              {expandedCategories.includes(category.name) ? (
+                                <ChevronUpIcon className="w-4 h-4 text-black" />
+                              ) : (
+                                <ChevronDownIcon className="w-4 h-4 text-black" />
+                              )}
+                            </div>
+                          )}
                         </div>
-                      ) : (
+                        
+                        {/* Subcategories and images when expanded */}
+                        {expandedCategories.includes(category.name) && category.subcategories && (
+                          <div className="mt-2 pl-4">
+                            {category.subcategories.map((subcategory, subIdx) => (
+                              <div key={subIdx} className="mb-4">
+                                <div className="mb-2">
+                                  <span 
+                                    className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
+                                  >
+                                    {subcategory.name}
+                                  </span>
+                                </div>
+                                
+                                {/* Image carousel for each subcategory */}
+                                <div className="px-4 mt-2">
+                                  {/* Simple carousel with images */}
+                                  <Carousel className="w-full">
+                                    <CarouselContent>
+                                      {/* For demo purposes, show the 3 portfolio images */}
+                                      {[0, 1, 2].map((_, imgIdx) => (
+                                        <CarouselItem key={imgIdx} className="basis-full sm:basis-1/2 md:basis-1/3">
+                                          <div className="p-1">
+                                            <img 
+                                              src={portfolioImages[imgIdx % portfolioImages.length]} 
+                                              alt={`${subcategory.name} image ${imgIdx + 1}`}
+                                              className="w-full aspect-square object-cover rounded-md"
+                                            />
+                                          </div>
+                                        </CarouselItem>
+                                      ))}
+                                    </CarouselContent>
+                                    <div className="flex justify-center gap-2 mt-2">
+                                      <CarouselPrevious className="relative inset-auto" />
+                                      <CarouselNext className="relative inset-auto" />
+                                    </div>
+                                  </Carousel>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <a 
+                        href={category.name === "ABOUT US" ? "/about" : "#"} 
+                        className="uppercase block text-black active:scale-95 transition-all duration-150"
+                        onClick={(e) => {
+                          try {
+                            if (category.name === "CONTACT") {
+                              e.preventDefault();
+                              window.open("https://tally.so/r/m6Pl1P", "_blank");
+                              handleClose();
+                            } else if (category.name === "ABOUT US") {
+                              // Let the link navigate naturally to /about
+                              handleClose();
+                            } else {
+                              e.preventDefault();
+                            }
+                          } catch (error) {
+                            console.error("Error handling category click:", error);
+                          }
+                        }}
+                      >
                         <span 
                           className="font-normal text-[14px] leading-[18px] uppercase block px-4 py-1.5 my-1 text-black"
                           // Ensure consistent spacing for special menu items
@@ -276,33 +341,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         >
                           {category.name}
                         </span>
-                      )}
-                    </a>
-                    
-                    {category.subcategories && category.subcategories.length > 0 && (
-                      <div>
-                        {category.subcategories.map((subcategory, subIdx) => (
-                          <a 
-                            key={subIdx} 
-                            href="#" 
-                            className="block active:scale-95 transition-all duration-150 text-black"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              handleSubcategoryClick(subcategory.name);
-                            }}
-                          >
-                            <span 
-                              className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
-                              style={{ 
-                                padding: '0.375rem 1rem',
-                                margin: '0.25rem 0'
-                              }}
-                            >
-                              {subcategory.name}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
+                      </a>
                     )}
                   </div>
                 ))}
@@ -313,84 +352,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             <div className="mt-auto flex justify-center pb-4 pt-2">
               <SocialIcons inDropdown={true} />
             </div>
-            
-            {/* Completely isolated overlay system */}
-            {showOverlay && selectedSubcategory && (
-              <div 
-                className="fixed inset-0 bg-white z-[9999]" 
-                style={{ pointerEvents: 'auto' }}
-              >
-                {/* BACK BUTTON - positioned at the top of the content area */}
-                
-                {/* Content container - separate from the X button */}
-                <div className="w-full h-full p-4 relative" style={{ pointerEvents: 'auto' }}>
-                  
-                  {/* Back button above content */}
-                  <button
-                    className="absolute top-6 left-6 px-4 py-2 bg-white/80 shadow-md rounded-md z-[10000] border-0 cursor-pointer flex items-center"
-                    style={{ touchAction: 'manipulation' }}
-                    onClick={() => {
-                      setShowOverlay(false);
-                      setSelectedSubcategory(null);
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
-                      setShowOverlay(false);
-                      setSelectedSubcategory(null);
-                    }}
-                  >
-                    <span className="text-black text-md font-medium">← Back</span>
-                  </button>
-                  
-                  {/* Content centered in remaining area - stop propagation on this area */}
-                  <div 
-                    className="absolute inset-0 pt-[25%] flex items-center justify-center"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {overlayType === 'image' && (
-                      <div className="w-full max-w-md max-h-[60vh]">
-                        <img 
-                          src={portfolioImages[0]} 
-                          alt={selectedSubcategory}
-                          className="w-full h-full object-contain"
-                          onClick={(e) => e.stopPropagation()}
-                        />
-                      </div>
-                    )}
-                    
-                    {overlayType === 'video' && (
-                      <div 
-                        className="w-full max-w-md aspect-video"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <img 
-                          src={portfolioImages[2]} 
-                          alt={`${selectedSubcategory} video thumbnail`}
-                          className="w-full h-full object-contain"
-                          onClick={(e) => e.stopPropagation()}
-                        />
-                        
-                        {/* Play button */}
-                        <div 
-                          className="absolute inset-0 flex items-center justify-center"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <div 
-                            className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <div 
-                              className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"
-                              onClick={(e) => e.stopPropagation()}
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
         
