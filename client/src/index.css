@@ -151,5 +151,3 @@ body.about-page #root {
   -webkit-perspective: 1000;
   perspective: 1000;
 }
-
-/* Fix for logo hover glitch - REMOVED - now handled by React state */

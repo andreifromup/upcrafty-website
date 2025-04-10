@@ -1,12 +1,12 @@
 // Brand colors
 export const COLORS = {
-  orange: "#FF6512",
+  orange: "#FF6600",
   black: "#000000",
   white: "#FFFFFF"
 };
 
-// Orange filter for SVG elements - exact match for #FF6512
-export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(43%) sepia(72%) saturate(2157%) hue-rotate(359deg) brightness(104%) contrast(102%)';
+// Orange filter for SVG elements
+export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
 
 // Image assets for icons
 export const ICONS = {
@@ -36,9 +36,9 @@ export const ICONS = {
 // Video files for different platforms and network conditions
 export const VIDEOS = {
   desktopHigh: "/desktop.mp4",
-  desktopLow: "/desktop low.mp4",
+  desktopLow: "/desktop-low.mp4",
   mobileHigh: "/mobil.mp4",
-  mobileLow: "/mobil low.mp4",
+  mobileLow: "/mobil-low.mp4",
   aboutUs: "/about-us-video.mp4"
 };
 
