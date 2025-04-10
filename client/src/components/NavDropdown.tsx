@@ -58,8 +58,20 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   };
   
   // Handle overlay close
-  const handleCloseOverlay = () => {
+  const handleCloseOverlay = (e?: React.SyntheticEvent) => {
+    // Prevent any default behavior
+    if (e) {
+      if (e.preventDefault) e.preventDefault();
+      if (e.stopPropagation) e.stopPropagation();
+    }
     console.log('Closing overlay');
+    setShowOverlay(false);
+    setSelectedSubcategory(null);
+  };
+  
+  // Special handler for mobile touch devices
+  const handleTouchCloseButton = () => {
+    console.log('Touch close button');
     setShowOverlay(false);
     setSelectedSubcategory(null);
   };
@@ -310,16 +322,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   )}
                 </div>
                 
-                {/* Special div for close button, implemented as directly as possible */}
-                <div 
-                  className="fixed top-6 right-6 z-[70] w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center cursor-pointer"
+                {/* Close icon positioned with fixed button */}
+                <div
+                  className="fixed top-0 right-0 z-[70] w-20 h-20 flex items-center justify-center"
                   onClick={() => {
-                    console.log('DIRECT Close div clicked');
+                    console.log('Closing from outer div handler');
                     setShowOverlay(false);
                     setSelectedSubcategory(null);
                   }}
                 >
-                  <XIcon size={24} className="text-black" />
+                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center">
+                    <XIcon size={24} className="text-black" />
+                  </div>
                 </div>
               </>
             )}
