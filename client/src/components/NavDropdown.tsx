@@ -249,20 +249,33 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className="mb-1">
                     {category.isTitle ? (
                       <div className="mb-1">
-                        {/* Title category with arrow for expansion */}
+                        {/* Title category */}
                         <div 
-                          className="py-1.5 my-1 rounded-lg flex items-center justify-between bg-[#EDEAE7]/50 cursor-pointer"
-                          onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
+                          className="py-1.5 my-1 rounded-lg bg-[#EDEAE7]/50 cursor-pointer"
                         >
-                          <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4 text-black">
-                            {category.name}
-                          </span>
+                          <div 
+                            className="flex items-center justify-between px-4"
+                            onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
+                          >
+                            <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase text-black">
+                              {category.name}
+                            </span>
+                          </div>
+                          
+                          {/* Separate arrow row */}
                           {category.subcategories?.length > 0 && (
-                            <div className="pr-3">
+                            <div 
+                              className="flex justify-end pr-3 pt-1"
+                              onClick={() => toggleCategoryExpansion(category.name)}
+                            >
                               {expandedCategories.includes(category.name) ? (
-                                <ChevronUpIcon className="w-4 h-4 text-black" />
+                                <div className="w-6 h-6 rounded-full bg-[#EDEAE7] border border-[#BCBCBC]/50 flex items-center justify-center">
+                                  <ChevronUpIcon className="w-4 h-4 text-black" />
+                                </div>
                               ) : (
-                                <ChevronDownIcon className="w-4 h-4 text-black" />
+                                <div className="w-6 h-6 rounded-full bg-[#EDEAE7] border border-[#BCBCBC]/50 flex items-center justify-center">
+                                  <ChevronDownIcon className="w-4 h-4 text-black" />
+                                </div>
                               )}
                             </div>
                           )}
@@ -281,29 +294,65 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   </span>
                                 </div>
                                 
-                                {/* Image carousel for each subcategory */}
+                                {/* Media display for each subcategory */}
                                 <div className="px-4 mt-2">
-                                  {/* Simple carousel with images */}
-                                  <Carousel className="w-full">
-                                    <CarouselContent>
-                                      {/* For demo purposes, show the 3 portfolio images */}
-                                      {[0, 1, 2].map((_, imgIdx) => (
-                                        <CarouselItem key={imgIdx} className="basis-full sm:basis-1/2 md:basis-1/3">
-                                          <div className="p-1">
-                                            <img 
-                                              src={portfolioImages[imgIdx % portfolioImages.length]} 
-                                              alt={`${subcategory.name} image ${imgIdx + 1}`}
-                                              className="w-full aspect-square object-cover rounded-md"
-                                            />
+                                  {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
+                                    <>
+                                      <Carousel className="w-full">
+                                        <CarouselContent>
+                                          {subcategory.items.map((item, imgIdx) => (
+                                            <CarouselItem key={imgIdx} className={`basis-full ${subcategory.mediaCount === 2 ? 'sm:basis-1/2' : subcategory.mediaCount === 3 ? 'sm:basis-1/3' : ''}`}>
+                                              <div className="p-1">
+                                                <img 
+                                                  src={item} 
+                                                  alt={`${subcategory.name} image ${imgIdx + 1}`}
+                                                  className="w-full aspect-square object-cover rounded-md"
+                                                />
+                                              </div>
+                                            </CarouselItem>
+                                          ))}
+                                        </CarouselContent>
+                                        {subcategory.mediaCount > 1 && (
+                                          <div className="flex justify-center gap-2 mt-4">
+                                            <CarouselPrevious className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                            <CarouselNext className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
                                           </div>
-                                        </CarouselItem>
-                                      ))}
-                                    </CarouselContent>
-                                    <div className="flex justify-center gap-2 mt-2">
-                                      <CarouselPrevious className="relative inset-auto" />
-                                      <CarouselNext className="relative inset-auto" />
-                                    </div>
-                                  </Carousel>
+                                        )}
+                                      </Carousel>
+                                    </>
+                                  )}
+                                  
+                                  {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
+                                    <>
+                                      <Carousel className="w-full">
+                                        <CarouselContent>
+                                          {subcategory.items.map((item, vidIdx) => (
+                                            <CarouselItem key={vidIdx} className={`basis-full ${subcategory.mediaCount === 2 ? 'sm:basis-1/2' : ''}`}>
+                                              <div className="p-1 relative">
+                                                <img 
+                                                  src={item} 
+                                                  alt={`${subcategory.name} video ${vidIdx + 1}`}
+                                                  className="w-full aspect-video object-cover rounded-md"
+                                                />
+                                                {/* Play button overlay */}
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
+                                                    <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </CarouselItem>
+                                          ))}
+                                        </CarouselContent>
+                                        {subcategory.mediaCount > 1 && (
+                                          <div className="flex justify-center gap-2 mt-4">
+                                            <CarouselPrevious className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                            <CarouselNext className="relative inset-auto h-8 w-8 bg-[#EDEAE7] border-none rounded-full text-black hover:bg-[#BCBCBC]/50" />
+                                          </div>
+                                        )}
+                                      </Carousel>
+                                    </>
+                                  )}
                                 </div>
                               </div>
                             ))}

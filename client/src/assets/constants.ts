@@ -88,31 +88,73 @@ export const NAV_CATEGORIES = [
     name: "ILLUSTRATIONS",
     isTitle: true,
     subcategories: [
-      { name: "CARTOON", isTitle: false, items: [] },
-      { name: "CHARACTER DESIGN", isTitle: false, items: [] }
-    ]
-  },
-  {
-    name: "ANIMATIONS",
-    isTitle: true,
-    subcategories: [
-      { name: "2D ANIMATIONS", isTitle: false, items: [] },
-      { name: "MOTION GRAPHICS", isTitle: false, items: [] }
+      { 
+        name: "CARTOON", 
+        isTitle: false, 
+        mediaType: "image",
+        mediaCount: 2,
+        items: ["/transp 1.png", "/transp 2.png"] 
+      },
+      { 
+        name: "CHARACTER DESIGN", 
+        isTitle: false, 
+        mediaType: "image",
+        mediaCount: 2,
+        items: ["/transp 1.png", "/transp 4.png"] 
+      }
     ]
   },
   {
     name: "GAMES",
     isTitle: true,
     subcategories: [
-      { name: "MOBILE GAMES", isTitle: false, items: [] }
+      { 
+        name: "MOBILE GAMES", 
+        isTitle: false,
+        mediaType: "image",
+        mediaCount: 2,
+        items: ["/transp 2.png", "/transp 4.png"] 
+      }
+    ]
+  },
+  {
+    name: "ANIMATIONS",
+    isTitle: true,
+    subcategories: [
+      { 
+        name: "2D ANIMATIONS", 
+        isTitle: false, 
+        mediaType: "video",
+        mediaCount: 1,
+        items: ["/video.png"] 
+      },
+      { 
+        name: "MOTION GRAPHICS", 
+        isTitle: false, 
+        mediaType: "video",
+        mediaCount: 1,
+        items: ["/video.png"] 
+      }
     ]
   },
   {
     name: "3D",
     isTitle: true,
     subcategories: [
-      { name: "ENVIRONMENT", isTitle: false, items: [] },
-      { name: "CHARACTER MODELING", isTitle: false, items: [] }
+      { 
+        name: "ENVIRONMENT", 
+        isTitle: false, 
+        mediaType: "video",
+        mediaCount: 2,
+        items: ["/video.png", "/video.png"] 
+      },
+      { 
+        name: "CHARACTER MODELING", 
+        isTitle: false, 
+        mediaType: "image",
+        mediaCount: 3,
+        items: ["/transp 1.png", "/transp 2.png", "/transp 4.png"] 
+      }
     ]
   },
   {
