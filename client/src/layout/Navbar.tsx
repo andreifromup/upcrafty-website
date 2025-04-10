@@ -75,12 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({
                 className={`
                   ${isAboutPage || useBlackButton
                     ? "bg-black text-white border border-black"
-                    : "bg-[#FF6512] text-white border-none"
+                    : `bg-[${COLORS.orange}] text-white border-none`
                   }
                   rounded-full uppercase font-normal tracking-[1.5px] text-[12px] leading-[16px]
                   flex items-center justify-center cursor-pointer 
                   active:scale-95 active:bg-white 
-                  ${isAboutPage || useBlackButton ? "active:text-black" : "active:text-[#FF6512]"}
+                  ${isAboutPage || useBlackButton ? "active:text-black" : `active:text-[${COLORS.orange}]`}
                   transition-all duration-300
                 `}
                 style={{ 
