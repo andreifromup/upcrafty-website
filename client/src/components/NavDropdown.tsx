@@ -59,6 +59,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   // Handle overlay close
   const handleCloseOverlay = () => {
+    console.log('Closing overlay');
     setShowOverlay(false);
     setSelectedSubcategory(null);
   };
@@ -254,7 +255,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Fullscreen overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
-              <div className="fixed inset-0 bg-white z-[60] flex items-center justify-center">
+              <div 
+                className="fixed inset-0 bg-white z-[60] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+              >
                 <div className="relative w-full h-full flex items-center justify-center">
                   
                   {/* Image overlay - fullscreen with centered content */}
@@ -295,10 +300,14 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   
                   {/* Close button in top-right corner */}
                   <button 
-                    className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/80 shadow-md"
-                    onClick={handleCloseOverlay}
+                    className="absolute top-6 right-6 z-20 p-3 rounded-full bg-black shadow-md active:scale-95 transition-transform"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCloseOverlay();
+                    }}
+                    style={{ touchAction: 'manipulation' }}
                   >
-                    <XIcon size={24} className="text-black" />
+                    <XIcon size={24} className="text-white" />
                   </button>
                 </div>
               </div>
