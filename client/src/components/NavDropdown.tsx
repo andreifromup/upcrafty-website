@@ -28,7 +28,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [overlayType, setOverlayType] = useState<'image' | 'video'>('image');
   const [activeIndex, setActiveIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   
   // Define portfolio images for desktop view
   const portfolioImages = [
@@ -37,12 +37,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     "/transp 4.png"
   ];
   
+  // Global function to close overlay - accessible from anywhere
+  const closeOverlay = () => {
+    console.log('CLOSING OVERLAY');
+    setShowOverlay(false);
+    setSelectedSubcategory(null);
+  };
+  
   // Handle subcategory click
   const handleSubcategoryClick = (subcategory: string) => {
     // If the same subcategory is clicked again, close the overlay
     if (selectedSubcategory === subcategory && showOverlay) {
-      setShowOverlay(false);
-      setSelectedSubcategory(null);
+      closeOverlay();
       return;
     }
     
@@ -308,86 +314,66 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <SocialIcons inDropdown={true} />
             </div>
             
-            {/* Fullscreen overlay for subcategories - START OF REPLACED SECTION */}
+            {/* COMPLETELY SIMPLIFIED overlay system */}
             {showOverlay && selectedSubcategory && (
-              <div id="subcategory-overlay" className="fixed inset-0 z-[60]">
-                {/* Background */}
-                <div className="fixed inset-0 bg-white" />
-                
-                {/* Image overlay content */}
-                {overlayType === 'image' && (
-                  <div className="relative z-10 w-full h-full flex items-center justify-center">
-                    <div className="w-full max-w-md max-h-[70vh]">
-                      <img 
-                        src={portfolioImages[0]} 
-                        alt={selectedSubcategory}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
+              <div 
+                className="fixed inset-0 bg-white z-[200]"
+                onClick={closeOverlay}
+              >
+                {/* Content container with close button on top */}
+                <div className="w-full h-full p-4 relative">
+                  {/* Close button - purely visual now as the entire overlay is clickable */}
+                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center">
+                    <XIcon size={24} className="text-black" />
                   </div>
-                )}
-                
-                {/* Video overlay content */}
-                {overlayType === 'video' && (
-                  <div className="relative z-10 w-full h-full flex items-center justify-center">
-                    <div className="w-full max-w-md aspect-video">
-                      <img 
-                        src={portfolioImages[2]} 
-                        alt={`${selectedSubcategory} video thumbnail`}
-                        className="w-full h-full object-contain"
-                      />
-                      
-                      {/* Play button */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
-                          <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
+                  
+                  {/* Content centered in remaining area - stop propagation on this area */}
+                  <div 
+                    className="absolute inset-0 pt-[25%] flex items-center justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {overlayType === 'image' && (
+                      <div className="w-full max-w-md max-h-[60vh]">
+                        <img 
+                          src={portfolioImages[0]} 
+                          alt={selectedSubcategory}
+                          className="w-full h-full object-contain"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </div>
+                    )}
+                    
+                    {overlayType === 'video' && (
+                      <div 
+                        className="w-full max-w-md aspect-video"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <img 
+                          src={portfolioImages[2]} 
+                          alt={`${selectedSubcategory} video thumbnail`}
+                          className="w-full h-full object-contain"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                        
+                        {/* Play button */}
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div 
+                            className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <div 
+                              className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"
+                              onClick={(e) => e.stopPropagation()}
+                            ></div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
-                )}
-                
-                {/* Full-screen transparent button layer BEHIND the visual X */}
-                <div
-                  id="touch-close-layer" 
-                  className="fixed top-0 right-0 z-[65] w-full h-full"
-                  style={{ 
-                    background: 'transparent',
-                    width: '100vw',
-                    height: '100vh',
-                    cursor: 'default'
-                  }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('FULL SCREEN CLOSE CLICKED');
-                    setShowOverlay(false);
-                    setSelectedSubcategory(null);
-                  }}
-                />
-                
-                {/* Native HTML button implementation for maximum compatibility */}
-                <button 
-                  ref={closeButtonRef}
-                  className="fixed top-6 right-6 z-[90] w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center cursor-pointer border-0 outline-none focus:outline-none"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('DIRECT BUTTON CLICK');
-                    setShowOverlay(false);
-                    setSelectedSubcategory(null);
-                  }}
-                  onTouchEnd={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('DIRECT TOUCH END');
-                    setShowOverlay(false);
-                    setSelectedSubcategory(null);
-                  }}
-                  aria-label="Close overlay"
-                >
-                  <XIcon size={24} className="text-black" />
-                </button>
+                </div>
               </div>
             )}
           </div>
