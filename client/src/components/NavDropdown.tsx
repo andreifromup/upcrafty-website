@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { 
   Carousel,
   CarouselContent,
@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/carousel";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
-import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
+import { NAV_CATEGORIES } from "@/assets/constants";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -250,6 +250,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                           src={image} 
                           alt={`Featured project ${idx + 1}`}
                           className="w-full h-full object-contain"
+                          loading="lazy"
                         />
                       </div>
                     </div>
@@ -391,6 +392,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       style={{
                         objectPosition: "center"
                       }}
+                      loading="lazy"
                     />
                   </div>
                   
@@ -409,6 +411,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       style={{
                         objectPosition: "center"
                       }}
+                      loading="lazy"
                     />
                   </div>
                   
@@ -427,6 +430,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       style={{
                         objectPosition: "center"
                       }}
+                      loading="lazy"
                     />
                   </div>
                 </div>

@@ -46,7 +46,8 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
           <div className="logo-carousel-animation">
             {/* For true infinite scroll, we need to duplicate the logo set */}
             {/* This technique creates a seamless loop by duplicating the items and only animating half the width */}
-            {[...Array(4)].map((_, setIndex) => (
+            {/* Reduced from 4 to 2 sets for better performance */}
+            {[...Array(2)].map((_, setIndex) => (
               <div className="flex logo-set" key={`set-${setIndex}`}>
                 {CLIENT_LOGOS.map((logo, logoIndex) => (
                   <div 
@@ -62,6 +63,7 @@ const ClientLogoCarousel: React.FC<ClientLogoCarouselProps> = ({ className = "" 
                       alt={`Client logo ${logoIndex + 1}`}
                       className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                       style={{ maxWidth: '100%', maxHeight: '100%' }}
+                      loading="lazy" 
                     />
                   </div>
                 ))}
