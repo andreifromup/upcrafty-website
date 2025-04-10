@@ -272,9 +272,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         
                         {/* Subcategories and images when expanded */}
                         {expandedCategories.includes(category.name) && category.subcategories && (
-                          <div className="mt-2 pl-4">
+                          <div className="mt-2 pl-0 pr-0">
                             {category.subcategories.map((subcategory, subIdx) => (
-                              <div key={subIdx} className="mb-8">
+                              <div key={subIdx} className="mb-12">
                                 <div className="mb-2">
                                   <span 
                                     className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
@@ -299,9 +299,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                             return (
                                               <CarouselItem key={imgIdx} className={`pl-0 basis-full`}>
                                                 <div 
-                                                  className={`relative overflow-hidden ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                  className={`relative overflow-hidden mx-auto ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: 'min(320px, 100%)',
+                                                    width: 'min(320px, calc(100% - 16px))',
                                                     height: 'min(300px, 90vw)', 
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
@@ -340,13 +340,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
+                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className="pl-0 basis-full">
                                               <div 
-                                                className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: 'min(320px, 100%)',
+                                                  width: 'min(320px, calc(100% - 16px))',
                                                   height: 'min(300px, 90vw)', 
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
