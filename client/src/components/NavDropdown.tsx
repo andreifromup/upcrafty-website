@@ -290,19 +290,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       <Carousel 
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
-                                        onSelect={(api) => {
-                                          const currentIndex = api?.selectedScrollSnap() || 0;
-                                          setCarouselActiveItems({
-                                            ...carouselActiveItems,
-                                            [subcategory.name]: currentIndex
-                                          });
-                                        }}
                                       >
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, imgIdx) => {
-                                            // Get the active index for this specific carousel
-                                            const activeIdx = carouselActiveItems[subcategory.name] || 0;
-                                            const isActive = imgIdx === activeIdx;
+                                            // Use a fixed active index for now
+                                            const isActive = imgIdx === 0;
                                             
                                             return (
                                               <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
@@ -355,7 +347,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className={`pl-2 basis-full`}>
+                                            <CarouselItem key={vidIdx} className="pl-2 basis-full">
                                               <div 
                                                 className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
@@ -374,7 +366,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                       <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
                                                     </div>
                                                   </div>
-                                                  {subcategory.name}
+                                                  {subcategory.name} {vidIdx + 1}
                                                 </div>
                                                 
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
