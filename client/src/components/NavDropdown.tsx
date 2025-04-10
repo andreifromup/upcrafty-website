@@ -316,16 +316,30 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* COMPLETELY SIMPLIFIED overlay system */}
             {showOverlay && selectedSubcategory && (
-              <div 
-                className="fixed inset-0 bg-white z-[200]"
-                onClick={closeOverlay}
-              >
+              <div className="fixed inset-0 bg-white z-[200]">
                 {/* Content container with close button on top */}
                 <div className="w-full h-full p-4 relative">
-                  {/* Close button - purely visual now as the entire overlay is clickable */}
-                  <div className="absolute top-6 right-6 w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center">
-                    <XIcon size={24} className="text-black" />
-                  </div>
+                  {/* FINAL ATTEMPT: using <a> tag which tends to be most reliable on mobile browsers */}
+                  <a 
+                    href="#" 
+                    id="CLOSE_BUTTON"
+                    className="absolute top-0 right-0 w-[80px] h-[80px] flex items-center justify-center z-[999]"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      closeOverlay();
+                    }}
+                    style={{
+                      touchAction: 'manipulation',
+                      WebkitTapHighlightColor: 'transparent',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {/* This is the visible part that looks just like the design */}
+                    <div className="w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center mt-6 mr-6">
+                      <XIcon size={24} className="text-black pointer-events-none" />
+                    </div>
+                  </a>
                   
                   {/* Content centered in remaining area - stop propagation on this area */}
                   <div 
