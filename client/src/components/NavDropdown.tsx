@@ -29,6 +29,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayType, setOverlayType] = useState<'image' | 'video'>('image');
   const [activeIndex, setActiveIndex] = useState(0);
+  // State to track active item in each carousel
+  const [carouselActiveItems, setCarouselActiveItems] = useState<{[key: string]: number}>({}); // Track by subcategory name
   const contentRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -285,23 +287,58 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 <div className="px-4 mt-2">
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                      <Carousel 
+                                        className="w-full overflow-visible" 
+                                        opts={{ align: "start" }}
+                                        onSelect={(api) => {
+                                          const currentIndex = api?.selectedScrollSnap() || 0;
+                                          setCarouselActiveItems({
+                                            ...carouselActiveItems,
+                                            [subcategory.name]: currentIndex
+                                          });
+                                        }}
+                                      >
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
-                                          {subcategory.items.map((item, imgIdx) => (
-                                            <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
-                                              <div className={`relative rounded-lg overflow-hidden ${imgIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`}>
-                                                <img 
-                                                  src={item} 
-                                                  alt={`${subcategory.name} image ${imgIdx + 1}`}
-                                                  className="w-full aspect-square object-cover"
-                                                />
-                                                {/* Add a gradient fade to the right edge for first item when there are multiple items */}
-                                                {subcategory.mediaCount > 1 && imgIdx === 0 && (
-                                                  <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                )}
-                                              </div>
-                                            </CarouselItem>
-                                          ))}
+                                          {subcategory.items.map((item, imgIdx) => {
+                                            // Get the active index for this specific carousel
+                                            const activeIdx = carouselActiveItems[subcategory.name] || 0;
+                                            const isActive = imgIdx === activeIdx;
+                                            
+                                            return (
+                                              <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
+                                                <div 
+                                                  className={`relative overflow-hidden ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                  style={{
+                                                    width: '242px',
+                                                    height: '238.65px', 
+                                                    borderRadius: '24px',
+                                                    border: '5px solid #FBFBFB',
+                                                    backgroundColor: '#E5F2FF',
+                                                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'
+                                                  }}
+                                                >
+                                                  {/* Content inside the container - keeping it empty or using a placeholder */}
+                                                  <div className="flex items-center justify-center h-full text-blue-400 font-medium">
+                                                    {subcategory.name} {imgIdx + 1}
+                                                  </div>
+                                                  
+                                                  {/* Add a gradient fade based on which direction has content */}
+                                                  {subcategory.mediaCount > 1 && isActive && (
+                                                    <>
+                                                      {/* Right fade when there are items to the right */}
+                                                      {imgIdx < subcategory.items.length - 1 && (
+                                                        <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                      )}
+                                                      {/* Left fade when there are items to the left */}
+                                                      {imgIdx > 0 && (
+                                                        <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/30 to-transparent pointer-events-none"></div>
+                                                      )}
+                                                    </>
+                                                  )}
+                                                </div>
+                                              </CarouselItem>
+                                            );
+                                          })}
                                         </CarouselContent>
                                         {subcategory.mediaCount > 1 && (
                                           <div className="flex justify-center gap-2 mt-4">
@@ -319,18 +356,27 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className={`pl-2 basis-full`}>
-                                              <div className={`relative rounded-lg overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`}>
-                                                <img 
-                                                  src={item} 
-                                                  alt={`${subcategory.name} video ${vidIdx + 1}`}
-                                                  className="w-full aspect-video object-cover"
-                                                />
-                                                {/* Play button overlay */}
-                                                <div className="absolute inset-0 flex items-center justify-center">
-                                                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
-                                                    <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
+                                              <div 
+                                                className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                style={{
+                                                  width: '242px',
+                                                  height: '238.65px', 
+                                                  borderRadius: '24px',
+                                                  border: '5px solid #FBFBFB',
+                                                  backgroundColor: '#E5F2FF',
+                                                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'
+                                                }}
+                                              >
+                                                {/* Content inside the container with play button overlay */}
+                                                <div className="flex items-center justify-center h-full text-blue-400 font-medium relative">
+                                                  <div className="absolute inset-0 flex items-center justify-center">
+                                                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
+                                                      <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
+                                                    </div>
                                                   </div>
+                                                  {subcategory.name}
                                                 </div>
+                                                
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && vidIdx === 0 && (
                                                   <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
