@@ -249,7 +249,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         <img 
                           src={image} 
                           alt={`Featured project ${idx + 1}`}
-                          className="w-full h-full object-cover object-center"
+                          className="w-full h-full object-contain"
                         />
                       </div>
                     </div>
@@ -378,7 +378,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 <div className="relative w-full h-[572px] overflow-hidden">
                   {/* Left image - all images aligned in straight line */}
                   <div 
-                    className="absolute w-[300px] h-[400px] overflow-hidden" 
+                    className="absolute w-[350px] h-[400px] overflow-hidden" 
                     style={{ 
                       left: '44px', 
                       bottom: '80px',
@@ -387,34 +387,34 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     <img 
                       src={portfolioImages[0]} 
                       alt="Featured project 1" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       style={{
-                        objectPosition: "center top"
+                        objectPosition: "center"
                       }}
                     />
                   </div>
                   
                   {/* Middle image - same height and position as others */}
                   <div 
-                    className="absolute w-[300px] h-[400px] overflow-hidden" 
+                    className="absolute w-[350px] h-[400px] overflow-hidden" 
                     style={{ 
-                      left: 'calc(50% - 150px)', 
+                      left: 'calc(50% - 175px)', 
                       bottom: '80px',
                     }}
                   >
                     <img 
                       src={portfolioImages[1]} 
                       alt="Featured project 2" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       style={{
-                        objectPosition: "center top"
+                        objectPosition: "center"
                       }}
                     />
                   </div>
                   
                   {/* Right image - same height and position as others */}
                   <div 
-                    className="absolute w-[300px] h-[400px] overflow-hidden" 
+                    className="absolute w-[350px] h-[400px] overflow-hidden" 
                     style={{ 
                       right: '44px', 
                       bottom: '80px',
@@ -423,9 +423,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     <img 
                       src={portfolioImages[2]}
                       alt="Featured project 3" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                       style={{
-                        objectPosition: "center top"
+                        objectPosition: "center"
                       }}
                     />
                   </div>
