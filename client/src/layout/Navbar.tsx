@@ -75,12 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({
                 className={`
                   ${isAboutPage || useBlackButton
                     ? "bg-black text-white border border-black"
-                    : `bg-[${COLORS.orange}] text-white border-none`
+                    : "bg-brand-orange text-white border-none"
                   }
                   rounded-full uppercase font-normal tracking-[1.5px] text-[12px] leading-[16px]
                   flex items-center justify-center cursor-pointer 
                   active:scale-95 active:bg-white 
-                  ${isAboutPage || useBlackButton ? "active:text-black" : `active:text-[${COLORS.orange}]`}
+                  ${isAboutPage || useBlackButton ? "active:text-black" : "active:text-brand-orange"}
                   transition-all duration-300
                 `}
                 style={{ 
@@ -98,11 +98,11 @@ const Navbar: React.FC<NavbarProps> = ({
                 className={`
                   ${isAboutPage || useBlackButton
                     ? "bg-black hover:bg-white text-white hover:text-black border border-black"
-                    : "bg-[#FF6512] hover:bg-white text-white hover:text-[#FF6512] border-none"
+                    : "bg-brand-orange hover:bg-white text-white hover:text-brand-orange border-none"
                   } 
                   rounded-full uppercase font-normal tracking-[2px] text-[14px] leading-[20px] 
                   h-[34px] w-[107px] p-0 transition-all duration-300 active:scale-95
-                  ${isAboutPage || useBlackButton ? "active:bg-white active:text-black" : "active:bg-white active:text-[#FF6512]"}
+                  ${isAboutPage || useBlackButton ? "active:bg-white active:text-black" : "active:bg-white active:text-brand-orange"}
                 `}
                 onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank", "noopener,noreferrer")}
               >
