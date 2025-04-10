@@ -249,33 +249,20 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   <div key={idx} className="mb-1">
                     {category.isTitle ? (
                       <div className="mb-1">
-                        {/* Title category */}
+                        {/* Title category with arrow for expansion */}
                         <div 
-                          className="py-1.5 my-1 rounded-lg bg-[#EDEAE7]/50 cursor-pointer"
+                          className="py-1.5 my-1 rounded-lg flex items-center justify-between bg-[#EDEAE7]/50 cursor-pointer"
+                          onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
                         >
-                          <div 
-                            className="flex items-center justify-between px-4"
-                            onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
-                          >
-                            <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase text-black">
-                              {category.name}
-                            </span>
-                          </div>
-                          
-                          {/* Separate arrow row */}
+                          <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4 text-black">
+                            {category.name}
+                          </span>
                           {category.subcategories?.length > 0 && (
-                            <div 
-                              className="flex justify-end pr-3 pt-1"
-                              onClick={() => toggleCategoryExpansion(category.name)}
-                            >
+                            <div className="pr-3">
                               {expandedCategories.includes(category.name) ? (
-                                <div className="w-6 h-6 rounded-full bg-[#EDEAE7] border border-[#BCBCBC]/50 flex items-center justify-center">
-                                  <ChevronUpIcon className="w-4 h-4 text-black" />
-                                </div>
+                                <ChevronUpIcon className="w-4 h-4 text-black" />
                               ) : (
-                                <div className="w-6 h-6 rounded-full bg-[#EDEAE7] border border-[#BCBCBC]/50 flex items-center justify-center">
-                                  <ChevronDownIcon className="w-4 h-4 text-black" />
-                                </div>
+                                <ChevronDownIcon className="w-4 h-4 text-black" />
                               )}
                             </div>
                           )}
@@ -298,16 +285,20 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 <div className="px-4 mt-2">
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full">
-                                        <CarouselContent>
+                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                        <CarouselContent className="-ml-2 overflow-visible">
                                           {subcategory.items.map((item, imgIdx) => (
-                                            <CarouselItem key={imgIdx} className={`basis-full ${subcategory.mediaCount === 2 ? 'sm:basis-1/2' : subcategory.mediaCount === 3 ? 'sm:basis-1/3' : ''}`}>
-                                              <div className="p-1">
+                                            <CarouselItem key={imgIdx} className={`pl-2 ${imgIdx === 0 ? 'basis-[85%]' : 'basis-[25%]'}`}>
+                                              <div className="relative rounded-lg overflow-hidden">
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} image ${imgIdx + 1}`}
-                                                  className="w-full aspect-square object-cover rounded-md"
+                                                  className="w-full aspect-square object-cover"
                                                 />
+                                                {/* Add a gradient fade to the right edge if there are multiple items */}
+                                                {subcategory.mediaCount > 1 && imgIdx === 0 && (
+                                                  <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                )}
                                               </div>
                                             </CarouselItem>
                                           ))}
@@ -324,15 +315,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full">
-                                        <CarouselContent>
+                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                        <CarouselContent className="-ml-2 overflow-visible">
                                           {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className={`basis-full ${subcategory.mediaCount === 2 ? 'sm:basis-1/2' : ''}`}>
-                                              <div className="p-1 relative">
+                                            <CarouselItem key={vidIdx} className={`pl-2 ${vidIdx === 0 ? 'basis-[85%]' : 'basis-[25%]'}`}>
+                                              <div className="relative rounded-lg overflow-hidden">
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} video ${vidIdx + 1}`}
-                                                  className="w-full aspect-video object-cover rounded-md"
+                                                  className="w-full aspect-video object-cover"
                                                 />
                                                 {/* Play button overlay */}
                                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -340,6 +331,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
                                                   </div>
                                                 </div>
+                                                {/* Add a gradient fade to the right edge if there are multiple items */}
+                                                {subcategory.mediaCount > 1 && vidIdx === 0 && (
+                                                  <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                )}
                                               </div>
                                             </CarouselItem>
                                           ))}
