@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { XIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
 import { NAV_CATEGORIES } from "@/assets/constants";
@@ -27,16 +23,45 @@ const LEFT_PADDING = "80px";
 const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const isMobile = useIsMobile();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [overlayType, setOverlayType] = useState<'image' | 'video'>('image');
+  const [activeIndex, setActiveIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
-  // Access images directly using their paths
+  
+  // Define portfolio images for desktop view
   const portfolioImages = [
     "/transp 1.png",
     "/transp 2.png", 
     "/transp 4.png"
   ];
   
-  // For carousel indicators
-  const [activeIndex, setActiveIndex] = useState(0);
+  // Handle subcategory click
+  const handleSubcategoryClick = (subcategory: string) => {
+    // If the same subcategory is clicked again, close the overlay
+    if (selectedSubcategory === subcategory && showOverlay) {
+      setShowOverlay(false);
+      setSelectedSubcategory(null);
+      return;
+    }
+    
+    // Set the subcategory and show the overlay
+    setSelectedSubcategory(subcategory);
+    setShowOverlay(true);
+    
+    // Determine content type based on subcategory
+    if (subcategory === "2D ANIMATIONS" || subcategory === "MOTION GRAPHICS") {
+      setOverlayType('video');
+    } else {
+      setOverlayType('image');
+    }
+  };
+  
+  // Handle overlay close
+  const handleCloseOverlay = () => {
+    setShowOverlay(false);
+    setSelectedSubcategory(null);
+  };
   
   // Close dropdown when user presses escape key
   const handleEsc = useCallback((e: KeyboardEvent) => {
