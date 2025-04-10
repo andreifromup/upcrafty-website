@@ -301,8 +301,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 <div 
                                                   className={`relative overflow-hidden ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: '242px',
-                                                    height: '238.65px', 
+                                                    width: '280px',
+                                                    height: '260px', 
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
@@ -351,8 +351,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                               <div 
                                                 className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: '242px',
-                                                  height: '238.65px', 
+                                                  width: '280px',
+                                                  height: '260px', 
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
