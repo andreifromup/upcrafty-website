@@ -320,34 +320,27 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                 className="fixed inset-0 bg-white z-[9999]" 
                 style={{ pointerEvents: 'auto' }}
               >
-                {/* X BUTTON - COMPLETELY ISOLATED WITH MULTIPLE EVENT HANDLERS */}
-                <button 
-                  className="fixed top-0 right-0 w-20 h-20 cursor-pointer bg-transparent border-0 outline-none"
-                  style={{ 
-                    zIndex: 10000,
-                    touchAction: 'manipulation'
-                  }}
-                  onClick={() => {
-                    setShowOverlay(false);
-                    setSelectedSubcategory(null);
-                  }}
-                  onTouchEnd={(e) => {
-                    e.preventDefault();
-                    setShowOverlay(false);
-                    setSelectedSubcategory(null);
-                  }}
-                  onTouchStart={(e) => {
-                    e.preventDefault(); // Prevent default touch behavior
-                  }}
-                >
-                  {/* Visual appearance of X button */}
-                  <div className="w-10 h-10 bg-white/80 shadow-md rounded-full flex items-center justify-center mt-6 mr-6">
-                    <XIcon size={24} className="text-black" />
-                  </div>
-                </button>
+                {/* BACK BUTTON - positioned at the top of the content area */}
                 
                 {/* Content container - separate from the X button */}
                 <div className="w-full h-full p-4 relative" style={{ pointerEvents: 'auto' }}>
+                  
+                  {/* Back button above content */}
+                  <button
+                    className="absolute top-6 left-6 px-4 py-2 bg-white/80 shadow-md rounded-md z-[10000] border-0 cursor-pointer flex items-center"
+                    style={{ touchAction: 'manipulation' }}
+                    onClick={() => {
+                      setShowOverlay(false);
+                      setSelectedSubcategory(null);
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      setShowOverlay(false);
+                      setSelectedSubcategory(null);
+                    }}
+                  >
+                    <span className="text-black text-md font-medium">← Back</span>
+                  </button>
                   
                   {/* Content centered in remaining area - stop propagation on this area */}
                   <div 
