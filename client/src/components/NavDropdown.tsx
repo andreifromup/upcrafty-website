@@ -81,13 +81,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       return (
         <div 
           className={`
-            relative overflow-hidden group 
+            relative overflow-hidden group text-black
             ${isTitle ? 'mb-3 font-medium' : 'font-normal'} 
             ${isTitle ? 'text-[15px] leading-[20px]' : 'text-[15px] leading-[20px]'}
           `}
           onClick={onClick}
         >
-          <span className="relative z-10">{name}</span>
+          <span className="relative z-10 text-black">{name}</span>
           <div 
             className="absolute bottom-0 left-0 w-full h-[1px] bg-black transform origin-left scale-x-0 
                       group-hover:scale-x-100 transition-transform duration-300"

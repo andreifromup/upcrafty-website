@@ -15,12 +15,13 @@ const Navbar: React.FC = () => {
       
       {/* Contact Button - Exact match to reference mobile.png */}
       <Button 
-        className="bg-[#FF6600] hover:bg-white text-white hover:text-[#FF6600] rounded-full uppercase font-normal
+        className="bg-[#FF6512] hover:bg-white text-white hover:text-[#FF6512] rounded-full uppercase font-normal
         tracking-[1.5px] md:tracking-[2px] text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] 
         h-[28px] md:h-[34px] w-[90px] md:w-[107px] p-0 transition-colors duration-300 border-none"
         style={{ 
           width: isMobileDevice ? "90px" : "107px", 
-          height: isMobileDevice ? "28px" : "34px"
+          height: isMobileDevice ? "28px" : "34px",
+          backgroundColor: "#FF6512"
         }}
         onClick={() => window.open("https://tally.so/r/m6Pl1P", "_blank")}
       >
