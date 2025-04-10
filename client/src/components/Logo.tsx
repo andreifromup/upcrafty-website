@@ -44,13 +44,15 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
             
             if (logoImg) {
-              // Always keep the hover effect (orange filter) when dropdown is open
-              logoImg.style.filter = isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none');
+              // Only show orange on hover, not by default when dropdown is open
+              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
             }
             
             if (dropdownImg) {
-              // Always keep the hover effect (orange filter) when dropdown is open
-              dropdownImg.style.filter = isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none');
+              // Only show orange on hover, not by default when dropdown is open
+              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+              // But keep the rotation when dropdown is open
+              dropdownImg.style.transform = isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             }
           }
         }}
@@ -91,7 +93,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             alt="Upcrafty Logo" 
             className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              filter: isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none')
+              filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
           />
         </div>
@@ -103,7 +105,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
               alt="Dropdown" 
               className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
-                filter: isDropdownOpen ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none'),
+                filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
               id="dropdown-arrow"
