@@ -220,84 +220,17 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm z-10"></div>
       )}
       
-      {/* Desktop layout - full screen video with enhanced responsiveness */}
+      {/* Desktop layout - temporary black background until new videos are uploaded */}
       <div className={`absolute inset-0 ${isMobileDevice ? 'hidden' : 'hidden md:block'}`}>
-        <div className="relative w-full h-full">
-          <video
-            ref={desktopVideoRef}
-            autoPlay={true}
-            muted={true}
-            loop={true}
-            playsInline={true}
-            preload="auto"
-            className={`absolute inset-0 w-full h-full object-cover min-h-full min-w-full ${blur ? 'brightness-75' : ''}`}
-            style={{
-              objectPosition: 'center center',
-              // Ensures the video scales properly on all desktop screen sizes
-              // while maintaining aspect ratio and filling the container
-            }}
-            onLoadedData={(e) => {
-              setVideoLoaded(true);
-              console.log("Current video source:", (e.target as HTMLVideoElement).currentSrc);
-              console.log("Video dimensions:", {
-                videoWidth: (e.target as HTMLVideoElement).videoWidth,
-                videoHeight: (e.target as HTMLVideoElement).videoHeight,
-                displayWidth: (e.target as HTMLVideoElement).offsetWidth,
-                displayHeight: (e.target as HTMLVideoElement).offsetHeight
-              });
-            }}
-            onError={(e) => {
-              setVideoError("Failed to load desktop video");
-              console.error("Desktop video error:", e);
-            }}
-          >
-            <source src={getDesktopVideoSource()} type="video/mp4" key={`desktop-${Date.now()}`} />
-            Your browser does not support the video tag.
-          </video>
+        <div className="relative w-full h-full bg-black">
+          {/* Videos have been temporarily removed - will be added back once uploaded */}
         </div>
       </div>
       
-      {/* Mobile layout - fixed height video with diagonal cut and black background */}
+      {/* Mobile layout - temporary black background until new videos are uploaded */}
       <div className={`absolute inset-0 ${isMobileDevice ? 'block md:hidden' : 'hidden'}`}>
         {/* Full black background for the entire screen */}
         <div className="absolute inset-0 bg-black"></div>
-        
-        {/* Video container with enhanced responsive sizing for all mobile screen sizes */}
-        <div className="absolute top-0 left-0 w-full h-full max-h-screen overflow-hidden z-0">
-          <div className="relative w-full h-full">
-            <video
-              ref={mobileVideoRef}
-              autoPlay={true}
-              muted={true}
-              loop={true}
-              playsInline={true}
-              preload="auto"
-              className={`absolute inset-0 w-full h-full object-cover min-h-full min-w-full ${blur ? 'brightness-75' : ''}`} 
-              style={{
-                objectPosition: 'center center', 
-                // The video will scale to cover the entire container while maintaining aspect ratio
-                // This ensures no empty spaces on different screen sizes
-              }}
-              onLoadedData={(e) => {
-                setVideoLoaded(true);
-                console.log("Current mobile video source:", (e.target as HTMLVideoElement).currentSrc);
-                console.log("Mobile video dimensions:", {
-                  videoWidth: (e.target as HTMLVideoElement).videoWidth,
-                  videoHeight: (e.target as HTMLVideoElement).videoHeight,
-                  displayWidth: (e.target as HTMLVideoElement).offsetWidth,
-                  displayHeight: (e.target as HTMLVideoElement).offsetHeight
-                });
-              }}
-              onError={(e) => {
-                setVideoError("Failed to load mobile video");
-                console.error("Mobile video error:", e);
-              }}
-            >
-              <source src={getMobileVideoSource()} type="video/mp4" key={`mobile-${Date.now()}`} />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
         
         {/* Diagonal overlay - temporarily hidden */}
         {false && (
