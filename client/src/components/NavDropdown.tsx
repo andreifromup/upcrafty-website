@@ -273,71 +273,52 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
             
             {/* Fullscreen overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
-              <div 
-                className="fixed inset-0 bg-white z-[60] flex items-center justify-center overlay-background"
-                onClick={handleOverlayClick}
-              >
-                <div 
-                  className="relative w-full h-full flex items-center justify-center" 
-                  onTouchMove={(e) => e.preventDefault()}
-                >
-                  
-                  {/* Image overlay - fullscreen with centered content */}
-                  {overlayType === 'image' && (
-                    <div className="w-full h-full flex items-center justify-center px-8">
-                      <div 
-                        className="relative w-full max-w-md max-h-[70vh] rounded-lg overflow-hidden"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <img 
-                          src={portfolioImages[0]} 
-                          alt={selectedSubcategory}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
+              <div className="fixed inset-0 bg-white z-[60]">
+                {/* Image overlay content */}
+                {overlayType === 'image' && (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full max-w-md max-h-[70vh]">
+                      <img 
+                        src={portfolioImages[0]} 
+                        alt={selectedSubcategory}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
-                  )}
-                  
-                  {/* Video overlay - fullscreen with centered content */}
-                  {overlayType === 'video' && (
-                    <div className="w-full h-full flex items-center justify-center px-8">
-                      <div 
-                        className="relative w-full max-w-md rounded-lg overflow-hidden aspect-video"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        {/* Video container */}
-                        <div className="w-full h-full">
-                          <img 
-                            src={portfolioImages[2]} 
-                            alt={`${selectedSubcategory} video thumbnail`}
-                            className="w-full h-full object-contain"
-                          />
-                          
-                          {/* Play button overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
-                              <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
-                            </div>
-                          </div>
+                  </div>
+                )}
+                
+                {/* Video overlay content */}
+                {overlayType === 'video' && (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full max-w-md aspect-video">
+                      <img 
+                        src={portfolioImages[2]} 
+                        alt={`${selectedSubcategory} video thumbnail`}
+                        className="w-full h-full object-contain"
+                      />
+                      
+                      {/* Play button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
+                          <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
                         </div>
                       </div>
                     </div>
-                  )}
-                  
-                  {/* Close button in top-right corner */}
+                  </div>
+                )}
+                
+                {/* Close button - completely standalone */}
+                <div className="absolute top-0 right-0 mt-6 mr-6 z-50">
                   <button 
-                    className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/80 shadow-md"
-                    onClick={(e) => {
-                      console.log('X button clicked');
-                      e.stopPropagation();
-                      e.preventDefault();
+                    className="p-4 rounded-full bg-black shadow-md"
+                    onClick={() => {
+                      console.log('NEW Close button clicked');
                       setShowOverlay(false);
                       setSelectedSubcategory(null);
                     }}
-                    data-close-overlay="true"
-                    aria-label="Close overlay"
+                    style={{ touchAction: 'manipulation' }}
                   >
-                    <XIcon size={24} className="text-black" data-close-overlay="true" />
+                    <XIcon size={32} className="text-white" />
                   </button>
                 </div>
               </div>
