@@ -274,7 +274,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         {expandedCategories.includes(category.name) && category.subcategories && (
                           <div className="mt-2 pl-4">
                             {category.subcategories.map((subcategory, subIdx) => (
-                              <div key={subIdx} className="mb-4">
+                              <div key={subIdx} className="mb-8">
                                 <div className="mb-2">
                                   <span 
                                     className="font-normal text-[13px] leading-[18px] uppercase block px-4 py-1.5 text-black"
@@ -291,7 +291,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
                                       >
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-16 pb-6">
                                           {subcategory.items.map((item, imgIdx) => {
                                             // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
@@ -301,12 +301,12 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 <div 
                                                   className={`relative overflow-hidden ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: '280px',
-                                                    height: '260px', 
+                                                    width: '320px',
+                                                    height: '300px', 
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
-                                                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'
+                                                    boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.15)'
                                                   }}
                                                 >
                                                   {/* Content inside the container - keeping it empty or using a placeholder */}
@@ -340,18 +340,18 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="-ml-2 overflow-visible pr-16">
+                                        <CarouselContent className="-ml-2 overflow-visible pr-16 pb-6">
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className="pl-2 basis-full">
                                               <div 
                                                 className={`relative overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: '280px',
-                                                  height: '260px', 
+                                                  width: '320px',
+                                                  height: '300px', 
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
-                                                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'
+                                                  boxShadow: '0px 4px 14px rgba(0, 0, 0, 0.15)'
                                                 }}
                                               >
                                                 {/* Content inside the container with play button overlay */}
@@ -420,8 +420,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Social icons at bottom - center aligned */}
-            <div className="mt-auto flex justify-center pb-4 pt-2">
+            {/* Social icons at bottom - center aligned with more space to show shadows */}
+            <div className="mt-auto flex justify-center pb-8 pt-2">
               <SocialIcons inDropdown={true} />
             </div>
           </div>
