@@ -252,61 +252,37 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <SocialIcons inDropdown={true} />
             </div>
             
-            {/* Dynamic content overlay for subcategories */}
+            {/* Fullscreen overlay for subcategories */}
             {showOverlay && selectedSubcategory && (
-              <div className="fixed bottom-0 left-0 right-0 bg-white z-[60] pb-16 shadow-lg">
-                <div className="relative w-full">
+              <div className="fixed inset-0 bg-white z-[60] flex items-center justify-center">
+                <div className="relative w-full h-full flex items-center justify-center">
                   
-                  {/* Image carousel overlay - matches the carousel.png screenshot */}
+                  {/* Image overlay - fullscreen with centered content */}
                   {overlayType === 'image' && (
-                    <div className="w-full">
-                      <div className="overflow-visible">
-                        {/* Horizontal image carousel */}
-                        <div className="flex gap-4 px-4 py-6 overflow-x-auto hide-scrollbar snap-x">
-                          {/* First image */}
-                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
-                            <img 
-                              src={portfolioImages[0]} 
-                              alt={`${selectedSubcategory} 1`}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          
-                          {/* Second image */}
-                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
-                            <img 
-                              src={portfolioImages[1]} 
-                              alt={`${selectedSubcategory} 2`}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          
-                          {/* Third image (if needed) */}
-                          <div className="flex-shrink-0 w-[250px] h-[250px] rounded-lg overflow-hidden snap-center">
-                            <img 
-                              src={portfolioImages[2]} 
-                              alt={`${selectedSubcategory} 3`}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        </div>
+                    <div className="w-full h-full flex items-center justify-center px-8">
+                      <div className="relative w-full max-w-md max-h-[70vh] rounded-lg overflow-hidden">
+                        <img 
+                          src={portfolioImages[0]} 
+                          alt={selectedSubcategory}
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
                   )}
                   
-                  {/* Video overlay - matches the video.png screenshot */}
+                  {/* Video overlay - fullscreen with centered content */}
                   {overlayType === 'video' && (
-                    <div className="w-full px-4 pt-6 pb-2">
-                      <div className="rounded-lg overflow-hidden w-full aspect-[3/2]">
-                        {/* Video container with aspect ratio */}
-                        <div className="relative w-full h-full">
+                    <div className="w-full h-full flex items-center justify-center px-8">
+                      <div className="relative w-full max-w-md rounded-lg overflow-hidden aspect-video">
+                        {/* Video container */}
+                        <div className="w-full h-full">
                           <img 
                             src={portfolioImages[2]} 
                             alt={`${selectedSubcategory} video thumbnail`}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain"
                           />
                           
-                          {/* Play button overlay - will be replaced with actual video */}
+                          {/* Play button overlay */}
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/30">
                               <div className="w-0 h-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-white ml-1"></div>
@@ -317,7 +293,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     </div>
                   )}
                   
-                  {/* No close button needed as tapping outside will close the overlay */}
+                  {/* Close button in top-right corner */}
+                  <button 
+                    className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/80 shadow-md"
+                    onClick={handleCloseOverlay}
+                  >
+                    <XIcon size={24} className="text-black" />
+                  </button>
                 </div>
               </div>
             )}
