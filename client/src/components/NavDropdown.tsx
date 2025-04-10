@@ -251,7 +251,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                       <div className="mb-1">
                         {/* Title category with arrow for expansion */}
                         <div 
-                          className="py-1.5 my-1 rounded-lg flex items-center justify-between bg-[#EDEAE7]/50 cursor-pointer"
+                          className="py-2 my-1 rounded-lg flex items-center justify-between bg-[#EDEAE7]/50 cursor-pointer"
                           onClick={() => category.subcategories?.length && toggleCategoryExpansion(category.name)}
                         >
                           <span className="font-medium text-[14px] leading-[18px] tracking-[1px] uppercase px-4 text-black">
@@ -289,7 +289,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, imgIdx) => (
                                             <CarouselItem key={imgIdx} className={`pl-2 basis-full`}>
-                                              <div className={`relative rounded-lg overflow-hidden ${imgIdx !== 0 ? 'opacity-80' : ''}`}>
+                                              <div className={`relative rounded-lg overflow-hidden ${imgIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`}>
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} image ${imgIdx + 1}`}
@@ -297,7 +297,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 />
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && imgIdx === 0 && (
-                                                  <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                  <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
                                                 )}
                                               </div>
                                             </CarouselItem>
@@ -319,7 +319,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         <CarouselContent className="-ml-2 overflow-visible pr-20">
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className={`pl-2 basis-full`}>
-                                              <div className={`relative rounded-lg overflow-hidden ${vidIdx !== 0 ? 'opacity-80' : ''}`}>
+                                              <div className={`relative rounded-lg overflow-hidden ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`}>
                                                 <img 
                                                   src={item} 
                                                   alt={`${subcategory.name} video ${vidIdx + 1}`}
@@ -333,7 +333,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 </div>
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && vidIdx === 0 && (
-                                                  <div className="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                  <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
                                                 )}
                                               </div>
                                             </CarouselItem>
