@@ -25,7 +25,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ inverted = false, inDropdown 
   };
   
   return (
-    <div className="flex items-center justify-center space-x-6">
+    <div className="flex items-center justify-center space-x-8">
       {/* X (Twitter) */}
       <a 
         href={SOCIAL_LINKS.x} 
