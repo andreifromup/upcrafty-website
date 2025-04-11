@@ -497,36 +497,44 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               <div className="flex flex-wrap mt-6 overflow-y-auto flex-grow" style={{ maxHeight: 'calc(572px - 170px)' }}>
                 {NAV_CATEGORIES.map((category, idx) => (
                   <div key={idx} className={`${category.isTitle ? 'w-1/2' : 'w-full'} ${category.name === "CONTACT" ? 'mt-[-32px]' : ''} mb-5 pr-4`}>
-                    <a 
-                      href={category.name === "ABOUT US" ? "/about" : "#"} 
-                      className="uppercase block mb-3 active:scale-95 transition-all duration-150"
-                      onClick={(e) => {
-                        try {
-                          if (category.name === "CONTACT") {
-                            e.preventDefault();
-                            window.open("https://tally.so/r/m6Pl1P", "_blank");
-                            handleClose();
-                          } else if (category.name === "ABOUT US") {
-                            // Let the link navigate naturally to /about
-                            handleClose();
-                          } else if (!category.isTitle) {
-                            e.preventDefault();
-                            setSelectedCategory(selectedCategory === category.name ? null : category.name);
-                          } else {
-                            e.preventDefault();
+                    {category.isTitle ? (
+                      // Title categories are not clickable - just display them
+                      <div className="uppercase block mb-3">
+                        <MenuItemWithHoverEffect 
+                          name={category.name} 
+                          isTitle={true}
+                        />
+                      </div>
+                    ) : (
+                      // Regular categories remain clickable
+                      <a 
+                        href={category.name === "ABOUT US" ? "/about" : "#"} 
+                        className="uppercase block mb-3 active:scale-95 transition-all duration-150"
+                        onClick={(e) => {
+                          try {
+                            if (category.name === "CONTACT") {
+                              e.preventDefault();
+                              window.open("https://tally.so/r/m6Pl1P", "_blank");
+                              handleClose();
+                            } else if (category.name === "ABOUT US") {
+                              // Let the link navigate naturally to /about
+                              handleClose();
+                            } else {
+                              e.preventDefault();
+                              setSelectedCategory(selectedCategory === category.name ? null : category.name);
+                            }
+                          } catch (error) {
+                            console.error("Error handling category click:", error);
                           }
-                        } catch (error) {
-                          console.error("Error handling category click:", error);
-                        }
-                      }}
-                    >
-                      {/* Use the reusable component with hover effect */}
-                      <MenuItemWithHoverEffect 
-                        name={category.name} 
-                        isTitle={category.isTitle}
-                        onClick={category.isTitle ? (e) => e.preventDefault() : undefined} 
-                      />
-                    </a>
+                        }}
+                      >
+                        {/* Use the reusable component with hover effect */}
+                        <MenuItemWithHoverEffect 
+                          name={category.name} 
+                          isTitle={false}
+                        />
+                      </a>
+                    )}
                     
                     {category.subcategories && category.subcategories.length > 0 && (
                       <div className="mt-2">
