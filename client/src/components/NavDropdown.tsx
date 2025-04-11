@@ -189,9 +189,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   // Menu Item component with hover effect
   const MenuItemWithHoverEffect: React.FC<{ 
     name: string; 
-    isTitle?: boolean; 
+    isTitle?: boolean;
+    isActive?: boolean;
     onClick?: (e: React.MouseEvent) => void 
-  }> = ({ name, isTitle = false, onClick }) => {
+  }> = ({ name, isTitle = false, isActive = false, onClick }) => {
     // Desktop menu items - match styling with mobile menu
     if (!isMobile) {
       if (isTitle) {
@@ -208,7 +209,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       } else {
         return (
           <div 
-            className="relative overflow-hidden group rounded-lg hover:bg-[#BCBCBC]/50 transition-colors duration-300"
+            className={`relative overflow-hidden group rounded-lg ${isActive ? 'bg-[#BCBCBC]/50' : 'hover:bg-[#BCBCBC]/50'} transition-colors duration-300`}
             onClick={onClick}
             style={{ 
               padding: '0.375rem 1rem',
@@ -540,7 +541,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             }}
                           >
                             {/* Use the reusable component with hover effect for subcategories too */}
-                            <MenuItemWithHoverEffect name={subcategory.name} />
+                            <MenuItemWithHoverEffect 
+                              name={subcategory.name} 
+                              isActive={selectedSubcategory === subcategory.name}
+                            />
                           </a>
                         ))}
                       </div>
