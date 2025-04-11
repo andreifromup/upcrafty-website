@@ -349,6 +349,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 style={{
                                                   width: 'min(320px, calc(100% - 16px))',
                                                   height: 'min(300px, 90vw)', 
+                                                  margin: '6px auto',
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
