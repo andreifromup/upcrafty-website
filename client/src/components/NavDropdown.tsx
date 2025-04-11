@@ -293,21 +293,23 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       >
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, imgIdx) => {
-                                            // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
+                                            const isNextContainer = imgIdx === 1;
                                             const isVideo = subcategory.mediaType === 'mixed' && item.endsWith('.mp4');
                                             
                                             return (
-                                              <CarouselItem key={imgIdx} className={`pl-0 basis-full`}>
+                                              <CarouselItem key={imgIdx} className="pl-0 basis-full">
                                                 <div 
-                                                  className={`relative overflow-hidden mx-auto ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                  className="relative overflow-hidden mx-auto"
                                                   style={{
                                                     width: 'min(320px, calc(100% - 16px))',
-                                                    height: 'min(300px, 90vw)', 
+                                                    height: 'min(300px, 90vw)',
                                                     margin: '6px auto',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
-                                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
+                                                    filter: isNextContainer ? 'blur(2px)' : 'none',
+                                                    opacity: !isActive && !isNextContainer ? 0.7 : 1
                                                   }}
                                                 >
                                                   {isVideo ? (
@@ -327,14 +329,11 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     />
                                                   )}
                                                   
-                                                  {/* Add a gradient fade based on which direction has content */}
                                                   {subcategory.mediaCount > 1 && isActive && (
                                                     <>
-                                                      {/* Right fade when there are items to the right */}
                                                       {imgIdx < subcategory.items.length - 1 && (
                                                         <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
                                                       )}
-                                                      {/* Left fade when there are items to the left */}
                                                       {imgIdx > 0 && (
                                                         <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/30 to-transparent pointer-events-none"></div>
                                                       )}
@@ -380,35 +379,41 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         // Implementation for ENVIRONMENT videos
                                         <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
                                           <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
-                                            {subcategory.items.map((item, vidIdx) => (
-                                              <CarouselItem key={vidIdx} className="pl-0 basis-full">
-                                                <div 
-                                                  className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
-                                                  style={{
-                                                    width: 'min(320px, calc(100% - 16px))',
-                                                    height: 'min(300px, 90vw)', 
-                                                    margin: '6px auto',
-                                                    borderRadius: '24px',
-                                                    border: '5px solid #FBFBFB',
-                                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                                  }}
-                                                >
-                                                  <video
-                                                    src={item}
-                                                    className="w-full h-full object-cover"
-                                                    autoPlay
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                  />
-                                                  
-                                                  {/* Add a gradient fade to the right edge for first item when there are multiple items */}
-                                                  {subcategory.mediaCount > 1 && vidIdx === 0 && (
-                                                    <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                  )}
-                                                </div>
-                                              </CarouselItem>
-                                            ))}
+                                            {subcategory.items.map((item, vidIdx) => {
+                                              const isActive = vidIdx === 0;
+                                              const isNextContainer = vidIdx === 1;
+                                              
+                                              return (
+                                                <CarouselItem key={vidIdx} className="pl-0 basis-full">
+                                                  <div 
+                                                    className="relative overflow-hidden mx-auto"
+                                                    style={{
+                                                      width: 'min(320px, calc(100% - 16px))',
+                                                      height: 'min(300px, 90vw)',
+                                                      margin: '6px auto',
+                                                      borderRadius: '24px',
+                                                      border: '5px solid #FBFBFB',
+                                                      boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
+                                                      filter: isNextContainer ? 'blur(2px)' : 'none',
+                                                      opacity: !isActive && !isNextContainer ? 0.7 : 1
+                                                    }}
+                                                  >
+                                                    <video
+                                                      src={item}
+                                                      className="w-full h-full object-cover"
+                                                      autoPlay
+                                                      loop
+                                                      muted
+                                                      playsInline
+                                                    />
+                                                    
+                                                    {subcategory.mediaCount > 1 && vidIdx === 0 && (
+                                                      <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                    )}
+                                                  </div>
+                                                </CarouselItem>
+                                              );
+                                            })}
                                           </CarouselContent>
                                           {/* Navigation buttons removed as requested */}
                                         </Carousel>
