@@ -293,7 +293,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       <Carousel 
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
-                                        onSelect={(index) => setImageCarouselActiveIndex(index)}
+
                                       >
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, imgIdx) => {
@@ -393,7 +393,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         <Carousel 
                                           className="w-full overflow-visible" 
                                           opts={{ align: "start" }}
-                                          onSelect={(index) => setVideoCarouselActiveIndex(index)}
+
                                         >
                                           <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                             {subcategory.items.map((item, vidIdx) => {
