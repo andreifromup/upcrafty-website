@@ -340,42 +340,69 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
-                                          {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className="pl-0 basis-full">
-                                              <div 
-                                                className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
-                                                style={{
-                                                  width: 'min(320px, calc(100% - 16px))',
-                                                  height: 'min(300px, 90vw)', 
-                                                  margin: '6px auto',
-                                                  borderRadius: '24px',
-                                                  border: '5px solid #FBFBFB',
-                                                  backgroundColor: '#E5F2FF',
-                                                  boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                                }}
-                                              >
-                                                {/* Content inside the container with play button overlay */}
-                                                <div className="flex items-center justify-center h-full text-blue-400 font-medium relative">
-                                                  <div className="absolute inset-0 flex items-center justify-center">
-                                                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
-                                                      <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
+                                      {/* Special handling for 2D ANIMATIONS and MOTION GRAPHICS sections */}
+                                      {(subcategory.name === "2D ANIMATIONS" || subcategory.name === "MOTION GRAPHICS") ? (
+                                        <div className="w-full">
+                                          <div 
+                                            className="relative overflow-hidden mx-auto"
+                                            style={{
+                                              width: "352px",
+                                              height: "224px",
+                                              margin: '6px auto',
+                                              borderRadius: '24px',
+                                              border: '5px solid #FBFBFB',
+                                              boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                            }}
+                                          >
+                                            <video
+                                              src={subcategory.items[0]}
+                                              className="w-full h-full object-cover"
+                                              autoPlay
+                                              loop
+                                              muted
+                                              playsInline
+                                            />
+                                          </div>
+                                        </div>
+                                      ) : (
+                                        // Original implementation for other video sections
+                                        <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                          <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
+                                            {subcategory.items.map((item, vidIdx) => (
+                                              <CarouselItem key={vidIdx} className="pl-0 basis-full">
+                                                <div 
+                                                  className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                  style={{
+                                                    width: 'min(320px, calc(100% - 16px))',
+                                                    height: 'min(300px, 90vw)', 
+                                                    margin: '6px auto',
+                                                    borderRadius: '24px',
+                                                    border: '5px solid #FBFBFB',
+                                                    backgroundColor: '#E5F2FF',
+                                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                                  }}
+                                                >
+                                                  {/* Content inside the container with play button overlay */}
+                                                  <div className="flex items-center justify-center h-full text-blue-400 font-medium relative">
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
+                                                        <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
+                                                      </div>
                                                     </div>
+                                                    {subcategory.name} {vidIdx + 1}
                                                   </div>
-                                                  {subcategory.name} {vidIdx + 1}
+                                                  
+                                                  {/* Add a gradient fade to the right edge for first item when there are multiple items */}
+                                                  {subcategory.mediaCount > 1 && vidIdx === 0 && (
+                                                    <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                  )}
                                                 </div>
-                                                
-                                                {/* Add a gradient fade to the right edge for first item when there are multiple items */}
-                                                {subcategory.mediaCount > 1 && vidIdx === 0 && (
-                                                  <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                )}
-                                              </div>
-                                            </CarouselItem>
-                                          ))}
-                                        </CarouselContent>
-                                        {/* Navigation buttons removed as requested */}
-                                      </Carousel>
+                                              </CarouselItem>
+                                            ))}
+                                          </CarouselContent>
+                                          {/* Navigation buttons removed as requested */}
+                                        </Carousel>
+                                      )}
                                     </>
                                   )}
                                 </div>
