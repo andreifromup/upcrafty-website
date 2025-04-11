@@ -340,16 +340,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                      <Carousel className="w-full overflow-visible" opts={{ align: "center" }}>
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 0 }}>
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className="pl-0 basis-full">
                                               <div 
                                                 className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: '100%',
-                                                  height: 'min(300px, 90vw)', 
-                                                  margin: '6px 0',
+                                                  width: '352px',
+                                                  height: '224px', 
+                                                  margin: '12px auto',
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
@@ -364,7 +364,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                   loop
                                                   muted
                                                   playsInline
-                                                  style={{ borderRadius: '18px' }}
+                                                  style={{ borderRadius: '18px', objectFit: 'cover' }}
                                                 />
                                                 
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
