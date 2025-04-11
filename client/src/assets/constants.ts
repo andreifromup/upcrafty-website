@@ -96,7 +96,7 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "image",
         mediaCount: 2,
-        items: ["/transp 1.png", "/transp 2.png"] 
+        items: ["/cartoon1 mobil.webp", "/cartoon2 mobil.webp"] 
       },
       { 
         name: "CHARACTER DESIGN", 

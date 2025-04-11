@@ -306,14 +306,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     margin: '6px auto',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
-                                                    backgroundColor: '#E5F2FF',
                                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
                                                   }}
                                                 >
-                                                  {/* Content inside the container - keeping it empty or using a placeholder */}
-                                                  <div className="flex items-center justify-center h-full text-blue-400 font-medium">
-                                                    {subcategory.name} {imgIdx + 1}
-                                                  </div>
+                                                  {/* Display the actual image */}
+                                                  <img 
+                                                    src={item} 
+                                                    alt={`${subcategory.name} ${imgIdx + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                  />
                                                   
                                                   {/* Add a gradient fade based on which direction has content */}
                                                   {subcategory.mediaCount > 1 && isActive && (
