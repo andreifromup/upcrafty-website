@@ -324,8 +324,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
-                                                    filter: isPartiallyVisible ? 'blur(2px)' : 'none',
-                                                    opacity: !isActive && !isPartiallyVisible ? 0.7 : 1
+                                                    filter: 'none',
+                                                    opacity: 1
                                                   }}
                                                 >
                                                   {isVideo ? (
@@ -345,16 +345,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     />
                                                   )}
                                                   
-                                                  {subcategory.mediaCount > 1 && isActive && (
-                                                    <>
-                                                      {imgIdx < subcategory.items.length - 1 && (
-                                                        <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                      )}
-                                                      {imgIdx > 0 && (
-                                                        <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/30 to-transparent pointer-events-none"></div>
-                                                      )}
-                                                    </>
-                                                  )}
+                                                  {/* Gradients removed */}
                                                 </div>
                                               </CarouselItem>
                                             );
@@ -420,8 +411,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                       borderRadius: '24px',
                                                       border: '5px solid #FBFBFB',
                                                       boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
-                                                      filter: isPartiallyVisible ? 'blur(2px)' : 'none',
-                                                      opacity: !isActive && !isPartiallyVisible ? 0.7 : 1
+                                                      filter: 'none',
+                                                      opacity: 1
                                                     }}
                                                   >
                                                     <video
@@ -433,16 +424,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                       playsInline
                                                     />
                                                     
-                                                    {subcategory.mediaCount > 1 && isActive && (
-                                                      <>
-                                                        {vidIdx < subcategory.items.length - 1 && (
-                                                          <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                        )}
-                                                        {vidIdx > 0 && (
-                                                          <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/30 to-transparent pointer-events-none"></div>
-                                                        )}
-                                                      </>
-                                                    )}
+                                                    {/* Gradients removed */}
                                                   </div>
                                                 </CarouselItem>
                                               );
