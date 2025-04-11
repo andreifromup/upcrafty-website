@@ -301,9 +301,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 <div 
                                                   className={`relative overflow-hidden mx-auto ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: '100%',
+                                                    width: 'min(320px, calc(100% - 16px))',
                                                     height: 'min(300px, 90vw)', 
-                                                    margin: '6px 0',
+                                                    margin: '6px auto',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
@@ -340,40 +340,68 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
-                                      <Carousel className="w-full overflow-visible" opts={{ align: "center" }}>
+                                      <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 0 }}>
-                                          {subcategory.items.map((item, vidIdx) => (
-                                            <CarouselItem key={vidIdx} className="pl-0 basis-full">
-                                              <div 
-                                                className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
-                                                style={{
-                                                  width: '352px',
-                                                  height: '224px', 
-                                                  margin: '12px auto',
-                                                  borderRadius: '24px',
-                                                  border: '5px solid #FBFBFB',
-                                                  backgroundColor: '#E5F2FF',
-                                                  boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                                }}
-                                              >
-                                                {/* Actual video player - autoplay and loop without controls */}
-                                                <video 
-                                                  className="w-full h-full object-cover"
-                                                  src={item}
-                                                  autoPlay
-                                                  loop
-                                                  muted
-                                                  playsInline
-                                                  style={{ borderRadius: '18px', objectFit: 'cover' }}
-                                                />
-                                                
-                                                {/* Add a gradient fade to the right edge for first item when there are multiple items */}
-                                                {subcategory.mediaCount > 1 && vidIdx === 0 && (
-                                                  <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
-                                                )}
-                                              </div>
-                                            </CarouselItem>
-                                          ))}
+                                          {subcategory.items.map((item, vidIdx) => {
+                                            // Only apply the special styling to 2D ANIMATIONS and MOTION GRAPHICS
+                                            const isSpecialVideoCategory = subcategory.name === "2D ANIMATIONS" || subcategory.name === "MOTION GRAPHICS";
+                                            
+                                            return (
+                                              <CarouselItem key={vidIdx} className="pl-0 basis-full">
+                                                <div 
+                                                  className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
+                                                  style={{
+                                                    width: isSpecialVideoCategory ? '352px' : 'min(320px, calc(100% - 16px))',
+                                                    height: isSpecialVideoCategory ? '224px' : 'min(300px, 90vw)', 
+                                                    margin: isSpecialVideoCategory ? '12px auto' : '6px auto',
+                                                    borderRadius: '24px',
+                                                    border: '5px solid #FBFBFB',
+                                                    backgroundColor: '#E5F2FF',
+                                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                                  }}
+                                                >
+                                                  {/* Special video handling to ensure paths are correct */}
+                                                  {subcategory.name === "2D ANIMATIONS" ? (
+                                                    <video 
+                                                      className="w-full h-full object-cover"
+                                                      src={item.includes("/attached_assets/") ? item : `/attached_assets${item}`}
+                                                      autoPlay
+                                                      loop
+                                                      muted
+                                                      playsInline
+                                                      style={{ borderRadius: '18px', objectFit: 'cover' }}
+                                                    />
+                                                  ) : subcategory.name === "MOTION GRAPHICS" ? (
+                                                    <video 
+                                                      className="w-full h-full object-cover"
+                                                      src={item.includes("/attached_assets/") ? item : `/attached_assets${item}`}
+                                                      autoPlay
+                                                      loop
+                                                      muted
+                                                      playsInline
+                                                      style={{ borderRadius: '18px', objectFit: 'cover' }}
+                                                    />
+                                                  ) : (
+                                                    // For other video items
+                                                    <video 
+                                                      className="w-full h-full object-cover"
+                                                      src={item}
+                                                      autoPlay
+                                                      loop
+                                                      muted
+                                                      playsInline
+                                                      style={{ borderRadius: '18px', objectFit: 'cover' }}
+                                                    />
+                                                  )}
+                                                  
+                                                  {/* Add a gradient fade to the right edge for first item when there are multiple items */}
+                                                  {subcategory.mediaCount > 1 && vidIdx === 0 && (
+                                                    <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                  )}
+                                                </div>
+                                              </CarouselItem>
+                                            );
+                                          })}
                                         </CarouselContent>
                                         {/* Navigation buttons removed as requested */}
                                       </Carousel>
