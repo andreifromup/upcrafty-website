@@ -284,7 +284,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 </div>
                                 
                                 {/* Media display for each subcategory */}
-                                <div className="pl-0 pr-4 mt-4 pt-2">
+                                <div className="pl-0 pr-4 mt-5 pt-4">
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel 
@@ -301,9 +301,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 <div 
                                                   className={`relative overflow-hidden mx-auto ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: 'calc(100% - 16px)',
+                                                    width: '100%',
                                                     height: 'min(300px, 90vw)', 
-                                                    margin: '6px auto',
+                                                    margin: '6px 0',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
@@ -347,22 +347,23 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                               <div 
                                                 className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: 'calc(100% - 16px)',
+                                                  width: '100%',
                                                   height: 'min(300px, 90vw)', 
-                                                  margin: '6px auto',
+                                                  margin: '6px 0',
                                                   borderRadius: '24px',
                                                   border: '5px solid #FBFBFB',
                                                   backgroundColor: '#E5F2FF',
                                                   boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
                                                 }}
                                               >
-                                                {/* Actual video player */}
+                                                {/* Actual video player - autoplay and loop without controls */}
                                                 <video 
                                                   className="w-full h-full object-cover"
                                                   src={item}
-                                                  controls
+                                                  autoPlay
+                                                  loop
+                                                  muted
                                                   playsInline
-                                                  controlsList="nodownload"
                                                   style={{ borderRadius: '18px' }}
                                                 />
                                                 
