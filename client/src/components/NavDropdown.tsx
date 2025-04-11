@@ -70,21 +70,25 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
 
   // Handle subcategory click - now used for image display under categories
   const handleSubcategoryClick = (subcategory: string) => {
-    // If the same subcategory is clicked again, close the overlay
-    if (selectedSubcategory === subcategory && showOverlay) {
-      closeOverlay();
+    // If the same subcategory is clicked again, deselect it
+    if (selectedSubcategory === subcategory) {
+      setSelectedSubcategory(null);
       return;
     }
     
-    // Set the subcategory and show the overlay
+    // Set the selected subcategory
     setSelectedSubcategory(subcategory);
-    setShowOverlay(true);
     
-    // Determine content type based on subcategory
-    if (subcategory === "2D ANIMATIONS" || subcategory === "MOTION GRAPHICS") {
-      setOverlayType('video');
-    } else {
-      setOverlayType('image');
+    // On mobile, also handle the overlay
+    if (isMobile) {
+      setShowOverlay(true);
+      
+      // Determine content type based on subcategory
+      if (subcategory === "2D ANIMATIONS" || subcategory === "MOTION GRAPHICS") {
+        setOverlayType('video');
+      } else {
+        setOverlayType('image');
+      }
     }
   };
   
@@ -178,11 +182,33 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     onClose();
   };
   
-  // Handle clicks outside the dropdown content
+  // Handle clicks outside the dropdown content or in the dropdown background
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Check if click is outside the dropdown content
+    // First, check if click is completely outside the dropdown content
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
       handleClose();
+      return;
+    }
+    
+    // Next, check if user clicked on the dropdown background
+    // Check if the click is on the element with className that contains "bg-white"
+    // and not on any of the menu items or controls
+    const target = e.target as HTMLElement;
+    if (
+      target && 
+      (
+        // Check if target is the white background div or the flex container directly under it
+        (target.classList.contains('bg-white') || 
+         (target.parentElement && target.parentElement.classList.contains('bg-white'))) &&
+        // Make sure it's not a menu item
+        !target.closest('a') && 
+        !target.closest('button') &&
+        // Ensure it's not a menu item with hover effect
+        !target.closest('.overflow-hidden.group')
+      )
+    ) {
+      // If it's a background click, deselect the subcategory
+      setSelectedSubcategory(null);
     }
   };
   
