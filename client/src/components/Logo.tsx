@@ -21,6 +21,10 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     return (
       <div 
         className="flex items-center cursor-pointer group"
+        onMouseDown={(e) => {
+          // Stop propagation to prevent interference with document-level handlers
+          e.stopPropagation();
+        }}
         onMouseEnter={(e) => {
           if (!isMobile) {
             // Apply orange filter to both logo and dropdown arrow

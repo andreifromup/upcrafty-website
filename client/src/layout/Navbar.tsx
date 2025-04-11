@@ -34,11 +34,20 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   }, [isDropdownOpen, onDropdownOpen, onDropdownClose]);
   
-  const toggleDropdown = () => {
-    // Toggle dropdown state
-    const newState = !isDropdownOpen;
-    setIsDropdownOpen(newState);
-    // No need to manually rotate arrow anymore, handled by Logo component
+  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Add immediate stopPropagation to prevent event bubbling and interference
+    e.stopPropagation();
+    
+    // Toggle dropdown state with a more direct approach
+    if (isDropdownOpen) {
+      // If already open, close it immediately
+      setIsDropdownOpen(false);
+      console.log('Logo click: Closing dropdown');
+    } else {
+      // Otherwise open it
+      setIsDropdownOpen(true);
+      console.log('Logo click: Opening dropdown');
+    }
   };
   
   return (
@@ -120,10 +129,9 @@ const Navbar: React.FC<NavbarProps> = ({
       <NavDropdown 
         isOpen={isDropdownOpen} 
         onClose={() => {
-          // Keep the hover effect briefly when closing
-          setTimeout(() => {
-            setIsDropdownOpen(false);
-          }, 100);
+          // Close immediately without delay
+          setIsDropdownOpen(false);
+          console.log('NavDropdown onClose called');
           // Arrow rotation is now handled by the Logo component via isDropdownOpen prop
         }} 
       />
