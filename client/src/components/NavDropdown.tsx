@@ -291,7 +291,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
                                       >
-                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
+                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 0 }}>
                                           {subcategory.items.map((item, imgIdx) => {
                                             // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
@@ -301,7 +301,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                 <div 
                                                   className={`relative overflow-hidden mx-auto ${!isActive ? 'opacity-70 blur-[1px]' : ''}`} 
                                                   style={{
-                                                    width: 'min(320px, calc(100% - 16px))',
+                                                    width: 'calc(100% - 16px)',
                                                     height: 'min(300px, 90vw)', 
                                                     margin: '6px auto',
                                                     borderRadius: '24px',
@@ -341,13 +341,13 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   {subcategory.mediaType === 'video' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
-                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
+                                        <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 0 }}>
                                           {subcategory.items.map((item, vidIdx) => (
                                             <CarouselItem key={vidIdx} className="pl-0 basis-full">
                                               <div 
                                                 className={`relative overflow-hidden mx-auto ${vidIdx !== 0 ? 'opacity-70 blur-[1px]' : ''}`} 
                                                 style={{
-                                                  width: 'min(320px, calc(100% - 16px))',
+                                                  width: 'calc(100% - 16px)',
                                                   height: 'min(300px, 90vw)', 
                                                   margin: '6px auto',
                                                   borderRadius: '24px',
@@ -356,15 +356,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                   boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
                                                 }}
                                               >
-                                                {/* Content inside the container with play button overlay */}
-                                                <div className="flex items-center justify-center h-full text-blue-400 font-medium relative">
-                                                  <div className="absolute inset-0 flex items-center justify-center">
-                                                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
-                                                      <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
-                                                    </div>
-                                                  </div>
-                                                  {subcategory.name} {vidIdx + 1}
-                                                </div>
+                                                {/* Actual video player */}
+                                                <video 
+                                                  className="w-full h-full object-cover"
+                                                  src={item}
+                                                  controls
+                                                  playsInline
+                                                  controlsList="nodownload"
+                                                  style={{ borderRadius: '18px' }}
+                                                />
                                                 
                                                 {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                 {subcategory.mediaCount > 1 && vidIdx === 0 && (

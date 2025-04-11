@@ -36,10 +36,12 @@ export const ICONS = {
 // Video files for different platforms and network conditions
 export const VIDEOS = {
   desktopHigh: "/desktop.mp4",
-  desktopLow: "/desktop-low.mp4",
+  desktopLow: "/desktop low.mp4",
   mobileHigh: "/mobil.mp4",
-  mobileLow: "/mobil-low.mp4",
-  aboutUs: "/about-us-video.mp4"
+  mobileLow: "/mobil low.mp4",
+  aboutUs: "/About us video.mp4",
+  animations2D: "/2d animations mobil.mp4",
+  motionGraphics: "/motion graphics mobil.mp4"
 };
 
 // Logo sizing configurations
@@ -126,14 +128,14 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "video",
         mediaCount: 1,
-        items: ["/video.png"] 
+        items: ["/2d animations mobil.mp4"] 
       },
       { 
         name: "MOTION GRAPHICS", 
         isTitle: false, 
         mediaType: "video",
         mediaCount: 1,
-        items: ["/video.png"] 
+        items: ["/motion graphics mobil.mp4"] 
       }
     ]
   },
