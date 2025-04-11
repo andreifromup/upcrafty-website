@@ -285,7 +285,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 
                                 {/* Media display for each subcategory */}
                                 <div className="pl-0 pr-4 mt-4 pt-2">
-                                  {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
+                                  {(subcategory.mediaType === 'image' || subcategory.mediaType === 'mixed') && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel 
                                         className="w-full overflow-visible" 
@@ -295,6 +295,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                           {subcategory.items.map((item, imgIdx) => {
                                             // Use a fixed active index for now
                                             const isActive = imgIdx === 0;
+                                            const isVideo = subcategory.mediaType === 'mixed' && item.endsWith('.mp4');
                                             
                                             return (
                                               <CarouselItem key={imgIdx} className={`pl-0 basis-full`}>
@@ -309,12 +310,22 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
                                                   }}
                                                 >
-                                                  {/* Display the actual image */}
-                                                  <img 
-                                                    src={item} 
-                                                    alt={`${subcategory.name} ${imgIdx + 1}`}
-                                                    className="w-full h-full object-cover"
-                                                  />
+                                                  {isVideo ? (
+                                                    <video
+                                                      src={item}
+                                                      className="w-full h-full object-cover"
+                                                      autoPlay
+                                                      loop
+                                                      muted
+                                                      playsInline
+                                                    />
+                                                  ) : (
+                                                    <img 
+                                                      src={item} 
+                                                      alt={`${subcategory.name} ${imgIdx + 1}`}
+                                                      className="w-full h-full object-cover"
+                                                    />
+                                                  )}
                                                   
                                                   {/* Add a gradient fade based on which direction has content */}
                                                   {subcategory.mediaCount > 1 && isActive && (
@@ -366,7 +377,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                           </div>
                                         </div>
                                       ) : (
-                                        // Original implementation for other video sections
+                                        // Implementation for ENVIRONMENT videos
                                         <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
                                           <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                             {subcategory.items.map((item, vidIdx) => (
@@ -379,19 +390,17 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     margin: '6px auto',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
-                                                    backgroundColor: '#E5F2FF',
                                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
                                                   }}
                                                 >
-                                                  {/* Content inside the container with play button overlay */}
-                                                  <div className="flex items-center justify-center h-full text-blue-400 font-medium relative">
-                                                    <div className="absolute inset-0 flex items-center justify-center">
-                                                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-black/30">
-                                                        <div className="w-0 h-0 border-y-[8px] border-y-transparent border-l-[14px] border-l-white ml-1"></div>
-                                                      </div>
-                                                    </div>
-                                                    {subcategory.name} {vidIdx + 1}
-                                                  </div>
+                                                  <video
+                                                    src={item}
+                                                    className="w-full h-full object-cover"
+                                                    autoPlay
+                                                    loop
+                                                    muted
+                                                    playsInline
+                                                  />
                                                   
                                                   {/* Add a gradient fade to the right edge for first item when there are multiple items */}
                                                   {subcategory.mediaCount > 1 && vidIdx === 0 && (

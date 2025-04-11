@@ -103,7 +103,7 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "image",
         mediaCount: 2,
-        items: ["/transp 1.png", "/transp 4.png"] 
+        items: ["/Character1 mobil.webp", "/Character2 mobil.webp"] 
       }
     ]
   },
@@ -114,9 +114,9 @@ export const NAV_CATEGORIES = [
       { 
         name: "MOBILE GAMES", 
         isTitle: false,
-        mediaType: "image",
+        mediaType: "mixed",
         mediaCount: 2,
-        items: ["/transp 2.png", "/transp 4.png"] 
+        items: ["/mobile games1.webp", "/mobile games2.mp4"] 
       }
     ]
   },
@@ -149,7 +149,7 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "video",
         mediaCount: 2,
-        items: ["/video.png", "/video.png"] 
+        items: ["/environment1 mobil_1.mp4", "/environment2 mobil_2.mp4"] 
       },
       { 
         name: "CHARACTER MODELING", 
