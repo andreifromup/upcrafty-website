@@ -555,10 +555,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Right section - Portfolio images matching Figma reference */}
-            {!selectedCategory && portfolioImages.length >= 3 && (
-              <div className="flex-1 relative bg-white h-full overflow-hidden">
-                {/* Portfolio images with absolute positioning to match Figma */}
+            {/* Right section content */}
+            <div className="flex-1 relative bg-white h-full overflow-hidden">
+              {/* Default Portfolio images - show when no subcategory or category is selected */}
+              {((!selectedCategory && !selectedSubcategory) || (selectedCategory && !selectedSubcategory)) && portfolioImages.length >= 3 && (
                 <div className="relative w-full h-[572px] overflow-hidden">
                   {/* Left image - all images aligned in straight line */}
                   <div 
@@ -617,8 +617,131 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     />
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+              
+              {/* Subcategory Content - Show when a subcategory is selected */}
+              {selectedSubcategory && (
+                <div className="w-full h-[572px] p-8 flex items-center justify-center">
+                  {/* Find the selected subcategory data */}
+                  {NAV_CATEGORIES.map(category => 
+                    category.subcategories?.map(subcategory => {
+                      if (subcategory.name === selectedSubcategory) {
+                        return (
+                          <div key={subcategory.name} className="w-full h-full flex flex-wrap items-center justify-center gap-8">
+                            {/* Render containers based on subcategory type */}
+                            {subcategory.mediaType === 'image' && subcategory.items?.map((item, idx) => (
+                              <div 
+                                key={idx}
+                                className="relative overflow-hidden"
+                                style={{
+                                  width: subcategory.name === "CHARACTER MODELING" ? '280px' : '400px',
+                                  height: subcategory.name === "CHARACTER MODELING" ? '280px' : '400px',
+                                  borderRadius: '24px',
+                                  border: '5px solid #FBFBFB',
+                                  boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                }}
+                              >
+                                <img
+                                  src={item}
+                                  alt={`${subcategory.name} ${idx + 1}`}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            ))}
+                            
+                            {/* Special handling for 2D ANIMATIONS and MOTION GRAPHICS sections */}
+                            {subcategory.mediaType === 'video' && (subcategory.name === "2D ANIMATIONS" || subcategory.name === "MOTION GRAPHICS") && (
+                              <div 
+                                className="relative overflow-hidden"
+                                style={{
+                                  width: "704px",  // Double the mobile width (352px)
+                                  height: "448px", // Double the mobile height (224px)
+                                  borderRadius: '24px',
+                                  border: '5px solid #FBFBFB',
+                                  boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                }}
+                              >
+                                <video
+                                  src={subcategory.items[0]}
+                                  className="w-full h-full object-cover"
+                                  autoPlay
+                                  loop
+                                  muted
+                                  playsInline
+                                />
+                              </div>
+                            )}
+                            
+                            {/* Mixed content for MOBILE GAMES */}
+                            {subcategory.mediaType === 'mixed' && subcategory.items?.map((item, idx) => {
+                              const isVideo = item.endsWith('.mp4');
+                              return (
+                                <div 
+                                  key={idx}
+                                  className="relative overflow-hidden"
+                                  style={{
+                                    width: '400px',
+                                    height: '400px',
+                                    borderRadius: '24px',
+                                    border: '5px solid #FBFBFB',
+                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                  }}
+                                >
+                                  {isVideo ? (
+                                    <video
+                                      src={item}
+                                      className="w-full h-full object-cover"
+                                      autoPlay
+                                      loop
+                                      muted
+                                      playsInline
+                                    />
+                                  ) : (
+                                    <img
+                                      src={item}
+                                      alt={`${subcategory.name} ${idx + 1}`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  )}
+                                </div>
+                              );
+                            })}
+                            
+                            {/* Standard videos like ENVIRONMENT */}
+                            {subcategory.mediaType === 'video' && 
+                              subcategory.name !== "2D ANIMATIONS" && 
+                              subcategory.name !== "MOTION GRAPHICS" && 
+                              subcategory.items?.map((item, idx) => (
+                                <div 
+                                  key={idx}
+                                  className="relative overflow-hidden"
+                                  style={{
+                                    width: '400px',
+                                    height: '400px',
+                                    borderRadius: '24px',
+                                    border: '5px solid #FBFBFB',
+                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
+                                  }}
+                                >
+                                  <video
+                                    src={item}
+                                    className="w-full h-full object-cover"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                  />
+                                </div>
+                            ))}
+                          </div>
+                        );
+                      }
+                      return null;
+                    })
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
