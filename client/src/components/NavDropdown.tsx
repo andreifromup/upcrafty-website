@@ -144,10 +144,35 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       
       // Disable body scrolling when dropdown is open
       document.body.style.overflow = "hidden";
+      
+      // Add document click handler to detect clicks outside the dropdown
+      const handleDocumentClick = (e: MouseEvent) => {
+        // Check if contentRef exists and click is outside of it
+        if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+          console.log('Document click outside dropdown content detected');
+          handleClose();
+        }
+      };
+      
+      // We need to let the current click event finish before setting up our document handler
+      // This ensures that the click that opened the dropdown doesn't also immediately close it
+      const timeoutId = setTimeout(() => {
+        // Using mousedown instead of click gives better responsiveness for closing
+        document.addEventListener("mousedown", handleDocumentClick);
+      }, 200);
+      
+      // Return cleanup function
+      return () => {
+        // Clean up listeners and re-enable scrolling
+        document.removeEventListener("keydown", handleEsc);
+        document.removeEventListener("mousedown", handleDocumentClick);
+        document.body.style.overflow = "auto";
+        clearTimeout(timeoutId);
+      };
     }
     
     return () => {
-      // Clean up listeners and re-enable scrolling
+      // Clean up listeners and re-enable scrolling when dropdown is closed
       document.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "auto";
     };
@@ -179,21 +204,26 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   // Handle dropdown close
   const handleClose = () => {
+    // Clear selection state before closing
+    setSelectedSubcategory(null);
+    // Close the dropdown
     onClose();
+    console.log('Dropdown closed');
   };
   
   // Handle clicks outside the dropdown content or in the dropdown background
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // First, check if click is completely outside the dropdown content
-    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+    // Check if clicking on the background - handle it directly
+    const target = e.target as HTMLElement;
+    
+    // Special handling for the background container itself
+    if (target === e.currentTarget) {
+      // This means user clicked on the outermost dropdown container (the overlay)
       handleClose();
       return;
     }
     
-    // Next, check if user clicked on the dropdown background
-    // Check if the click is on the element with className that contains "bg-white"
-    // and not on any of the menu items or controls
-    const target = e.target as HTMLElement;
+    // For clicks inside the content but on the dropdown background itself
     if (
       target && 
       (
