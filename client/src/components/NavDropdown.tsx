@@ -284,7 +284,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 </div>
                                 
                                 {/* Media display for each subcategory */}
-                                <div className="pl-0 pr-4 mt-2">
+                                <div className="pl-0 pr-4 mt-4 pt-2">
                                   {subcategory.mediaType === 'image' && subcategory.items && subcategory.items.length > 0 && (
                                     <>
                                       <Carousel 
@@ -303,6 +303,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                   style={{
                                                     width: 'min(320px, calc(100% - 16px))',
                                                     height: 'min(300px, 90vw)', 
+                                                    margin: '6px auto',
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     backgroundColor: '#E5F2FF',
