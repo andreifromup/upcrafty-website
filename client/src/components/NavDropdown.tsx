@@ -31,6 +31,9 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // State to track active item in each carousel
   const [carouselActiveItems, setCarouselActiveItems] = useState<{[key: string]: number}>({}); // Track by subcategory name
+  // State for tracking which item is active in each subcategory carousel
+  const [imageCarouselActiveIndex, setImageCarouselActiveIndex] = useState(0);
+  const [videoCarouselActiveIndex, setVideoCarouselActiveIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -290,15 +293,25 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       <Carousel 
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
+                                        onSelect={(index) => setImageCarouselActiveIndex(index)}
                                       >
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, imgIdx) => {
-                                            const isActive = imgIdx === 0;
-                                            const isNextContainer = imgIdx === 1;
+                                            const isActive = imgIdx === imageCarouselActiveIndex;
+                                            
+                                            // Determine if this is a container that should be blurred (adjacent to active)
+                                            const isPartiallyVisible = 
+                                              (imgIdx === imageCarouselActiveIndex + 1) || // next container
+                                              (imgIdx === imageCarouselActiveIndex - 1);   // previous container
+                                            
                                             const isVideo = subcategory.mediaType === 'mixed' && item.endsWith('.mp4');
                                             
                                             return (
-                                              <CarouselItem key={imgIdx} className="pl-0 basis-full">
+                                              <CarouselItem 
+                                                key={imgIdx} 
+                                                className="pl-0 basis-full"
+                                                onClick={() => setImageCarouselActiveIndex(imgIdx)} // Update active index on click
+                                              >
                                                 <div 
                                                   className="relative overflow-hidden mx-auto"
                                                   style={{
@@ -308,8 +321,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                     borderRadius: '24px',
                                                     border: '5px solid #FBFBFB',
                                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
-                                                    filter: isNextContainer ? 'blur(2px)' : 'none',
-                                                    opacity: !isActive && !isNextContainer ? 0.7 : 1
+                                                    filter: isPartiallyVisible ? 'blur(2px)' : 'none',
+                                                    opacity: !isActive && !isPartiallyVisible ? 0.7 : 1
                                                   }}
                                                 >
                                                   {isVideo ? (
@@ -377,14 +390,26 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         </div>
                                       ) : (
                                         // Implementation for ENVIRONMENT videos
-                                        <Carousel className="w-full overflow-visible" opts={{ align: "start" }}>
+                                        <Carousel 
+                                          className="w-full overflow-visible" 
+                                          opts={{ align: "start" }}
+                                          onSelect={(index) => setVideoCarouselActiveIndex(index)}
+                                        >
                                           <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                             {subcategory.items.map((item, vidIdx) => {
-                                              const isActive = vidIdx === 0;
-                                              const isNextContainer = vidIdx === 1;
+                                              const isActive = vidIdx === videoCarouselActiveIndex;
+                                              
+                                              // Determine if this is a container that should be blurred (adjacent to active)
+                                              const isPartiallyVisible = 
+                                                (vidIdx === videoCarouselActiveIndex + 1) || // next container
+                                                (vidIdx === videoCarouselActiveIndex - 1);   // previous container
                                               
                                               return (
-                                                <CarouselItem key={vidIdx} className="pl-0 basis-full">
+                                                <CarouselItem 
+                                                  key={vidIdx} 
+                                                  className="pl-0 basis-full"
+                                                  onClick={() => setVideoCarouselActiveIndex(vidIdx)} // Update active index on click
+                                                >
                                                   <div 
                                                     className="relative overflow-hidden mx-auto"
                                                     style={{
@@ -394,8 +419,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                       borderRadius: '24px',
                                                       border: '5px solid #FBFBFB',
                                                       boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)',
-                                                      filter: isNextContainer ? 'blur(2px)' : 'none',
-                                                      opacity: !isActive && !isNextContainer ? 0.7 : 1
+                                                      filter: isPartiallyVisible ? 'blur(2px)' : 'none',
+                                                      opacity: !isActive && !isPartiallyVisible ? 0.7 : 1
                                                     }}
                                                   >
                                                     <video
@@ -407,8 +432,15 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                                       playsInline
                                                     />
                                                     
-                                                    {subcategory.mediaCount > 1 && vidIdx === 0 && (
-                                                      <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                    {subcategory.mediaCount > 1 && isActive && (
+                                                      <>
+                                                        {vidIdx < subcategory.items.length - 1 && (
+                                                          <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/30 to-transparent pointer-events-none"></div>
+                                                        )}
+                                                        {vidIdx > 0 && (
+                                                          <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/30 to-transparent pointer-events-none"></div>
+                                                        )}
+                                                      </>
                                                     )}
                                                   </div>
                                                 </CarouselItem>
