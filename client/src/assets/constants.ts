@@ -96,14 +96,16 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "image",
         mediaCount: 2,
-        items: ["/cartoon1 mobil.webp", "/cartoon2 mobil.webp"] 
+        items: ["/cartoon1 mobil.webp", "/cartoon2 mobil.webp"],
+        desktopItems: ["/cartoons1 desktop.webp", "/cartoons2 desktop.webp"]
       },
       { 
         name: "CHARACTER DESIGN", 
         isTitle: false, 
         mediaType: "image",
         mediaCount: 2,
-        items: ["/Character1 mobil.webp", "/Character2 mobil.webp"] 
+        items: ["/Character1 mobil.webp", "/Character2 mobil.webp"],
+        desktopItems: ["/character1 desktop .webp", "/character2 desktop .webp"]
       }
     ]
   },
@@ -116,7 +118,8 @@ export const NAV_CATEGORIES = [
         isTitle: false,
         mediaType: "mixed",
         mediaCount: 2,
-        items: ["/mobile games1.webp", "/mobile games2.mp4"] 
+        items: ["/mobile games1.webp", "/mobile games2.mp4"],
+        desktopItems: ["/mobil games1 desktop.webp", "/mobil games2 desktop.mp4"]
       }
     ]
   },
@@ -129,14 +132,16 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "video",
         mediaCount: 1,
-        items: ["/2d animations mobil.mp4"] 
+        items: ["/2d animations mobil.mp4"],
+        desktopItems: ["/2d animations desktop.mp4"]
       },
       { 
         name: "MOTION GRAPHICS", 
         isTitle: false, 
         mediaType: "video",
         mediaCount: 1,
-        items: ["/motion graphics mobil.mp4"] 
+        items: ["/motion graphics mobil.mp4"],
+        desktopItems: ["/motion graphics desktop.mp4"]
       }
     ]
   },
@@ -149,14 +154,16 @@ export const NAV_CATEGORIES = [
         isTitle: false, 
         mediaType: "video",
         mediaCount: 2,
-        items: ["/environment1 mobil_1.mp4", "/environment2 mobil_2.mp4"] 
+        items: ["/environment1 mobil_1.mp4", "/environment2 mobil_2.mp4"],
+        desktopItems: ["/environment1 desktop_1.mp4", "/environment2 desktop.mp4"]
       },
       { 
         name: "CHARACTER MODELING", 
         isTitle: false, 
         mediaType: "image",
         mediaCount: 3,
-        items: ["/transp 1.png", "/transp 2.png", "/transp 4.png"] 
+        items: ["/transp 1.png", "/transp 2.png", "/transp 4.png"],
+        desktopItems: ["/transp 1.png", "/transp 2.png", "/transp 4.png"] // No desktop versions provided, use the same
       }
     ]
   },
