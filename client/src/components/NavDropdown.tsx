@@ -31,9 +31,44 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // State to track active item in each carousel
   const [carouselActiveItems, setCarouselActiveItems] = useState<{[key: string]: number}>({}); // Track by subcategory name
-  // State for tracking which item is active in each subcategory carousel
+  // State for tracking which item is active in each subcategory carousel 
   const [imageCarouselActiveIndex, setImageCarouselActiveIndex] = useState(0);
   const [videoCarouselActiveIndex, setVideoCarouselActiveIndex] = useState(0);
+  
+  // References to carousel APIs
+  const [imageCarouselApi, setImageCarouselApi] = useState<any>(null);
+  const [videoCarouselApi, setVideoCarouselApi] = useState<any>(null);
+  
+  // Effect to listen for carousel slides
+  useEffect(() => {
+    if (imageCarouselApi) {
+      const onSelect = () => {
+        const selectedIndex = imageCarouselApi.selectedScrollSnap();
+        setImageCarouselActiveIndex(selectedIndex);
+      };
+      
+      imageCarouselApi.on('select', onSelect);
+      
+      return () => {
+        imageCarouselApi.off('select', onSelect);
+      };
+    }
+  }, [imageCarouselApi]);
+  
+  useEffect(() => {
+    if (videoCarouselApi) {
+      const onSelect = () => {
+        const selectedIndex = videoCarouselApi.selectedScrollSnap();
+        setVideoCarouselActiveIndex(selectedIndex);
+      };
+      
+      videoCarouselApi.on('select', onSelect);
+      
+      return () => {
+        videoCarouselApi.off('select', onSelect);
+      };
+    }
+  }, [videoCarouselApi]);
   const contentRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -293,7 +328,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                       <Carousel 
                                         className="w-full overflow-visible" 
                                         opts={{ align: "start" }}
-
+                                        setApi={setImageCarouselApi}
                                       >
                                         <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                           {subcategory.items.map((item, imgIdx) => {
@@ -393,7 +428,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                         <Carousel 
                                           className="w-full overflow-visible" 
                                           opts={{ align: "start" }}
-
+                                          setApi={setVideoCarouselApi}
                                         >
                                           <CarouselContent className="ml-0 overflow-visible pb-6" style={{ paddingRight: 'min(4rem, 15vw)' }}>
                                             {subcategory.items.map((item, vidIdx) => {
