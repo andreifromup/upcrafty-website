@@ -638,70 +638,42 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                   {NAV_CATEGORIES.map(category => 
                     category.subcategories?.map(subcategory => {
                       if (subcategory.name === selectedSubcategory) {
+                        // Directly log the subcategory to debug
+                        console.log("Selected subcategory:", subcategory);
+                        
+                        let mediaItems = [];
+                        
+                        // Use desktop items when available
+                        if (subcategory.desktopItems) {
+                          console.log("Using desktop items:", subcategory.desktopItems);
+                          mediaItems = subcategory.desktopItems;
+                        } else {
+                          console.log("Using mobile items:", subcategory.items);
+                          mediaItems = subcategory.items;
+                        }
+                        
                         return (
                           <div key={subcategory.name} className="w-full h-full flex flex-wrap items-center justify-center gap-8">
-                            {/* Render containers based on subcategory type */}
-                            {subcategory.mediaType === 'image' && (subcategory.desktopItems || subcategory.items)?.map((item, idx) => {
-                              // Use desktop items when available, fall back to mobile items
-                              const displayItem = (subcategory.desktopItems && subcategory.desktopItems[idx]) || item;
+                            {/* Simplified media rendering for all types */}
+                            {mediaItems.map((item, idx) => {
+                              const isVideo = item.endsWith('.mp4');
+                              console.log(`Rendering item ${idx}:`, item, "Is video:", isVideo);
+                              
+                              // Special sizing for 2D ANIMATIONS and MOTION GRAPHICS
+                              const isSpecialVideo = 
+                                isVideo && 
+                                (subcategory.name === "2D ANIMATIONS" || subcategory.name === "MOTION GRAPHICS");
+                              
+                              // Special sizing for CHARACTER MODELING
+                              const isCharacterModeling = subcategory.name === "CHARACTER MODELING";
                               
                               return (
                                 <div 
                                   key={idx}
                                   className="relative overflow-hidden"
                                   style={{
-                                    width: subcategory.name === "CHARACTER MODELING" ? '280px' : '400px',
-                                    height: subcategory.name === "CHARACTER MODELING" ? '280px' : '400px',
-                                    borderRadius: '24px',
-                                    border: '5px solid #FBFBFB',
-                                    boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                  }}
-                                >
-                                  <img
-                                    src={displayItem}
-                                    alt={`${subcategory.name} ${idx + 1}`}
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                              );
-                            })}
-                            
-                            {/* Special handling for 2D ANIMATIONS and MOTION GRAPHICS sections */}
-                            {subcategory.mediaType === 'video' && (subcategory.name === "2D ANIMATIONS" || subcategory.name === "MOTION GRAPHICS") && (
-                              <div 
-                                className="relative overflow-hidden"
-                                style={{
-                                  width: "704px",  // Double the mobile width (352px)
-                                  height: "448px", // Double the mobile height (224px)
-                                  borderRadius: '24px',
-                                  border: '5px solid #FBFBFB',
-                                  boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                }}
-                              >
-                                <video
-                                  src={subcategory.desktopItems ? subcategory.desktopItems[0] : subcategory.items[0]}
-                                  className="w-full h-full object-cover"
-                                  autoPlay
-                                  loop
-                                  muted
-                                  playsInline
-                                />
-                              </div>
-                            )}
-                            
-                            {/* Mixed content for MOBILE GAMES */}
-                            {subcategory.mediaType === 'mixed' && (subcategory.desktopItems || subcategory.items)?.map((item, idx) => {
-                              // Use desktop items when available, fall back to mobile items
-                              const displayItem = (subcategory.desktopItems && subcategory.desktopItems[idx]) || item;
-                              const isVideo = displayItem.endsWith('.mp4');
-                              
-                              return (
-                                <div 
-                                  key={idx}
-                                  className="relative overflow-hidden"
-                                  style={{
-                                    width: '400px',
-                                    height: '400px',
+                                    width: isSpecialVideo ? '704px' : isCharacterModeling ? '280px' : '400px',
+                                    height: isSpecialVideo ? '448px' : isCharacterModeling ? '280px' : '400px',
                                     borderRadius: '24px',
                                     border: '5px solid #FBFBFB',
                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
@@ -709,55 +681,25 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                 >
                                   {isVideo ? (
                                     <video
-                                      src={displayItem}
+                                      src={item}
                                       className="w-full h-full object-cover"
                                       autoPlay
                                       loop
                                       muted
                                       playsInline
+                                      onError={(e) => console.error("Video error:", e)}
                                     />
                                   ) : (
                                     <img
-                                      src={displayItem}
+                                      src={item}
                                       alt={`${subcategory.name} ${idx + 1}`}
                                       className="w-full h-full object-cover"
+                                      onError={(e) => console.error("Image error:", e.target)}
                                     />
                                   )}
                                 </div>
                               );
                             })}
-                            
-                            {/* Standard videos like ENVIRONMENT */}
-                            {subcategory.mediaType === 'video' && 
-                              subcategory.name !== "2D ANIMATIONS" && 
-                              subcategory.name !== "MOTION GRAPHICS" && 
-                              (subcategory.desktopItems || subcategory.items)?.map((item, idx) => {
-                                // Use desktop items when available, fall back to mobile items
-                                const displayItem = (subcategory.desktopItems && subcategory.desktopItems[idx]) || item;
-                                
-                                return (
-                                  <div 
-                                    key={idx}
-                                    className="relative overflow-hidden"
-                                    style={{
-                                      width: '400px',
-                                      height: '400px',
-                                      borderRadius: '24px',
-                                      border: '5px solid #FBFBFB',
-                                      boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
-                                    }}
-                                  >
-                                    <video
-                                      src={displayItem}
-                                      className="w-full h-full object-cover"
-                                      autoPlay
-                                      loop
-                                      muted
-                                      playsInline
-                                    />
-                                  </div>
-                                );
-                              })}
                           </div>
                         );
                       }
