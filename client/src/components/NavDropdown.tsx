@@ -35,40 +35,10 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const [imageCarouselActiveIndex, setImageCarouselActiveIndex] = useState(0);
   const [videoCarouselActiveIndex, setVideoCarouselActiveIndex] = useState(0);
   
-  // References to carousel APIs
+  // Since we removed the blur effect, we've simplified the carousel API handling
+  // We still keep these for proper navigation and state updates
   const [imageCarouselApi, setImageCarouselApi] = useState<any>(null);
   const [videoCarouselApi, setVideoCarouselApi] = useState<any>(null);
-  
-  // Effect to listen for carousel slides
-  useEffect(() => {
-    if (imageCarouselApi) {
-      const onSelect = () => {
-        const selectedIndex = imageCarouselApi.selectedScrollSnap();
-        setImageCarouselActiveIndex(selectedIndex);
-      };
-      
-      imageCarouselApi.on('select', onSelect);
-      
-      return () => {
-        imageCarouselApi.off('select', onSelect);
-      };
-    }
-  }, [imageCarouselApi]);
-  
-  useEffect(() => {
-    if (videoCarouselApi) {
-      const onSelect = () => {
-        const selectedIndex = videoCarouselApi.selectedScrollSnap();
-        setVideoCarouselActiveIndex(selectedIndex);
-      };
-      
-      videoCarouselApi.on('select', onSelect);
-      
-      return () => {
-        videoCarouselApi.off('select', onSelect);
-      };
-    }
-  }, [videoCarouselApi]);
   const contentRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   
@@ -334,10 +304,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                           {subcategory.items.map((item, imgIdx) => {
                                             const isActive = imgIdx === imageCarouselActiveIndex;
                                             
-                                            // Determine if this is a container that should be blurred (adjacent to active)
-                                            const isPartiallyVisible = 
-                                              (imgIdx === imageCarouselActiveIndex + 1) || // next container
-                                              (imgIdx === imageCarouselActiveIndex - 1);   // previous container
+                                            // No blur effect as it didn't work correctly
+                                            const isPartiallyVisible = false;
                                             
                                             const isVideo = subcategory.mediaType === 'mixed' && item.endsWith('.mp4');
                                             
@@ -434,10 +402,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                             {subcategory.items.map((item, vidIdx) => {
                                               const isActive = vidIdx === videoCarouselActiveIndex;
                                               
-                                              // Determine if this is a container that should be blurred (adjacent to active)
-                                              const isPartiallyVisible = 
-                                                (vidIdx === videoCarouselActiveIndex + 1) || // next container
-                                                (vidIdx === videoCarouselActiveIndex - 1);   // previous container
+                                              // No blur effect as it didn't work correctly
+                                              const isPartiallyVisible = false;
                                               
                                               return (
                                                 <CarouselItem 
