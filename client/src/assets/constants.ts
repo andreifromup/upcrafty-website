@@ -160,10 +160,10 @@ export const NAV_CATEGORIES = [
       { 
         name: "CHARACTER MODELING", 
         isTitle: false, 
-        mediaType: "image",
-        mediaCount: 3,
-        items: ["/transp 1.png", "/transp 2.png", "/transp 4.png"],
-        desktopItems: ["/transp 1.png", "/transp 2.png", "/transp 4.png"] // No desktop versions provided, use the same
+        mediaType: "mixed",
+        mediaCount: 2,
+        items: ["/CM mobile 1.mp4", "/CM mobile 2.webp"],
+        desktopItems: ["/CM desktop 1.mp4", "/CM desktop 2.webp"]
       }
     ]
   },
