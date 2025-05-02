@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
-import { XIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
-import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
+import { NAV_CATEGORIES } from "@/assets/constants";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface NavDropdownProps {
@@ -42,7 +42,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   
-  // Define portfolio images for desktop view
+  // Define portfolio images for desktop view directly
   const portfolioImages = [
     "/transp 1.png",
     "/transp 2.png", 
