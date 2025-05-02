@@ -49,7 +49,7 @@ const Footer: React.FC<FooterProps> = ({
         
         {/* Copyright text at bottom - exact style from reference */}
         <div className={`text-center font-normal ${textColor}`}>
-          <p className="text-[12px] leading-[16px]">© 2025 Upcrafty Co. All Rights Reserved.</p>
+          <p className="text-[12px] leading-[16px]">© 2025 Upcrafty. All rights reserved.</p>
         </div>
       </div>
       
@@ -64,7 +64,7 @@ const Footer: React.FC<FooterProps> = ({
             paddingLeft: "0", // Align with the left edge of the top logo
           }}
         >
-          <p>© 2025 Upcrafty Co. All Rights Reserved.</p>
+          <p>© 2025 Upcrafty. All rights reserved.</p>
         </div>
         
         {/* Center Logo - Exactly 38x38px and perfectly centered */}
