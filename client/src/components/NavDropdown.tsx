@@ -728,8 +728,8 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                                   key={idx}
                                   className="relative overflow-hidden"
                                   style={{
-                                    width: isSpecialVideo ? '704px' : '400px',
-                                    height: isSpecialVideo ? '448px' : '400px',
+                                    width: isSpecialVideo ? '704px' : (isMobile && isCharacterModeling) ? '280px' : '400px',
+                                    height: isSpecialVideo ? '448px' : (isMobile && isCharacterModeling) ? '280px' : '400px',
                                     borderRadius: '24px',
                                     border: '5px solid #FBFBFB',
                                     boxShadow: '0px 0px 5.5px rgba(0, 0, 0, 0.25)'
