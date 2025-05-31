@@ -64,12 +64,18 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoadingComplete }) => {
   return (
     <div className={`fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
       {/* Rotating Logo - Same size as homepage header logo */}
-      <div className="mb-8">
-        <img 
-          src="/logo.png" 
-          alt="Upcrafty Logo" 
-          className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] animate-loading-spin"
-        />
+      <div className="mb-8 flex items-center justify-center">
+        <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
+          <img 
+            src="/logo.png" 
+            alt="Upcrafty Logo" 
+            className="h-full w-auto animate-loading-spin"
+            style={{ 
+              objectFit: 'contain',
+              transformOrigin: 'center center'
+            }}
+          />
+        </div>
       </div>
       
       {/* Loading Text */}
