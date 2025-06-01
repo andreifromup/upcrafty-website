@@ -182,7 +182,7 @@ const About: React.FC = () => {
                     <div className="bg-black text-white w-10 h-10 flex-shrink-0 rounded-full flex items-center justify-center font-medium md:transition-transform md:group-hover:scale-110 duration-300">2</div>
                     <div>
                       <h4 className="font-bold text-base md:text-lg md:group-hover:text-[#FF6600] transition-colors duration-300">Strong Collaboration</h4>
-                      <p className="text-gray-700 text-sm md:text-base mt-1">Ensures <span className="text-[#FF6600] font-medium">fast delivery</span> on projects</p>
+                      <p className="text-gray-700 text-sm md:text-base mt-1">Enables <span className="text-[#FF6600] font-medium">fast and efficient</span> project delivery</p>
                     </div>
                   </div>
                   
