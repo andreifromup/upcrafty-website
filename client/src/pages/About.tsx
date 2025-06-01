@@ -73,7 +73,7 @@ const About: React.FC = () => {
               
               <div className="space-y-8">
                 <p className="text-base md:text-lg leading-relaxed max-w-3xl">
-                  We're <span className="font-bold">Upcrafty</span>, a creative studio formed by a team of five professionals — <span className="text-[#FF6600]">each specialized in their own area</span>:
+                  We're <span className="font-bold">Upcrafty</span>, a creative studio formed by a team of five professionals <span className="text-[#FF6600]">each specialized in their own area</span>:
                   illustration & animation, 3D design, game development, web development, and sound design.
                 </p>
                 
@@ -109,7 +109,7 @@ const About: React.FC = () => {
                 </div>
                 
                 <div className="text-gray-700 italic border-l-2 border-gray-200 pl-4 py-2">
-                  <span className="font-bold text-sm md:text-base">Upcrafty was born out of shared passion and strong creative alignment — a team built around trust, skill, and a common vision.</span>
+                  <span className="font-bold text-sm md:text-base">Upcrafty was born out of shared passion and strong creative alignment. A team built around trust, skill, and a common vision.</span>
                 </div>
               </div>
             </section>
@@ -124,13 +124,13 @@ const About: React.FC = () => {
               <div className="space-y-8">
                 <p className="text-base md:text-lg leading-relaxed max-w-3xl">
                   We offer both individual services and complete creative solutions.
-                  Whether it's a game, mobile app, website, or brand — we can handle the entire journey, from <span className="text-[#FF6600] font-medium">concept to launch</span>.
+                  Whether it's a game, mobile app, website, or brand, we can handle the entire journey, from <span className="text-[#FF6600] font-medium">concept to launch</span>.
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Project Packages</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Full delivery for games, apps, brands, and NFT/crypto projects – from concept to launch</p>
+                    <p className="text-gray-700 text-sm md:text-base">Full delivery for games, apps, brands, and NFT/crypto projects from concept to launch</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
@@ -145,12 +145,12 @@ const About: React.FC = () => {
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Game Development</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Custom gameplay systems, game logic, and UI integration – specialized in mobile platforms</p>
+                    <p className="text-gray-700 text-sm md:text-base">Custom gameplay systems, game logic, and UI integration specialized in mobile platforms</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
                     <h4 className="font-bold text-base md:text-lg mb-2 md:group-hover:text-[#FF6600] transition-colors duration-300">Web Development</h4>
-                    <p className="text-gray-700 text-sm md:text-base">Responsive websites and web apps – design, development, and deployment</p>
+                    <p className="text-gray-700 text-sm md:text-base">Responsive websites and web apps: design, development, and deployment</p>
                   </div>
                   
                   <div className="group bg-white p-5 rounded-lg shadow-sm md:hover:shadow-md transition-all duration-300">
@@ -207,7 +207,7 @@ const About: React.FC = () => {
                   <p className="mb-0 text-base md:text-lg leading-relaxed">
                     We've completed <span className="text-[#FF6600] font-medium">over 50 projects</span> so far, mostly with startups and early-stage teams. 
                     We're now looking to grow alongside more established clients who are ready to take things to the next 
-                    level — but we'll always keep space for fresh, meaningful ideas.
+                    level, but we'll always keep space for fresh, meaningful ideas.
                   </p>
                 </div>
               </div>
@@ -225,7 +225,7 @@ const About: React.FC = () => {
                   <div className="max-w-3xl mx-auto">
                     <div className="space-y-6">
                       <p className="text-base md:text-lg leading-relaxed">
-                        We're motivated by the challenge of creating something truly great — 
+                        We're motivated by the challenge of creating something truly great, 
                         not just visually, but in <span className="text-[#FF6600] font-medium">every detail</span>. 
                         We believe that good work comes from clarity, collaboration, and a 
                         genuine interest in the result.
