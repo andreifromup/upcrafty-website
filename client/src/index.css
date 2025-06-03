@@ -21,7 +21,7 @@
   
   .orange-hover:hover,
   .logo-container:hover .orange-hover {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(2deg) brightness(118%) contrast(119%) !important;
+    filter: brightness(0) saturate(100%) invert(50%) sepia(98%) saturate(2077%) hue-rotate(7deg) brightness(108%) contrast(101%) !important;
   }
 }
 
