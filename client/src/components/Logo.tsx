@@ -62,7 +62,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             alt="Upcrafty Logo" 
             className="logo-img h-full w-auto absolute logo-image"
           />
-          {/* Orange logo - appears on hover */}
+          {/* Orange logo - appears on hover - same size as white logo */}
           <img 
             src={ICONS.logoOrange} 
             alt="Upcrafty Logo Orange" 
