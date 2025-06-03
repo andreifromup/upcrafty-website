@@ -60,11 +60,10 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`logo-img h-full w-auto absolute orange-hover transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            className={`logo-img h-full w-auto absolute orange-hover ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              filter: useBlackLogo ? 'invert(1)' : 'none',
-              '--mask-image': `url('${ICONS.logo}')`
-            } as React.CSSProperties}
+              filter: useBlackLogo ? 'invert(1)' : 'none'
+            }}
           />
         </div>
         {includeDropdown && (
@@ -73,12 +72,11 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full orange-hover transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className={`dropdown-img absolute w-full h-full orange-hover ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
-                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                '--mask-image': `url('${ICONS.polygon}')`
-              } as React.CSSProperties}
+                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+              }}
               id="dropdown-arrow"
             />
           </div>
