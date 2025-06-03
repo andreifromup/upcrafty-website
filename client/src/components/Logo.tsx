@@ -67,17 +67,25 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
         </div>
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* Dropdown polygon that changes to exact #FF6600 orange on hover */}
+            {/* Normal arrow - hidden when hovered */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className="absolute w-full h-full"
+              className={`absolute w-full h-full transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
               style={{
-                filter: isHovered 
-                  ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(7481%) hue-rotate(12deg) brightness(100%) contrast(108%)'
-                  : (useBlackLogo ? 'invert(1)' : 'none'),
+                filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'filter 300ms ease, transform 300ms ease'
+                transition: 'opacity 300ms ease, transform 300ms ease'
+              }}
+            />
+            {/* Orange arrow - shown when hovered */}
+            <img 
+              src="/orange-arrow.svg" 
+              alt="Dropdown" 
+              className={`absolute w-full h-full transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              style={{
+                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'opacity 300ms ease, transform 300ms ease'
               }}
               id="dropdown-arrow"
             />
