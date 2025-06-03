@@ -6,7 +6,7 @@ export const COLORS = {
 };
 
 // Orange filter for SVG elements - matches exact #FF6600 color
-export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(52%) sepia(98%) saturate(2020%) hue-rotate(3deg) brightness(104%) contrast(101%)';
+export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(2deg) brightness(118%) contrast(119%)';
 
 // Image assets for icons
 export const ICONS = {
