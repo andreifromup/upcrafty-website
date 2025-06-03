@@ -24,6 +24,7 @@ export const ICONS = {
   
   // Logo Images
   logo: "/sigla.png",
+  logoOrange: "/sigla-orange.png",
   logoBlack: "/Black Logo.png",
   logoBottom: "/sigla bottom.png",
   blackCenterLogo: "/black-center-logo.png",

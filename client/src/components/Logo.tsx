@@ -56,14 +56,17 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
       >
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* Vector logo with color switching but same position */}
+          {/* White/Black logo - default state */}
           <img 
-            src={ICONS.logo} 
+            src={useBlackLogo ? ICONS.logoBlack : ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`logo-img h-full w-auto absolute orange-hover ${useBlackLogo ? 'invert-[1]' : ''}`}
-            style={{
-              filter: useBlackLogo ? 'invert(1)' : 'none'
-            }}
+            className="logo-img h-full w-auto absolute logo-image"
+          />
+          {/* Orange logo - appears on hover */}
+          <img 
+            src={ICONS.logoOrange} 
+            alt="Upcrafty Logo Orange" 
+            className="logo-img h-full w-auto absolute logo-orange"
           />
         </div>
         {includeDropdown && (
@@ -72,7 +75,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full orange-hover ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className={`dropdown-img absolute w-full h-full orange-hover-arrow ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'

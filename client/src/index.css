@@ -15,12 +15,29 @@
   }
 
   /* Orange hover effect for logo that matches Contact button exactly */
-  .orange-hover {
+  .logo-image {
+    transition: opacity 0.3s ease;
+  }
+  
+  .logo-orange {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .logo-container:hover .logo-image {
+    opacity: 0;
+  }
+  
+  .logo-container:hover .logo-orange {
+    opacity: 1;
+  }
+  
+  .orange-hover-arrow {
     transition: filter 0.3s ease;
   }
   
-  .logo-container:hover .orange-hover {
-    filter: brightness(0) saturate(100%) invert(43%) sepia(96%) saturate(1352%) hue-rotate(360deg) brightness(119%) contrast(119%);
+  .logo-container:hover .orange-hover-arrow {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(100%) saturate(1000%) hue-rotate(360deg) brightness(120%) contrast(120%);
   }
 }
 
