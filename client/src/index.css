@@ -15,13 +15,16 @@
   }
 
   /* Orange hover effect for logo that matches Contact button exactly */
-  .logo-image {
+  .logo-image,
+  .logo-orange {
     transition: opacity 0.3s ease;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
   }
   
   .logo-orange {
     opacity: 0;
-    transition: opacity 0.3s ease;
   }
   
   .logo-container:hover .logo-image {
