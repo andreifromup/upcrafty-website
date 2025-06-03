@@ -25,18 +25,24 @@ export const ICONS = {
   // Logo Images
   logo: "/sigla.png",
   logoBlack: "/Black Logo.png",
-  logoBottom: "/black-center-logo.png",
+  logoBottom: "/sigla bottom.png",
   blackCenterLogo: "/black-center-logo.png",
   
   // Other
-  polygon: "/Polygon 2.png"
+  polygon: "/Polygon 2.png",
+  mobile: "/mobil.png"
 };
 
-// Video files for different platforms
+// Video files for different platforms and network conditions
 export const VIDEOS = {
-  desktop: "/desktop.mp4",
-  mobile: "/mobil.mp4",
-  aboutUs: "/about-us-video.mp4"
+  desktopHigh: "/desktop.mp4",
+  desktopLow: "/desktop-low.mp4",
+  mobileHigh: "/mobil.mp4",
+  mobileLow: "/mobil-low.mp4",
+  aboutUs: "/about-us-video.mp4",
+  // Videos for dropdown animation sections
+  twoDAnimations: "/2d animations mobil.mp4",
+  motionGraphics: "/motion graphics mobil.mp4"
 };
 
 // Logo sizing configurations

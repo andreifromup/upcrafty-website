@@ -47,6 +47,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
   
   // Global function to close overlay - accessible from anywhere
   const closeOverlay = () => {
+    console.log('CLOSING OVERLAY');
     setShowOverlay(false);
     setSelectedSubcategory(null);
   };
@@ -94,21 +95,21 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       if (e.preventDefault) e.preventDefault();
       if (e.stopPropagation) e.stopPropagation();
     }
-    
+    console.log('Closing overlay');
     setShowOverlay(false);
     setSelectedSubcategory(null);
   };
   
   // Special handler for mobile touch devices
   const handleTouchCloseButton = () => {
-    
+    console.log('Touch close button');
     setShowOverlay(false);
     setSelectedSubcategory(null);
   };
   
   // This ensures the overlay can be closed by clicking anywhere on it
   const handleOverlayClick = (e: React.MouseEvent) => {
-    
+    console.log('Overlay clicked');
     // Close the overlay when clicking on the background or close button
     const target = e.target as HTMLElement;
     if (target.classList.contains('overlay-background') || 
@@ -144,6 +145,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
       const handleDocumentClick = (e: MouseEvent) => {
         // Check if contentRef exists and click is outside of it
         if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+          console.log('Document click outside dropdown content detected');
           handleClose();
         }
       };
@@ -177,6 +179,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     if (closeButtonRef.current && showOverlay) {
       // Define click handler that directly uses state setter
       const directCloseHandler = () => {
+        console.log('Direct close button handler called');
         setShowOverlay(false);
         setSelectedSubcategory(null);
       };
@@ -201,7 +204,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
     setSelectedSubcategory(null);
     // Close the dropdown
     onClose();
-    
+    console.log('Dropdown closed');
   };
   
   // Handle clicks outside the dropdown content or in the dropdown background
@@ -508,7 +511,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                               e.preventDefault();
                             }
                           } catch (error) {
-                            
+                            console.error("Error handling category click:", error);
                           }
                         }}
                       >
@@ -573,7 +576,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                               setSelectedCategory(selectedCategory === category.name ? null : category.name);
                             }
                           } catch (error) {
-                            
+                            console.error("Error handling category click:", error);
                           }
                         }}
                       >
@@ -688,16 +691,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                     category.subcategories?.map(subcategory => {
                       if (subcategory.name === selectedSubcategory) {
                         // Directly log the subcategory to debug
-                        
+                        console.log("Selected subcategory:", subcategory);
                         
                         let mediaItems = [];
                         
                         // Use desktop items when available
                         if (subcategory.desktopItems) {
-                          
+                          console.log("Using desktop items:", subcategory.desktopItems);
                           mediaItems = subcategory.desktopItems;
                         } else {
-                          
+                          console.log("Using mobile items:", subcategory.items);
                           mediaItems = subcategory.items;
                         }
                         
@@ -706,7 +709,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                             {/* Simplified media rendering for all types */}
                             {mediaItems.map((item, idx) => {
                               const isVideo = item.endsWith('.mp4');
-                              
+                              console.log(`Rendering item ${idx}:`, item, "Is video:", isVideo);
                               
                               // Special sizing for 2D ANIMATIONS and MOTION GRAPHICS
                               const isSpecialVideo = 
