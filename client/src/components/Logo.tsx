@@ -27,35 +27,40 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
         }}
         onMouseEnter={(e) => {
           if (!isMobile) {
-            // Apply orange filter to both logo and dropdown arrow
+            // Apply exact #FF6600 color to both logo and dropdown arrow
             const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
             const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
             
             if (logoImg) {
-              logoImg.style.filter = ORANGE_FILTER;
+              // Use a different approach: set background color and use mix-blend-mode
+              logoImg.style.backgroundColor = '#FF6600';
+              logoImg.style.mixBlendMode = 'multiply';
+              logoImg.style.filter = 'brightness(0) invert(1)';
             }
             
             if (dropdownImg) {
-              dropdownImg.style.filter = ORANGE_FILTER;
+              dropdownImg.style.backgroundColor = '#FF6600';
+              dropdownImg.style.mixBlendMode = 'multiply';
+              dropdownImg.style.filter = 'brightness(0) invert(1)';
             }
           }
         }}
         onMouseLeave={(e) => {
           if (!isMobile) {
             // Reset both logo and dropdown arrow to original color
-            // But maintain the hover state when dropdown is open
             const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
             const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
             
             if (logoImg) {
-              // Only show orange on hover, not by default when dropdown is open
+              logoImg.style.backgroundColor = '';
+              logoImg.style.mixBlendMode = '';
               logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
             }
             
             if (dropdownImg) {
-              // Only show orange on hover, not by default when dropdown is open
+              dropdownImg.style.backgroundColor = '';
+              dropdownImg.style.mixBlendMode = '';
               dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-              // But keep the rotation when dropdown is open
               dropdownImg.style.transform = isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             }
           }
