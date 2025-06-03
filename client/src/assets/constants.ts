@@ -33,16 +33,11 @@ export const ICONS = {
   mobile: "/mobil.png"
 };
 
-// Video files for different platforms and network conditions
+// Video files for different platforms
 export const VIDEOS = {
-  desktopHigh: "/desktop.mp4",
-  desktopLow: "/desktop-low.mp4",
-  mobileHigh: "/mobil.mp4",
-  mobileLow: "/mobil-low.mp4",
-  aboutUs: "/about-us-video.mp4",
-  // Videos for dropdown animation sections
-  twoDAnimations: "/2d animations mobil.mp4",
-  motionGraphics: "/motion graphics mobil.mp4"
+  desktop: "/desktop.mp4",
+  mobile: "/mobil.mp4",
+  aboutUs: "/about-us-video.mp4"
 };
 
 // Logo sizing configurations
