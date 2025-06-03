@@ -14,14 +14,38 @@
     display: none; /* for Chrome, Safari, and Opera */
   }
 
-  /* Orange hover effect for logo that matches #FF6600 exactly */
+  /* Orange hover effect for logo that matches Contact button exactly */
   .orange-hover {
-    transition: filter 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
   }
   
-  .orange-hover:hover,
+  .orange-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FF6600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mask-image: var(--mask-image);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: var(--mask-image);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+  }
+  
+  .logo-container:hover .orange-hover::before {
+    opacity: 1;
+  }
+  
   .logo-container:hover .orange-hover {
-    filter: brightness(0) saturate(100%) invert(50%) sepia(98%) saturate(2077%) hue-rotate(7deg) brightness(108%) contrast(101%) !important;
+    opacity: 0;
   }
 }
 
