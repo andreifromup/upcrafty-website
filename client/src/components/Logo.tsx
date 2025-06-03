@@ -20,10 +20,45 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div 
-        className="flex items-center cursor-pointer group logo-container"
+        className="flex items-center cursor-pointer group"
         onMouseDown={(e) => {
           // Stop propagation to prevent interference with document-level handlers
           e.stopPropagation();
+        }}
+        onMouseEnter={(e) => {
+          if (!isMobile) {
+            // Apply orange filter to both logo and dropdown arrow
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              logoImg.style.filter = ORANGE_FILTER;
+            }
+            
+            if (dropdownImg) {
+              dropdownImg.style.filter = ORANGE_FILTER;
+            }
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isMobile) {
+            // Reset both logo and dropdown arrow to original color
+            // But maintain the hover state when dropdown is open
+            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
+            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
+            
+            if (logoImg) {
+              // Only show orange on hover, not by default when dropdown is open
+              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+            }
+            
+            if (dropdownImg) {
+              // Only show orange on hover, not by default when dropdown is open
+              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
+              // But keep the rotation when dropdown is open
+              dropdownImg.style.transform = isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+          }
         }}
         onTouchStart={(e) => {
           if (isMobile) {
@@ -56,17 +91,14 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
       >
         {/* Logo image that changes to orange on hover - both for white and black versions */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* White/Black logo - default state */}
+          {/* Vector logo with color switching but same position */}
           <img 
-            src={useBlackLogo ? ICONS.logoBlack : ICONS.logo} 
+            src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className="logo-img h-full w-auto absolute logo-image"
-          />
-          {/* Orange logo - appears on hover - same size as white logo */}
-          <img 
-            src={ICONS.logoOrange} 
-            alt="Upcrafty Logo Orange" 
-            className="logo-img h-full w-auto absolute logo-orange"
+            className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            style={{
+              filter: useBlackLogo ? 'invert(1)' : 'none'
+            }}
           />
         </div>
         {includeDropdown && (
@@ -75,7 +107,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full orange-hover-arrow ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
