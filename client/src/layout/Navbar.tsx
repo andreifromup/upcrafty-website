@@ -129,7 +129,7 @@ const Navbar: React.FC<NavbarProps> = ({
         onClose={() => {
           // Close immediately without delay
           setIsDropdownOpen(false);
-          console.log('NavDropdown onClose called');
+          
           // Arrow rotation is now handled by the Logo component via isDropdownOpen prop
         }} 
       />

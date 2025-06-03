@@ -17,14 +17,14 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
     if (video) {
       // Try to play the video immediately and also on metadata loaded
       const playVideo = () => {
-        console.log("Attempting to play About Us video");
+        
         video.play()
           .then(() => {
             setIsVideoPlaying(true);
-            console.log("About video playing successfully");
+            
           })
           .catch(error => {
-            console.error("Error playing about video:", error);
+            
           });
       };
 
@@ -55,14 +55,14 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
     setTimeout(() => {
       fetch(videoUrl)
         .then(response => {
-          console.log("Video fetch response:", response.status, response.statusText);
+          
           if (!response.ok) {
             throw new Error(`Video fetch failed: ${response.status} ${response.statusText}`);
           }
           return response;
         })
         .catch(error => {
-          console.error("Error fetching video:", error);
+          
         });
     }, 500);
   }, []);
