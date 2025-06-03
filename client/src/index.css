@@ -15,8 +15,13 @@
   }
 
   /* Orange hover effect for logo that matches #FF6600 exactly */
+  .orange-hover {
+    transition: filter 0.3s ease;
+  }
+  
+  .orange-hover:hover,
   .logo-container:hover .orange-hover {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(2deg) brightness(118%) contrast(119%);
+    filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(2deg) brightness(118%) contrast(119%) !important;
   }
 }
 
