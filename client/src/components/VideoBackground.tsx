@@ -209,14 +209,14 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
   const getDesktopVideoSource = () => {
     // Using a more aggressive approach for desktop, always pick high quality
     // We previously detected connection speed already, so this is safe
-    const source = VIDEOS.desktopHigh;
+    const source = VIDEOS.desktop;
     console.log("Loading desktop video:", source);
     return source;
   };
   
   const getMobileVideoSource = () => {
     // For mobile, we care about connection speed since mobile data can be limited
-    const source = isSlowConnection ? VIDEOS.mobileLow : VIDEOS.mobileHigh;
+    const source = VIDEOS.mobile;
     console.log("Loading mobile video:", source);
     return source;
   };
