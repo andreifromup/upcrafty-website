@@ -80,7 +80,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             />
             {/* Orange arrow - shown when hovered */}
             <img 
-              src="/orange-arrow.svg" 
+              src="/orange-arrow.png" 
               alt="Dropdown" 
               className={`absolute w-full h-full transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
               style={{
