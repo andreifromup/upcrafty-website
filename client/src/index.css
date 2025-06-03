@@ -15,34 +15,8 @@
   }
 
   /* Orange hover effect for logo that matches #FF6600 exactly */
-  .orange-hover {
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  
-  .orange-hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #FF6600;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    mask: url('/sigla.png') no-repeat center;
-    mask-size: contain;
-    -webkit-mask: url('/sigla.png') no-repeat center;
-    -webkit-mask-size: contain;
-    pointer-events: none;
-  }
-  
-  .orange-hover:hover::after {
-    opacity: 1;
-  }
-  
-  .orange-hover:hover {
-    opacity: 0;
+  .logo-container:hover .orange-hover {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(76%) saturate(1575%) hue-rotate(360deg) brightness(103%) contrast(101%);
   }
 }
 

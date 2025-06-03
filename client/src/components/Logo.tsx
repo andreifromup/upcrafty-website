@@ -20,7 +20,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     // Header logo with exact dimension of 81x81px for desktop, smaller for mobile
     return (
       <div 
-        className="flex items-center cursor-pointer group"
+        className="flex items-center cursor-pointer group logo-container"
         onMouseDown={(e) => {
           // Stop propagation to prevent interference with document-level handlers
           e.stopPropagation();
@@ -60,7 +60,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`logo-img h-full w-auto absolute ${useBlackLogo ? 'invert-[1]' : 'orange-hover'}`}
+            className={`logo-img h-full w-auto absolute orange-hover transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
               filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
@@ -72,7 +72,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : 'orange-hover'}`}
+              className={`dropdown-img absolute w-full h-full orange-hover transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
