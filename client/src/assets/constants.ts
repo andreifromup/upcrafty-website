@@ -5,8 +5,8 @@ export const COLORS = {
   white: "#FFFFFF"
 };
 
-// Orange filter for SVG elements
-export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
+// Orange filter for SVG elements - matches exact #FF6600 color
+export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(9deg) brightness(119%) contrast(119%)';
 
 // Image assets for icons
 export const ICONS = {
