@@ -25,46 +25,6 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           // Stop propagation to prevent interference with document-level handlers
           e.stopPropagation();
         }}
-        onMouseEnter={(e) => {
-          if (!isMobile) {
-            // Apply exact #FF6600 color to both logo and dropdown arrow
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              // Use a different approach: set background color and use mix-blend-mode
-              logoImg.style.backgroundColor = '#FF6600';
-              logoImg.style.mixBlendMode = 'multiply';
-              logoImg.style.filter = 'brightness(0) invert(1)';
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.backgroundColor = '#FF6600';
-              dropdownImg.style.mixBlendMode = 'multiply';
-              dropdownImg.style.filter = 'brightness(0) invert(1)';
-            }
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!isMobile) {
-            // Reset both logo and dropdown arrow to original color
-            const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
-            const dropdownImg = e.currentTarget.querySelector('.dropdown-img') as HTMLImageElement;
-            
-            if (logoImg) {
-              logoImg.style.backgroundColor = '';
-              logoImg.style.mixBlendMode = '';
-              logoImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-            }
-            
-            if (dropdownImg) {
-              dropdownImg.style.backgroundColor = '';
-              dropdownImg.style.mixBlendMode = '';
-              dropdownImg.style.filter = useBlackLogo ? 'invert(1)' : 'none';
-              dropdownImg.style.transform = isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-          }
-        }}
         onTouchStart={(e) => {
           if (isMobile) {
             const logoImg = e.currentTarget.querySelector('.logo-img') as HTMLImageElement;
@@ -100,7 +60,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
           <img 
             src={ICONS.logo} 
             alt="Upcrafty Logo" 
-            className={`logo-img h-full w-auto absolute transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+            className={`logo-img h-full w-auto absolute ${useBlackLogo ? 'invert-[1]' : 'orange-hover'}`}
             style={{
               filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
@@ -112,7 +72,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : ''}`}
+              className={`dropdown-img absolute w-full h-full transition-all duration-300 ${useBlackLogo ? 'invert-[1]' : 'orange-hover'}`}
               style={{
                 filter: useBlackLogo ? 'invert(1)' : 'none',
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
