@@ -84,28 +84,15 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
             .then(() => {
               if (unmounted) return;
               
-              console.log("Video playing successfully");
-              // Minimize expensive logging operations
-              if (currentVideoRef.current && process.env.NODE_ENV !== 'production') {
-                console.log("Current video source:", currentVideoRef.current.currentSrc);
-                console.log("Video dimensions:", {
-                  videoWidth: currentVideoRef.current.videoWidth,
-                  videoHeight: currentVideoRef.current.videoHeight,
-                  displayWidth: currentVideoRef.current.clientWidth,
-                  displayHeight: currentVideoRef.current.clientHeight
-                });
-              }
+              // Video playing successfully - production ready
             })
             .catch(error => {
               if (unmounted) return;
-              // Only set error if component is still mounted
-              console.error("Error playing video:", error);
               setVideoError(error instanceof Error ? error.message : String(error));
             });
         }
       } catch (error) {
         if (unmounted) return;
-        console.error("Error in playVideo function:", error);
         setVideoError(error instanceof Error ? error.message : String(error));
       }
     };
@@ -116,11 +103,9 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
       setVideoLoaded(true);
     };
     
-    // Handle metadata loaded event - minimize console logging
+    // Handle metadata loaded event
     const metadataHandler = () => {
-      if (!unmounted) {
-        console.log("Video metadata loaded");
-      }
+      // Metadata loaded successfully
     };
     
     // Setup function that runs immediately instead of in a timeout
@@ -205,20 +190,13 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ blur = false }) => {
     return () => clearTimeout(timerId);
   }, [isSlowConnection]);
 
-  // Choose the appropriate video source based on device and connection speed - memoized to avoid rerenders
+  // Choose the appropriate video source based on device
   const getDesktopVideoSource = () => {
-    // Using a more aggressive approach for desktop, always pick high quality
-    // We previously detected connection speed already, so this is safe
-    const source = VIDEOS.desktopHigh;
-    console.log("Loading desktop video:", source);
-    return source;
+    return VIDEOS.desktop;
   };
   
   const getMobileVideoSource = () => {
-    // For mobile, we care about connection speed since mobile data can be limited
-    const source = isSlowConnection ? VIDEOS.mobileLow : VIDEOS.mobileHigh;
-    console.log("Loading mobile video:", source);
-    return source;
+    return VIDEOS.mobile;
   };
 
   return (

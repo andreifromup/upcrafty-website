@@ -42,11 +42,9 @@ const Navbar: React.FC<NavbarProps> = ({
     if (isDropdownOpen) {
       // If already open, close it immediately
       setIsDropdownOpen(false);
-      console.log('Logo click: Closing dropdown');
     } else {
       // Otherwise open it
       setIsDropdownOpen(true);
-      console.log('Logo click: Opening dropdown');
     }
   };
   
