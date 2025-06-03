@@ -5,8 +5,8 @@ export const COLORS = {
   white: "#FFFFFF"
 };
 
-// Orange filter for SVG elements - Updated to match exact #FF6600 color
-export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(46%) sepia(100%) saturate(7461%) hue-rotate(21deg) brightness(107%) contrast(107%)';
+// Orange filter for SVG elements
+export const ORANGE_FILTER = 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)';
 
 // Image assets for icons
 export const ICONS = {
@@ -24,8 +24,6 @@ export const ICONS = {
   
   // Logo Images
   logo: "/sigla.png",
-  logoWhite: "/sigla-white.png",
-  logoOrange: "/sigla-orange.png",
   logoBlack: "/Black Logo.png",
   logoBottom: "/sigla bottom.png",
   blackCenterLogo: "/black-center-logo.png",
