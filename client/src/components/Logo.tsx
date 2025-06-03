@@ -49,25 +49,33 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
       >
         {/* Logo image that changes to orange on hover */}
         <div className="relative h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[81px] md:w-[81px] flex items-center justify-center">
-          {/* Show orange logo on hover, otherwise show normal/black logo */}
+          {/* Normal logo - hidden when hovered */}
           <img 
-            src={isHovered ? "/orange-logo.png" : ICONS.logo}
+            src={ICONS.logo}
             alt="Upcrafty Logo" 
-            className={`h-full w-auto transition-all duration-300 ${!isHovered && useBlackLogo ? 'invert-[1]' : ''}`}
+            className={`h-full w-auto absolute transition-opacity duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'} ${useBlackLogo ? 'invert-[1]' : ''}`}
             style={{
-              filter: !isHovered && useBlackLogo ? 'invert(1)' : 'none'
+              filter: useBlackLogo ? 'invert(1)' : 'none'
             }}
+          />
+          {/* Orange logo - shown when hovered */}
+          <img 
+            src="/orange-logo.png"
+            alt="Upcrafty Logo" 
+            className={`h-full w-auto absolute transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
           />
         </div>
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* Dropdown polygon that changes to orange on hover */}
+            {/* Dropdown polygon that changes to exact orange on hover */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
               className="absolute w-full h-full transition-all duration-300"
               style={{
-                filter: isHovered ? ORANGE_FILTER : (useBlackLogo ? 'invert(1)' : 'none'),
+                filter: isHovered 
+                  ? 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)'
+                  : (useBlackLogo ? 'invert(1)' : 'none'),
                 transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
               }}
               id="dropdown-arrow"
