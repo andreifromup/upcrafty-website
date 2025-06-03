@@ -67,16 +67,17 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
         </div>
         {includeDropdown && (
           <div className="relative -ml-1 w-[8px] h-[6px] md:w-[12px] md:h-[9px] flex items-center">
-            {/* Dropdown polygon that changes to exact orange on hover */}
+            {/* Dropdown polygon that changes to exact #FF6600 orange on hover */}
             <img 
               src={ICONS.polygon} 
               alt="Dropdown" 
-              className="absolute w-full h-full transition-all duration-300"
+              className="absolute w-full h-full"
               style={{
                 filter: isHovered 
-                  ? 'brightness(0) saturate(100%) invert(49%) sepia(75%) saturate(5338%) hue-rotate(1deg) brightness(103%) contrast(105%)'
+                  ? 'brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(7481%) hue-rotate(12deg) brightness(100%) contrast(108%)'
                   : (useBlackLogo ? 'invert(1)' : 'none'),
-                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+                transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'filter 300ms ease, transform 300ms ease'
               }}
               id="dropdown-arrow"
             />
