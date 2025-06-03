@@ -99,7 +99,7 @@ const Logo: React.FC<LogoProps> = ({ size = "medium", includeDropdown = false, u
     // Bottom center logo - larger size for better visibility on mobile
     return (
       <img 
-        src={ICONS.blackCenterLogo}
+        src={ICONS.logoBottom}
         alt="Upcrafty Logo" 
         className="w-[24px] h-[24px] md:h-[38px] md:w-[38px]"
       />
