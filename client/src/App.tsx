@@ -27,7 +27,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />} */}
+      {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Router />
         <Toaster />
