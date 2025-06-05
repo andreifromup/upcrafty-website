@@ -9,7 +9,7 @@ const AboutVideo: React.FC<AboutVideoProps> = ({ className = "" }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   // Hardcode the direct URL to avoid any confusion
-  const videoUrl = "/about-us-video.mp4";
+  const videoUrl = "/optimized/about-us-video.mp4";
 
   // Setup video playback on component mount
   useEffect(() => {
