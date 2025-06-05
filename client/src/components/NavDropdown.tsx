@@ -526,7 +526,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         >
                           {category.name}
                         </span>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 ))}
