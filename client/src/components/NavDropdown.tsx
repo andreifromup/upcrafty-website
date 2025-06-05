@@ -4,6 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import SocialIcons from "@/components/SocialIcons";
 import { NAV_CATEGORIES, PORTFOLIO_IMAGES } from "@/assets/constants";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Link } from "wouter";
 
 interface NavDropdownProps {
   isOpen: boolean;
@@ -495,7 +496,7 @@ const NavDropdown: React.FC<NavDropdownProps> = ({ isOpen, onClose }) => {
                         )}
                       </div>
                     ) : (
-                      <a 
+                      <Link
                         href={category.name === "ABOUT US" ? "/about" : "#"} 
                         className="uppercase block text-black active:scale-95 transition-all duration-150"
                         onClick={(e) => {
