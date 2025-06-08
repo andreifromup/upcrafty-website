@@ -6,7 +6,7 @@ import About from "@/pages/About";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useState } from "react";
 
-function Router() {
+function Routing() {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -27,7 +27,7 @@ function App() {
     <>
       {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
       <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        <Router />
+        <Routing />
         <Toaster />
       </div>
     </>
